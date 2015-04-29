@@ -67,10 +67,7 @@ static int serialno;
 static int audioRecordedLength;
 
 
-NSString const *NOTIFICATION_VAD_STOP_EVENT = @"STOP_RECORDING";
-NSString const *DEFAULT_SPEECH_MODEL = @"WatsonModel";
 
-NSString const *SERVICE_PATH_MODELS = @"/speech-to-text-beta/api/v1/models";
 
 BOOL hasError(){
     return errorCode!=0;

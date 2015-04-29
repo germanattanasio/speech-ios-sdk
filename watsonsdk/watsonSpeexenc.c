@@ -155,7 +155,6 @@ int pcmEnc(const char *filepathPCM,const char *filepathSPX, _Bool hasHeader, int
 	spx_int32_t complexity=3;
 	const char* speex_version;
 	char vendor_string[64];
-	char *comments;
 	int close_in=0, close_out=0;
 	int eos=0;
 	char first_bytes[12];
@@ -424,7 +423,6 @@ int pcmEncInMemory(const char *filepathPCM,const char *filepathSPX, _Bool hasHea
 	spx_int32_t complexity=3;
 	const char* speex_version;
 	char vendor_string[64];
-	char *comments;
 	int close_in=0, close_out=0;
 	int eos=0;
 	char first_bytes[12];

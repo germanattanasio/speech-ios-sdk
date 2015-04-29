@@ -39,6 +39,10 @@
 #define STREAMING_TYPE_HTTP @"http"
 #define STREAMING_TYPE_WEBSOCKETS @"websockets"
 
+#define NOTIFICATION_VAD_STOP_EVENT @"STOP_RECORDING"
+#define DEFAULT_SPEECH_MODEL @"WatsonModel"
+#define SERVICE_PATH_MODELS @"/speech-to-text-beta/api/v1/models"
+
 
 typedef struct
 {

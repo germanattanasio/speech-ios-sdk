@@ -168,11 +168,6 @@
 		C16542B1191A0D8500905DCC /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C16542AF191A0D8500905DCC /* Main_iPad.storyboard */; };
 		C16542B4191A0D8500905DCC /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C16542B3191A0D8500905DCC /* FirstViewController.m */; };
 		C16542B6191A0D8500905DCC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C16542B5191A0D8500905DCC /* Images.xcassets */; };
-		C16542BD191A0D8500905DCC /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C16542BC191A0D8500905DCC /* XCTest.framework */; };
-		C16542BE191A0D8500905DCC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C11A645E1754D0E600385896 /* Foundation.framework */; };
-		C16542BF191A0D8500905DCC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C11A646F1754D0E700385896 /* UIKit.framework */; };
-		C16542C7191A0D8500905DCC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C16542C5191A0D8500905DCC /* InfoPlist.strings */; };
-		C16542C9191A0D8500905DCC /* watsonsdktestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C16542C8191A0D8500905DCC /* watsonsdktestTests.m */; };
 		C16542D4191A0FA100905DCC /* libwatsonsdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C11A645B1754D0E600385896 /* libwatsonsdk.a */; };
 		C1B14B831AA0D3DD00864C53 /* libopus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C1B14B821AA0D3DC00864C53 /* libopus.a */; };
 		C1C3743B1A8581A00083C69B /* WebSocketUploader.h in Headers */ = {isa = PBXBuildFile; fileRef = C1C374391A8581A00083C69B /* WebSocketUploader.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -211,13 +206,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = C11A64931754D98700385896;
 			remoteInfo = watsonResources;
-		};
-		C16542C0191A0D8500905DCC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C11A64531754D0E600385896 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C165429A191A0D8500905DCC;
-			remoteInfo = watsonsdktest;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -406,11 +394,7 @@
 		C16542B2191A0D8500905DCC /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
 		C16542B3191A0D8500905DCC /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
 		C16542B5191A0D8500905DCC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		C16542BB191A0D8500905DCC /* watsonsdktestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = watsonsdktestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C16542BC191A0D8500905DCC /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		C16542C4191A0D8500905DCC /* watsonsdktestTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "watsonsdktestTests-Info.plist"; sourceTree = "<group>"; };
-		C16542C6191A0D8500905DCC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		C16542C8191A0D8500905DCC /* watsonsdktestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = watsonsdktestTests.m; sourceTree = "<group>"; };
 		C1B14B821AA0D3DC00864C53 /* libopus.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libopus.a; sourceTree = "<group>"; };
 		C1C374391A8581A00083C69B /* WebSocketUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebSocketUploader.h; sourceTree = "<group>"; };
 		C1C3743A1A8581A00083C69B /* WebSocketUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebSocketUploader.m; sourceTree = "<group>"; };
@@ -459,16 +443,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C16542B8191A0D8500905DCC /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C16542BD191A0D8500905DCC /* XCTest.framework in Frameworks */,
-				C16542BF191A0D8500905DCC /* UIKit.framework in Frameworks */,
-				C16542BE191A0D8500905DCC /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -483,7 +457,6 @@
 				C11A64601754D0E600385896 /* watsonsdk */,
 				C11A64971754D98700385896 /* watsonResources */,
 				C16542A0191A0D8500905DCC /* watsonsdktest */,
-				C16542C2191A0D8500905DCC /* watsonsdktestTests */,
 				C11A645D1754D0E600385896 /* Frameworks */,
 				C11A645C1754D0E600385896 /* Products */,
 			);
@@ -495,7 +468,6 @@
 				C11A645B1754D0E600385896 /* libwatsonsdk.a */,
 				C11A64941754D98700385896 /* watsonsdk.bundle */,
 				C165429B191A0D8500905DCC /* watsonsdktest.app */,
-				C16542BB191A0D8500905DCC /* watsonsdktestTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -837,24 +809,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		C16542C2191A0D8500905DCC /* watsonsdktestTests */ = {
-			isa = PBXGroup;
-			children = (
-				C16542C8191A0D8500905DCC /* watsonsdktestTests.m */,
-				C16542C3191A0D8500905DCC /* Supporting Files */,
-			);
-			path = watsonsdktestTests;
-			sourceTree = "<group>";
-		};
-		C16542C3191A0D8500905DCC /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				C16542C4191A0D8500905DCC /* watsonsdktestTests-Info.plist */,
-				C16542C5191A0D8500905DCC /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		C1D457F719A760A300093095 /* socketrocket */ = {
 			isa = PBXGroup;
 			children = (
@@ -1012,38 +966,15 @@
 			productReference = C165429B191A0D8500905DCC /* watsonsdktest.app */;
 			productType = "com.apple.product-type.application";
 		};
-		C16542BA191A0D8500905DCC /* watsonsdktestTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = C16542CF191A0D8500905DCC /* Build configuration list for PBXNativeTarget "watsonsdktestTests" */;
-			buildPhases = (
-				C16542B7191A0D8500905DCC /* Sources */,
-				C16542B8191A0D8500905DCC /* Frameworks */,
-				C16542B9191A0D8500905DCC /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				C16542C1191A0D8500905DCC /* PBXTargetDependency */,
-			);
-			name = watsonsdktestTests;
-			productName = watsonsdktestTests;
-			productReference = C16542BB191A0D8500905DCC /* watsonsdktestTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		C11A64531754D0E600385896 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastTestingUpgradeCheck = 0610;
-				LastUpgradeCheck = 0460;
+				LastTestingUpgradeCheck = 0630;
+				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = IBM;
-				TargetAttributes = {
-					C16542BA191A0D8500905DCC = {
-						TestTargetID = C165429A191A0D8500905DCC;
-					};
-				};
 			};
 			buildConfigurationList = C11A64561754D0E600385896 /* Build configuration list for PBXProject "watsonsdk" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1062,7 +993,6 @@
 				C11A64891754D6AB00385896 /* Framework */,
 				C11A64931754D98700385896 /* watsonResources */,
 				C165429A191A0D8500905DCC /* watsonsdktest */,
-				C16542BA191A0D8500905DCC /* watsonsdktestTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1085,14 +1015,6 @@
 				C16542B6191A0D8500905DCC /* Images.xcassets in Resources */,
 				C16542AE191A0D8500905DCC /* Main_iPhone.storyboard in Resources */,
 				C16542A5191A0D8500905DCC /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C16542B9191A0D8500905DCC /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C16542C7191A0D8500905DCC /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1209,14 +1131,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C16542B7191A0D8500905DCC /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C16542C9191A0D8500905DCC /* watsonsdktestTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1234,11 +1148,6 @@
 			isa = PBXTargetDependency;
 			target = C11A64931754D98700385896 /* watsonResources */;
 			targetProxy = C11D9E7C1937D8B900F2D614 /* PBXContainerItemProxy */;
-		};
-		C16542C1191A0D8500905DCC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = C165429A191A0D8500905DCC /* watsonsdktest */;
-			targetProxy = C16542C0191A0D8500905DCC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1275,14 +1184,6 @@
 			name = Main_iPad.storyboard;
 			sourceTree = "<group>";
 		};
-		C16542C5191A0D8500905DCC /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C16542C6191A0D8500905DCC /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -1290,7 +1191,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -1313,7 +1213,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				"PUBLIC_HEADERS_FOLDER_PATH[sdk=*]" = "$(PROJECT_NAME)Headers";
 				SDKROOT = iphoneos;
 				STRIP_STYLE = "non-global";
@@ -1325,7 +1225,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -1425,7 +1324,6 @@
 		C11A649F1754D98700385896 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1444,7 +1342,6 @@
 		C11A64A01754D98700385896 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -1530,71 +1427,6 @@
 			};
 			name = Release;
 		};
-		C16542CC191A0D8500905DCC /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/watsonsdktest.app/watsonsdktest";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "watsonsdktest/watsonsdktest-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				INFOPLIST_FILE = "watsonsdktestTests/watsonsdktestTests-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		C16542CD191A0D8500905DCC /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/watsonsdktest.app/watsonsdktest";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				COPY_PHASE_STRIP = YES;
-				ENABLE_NS_ASSERTIONS = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "watsonsdktest/watsonsdktest-Prefix.pch";
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				INFOPLIST_FILE = "watsonsdktestTests/watsonsdktestTests-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1639,15 +1471,6 @@
 			buildConfigurations = (
 				C16542CA191A0D8500905DCC /* Debug */,
 				C16542CB191A0D8500905DCC /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		C16542CF191A0D8500905DCC /* Build configuration list for PBXNativeTarget "watsonsdktestTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				C16542CC191A0D8500905DCC /* Debug */,
-				C16542CD191A0D8500905DCC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

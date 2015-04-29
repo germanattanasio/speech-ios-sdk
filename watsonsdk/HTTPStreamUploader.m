@@ -431,6 +431,10 @@ static NSString *NETWORK_401 = @"HTTP/1.1 401 Authorization Required";
             }
             break;
         }
+        case NSStreamEventNone:
+        {
+            break;
+        }
             
     }
         

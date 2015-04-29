@@ -10,7 +10,6 @@
 #import "opus.h"
 
 
-static const int kNumberOfSamplesPerChannel = 2880;
 
 @interface OpusHelper()
 @property (nonatomic) OpusEncoder *encoder;

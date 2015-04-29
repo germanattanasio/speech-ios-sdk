@@ -70,8 +70,6 @@
 /* Process the http response*/
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-	NSString *txt = [[[NSString alloc] initWithData:responseData encoding: NSASCIIStringEncoding] autorelease];
-	
     [connection release];
 	
 	[[self delegate] AudioUploadFinished:responseData];
