@@ -50,58 +50,41 @@
 
 -(IBAction) pressStartRecord:(id) sender
 {
-    NSError* error= [stt recognize];
-    if(error != nil)
-        NSLog(@"error is %@",error.localizedDescription);
     
-    result.text = @"Starting audio stream...";
-    
+    // list models calls
     [stt listModels:^(NSDictionary* res, NSError* err){
         
         if(err == nil)
             [self modelHandler:res];
         else
-            NSLog(@"Error fetching models");
+            result.text = [err localizedDescription];
     }];
+    
+    
+    // start recognize
+    [stt recognize:^(NSDictionary* res, NSError* err){
+        
+        if(err == nil)
+            result.text = [stt getTranscript:res];
+        else
+            result.text = [err localizedDescription];
+    }];
+   
+    // get power readings until recording has finished
+    [stt getPowerLevel:^(float power){
+        
+        CGRect frm = self.soundbar.frame;
+        frm.size.width = 3*(70 + power);
+        self.soundbar.frame = frm;
+        self.soundbar.center = CGPointMake(self.view.frame.size.width / 2, self.soundbar.center.y);
+    }];
+    
+    
     
 }
 
 - (void) modelHandler:(NSDictionary *) dict {
     NSLog(@"modelHandler");
-}
-
--(IBAction) pressStopRecord:(id) sender{
-    
-    NSError* error= [stt endRecognize];
-    if(error != nil)
-        NSLog(@"error is %@",error.localizedDescription);
-   
-}
-
-- (void) PartialTranscriptCallback:(NSString*) response {
-  
-    result.text = response;
-    
-}
-
-
-- (void) TranscriptionFinishedCallback:(NSString*) response{
-    
-    
-    NSLog(@"transcript is this %@",response);
-    result.text = response;
-    
-}
-
-- (void) peakPowerCallback:(float) power {
-    
-//    NSLog(@"peak power %f",power);
-   
-    CGRect frm = self.soundbar.frame;
-    frm.size.width = 3*(70 + power);
-    self.soundbar.frame = frm;
-    
-    self.soundbar.center = CGPointMake(self.view.frame.size.width / 2, self.soundbar.center.y);
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{

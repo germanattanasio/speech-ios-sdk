@@ -17,10 +17,14 @@
 #import "WebSocketUploader.h"
 #import "SRWebSocket.h"
 
+
+typedef void (^RecognizeCallbackBlockType)(NSDictionary*, NSError*);
+
 @interface WebSocketUploader () <SRWebSocketDelegate>
 
 @property (strong,atomic) NSMutableData *buffer;
 @property (strong,atomic) NSNumber *reconnectAttempts;
+@property (nonatomic,copy) RecognizeCallbackBlockType recognizeCallback;
 
 @end
 
@@ -33,6 +37,7 @@
 
 @synthesize speechServer;
 @synthesize buffer;
+@synthesize recognizeCallback;
 
 /**
  *  connect to an itrans server using websockets
@@ -158,14 +163,8 @@
         [self reconnect];
     } else {
         
-        NSMutableDictionary* details = [NSMutableDictionary dictionary];
-        [details setValue:[error localizedDescription] forKey:NSLocalizedDescriptionKey];
-        
-        // populate the error object with the details
-        NSError *delegateError = [NSError errorWithDomain:@"com.ibm.cio.watsonsdk" code:401 userInfo:details];
-        
-        // assume session has expired, no way of knowing with websockets and IMC
-        [resultDelegate streamErrorCallback:[error localizedDescription] error:delegateError];
+        // call the recognize handler block in the clients code
+        recognizeCallback(nil,error);
     }
     
     
@@ -189,6 +188,7 @@
         
         /* JSON was malformed, act appropriately here */
         NSLog(@"JSON from service malformed, received %@",json);
+        recognizeCallback(nil,error);
         
     }
     
@@ -227,33 +227,7 @@
          */
         
         if([results objectForKey:@"results"] != nil) {
-            
-            NSArray *resultArray = [results objectForKey:@"results"];
-            if( [resultArray count] != 0 && [resultArray objectAtIndex:0] != nil) {
-                
-                NSDictionary *result =[resultArray objectAtIndex:0];
-            
-            
-                BOOL isEndOfSentence = [[result objectForKey:@"final"] boolValue];
-                NSArray *alternatives = [result objectForKey:@"alternatives"];
-                
-                if([alternatives objectAtIndex:0] != nil) {
-                    NSDictionary *alternative = [alternatives objectAtIndex:0];
-                    
-                    if([alternative objectForKey:@"transcript"] != nil) {
-                        NSString *transcript = [alternative objectForKey:@"transcript"];
-                        
-                        if(isEndOfSentence) {
-                            // send the transcript back to the delegate and initiate the connection close
-                            [resultDelegate streamResultPartialCallback:transcript];
-                            //[self endSession];
-                        } else {
-                            // send teh partial result back to the
-                            [resultDelegate streamResultPartialCallback:transcript];
-                        }
-                    }
-                }
-            }
+            recognizeCallback(results,nil);
         }
         
         
@@ -274,17 +248,18 @@
     isConnected = NO;
     isReadyForAudio = NO;
     _webSocket = nil;
-    
-    // trigger the stream closed callback so the calling class can clean up
-    [resultDelegate streamClosedCallback];
 }
 
-#pragma mark - Uploader delegate
+#pragma mark - delegate
 
-// setting a delegate allows the HTTPStreamUploader to call back when either an error has occured or data is received and the stream closed
--(void) setResultDelegate:(id) delegate {
-    resultDelegate = delegate;
+/**
+ *  setRecognizeHandler - store the handler from the client so we can pass back results and errors
+ *
+ *  @param handler (void (^)(NSDictionary*, NSError*))
+ */
+- (void) setRecognizeHandler:(void (^)(NSDictionary*, NSError*))handler {
     
+    self.recognizeCallback = handler;
 }
 
 

@@ -93,13 +93,13 @@ id opusRef;
 +(id)initWithURL:(NSURL *)url;
 -(id)initWithURL:(NSURL *)url;
 
-/**
- *  startRecording and streaming audio from the device microphone
- *
- *  @return NSError - nil if no error
- */
-- (NSError*) recognize;
 
+/**
+ *  stream audio from the device microphone to the STT service
+ *
+ *  @param recognizeHandler (^)(NSDictionary*, NSError*)
+ */
+- (void) recognize:(void (^)(NSDictionary*, NSError*)) recognizeHandler;
 
 /**
  *  stopRecording and streaming audio from the device microphone
@@ -142,15 +142,24 @@ id opusRef;
  */
 - (void) setCompressionType:(NSString *)compressionType;
 
+
+
+/**
+ *  getTranscript - convenience method to get the transcript from the JSON results
+ *
+ *  @param results NSDictionary containing parsed JSON returned from the service
+ *
+ *  @return NSString containing transcript
+ */
+-(NSString*) getTranscript:(NSDictionary*) results;
+
+
+/**
+ *  getPowerLevel - listen for updates to the Db level of the speaker, can be used for a voice wave visualization
+ *
+ *  @param powerHandler - callback block
+ */
+- (void) getPowerLevel:(void (^)(float)) powerHandler;
+
 @end
 
-// need some callbacks that we can fire from the calling application
-// delegate for responding to AudioUpload
-@protocol SpeechToTextDelegate <NSObject>
-@required
-
-- (void) PartialTranscriptCallback:(NSString*) response;
-- (void) TranscriptionFinishedCallback:(NSString*) response;
-- (void) peakPowerCallback:(float) power;
-
-@end

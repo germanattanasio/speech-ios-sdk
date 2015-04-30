@@ -18,7 +18,7 @@
 #import "UploaderDelegate.h"
 
 @interface WebSocketUploader : NSObject {
-    id resultDelegate;
+   
 }
 
 @property NSURL *speechServer;
@@ -29,8 +29,9 @@
 - (void) reconnect;
 - (void) disconnect;
 - (void) writeData:(NSData*) data;
-- (void) setResultDelegate:(id) delegate;
+- (void) setRecognizeHandler:(void (^)(NSDictionary*, NSError*))handler;
 - (void) sendEndOfStreamMarker;
+
 
 @end
 

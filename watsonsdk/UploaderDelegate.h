@@ -20,6 +20,6 @@
 
 - (void) streamErrorCallback:(NSString*) errormessage error:(NSError*) theError; // TODO change this to return an nserror
 - (void) streamResultCallback:(NSString*)result responseBytes:(uint8_t*)responseBytes responseBytesLen:(int)responseBytesLen;
-- (void) streamResultPartialCallback:(NSString*)result;
+- (void) streamResultPartialCallback:(NSDictionary*) result;
 - (void) streamClosedCallback;
 @end

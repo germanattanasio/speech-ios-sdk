@@ -19,6 +19,10 @@
 #import "VadProcessor.h"
 #import "OpusHelper.h"
 
+// type defs for block callbacks
+typedef void (^RecognizeCallbackBlockType)(NSDictionary*, NSError*);
+typedef void (^PowerLevelCallbackBlockType)(float);
+
 @interface SpeechToText()
 
 @property(atomic,strong) OpusHelper* opus;
@@ -31,6 +35,8 @@
 @property (nonatomic,strong) NSURL* speechServer;
 @property (nonatomic,strong) NSString* compressionType;
 @property (assign) BOOL isCertificateValidationDisabled;
+@property (nonatomic,copy) RecognizeCallbackBlockType recognizeCallback;
+@property (nonatomic,copy) PowerLevelCallbackBlockType powerLevelCallback;
 
 @end
 
@@ -50,6 +56,8 @@
 @synthesize delegate;
 @synthesize PeakPowerTimer;
 @synthesize error;
+@synthesize recognizeCallback;
+@synthesize powerLevelCallback;
 
 
 static BOOL isCompressedOpus;
@@ -139,31 +147,34 @@ BOOL hasError(){
     }
 }
 
--(NSError*) recognize
-{
+/**
+ *  stream audio from the device microphone to the STT service
+ *
+ *  @param recognizeHandler (^)(NSDictionary*, NSError*)
+ */
+- (void) recognize:(void (^)(NSDictionary*, NSError*)) recognizeHandler {
+    
+    // perform asset here
+    
+    // store the block
+    self.recognizeCallback = recognizeHandler;
+    
     if(!isNewRecordingAllowed)
     {
-        NSLog(@"Transription already in progress");
+        NSLog(@"Transcription already in progress");
         NSMutableDictionary* details = [NSMutableDictionary dictionary];
         [details setValue:@"A voice query is already in progress" forKey:NSLocalizedDescriptionKey];
         
         // populate the error object with the details
         NSError *recordError = [NSError errorWithDomain:@"com.ibm.cio.watsonsdk" code:409 userInfo:details];
-        return recordError;
-        
+        self.recognizeCallback(nil,recordError);
+        return;
     }
     
     // don't allow a new recording to be allowed until this transaction has completed
     isNewRecordingAllowed= NO;
-    
-    NSLog(@"startRecording");
-    
-    errorCode = 0;
-    self.error = nil;
-    
     [self startRecordingAudio];
     
-    return self.error;
     
 }
 
@@ -230,8 +241,57 @@ BOOL hasError(){
 }
 
 
+/**
+ *  getTranscript - convenience method to get the transcript from the JSON results
+ *
+ *  @param results NSDictionary containing parsed JSON returned from the service
+ *
+ *  @return NSString containing transcript
+ */
+-(NSString*) getTranscript:(NSDictionary*) results {
+    
+    if([results objectForKey:@"results"] != nil) {
+        
+        NSArray *resultArray = [results objectForKey:@"results"];
+        if( [resultArray count] != 0 && [resultArray objectAtIndex:0] != nil) {
+            
+            NSDictionary *result =[resultArray objectAtIndex:0];
+            
+            NSArray *alternatives = [result objectForKey:@"alternatives"];
+            
+            if([alternatives objectAtIndex:0] != nil) {
+                NSDictionary *alternative = [alternatives objectAtIndex:0];
+                
+                if([alternative objectForKey:@"transcript"] != nil) {
+                    NSString *transcript = [alternative objectForKey:@"transcript"];
+                    
+                    return transcript;
+                }
+            }
+        }
+    }
+
+    return nil;
+}
+
+/**
+ *  getPowerLevel - listen for updates to the Db level of the speaker, can be used for a voice wave visualization
+ *
+ *  @param powerHandler - callback block
+ */
+- (void) getPowerLevel:(void (^)(float)) powerHandler {
+    
+    self.powerLevelCallback = powerHandler;
+}
+
 #pragma mark private methods
 
+/**
+ *  performGet - shared method for performing GET requests to a given url calling a handler parameter with the result
+ *
+ *  @param handler (^)(NSDictionary*, NSError*))
+ *  @param url     url to perform GET request on
+ */
 - (void) performGet:(void (^)(NSDictionary*, NSError*))handler forURL:(NSURL*)url{
     
     // Create and set authentication headers
@@ -272,7 +332,7 @@ BOOL hasError(){
     //  NSLog(@"PERF time from touchStart to initRecordControl:%f", (CACurrentMediaTime()-timeTmp));
     
     // lets start the socket connection right away
-    [self _initStreaming];
+    [self initializeStreaming];
     
     audioRecordedLength = 0;
     
@@ -354,14 +414,12 @@ BOOL hasError(){
     AudioQueueDispose (recordState.queue, YES);
     fclose(recordState.stream);
     
-    
+    isNewRecordingAllowed = YES;
     NSLog(@"stopRecordingAudio->fclose done");
     
 }
 
 - (void) samplePeakPower {
-    
-    // NSLog(@"sample peak power");
     
     AudioQueueLevelMeterState meters[1];
     UInt32 dlen = sizeof(meters);
@@ -370,9 +428,13 @@ BOOL hasError(){
     if (Status == 0) {
         
         // added a new delegate method so that we can get callbacks with raw audio data in order to visualize it
-        if ([delegateRef respondsToSelector:@selector(peakPowerCallback:)]) {
-            [delegateRef peakPowerCallback:meters[0].mAveragePower];
+        //if ([delegateRef respondsToSelector:@selector(peakPowerCallback:)]) {
+        //    [delegateRef peakPowerCallback:meters[0].mAveragePower];
+        //}
+        if(self.powerLevelCallback !=nil) {
+            self.powerLevelCallback(meters[0].mAveragePower);
         }
+        
     }
 }
 
@@ -382,10 +444,10 @@ BOOL hasError(){
 /**
  *  syncTranscript - perform a synchronous call to upload an audio file
  *
- *  @param filePath <#filePath description#>
- *  @param url      <#url description#>
+ *  @param filePath
+ *  @param url
  *
- *  @return <#return value description#>
+ *  @return NSString
  */
 - (NSString*) syncTranscript:(NSString*) filePath iTransUrl:(NSString*) url {
     
@@ -453,7 +515,7 @@ BOOL hasError(){
     
     // allow the next voice query to happen
     isNewRecordingAllowed= YES;
-    [self.delegate TranscriptionFinishedCallback:[self getLastLine:result]];
+   // [self.delegate TranscriptionFinishedCallback:[self getLastLine:result]];
 }
 
 -(NSString *) getLastLine:(NSString*)body {
@@ -490,13 +552,13 @@ BOOL hasError(){
     
 }
 
-- (void) _initStreaming {
+- (void) initializeStreaming {
     NSLog(@"CALL STARTING STREAM 1050");
     
         // init the websocket uploader if its nil
         if(wsuploader == nil) {
             wsuploader = [[WebSocketUploader alloc] init];
-            [wsuploader setResultDelegate:self];
+            [wsuploader setRecognizeHandler:recognizeCallback];
         }
         
         
@@ -697,7 +759,7 @@ void AudioInputStreamingCallback(
     if (responseBytesLen==0) {
         clientResult = [NSString stringWithFormat:@"{'code':0, 'text':'%@'}",@""];
         isNewRecordingAllowed=YES;
-        [self.delegate TranscriptionFinishedCallback:clientResult];
+        //[self.delegate TranscriptionFinishedCallback:clientResult];
     } else {
         
         //    if(self.useVaniBackend)
@@ -717,11 +779,9 @@ void AudioInputStreamingCallback(
      [self writeJavascript:[pluginResult toSuccessCallbackString:self.callbackId]];*/
 }
 
-- (void) streamResultPartialCallback:(NSString*)result {
-    
-    NSLog(@"%@",result);
-    self.partialTranscript =result;
-    [self.delegate PartialTranscriptCallback:result];
+
+- (void) streamResultPartialCallback:(NSDictionary*)result {
+    self.recognizeCallback(result,nil);
 }
 
 
@@ -740,11 +800,6 @@ void AudioInputStreamingCallback(
     NSLog(@"RecorderPlugin -> streamClosedCallback");
     
     isNewRecordingAllowed=YES;
-    uploader = nil;
-    
-    [self.delegate TranscriptionFinishedCallback:self.partialTranscript];
-    
-    
     
 }
 
@@ -752,68 +807,6 @@ void AudioInputStreamingCallback(
 
 
 #pragma mark utilities
-
-+(NSString*) getXmlVal: (NSString*)textWithXml tag:(NSString*) tag {
-    if (textWithXml == nil) {
-        return @"";
-    }
-    NSString* result;
-    
-    NSString* start = [NSString stringWithFormat:@"<%@>", tag];
-    NSString* end = [NSString stringWithFormat:@"</%@>", tag];
-    
-    NSRange startRange = [textWithXml rangeOfString:start];
-    if (startRange.location == NSNotFound) {
-        return @"";
-    }
-    
-    result = [textWithXml substringFromIndex:NSMaxRange(startRange)];
-    
-    NSRange endRange = [result rangeOfString:end];
-    if (endRange.location == NSNotFound) {
-        return @"";
-    }
-    
-    result = [result substringToIndex:endRange.location];
-    
-    return result;
-}
-
-+(NSString*) getJsonTranscript : (NSString*) response {
-    //error, 10=need logout, reload app
-    if ([response rangeOfString:@"401 Authorization Required"].location != NSNotFound) {
-        return [NSString stringWithFormat:@"{'code':10, 'text':'%@'}",@"Authorization Required!"];
-    }
-    
-    if (response==nil || [response length] == 0) {
-        return [NSString stringWithFormat:@"{'code':0, 'text':'%@'}",@""];
-    }
-    
-    
-    
-    
-    NSString *transcript = [SpeechToText getXmlVal:response tag:@"transcription"];
-    NSString *jobId = [SpeechToText getXmlVal:response tag:@"job-id"];
-    
-    
-    NSLog(@"callback hit with %@, jobId=%@",transcript, jobId);
-    //NSLog(@"Current thread is %@", [NSThread currentThread]);
-    
-    NSString *clientResult = [NSString stringWithFormat:@"{'code':0, 'text':'%@', 'jobId':'%@'}",transcript, jobId];
-    
-    return clientResult;
-}
-
-+ (bool) isOnlyOneResult : (NSString*) s {
-    int count=0;
-    for (int i=0; i < [s length]; i++) {
-        if ([s characterAtIndex:i] == '{') {
-            count++;
-        }
-    }
-    return count==1;
-}
-
 
 + (void) setTmpFilePaths{
     
@@ -832,14 +825,6 @@ void AudioInputStreamingCallback(
     
 }
 
-/*
- + (void) genSerialNo {
- srand(time(NULL));
- serialno = rand();
- 
- pageSeq = 0;
- }
- */
 - (void) setFilePaths{
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,

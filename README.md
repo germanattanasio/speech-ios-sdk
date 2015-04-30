@@ -33,6 +33,8 @@ Start Coding
 ```
 
 **Get a list of models supported by the service**
+
+in Objective-C
 ```
 	[stt listModels:^(NSDictionary* jsonDict, NSError* err){
         
@@ -40,6 +42,16 @@ Start Coding
             ... read values from NSDictionary ...
 
     }];
+```
+
+in Swift
+```
+stt.listModels({
+    jsonDict in
+    err in
+    if(err == nil)
+    	...
+})
 ```
 
 **Get details of a particular model**

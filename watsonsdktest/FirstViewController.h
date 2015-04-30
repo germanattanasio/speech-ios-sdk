@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <watsonsdk/SpeechToText.h>
 
-@interface FirstViewController : UIViewController<SpeechToTextDelegate, UITextFieldDelegate>{
+@interface FirstViewController : UIViewController<UITextFieldDelegate>{
     
     SpeechToText *stt;
 }
