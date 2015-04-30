@@ -23,7 +23,7 @@ Some additional iOS standard frameworks must be added.
 
 - AudioToolbox.framework
 
-- Quartzcore.framework
+--- Quartzcore.framework
 
 - CoreAudio.framework
 
@@ -33,7 +33,6 @@ Some additional iOS standard frameworks must be added.
 
 - libicucore.dylib
 
-- Foundation.framework
 
 
 
