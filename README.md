@@ -8,11 +8,9 @@ The SDK include support for recording and streaming audio and receiving a transc
 Installation
 ------------
 
-The SDK can be installed using [Cocoapods](https://cocoapods.org/) by adding the 'Watson-iOS-SDK' pod.
-
 **Using the framework**
 
-1. Download the watsonsdk.framework.zip and unzip it somewhere convenient
+1. Download the [watsonsdk.framework.zip](https://git.hursley.ibm.com/w3bluemix/WatsoniOSSpeechSDK/blob/master/watsonsdk.framework.zip) and unzip it somewhere convenient
 2. Once unzipped drag the watsonsdk.framework folder into your xcode project view under the Frameworks folder.
 
 Some additional iOS standard frameworks must be added.
@@ -54,7 +52,7 @@ Start Coding
 	self.stt = [SpeechToText initWithURL:host];
     [self.stt setDelegate:self];
     
-	// Credentials are obtained by inspecting the service instance detailsin Bluemix
+	// Credentials are obtained by inspecting the service instance details in Bluemix
     [self.stt setBasicAuthUsername:@"xxxxxx"];
     [self.stt setBasicAuthPassword:@"xxxxxx"];
 ```
