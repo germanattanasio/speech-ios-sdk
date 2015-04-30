@@ -10,20 +10,47 @@ Installation
 
 The SDK can be installed using [Cocoapods](https://cocoapods.org/) by adding the 'Watson-iOS-SDK' pod.
 
-..
+**Using the framework**
 
-..
+1. Download the watsonsdk.framework.zip and unzip it somewhere convenient
+2. Once unzipped drag the watsonsdk.framework folder into your xcode project view under the Frameworks folder.
+
+Some additional iOS standard frameworks must be added.
+
+1. Select your project in the Xcode file explorer and open the "Build Phases" tab. Expand the "Link Binary With Libraries" section and click the + icon
+
+2. Add the following frameworks
+
+- CFNetwork.framework
+
+- AudioToolbox.framework
+
+- Quartzcore.framework
+
+- CoreAudio.framework
+
+- Security.framework
+
+- Foundation.framework
+
+- libicucore.dylib
+
+- Foundation.framework
+
+
 
 Start Coding
 --------------
 
+**Include the header**
+
+```
+#import <watsonsdk/SpeechToText.h>
+```
 
 **Create a SpeechToText instance**
 ```objective-c
-	#import <WatsonSDK/SpeechToText.h>
-	
-	...
-	
+		
 	self.stt = [SpeechToText initWithURL:host];
     [self.stt setDelegate:self];
     

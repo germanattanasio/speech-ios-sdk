@@ -143,12 +143,13 @@ typedef void (^RecognizeCallbackBlockType)(NSDictionary*, NSError*);
 {
     NSLog(@"Websocket Connected");
     isConnected = YES;
+    [_webSocket send:[self buildQueryJson]];
+}
+
+- (NSString *) buildQueryJson {
     
-   // NSString *json = @"{\"grammar\":null,\"name\":\"listen\",\"dictionary\":null,\"wantResults\":[\"topHypothesis\",\"splitTopHypothesis\"],\"content-type\":\"audio/l16; rate=16000\",\"wantInterimResults\":true,\"EOUMode\":\"PTT\"}";
-    
-    NSString *json = @"{\"action\":\"start\",\"content-type\":\"audio/l16; rate=16000\",\"interim_results\":true,\"continuous\": true}";
-    
-    [_webSocket send:json];
+    NSString *json = @"{\"model\":\"ModelCI6\",\"action\":\"start\",\"content-type\":\"audio/l16; rate=16000\",\"interim_results\":true,\"continuous\": true}";
+    return json;
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error;

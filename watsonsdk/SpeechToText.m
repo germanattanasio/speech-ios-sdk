@@ -419,6 +419,10 @@ BOOL hasError(){
     
 }
 
+
+/**
+ *  samplePeakPower - Get the decibel level from the AudioQueue
+ */
 - (void) samplePeakPower {
     
     AudioQueueLevelMeterState meters[1];
@@ -426,11 +430,7 @@ BOOL hasError(){
     OSErr Status = AudioQueueGetProperty(recordState.queue,kAudioQueueProperty_CurrentLevelMeterDB,meters,&dlen);
     
     if (Status == 0) {
-        
-        // added a new delegate method so that we can get callbacks with raw audio data in order to visualize it
-        //if ([delegateRef respondsToSelector:@selector(peakPowerCallback:)]) {
-        //    [delegateRef peakPowerCallback:meters[0].mAveragePower];
-        //}
+     
         if(self.powerLevelCallback !=nil) {
             self.powerLevelCallback(meters[0].mAveragePower);
         }
