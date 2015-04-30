@@ -66,9 +66,13 @@ stt.listModels({
 
 **Start Audio Transcription**
 ```
-	NSError* error= [stt recognize];
-    if(error != nil)
-        NSLog(@"error is %@",error.localizedDescription);
+	[stt recognize:^(NSDictionary* res, NSError* err){
+        
+        if(err == nil)
+            result.text = [stt getTranscript:res];
+        else
+            result.text = [err localizedDescription];
+    }];
 
 ```
 
@@ -82,34 +86,19 @@ By default the SDK uses Voice Activated Detection (VAD) to detect when a user ha
 
 ```
 
-**Audio Transcription Callbacks**
-In order to use receive the callbacks
+
+**Receive speech power levels during the recognize**
 
 ```
-	// handle callbacks during transcription with the transcript so far
-	- (void) PartialTranscriptCallback:(NSString*) response {
-  
-    	...
-    
-	}
-```
-
-```
-	// receive the final transcript
-	- (void) TranscriptionFinishedCallback:(NSString*) response{
-    
-		...
-    
-	}
-```
-```	
-	// receive an indication of the current power for displaying a speech indicator
-	- (void) peakPowerCallback:(float) power {
-    
-		...
-
-	}
-
+[stt getPowerLevel:^(float power){
+        
+		// user the power level to make a simple UIView graphic indicator 
+        CGRect frm = self.soundbar.frame;
+        frm.size.width = 3*(70 + power);
+        self.soundbar.frame = frm;
+        self.soundbar.center = CGPointMake(self.view.frame.size.width / 2, 	self.soundbar.center.y);
+        
+    }];
 ```
 
 Features
