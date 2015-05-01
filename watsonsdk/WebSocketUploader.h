@@ -16,16 +16,12 @@
 
 #import <Foundation/Foundation.h>
 #import "UploaderDelegate.h"
+#import "STTConfiguration.h"
 
-@interface WebSocketUploader : NSObject {
-   
-}
-
-@property NSURL *speechServer;
-@property NSDictionary *headers;
+@interface WebSocketUploader : NSObject
 
 - (BOOL) isWebSocketConnected;
-- (void) connect:(NSURL*)speechServer headers:(NSDictionary*)headers;
+- (void) connect:(STTConfiguration*)config headers:(NSDictionary*)headers;
 - (void) reconnect;
 - (void) disconnect;
 - (void) writeData:(NSData*) data;

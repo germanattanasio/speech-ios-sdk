@@ -31,6 +31,8 @@
 		C11A66BE1754F9CD00385896 /* HTTPStreamUploader.h in Headers */ = {isa = PBXBuildFile; fileRef = C11A66BC1754F9CD00385896 /* HTTPStreamUploader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C11A66C21754FA1800385896 /* watsonSpeexdec.h in Headers */ = {isa = PBXBuildFile; fileRef = C11A66C01754FA1800385896 /* watsonSpeexdec.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C11A66C31754FA1800385896 /* watsonSpeexenc.h in Headers */ = {isa = PBXBuildFile; fileRef = C11A66C11754FA1800385896 /* watsonSpeexenc.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C11B3E931AF398C80062BF7D /* STTConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = C11B3E911AF398C80062BF7D /* STTConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C11B3E941AF398C80062BF7D /* STTConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = C11B3E921AF398C80062BF7D /* STTConfiguration.m */; };
 		C11D9E7A1937C57200F2D614 /* beep.wav in Resources */ = {isa = PBXBuildFile; fileRef = C11D9E791937C57200F2D614 /* beep.wav */; };
 		C1203966175623BD008B0297 /* watsonSpeexenc.c in Sources */ = {isa = PBXBuildFile; fileRef = C1203965175623BD008B0297 /* watsonSpeexenc.c */; };
 		C120396817562404008B0297 /* watsonSpeexdec.c in Sources */ = {isa = PBXBuildFile; fileRef = C120396717562404008B0297 /* watsonSpeexdec.c */; };
@@ -156,8 +158,6 @@
 		C1435D6D175775F500EA854D /* speexenc.h in Headers */ = {isa = PBXBuildFile; fileRef = C1435CF7175775F400EA854D /* speexenc.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C1435D6E175775F500EA854D /* wav_io.c in Sources */ = {isa = PBXBuildFile; fileRef = C1435CF8175775F400EA854D /* wav_io.c */; };
 		C1435D6F175775F500EA854D /* wave_out.c in Sources */ = {isa = PBXBuildFile; fileRef = C1435CF9175775F400EA854D /* wave_out.c */; };
-		C1435D7C175789F500EA854D /* AudioUploader.h in Headers */ = {isa = PBXBuildFile; fileRef = C1435D7A175789F500EA854D /* AudioUploader.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C1435D7D175789F500EA854D /* AudioUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = C1435D7B175789F500EA854D /* AudioUploader.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C165429C191A0D8500905DCC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C11A645E1754D0E600385896 /* Foundation.framework */; };
 		C165429E191A0D8500905DCC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C165429D191A0D8500905DCC /* CoreGraphics.framework */; };
 		C165429F191A0D8500905DCC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C11A646F1754D0E700385896 /* UIKit.framework */; };
@@ -241,6 +241,8 @@
 		C11A66DD175609B500385896 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		C11A66DF17560A4E00385896 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		C11A66E117560AD900385896 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		C11B3E911AF398C80062BF7D /* STTConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTConfiguration.h; sourceTree = "<group>"; };
+		C11B3E921AF398C80062BF7D /* STTConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTConfiguration.m; sourceTree = "<group>"; };
 		C11BDA781758A2C600E656B9 /* jodiefuller.spx */ = {isa = PBXFileReference; lastKnownFileType = file; path = jodiefuller.spx; sourceTree = "<group>"; };
 		C11D9E791937C57200F2D614 /* beep.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beep.wav; sourceTree = "<group>"; };
 		C1203965175623BD008B0297 /* watsonSpeexenc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = watsonSpeexenc.c; sourceTree = "<group>"; };
@@ -379,8 +381,6 @@
 		C1435CF7175775F400EA854D /* speexenc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = speexenc.h; sourceTree = "<group>"; };
 		C1435CF8175775F400EA854D /* wav_io.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wav_io.c; sourceTree = "<group>"; };
 		C1435CF9175775F400EA854D /* wave_out.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wave_out.c; sourceTree = "<group>"; };
-		C1435D7A175789F500EA854D /* AudioUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioUploader.h; sourceTree = "<group>"; };
-		C1435D7B175789F500EA854D /* AudioUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioUploader.m; sourceTree = "<group>"; };
 		C165429B191A0D8500905DCC /* watsonsdktest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = watsonsdktest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C165429D191A0D8500905DCC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		C16542A2191A0D8500905DCC /* watsonsdktest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "watsonsdktest-Info.plist"; sourceTree = "<group>"; };
@@ -500,6 +500,8 @@
 				C11A64611754D0E600385896 /* Supporting Files */,
 				C1C3743D1A86C5DB0083C69B /* SpeechToText.h */,
 				C1C3743E1A86C5DB0083C69B /* SpeechToText.m */,
+				C11B3E911AF398C80062BF7D /* STTConfiguration.h */,
+				C11B3E921AF398C80062BF7D /* STTConfiguration.m */,
 			);
 			path = watsonsdk;
 			sourceTree = "<group>";
@@ -549,8 +551,6 @@
 			children = (
 				C11A66BB1754F9CD00385896 /* HTTPStreamUploader.m */,
 				C11A66BC1754F9CD00385896 /* HTTPStreamUploader.h */,
-				C1435D7A175789F500EA854D /* AudioUploader.h */,
-				C1435D7B175789F500EA854D /* AudioUploader.m */,
 				C123FF8719B9FE4100C6A702 /* UploaderDelegate.h */,
 				C1C374391A8581A00083C69B /* WebSocketUploader.h */,
 				C1C3743A1A8581A00083C69B /* WebSocketUploader.m */,
@@ -897,7 +897,6 @@
 				C1435D42175775F400EA854D /* config.h in Headers */,
 				C1435D69175775F500EA854D /* const.h in Headers */,
 				C1435D6A175775F500EA854D /* myarray.h in Headers */,
-				C1435D7C175789F500EA854D /* AudioUploader.h in Headers */,
 				C1235355199B53FF009A8F8B /* OpusHelper.h in Headers */,
 				C1D457F419A7609D00093095 /* SRWebSocket.h in Headers */,
 				C1D457F519A7609E00093095 /* SocketRocket-Prefix.pch in Headers */,
@@ -905,6 +904,7 @@
 				C1416C32194B48180009C49A /* VadProcessor.h in Headers */,
 				C1C3743B1A8581A00083C69B /* WebSocketUploader.h in Headers */,
 				C1C3743F1A86C5DB0083C69B /* SpeechToText.h in Headers */,
+				C11B3E931AF398C80062BF7D /* STTConfiguration.h in Headers */,
 				C11712E31A03DC2E00957080 /* UploaderDelegate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1102,6 +1102,7 @@
 				C1435D64175775F500EA854D /* speex_header.c in Sources */,
 				C1435D65175775F500EA854D /* stereo.c in Sources */,
 				C1C374401A86C5DB0083C69B /* SpeechToText.m in Sources */,
+				C11B3E941AF398C80062BF7D /* STTConfiguration.m in Sources */,
 				C1435D66175775F500EA854D /* vbr.c in Sources */,
 				C1435D67175775F500EA854D /* vq.c in Sources */,
 				C1435D68175775F500EA854D /* window.c in Sources */,
@@ -1110,7 +1111,6 @@
 				C1435D6C175775F500EA854D /* speexenc.c in Sources */,
 				C1435D6E175775F500EA854D /* wav_io.c in Sources */,
 				C1435D6F175775F500EA854D /* wave_out.c in Sources */,
-				C1435D7D175789F500EA854D /* AudioUploader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

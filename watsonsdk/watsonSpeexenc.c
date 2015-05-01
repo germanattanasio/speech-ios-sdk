@@ -37,16 +37,18 @@
 #define MAX_FRAME_BYTES 2000
 
 void headerToFile(FILE *fout_tmp, int serialno,long *pageSeq) {
-    ogg_stream_state os;
-    ogg_page og;
-    ogg_packet 		 op;
     
-    int rate=16000;
+    
+    
     
     const SpeexMode *mode=NULL;
     int modeID =SPEEX_MODEID_WB;
     int nframes=1;
+    int rate=16000;
     spx_int32_t vbr_enabled=0;
+    ogg_stream_state os;
+    ogg_page og;
+    ogg_packet 		 op;
     mode = speex_lib_get_mode (modeID);
     
     SpeexHeader header;
@@ -55,11 +57,6 @@ void headerToFile(FILE *fout_tmp, int serialno,long *pageSeq) {
 	header.frames_per_packet=nframes;
 	header.vbr=vbr_enabled;
 	header.nb_channels = 1;
-    
-    //char vendor_string[64];
-    //char *comments;
-	//int comments_length;
-    //comment_init(&comments, &comments_length, vendor_string);
     
     int result,ret;
     
@@ -102,21 +99,7 @@ void headerToFile(FILE *fout_tmp, int serialno,long *pageSeq) {
         
 	}
     
-    
-	/* writing the rest of the speex header packets */
-    //TODO: don't know why need this
-    /*
-	while((result = ogg_stream_flush(&os, &og))) {
-        if(!result) break;
-		ret = oe_write_page(&og, fout_tmp);
-		if(ret != og.header_len + og.body_len){
-			fprintf (stderr,"Error: failed writing header to output stream\n");
-			exit(1);
-		}
-	}
-     */
-    
-    *pageSeq = os.pageno;
+    pageSeq = os.pageno;
 }
 
 int pcmEnc(const char *filepathPCM,const char *filepathSPX, _Bool hasHeader, int serialno, long *pageSeq) {

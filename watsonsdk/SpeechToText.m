@@ -15,26 +15,38 @@
  */
 
 #import <SpeechToText.h>
-#import "AudioUploader.h"
 #import "VadProcessor.h"
 #import "OpusHelper.h"
+#import "watsonSpeexdec.h"
+#import "watsonSpeexenc.h"
+#import "WebSocketUploader.h"
 
 // type defs for block callbacks
+#define NUM_BUFFERS 3
+#define NOTIFICATION_VAD_STOP_EVENT @"STOP_RECORDING"
 typedef void (^RecognizeCallbackBlockType)(NSDictionary*, NSError*);
 typedef void (^PowerLevelCallbackBlockType)(float);
+typedef struct
+{
+    AudioStreamBasicDescription  dataFormat;
+    AudioQueueRef                queue;
+    AudioQueueBufferRef          buffers[NUM_BUFFERS];
+    AudioFileID                  audioFile;
+    SInt64                       currentPacket;
+    bool                         recording;
+    FILE*						 stream;
+    int                          slot;
+} RecordingState;
+
 
 @interface SpeechToText()
 
-@property(atomic,strong) OpusHelper* opus;
-@property(atomic,strong) NSString* partialTranscript;
-@property (nonatomic,copy)   NSString* callbackId;
-@property (nonatomic,retain) NSString* pathPCM;
-@property (nonatomic,retain) NSString* pathSPX;
-@property (nonatomic,retain) NSError* error;
-@property (strong,retain) NSTimer *PeakPowerTimer;
-@property (nonatomic,strong) NSURL* speechServer;
-@property (nonatomic,strong) NSString* compressionType;
-@property (assign) BOOL isCertificateValidationDisabled;
+@property NSString* pathPCM;
+@property NSString* pathSPX;
+@property NSTimer *PeakPowerTimer;
+@property OpusHelper* opus;
+@property RecordingState recordState;
+@property WebSocketUploader* wsuploader;
 @property (nonatomic,copy) RecognizeCallbackBlockType recognizeCallback;
 @property (nonatomic,copy) PowerLevelCallbackBlockType powerLevelCallback;
 
@@ -42,44 +54,29 @@ typedef void (^PowerLevelCallbackBlockType)(float);
 
 @implementation SpeechToText
 
-@synthesize opus;
-@synthesize partialTranscript;
-@synthesize callbackId;
-@synthesize pathPCM;
-@synthesize pathSPX;
-@synthesize speechServer;
-@synthesize sessionCookie;
-@synthesize basicAuthPassword;
-@synthesize basicAuthUsername;
-@synthesize speechModel;
-@synthesize isCertificateValidationDisabled;
-@synthesize delegate;
-@synthesize PeakPowerTimer;
-@synthesize error;
 @synthesize recognizeCallback;
 @synthesize powerLevelCallback;
 
 
+
+// static for use by c code
+static BOOL isNewRecordingAllowed;
 static BOOL isCompressedOpus;
 static BOOL isCompressedSpeex;
-static BOOL isNewRecordingAllowed;
-
+static int audioRecordedLength;
+static int serialno;
 static NSString* tmpPCM=nil;
 static NSString* tmpSPX;
-static NSString* tmpOpus;
 static long pageSeq;
 static bool isTempPathSet = false;
 static bool isVadEnabled = true;
-static int errorCode = 0;
-static int serialno;
-static int audioRecordedLength;
 
 
+id uploaderRef;
+id delegateRef;
+id opusRef;
 
 
-BOOL hasError(){
-    return errorCode!=0;
-}
 
 
 #pragma mark public methods
@@ -91,10 +88,9 @@ BOOL hasError(){
  *
  *  @return SpeechToText
  */
-+(id)initWithURL:(NSURL *)newURL {
++(id)initWithConfig:(STTConfiguration *)config {
     
-    SpeechToText *watson = [[self alloc] initWithURL:newURL] ;
-    isNewRecordingAllowed= YES;
+    SpeechToText *watson = [[self alloc] initWithConfig:config] ;
     return watson;
 }
 
@@ -105,15 +101,14 @@ BOOL hasError(){
  *
  *  @return SpeechToText
  */
-- (id)initWithURL:(NSURL *)newURL {
+- (id)initWithConfig:(STTConfiguration *)config {
     
-    [self setSpeechServer:newURL];
+    self.config = config;
+    //[self setSpeechServer:newURL];
     
-    // set default values
-    [self setCompressionType:COMPRESSION_TYPE_NONE];
-    [self setSpeechModel:DEFAULT_SPEECH_MODEL];
-    [self setIsCertificateValidationDisabled:NO];
-    
+    // set audio encoding flags so they are accessible in c audio callbacks
+    isCompressedOpus = [config.audioCodec isEqualToString:WATSONSDK_AUDIO_CODEC_TYPE_SPEEX] ? YES:NO;
+    isCompressedSpeex =[config.audioCodec isEqualToString:WATSONSDK_AUDIO_CODEC_TYPE_OPUS] ? YES:NO;
     
     [[NSNotificationCenter defaultCenter]
      addObserver:self
@@ -123,28 +118,12 @@ BOOL hasError(){
     
     isNewRecordingAllowed=YES;
     
-    // TODO static bool as some of the c callbacks need to access it
-    
-    isCompressedOpus = NO;
-    isCompressedSpeex = NO;
-    
     // setup opus helper
     self.opus = [[OpusHelper alloc] init];
     [self.opus createEncoder];
-    opusRef = self->opus;
+    opusRef = self->_opus;
     
     return self;
-}
-
-- (void) setCompressionType:(NSString *)compressionType {
-    
-    _compressionType = compressionType;
-    
-    if([self.compressionType isEqualToString:COMPRESSION_TYPE_SPEEX]) {
-        isCompressedSpeex = YES;
-    } else if([self.compressionType isEqualToString:COMPRESSION_TYPE_OPUS]) {
-        isCompressedOpus = YES;
-    }
 }
 
 /**
@@ -178,25 +157,13 @@ BOOL hasError(){
     
 }
 
--(NSError*) endRecognize
+-(void) endRecognize
 {
     [self stopRecordingAudio];
     
-    if (hasError()) {
-        
-        NSLog(@"An error occured during recording returning error to client");
-        return self.error;
-    }
-    
-    [wsuploader sendEndOfStreamMarker];
+    [self.wsuploader sendEndOfStreamMarker];
     
     isNewRecordingAllowed=YES;
-    
-    
-    return nil;
-    
-    
-    
 }
 
 
@@ -206,12 +173,9 @@ BOOL hasError(){
  *  @param handler(NSDictionary*, NSError*) block to be called when response has been received from the service
  */
 - (void) listModels:(void (^)(NSDictionary*, NSError*))handler {
-     
-    NSString *uriStr = [NSString stringWithFormat:@"https://%@%@",speechServer.host,SERVICE_PATH_MODELS];
-    NSURL * url = [NSURL URLWithString:uriStr];
     
-    [self performGet:handler forURL:url];
- 
+    [self performGet:handler forURL:[self.config getModelsServiceURL]];
+    
 }
 
 /**
@@ -222,10 +186,7 @@ BOOL hasError(){
  */
 - (void) listModel:(void (^)(NSDictionary*, NSError*))handler withName:(NSString*) modelName {
     
-    NSString *uriStr = [NSString stringWithFormat:@"https://%@%@/%@",speechServer.host,SERVICE_PATH_MODELS,modelName];
-    NSURL * url = [NSURL URLWithString:uriStr];
-    
-    [self performGet:handler forURL:url];
+    [self performGet:handler forURL:[self.config getModelServiceURL:modelName]];
     
 }
 
@@ -270,7 +231,7 @@ BOOL hasError(){
             }
         }
     }
-
+    
     return nil;
 }
 
@@ -299,7 +260,7 @@ BOOL hasError(){
     NSDictionary* headers = [self createRequestHeaders];
     [defaultConfigObject setHTTPAdditionalHeaders:headers];
     NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: defaultConfigObject delegate: self delegateQueue: [NSOperationQueue mainQueue]];
-   
+    
     
     NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *reqError) {
         
@@ -329,71 +290,56 @@ BOOL hasError(){
 }
 
 - (void) startRecordingAudio {
-    //  NSLog(@"PERF time from touchStart to initRecordControl:%f", (CACurrentMediaTime()-timeTmp));
     
     // lets start the socket connection right away
     [self initializeStreaming];
+    [self setFilePaths];
+    [self setupAudioFormat:&_recordState.dataFormat];
     
+    _recordState.currentPacket = 0;
     audioRecordedLength = 0;
     
-    NSLog(@"start recording, host=%@",self.speechServer.host);
-    
-    [self setFilePaths];
-    
-    [self setupAudioFormat:&recordState.dataFormat];
-    
-    recordState.currentPacket = 0;
-    
-    OSStatus status;
-    
-    status = AudioQueueNewInput(&recordState.dataFormat,
-                                    AudioInputStreamingCallback,
-                                    &recordState,
-                                    CFRunLoopGetCurrent(),
-                                    kCFRunLoopCommonModes,
-                                    0,
-                                    &recordState.queue);
+    OSStatus status = AudioQueueNewInput(&_recordState.dataFormat,
+                                         AudioInputStreamingCallback,
+                                         &_recordState,
+                                         CFRunLoopGetCurrent(),
+                                         kCFRunLoopCommonModes,
+                                         0,
+                                         &_recordState.queue);
     
     
     if(status == 0) {
+        
         for(int i = 0; i < NUM_BUFFERS; i++) {
-            AudioQueueAllocateBuffer(recordState.queue,
-                                     16000.0, &recordState.buffers[i]);
-            AudioQueueEnqueueBuffer(recordState.queue,
-                                    recordState.buffers[i], 0, NULL);
+            
+            AudioQueueAllocateBuffer(_recordState.queue,
+                                     16000.0, &_recordState.buffers[i]);
+            AudioQueueEnqueueBuffer(_recordState.queue,
+                                    _recordState.buffers[i], 0, NULL);
         }
         
-        recordState.stream=fopen([self.pathPCM UTF8String],"wb");
+        _recordState.stream=fopen([self.pathPCM UTF8String],"wb");
+        BOOL openFileOk = (_recordState.stream!=NULL);
         
-        //   double t4 = CACurrentMediaTime();
-        
-        BOOL openFileOk = (recordState.stream!=NULL);
         if(openFileOk) {
-            recordState.recording = true;
             
-            
-            
-            OSStatus rc = AudioQueueStart(recordState.queue, NULL);
-            
+            _recordState.recording = true;
+            OSStatus rc = AudioQueueStart(_recordState.queue, NULL);
             UInt32 enableMetering = 1;
-            status = AudioQueueSetProperty(recordState.queue, kAudioQueueProperty_EnableLevelMetering, &enableMetering,sizeof(enableMetering));
-            
-        
+            status = AudioQueueSetProperty(_recordState.queue, kAudioQueueProperty_EnableLevelMetering, &enableMetering,sizeof(enableMetering));
             
             // start peak power timer
-            PeakPowerTimer = [NSTimer scheduledTimerWithTimeInterval:0.125
-                                                              target:self
-                                                            selector:@selector(samplePeakPower)
-                                                            userInfo:nil
-                                                             repeats:YES];
-            
+            self.PeakPowerTimer = [NSTimer scheduledTimerWithTimeInterval:0.125
+                                                                   target:self
+                                                                 selector:@selector(samplePeakPower)
+                                                                 userInfo:nil
+                                                                  repeats:YES];
             
             if (rc!=0) {
-                NSLog(@"startPlaying AudioQueueStart returned %ld.", rc);
-            }else{
-                if(isVadEnabled){
-                    recordState.slot = VadProcessor_allocate(320,16000);//
-                }
+                NSLog(@"startPlaying AudioQueueStart returned %d.", (int)rc);
+            } else {
+                if(isVadEnabled)
+                    _recordState.slot = VadProcessor_allocate(320,16000);//
             }
         }
     }
@@ -406,13 +352,13 @@ BOOL hasError(){
     
     NSLog(@"stopRecordingAudio");
     
-    [PeakPowerTimer invalidate];
-    PeakPowerTimer = nil;
+    [self.PeakPowerTimer invalidate];
+    self.PeakPowerTimer = nil;
     [self setFilePaths];
-    AudioQueueReset (recordState.queue);
-    AudioQueueStop (recordState.queue, YES);
-    AudioQueueDispose (recordState.queue, YES);
-    fclose(recordState.stream);
+    AudioQueueReset (_recordState.queue);
+    AudioQueueStop (_recordState.queue, YES);
+    AudioQueueDispose (_recordState.queue, YES);
+    fclose(_recordState.stream);
     
     isNewRecordingAllowed = YES;
     NSLog(@"stopRecordingAudio->fclose done");
@@ -427,10 +373,10 @@ BOOL hasError(){
     
     AudioQueueLevelMeterState meters[1];
     UInt32 dlen = sizeof(meters);
-    OSErr Status = AudioQueueGetProperty(recordState.queue,kAudioQueueProperty_CurrentLevelMeterDB,meters,&dlen);
+    OSErr Status = AudioQueueGetProperty(_recordState.queue,kAudioQueueProperty_CurrentLevelMeterDB,meters,&dlen);
     
     if (Status == 0) {
-     
+        
         if(self.powerLevelCallback !=nil) {
             self.powerLevelCallback(meters[0].mAveragePower);
         }
@@ -441,108 +387,13 @@ BOOL hasError(){
 
 
 #pragma mark audio upload
-/**
- *  syncTranscript - perform a synchronous call to upload an audio file
- *
- *  @param filePath
- *  @param url
- *
- *  @return NSString
- */
-- (NSString*) syncTranscript:(NSString*) filePath iTransUrl:(NSString*) url {
-    
-    
-    NSString *result = nil;
-    
-    @try {
-        NSData *response = [self post:url filePath:filePath];
-        
-    } @catch (NSException * e) {
-        result = [NSString stringWithFormat:@"{'code':1, 'text':'%@'}", [e reason]];
-    }
-    
-    
-    return result;
-}
-
-
-// perform an HTTP POST call
--(NSData*)post:(NSString*)url filePath:(NSString*)filePath {
-    
-    
-    // setup POST request
-    NSURL* vmURL= [NSURL URLWithString:url ];
-    NSMutableURLRequest* vmRequest=[NSMutableURLRequest requestWithURL:vmURL];
-    NSData *postData= [[NSData alloc] initWithContentsOfFile:filePath] ;
-    NSString *postLength=[NSString stringWithFormat: @"%d",[postData length]];
-    
-    [vmRequest setValue:@"binary/octet-stream" forHTTPHeaderField:@"Content-Type"];
-    [vmRequest setValue:postLength forHTTPHeaderField:@"Content-Length"];
-    [vmRequest setHTTPMethod:@"POST"];
-    [vmRequest setTimeoutInterval:30.0];
-    [vmRequest setHTTPBody: postData];
-    
-    // iTrans is for some reason sending back a JSESSIONID cookie with immediate expiry -1, this is
-    // causing worklight to request reauthentication when we call the faces adapter, as such we will ignore the returned cookies
-    [vmRequest setHTTPShouldHandleCookies:NO];
-    
-    if(self.sessionCookie != nil)
-    {
-        [vmRequest setValue:self.sessionCookie forHTTPHeaderField:@"Cookie"];
-    }
-    
-    NSLog(@"post length is %d posting to %@",[postData length],url);
-    AudioUploader *connection = [[AudioUploader alloc]initWithRequest:vmRequest];
-    
-    // set the call back delegate to be
-    [connection setDelegate:self];
-    [connection setIsCertificateValidationDisabled:self.isCertificateValidationDisabled];
-    [connection start];
-    
-    
-    return NULL;
-    
-}
-
-- (void) AudioUploadFinished:(NSMutableData*) responseData{
-    
-    
-    NSString* result;
-    
-    result = [[NSString alloc] initWithData:responseData encoding:NSASCIIStringEncoding];
-    NSLog(@"transcript is %@",result);
-    
-    
-    // allow the next voice query to happen
-    isNewRecordingAllowed= YES;
-   // [self.delegate TranscriptionFinishedCallback:[self getLastLine:result]];
-}
-
--(NSString *) getLastLine:(NSString*)body {
-    
-    NSLog(@"line --> %@",body);
-    
-    // tokenize the body into lines so we can get the last one.
-    NSArray *transcriptionItems = [body componentsSeparatedByString:@"0:"];
-    
-    for (id line in [transcriptionItems reverseObjectEnumerator])
-    {
-        return line;
-    }
-    return @"";
-    
-}
 
 - (NSDictionary*) createRequestHeaders {
     
     NSMutableDictionary *headers = [[NSMutableDictionary alloc] init];
     
-    if(self.sessionCookie) {
-        [headers setObject:self.sessionCookie forKey:@"Cookie"];
-    }
-    
-    if(self.basicAuthPassword && self.basicAuthUsername) {
-        NSString *authStr = [NSString stringWithFormat:@"%@:%@", self.basicAuthUsername,self.basicAuthPassword];
+    if(self.config.basicAuthPassword && self.config.basicAuthUsername) {
+        NSString *authStr = [NSString stringWithFormat:@"%@:%@", self.config.basicAuthUsername,self.config.basicAuthPassword];
         NSData *authData = [authStr dataUsingEncoding:NSUTF8StringEncoding];
         NSString *authValue = [NSString stringWithFormat:@"Basic %@", [authData base64Encoding]];
         [headers setObject:authValue forKey:@"Authorization"];
@@ -552,50 +403,37 @@ BOOL hasError(){
     
 }
 
+
+
 - (void) initializeStreaming {
     NSLog(@"CALL STARTING STREAM 1050");
     
-        // init the websocket uploader if its nil
-        if(wsuploader == nil) {
-            wsuploader = [[WebSocketUploader alloc] init];
-            [wsuploader setRecognizeHandler:recognizeCallback];
-        }
-        
-        
-        // connect if we are not connected
-        if(![wsuploader isWebSocketConnected]){
-            [wsuploader connect:self.speechServer headers:[self createRequestHeaders]];
-        }
-    
-
-    uploaderRef = self->wsuploader;
-    delegateRef = self->delegate;
-    
-    
-    //write spx header
-    if ([self.compressionType isEqualToString:COMPRESSION_TYPE_SPEEX]) {
-        NSLog(@"Will write header for spx stream");
-        //gen serialno for spx compression
-        
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
-                                                             NSUserDomainMask, YES);
-        
-        NSString* docDir = [paths objectAtIndex:0];
-        NSString *spxHeaderFile = [NSString stringWithFormat:@"%@%@",docDir,@"/header.bin"];
-        
-        FILE *fo_tmp = fopen([spxHeaderFile UTF8String], "wb");
-        headerToFile(fo_tmp, serialno, &pageSeq);
-        fclose(fo_tmp);
-        
-        [uploaderRef writeData:[NSData dataWithContentsOfFile:spxHeaderFile]];
+    // init the websocket uploader if its nil
+    if(self.wsuploader == nil) {
+        self.wsuploader = [[WebSocketUploader alloc] init];
+        [self.wsuploader setRecognizeHandler:recognizeCallback];
     }
+    
+    
+    // connect if we are not connected
+    if(![self.wsuploader isWebSocketConnected])
+        [self.wsuploader connect:self.config headers:[self createRequestHeaders]];
+    
+    
+    // set a pointer to the wsuploader class so it is accessible in the c callback
+    uploaderRef = self.wsuploader;
+    
+    
+    // write spx header
+    if (isCompressedSpeex)
+        [self writeSpeexHeader];
+    
     
 }
 
 
 -(void)didReceiveVadStopNotification:(NSNotification *)notification {
     
-    NSLog(@"didReceiveVadStopNotification-> stopping recording");
     [self endRecognize];
     
 }
@@ -603,6 +441,18 @@ BOOL hasError(){
 
 
 #pragma mark audio
+
+- (void)writeSpeexHeader {
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+    NSString* docDir = [paths objectAtIndex:0];
+    NSString *spxHeaderFile = [NSString stringWithFormat:@"%@%@",docDir,@"/header.bin"];
+    FILE *fo_tmp = fopen([spxHeaderFile UTF8String], "wb");
+    headerToFile(fo_tmp, serialno, &pageSeq);
+    fclose(fo_tmp);
+    
+    [uploaderRef writeData:[NSData dataWithContentsOfFile:spxHeaderFile]];
+}
 
 - (void)setupAudioFormat:(AudioStreamBasicDescription*)format
 {
@@ -618,23 +468,55 @@ BOOL hasError(){
     format->mFormatFlags = kLinearPCMFormatFlagIsSignedInteger | kLinearPCMFormatFlagIsPacked;
 }
 
-int getAudioRecordedLengthInMs() {
+int getAudioRecordedLengthInMs()
+{
     return audioRecordedLength/32;
 }
 
 
 
+void sendAudioOpusEncoded(NSData *data)
+{
+    if (data!=nil && [data length]!=0) {
+        
+        NSUInteger length = [data length];
+        NSUInteger chunkSize = 160 * 2; // Frame Size * 2
+        NSUInteger offset = 0;
+        
+        do {
+            NSUInteger thisChunkSize = length - offset > chunkSize ? chunkSize : length - offset;
+            NSData* chunk = [NSData dataWithBytesNoCopy:(char *)[data bytes] + offset
+                                                 length:thisChunkSize
+                                           freeWhenDone:NO];
+            
+            // opus encode block
+            NSData *compressed = [opusRef encode:chunk];
+            
+            if(compressed !=nil)
+                [uploaderRef writeData:compressed];
+            
+            offset += thisChunkSize;
+        } while (offset < length);
+    }
+}
 
-
-
-
-
-
-
-
+void sendAudioSpeexEncoded(NSData *data)
+{
+    if (data!=nil && [data length]!=0) {
+        
+        [SpeechToText setTmpFilePaths];
+        [data writeToFile:tmpPCM atomically:YES];
+        pcmEnc([tmpPCM UTF8String],[tmpSPX UTF8String], 0, serialno, &pageSeq);
+        NSData *compressed = [NSData dataWithContentsOfFile:tmpSPX];
+        [uploaderRef writeData:compressed];
+        
+    }
+}
 
 
 #pragma mark audio callbacks
+
+
 
 void AudioInputStreamingCallback(
                                  void *inUserData,
@@ -644,78 +526,22 @@ void AudioInputStreamingCallback(
                                  UInt32 inNumberPacketDescriptions,
                                  const AudioStreamPacketDescription *inPacketDescs)
 {
-    RecordingState* recordState = (RecordingState*)inUserData;
-    if(!recordState->recording)
-    {
-        printf("Not recording, returning\n");
-    }
     OSStatus status=0;
+    RecordingState* recordState = (RecordingState*)inUserData;
+    
+    
     
     NSData *data = [NSData  dataWithBytes:inBuffer->mAudioData length:inBuffer->mAudioDataByteSize];
     audioRecordedLength += [data length];
     
-    NSLog(@"write data about to be called %d bytes",[data length]);
-    
-    
-    if (isCompressedSpeex) {
-        if (data!=nil && [data length]!=0) {
-            
-            
-            [SpeechToText setTmpFilePaths];
-            
-            //save to PCM from iData
-            [data writeToFile:tmpPCM atomically:YES];
-            pcmEnc([tmpPCM UTF8String],[tmpSPX UTF8String], 0, serialno, &pageSeq);
-            NSData *compressed = [NSData dataWithContentsOfFile:tmpSPX];
-            
-            if (hasError()) {
-                NSLog(@"Has error so will not call [uploaderRef writeData:compressed]");
-            } else {
-                [uploaderRef writeData:compressed];
-            }
-            
-            
-            
-            
-            
-        }
-    } else if(isCompressedOpus){
-        if (data!=nil && [data length]!=0) {
-            
-            NSUInteger length = [data length];
-            NSUInteger chunkSize = 160 * 2; // Frame Size * 2
-            NSUInteger offset = 0;
-            
-            do {
-                NSUInteger thisChunkSize = length - offset > chunkSize ? chunkSize : length - offset;
-                NSData* chunk = [NSData dataWithBytesNoCopy:(char *)[data bytes] + offset
-                                                     length:thisChunkSize
-                                               freeWhenDone:NO];
-                
-                // opus encode block
-                NSData *compressed = [opusRef encode:chunk];
-                
-                // write data to file for debug purposes
-                [SpeechToText setTmpFilePaths];
-                
-                //save to PCM from iData
-                [compressed writeToFile:tmpOpus atomically:YES];
-                if(compressed !=nil)
-                {
-                    [uploaderRef writeData:compressed];
-                }
-                offset += thisChunkSize;
-            } while (offset < length);
-        }
-    } else {
+    if (isCompressedSpeex)
+        sendAudioSpeexEncoded(data);
+    else if(isCompressedOpus)
+        sendAudioOpusEncoded(data);
+    else
+        [uploaderRef writeData:data];
         
-        
-        if (hasError()) {
-            NSLog(@"Has error so will not call [uploaderRef writeData:data]");
-        } else {
-            [uploaderRef writeData:data];
-        }
-    }
+    
     
     
     if(fwrite(inBuffer->mAudioData, 1,inBuffer->mAudioDataByteSize, recordState->stream)<=0) {
@@ -749,63 +575,6 @@ void AudioInputStreamingCallback(
 
 
 
-#pragma mark result callbacks
-
-
--(void) streamResultCallback:(NSString*)result responseBytes:(uint8_t*)responseBytes responseBytesLen:(int)responseBytesLen {
-    NSLog(@"Call streamResultCallback,responseBytesLen:%d\n", responseBytesLen);
-    NSString* clientResult;
-    
-    if (responseBytesLen==0) {
-        clientResult = [NSString stringWithFormat:@"{'code':0, 'text':'%@'}",@""];
-        isNewRecordingAllowed=YES;
-        //[self.delegate TranscriptionFinishedCallback:clientResult];
-    } else {
-        
-        //    if(self.useVaniBackend)
-        //    {
-        //     clientResult = [self playTtsAndGetClient:responseBytes responseBytesLen:responseBytesLen];
-        //    }
-        //    else
-        //   {
-        //[self AudioUploadFinished:[[NSMutableData alloc] initWithBytes:responseBytes length:responseBytesLen]];
-        //   }
-        //[self.delegate TranscriptionFinishedCallback:result];
-    }
-    
-    
-    
-    /*  CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:[clientResult retain]];
-     [self writeJavascript:[pluginResult toSuccessCallbackString:self.callbackId]];*/
-}
-
-
-- (void) streamResultPartialCallback:(NSDictionary*)result {
-    self.recognizeCallback(result,nil);
-}
-
-
-
--(void) streamErrorCallback:(NSString*)errorMessage  error:(NSError*) theError{
-    NSLog(@"RecorderPlugin -> streamErrorCallback %@",theError.localizedDescription);
-    
-    errorCode = theError.code;
-    self.error = theError;
-    
-    NSLog(@"RecorderPlugin -> ending of streamErrorCallback");
-    [self streamClosedCallback];
-}
-
--(void) streamClosedCallback{
-    NSLog(@"RecorderPlugin -> streamClosedCallback");
-    
-    isNewRecordingAllowed=YES;
-    
-}
-
-
-
-
 #pragma mark utilities
 
 + (void) setTmpFilePaths{
@@ -819,9 +588,7 @@ void AudioInputStreamingCallback(
     NSString* docDir = [paths objectAtIndex:0];
     
     tmpPCM = [[NSString alloc]initWithFormat:@"%@%@",docDir,@"/tmp.pcm"];
-    //tmpWAV = [[NSString alloc]initWithFormat:@"%@%@",docDir,@"/tmp.wav"];
     tmpSPX = [[NSString alloc]initWithFormat:@"%@%@",docDir,@"/tmp.spx"];
-    tmpOpus = [[NSString alloc]initWithFormat:@"%@%@",docDir,@"/tmp.opus"];
     
 }
 

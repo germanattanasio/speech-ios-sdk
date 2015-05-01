@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <watsonsdk/SpeechToText.h>
+#import <watsonsdk/STTConfiguration.h>
 
 @interface FirstViewController : UIViewController<UITextFieldDelegate>{
     

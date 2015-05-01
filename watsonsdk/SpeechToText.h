@@ -17,81 +17,15 @@
 #import <Foundation/Foundation.h>
 #import <AudioToolbox/AudioQueue.h>
 #import <AudioToolbox/AudioFile.h>
-#import <AVFoundation/AVAudioPlayer.h>
-#import "watsonSpeexdec.h"
-#import "watsonSpeexenc.h"
+#import "STTConfiguration.h"
 
-#import <string.h>
-#import <stdio.h>
-#import "HTTPStreamUploader.h"
-#import "AudioUploader.h"
-#import "WebSocketUploader.h"
-#import "UploaderDelegate.h"
-
-#define NUM_BUFFERS 3
-
-// encoding types
-#define COMPRESSION_TYPE_NONE @"PCM"
-#define COMPRESSION_TYPE_SPEEX @"spx"
-#define COMPRESSION_TYPE_OPUS @"opus"
-
-#define STREAMING_TYPE_NONE @"none"
-#define STREAMING_TYPE_HTTP @"http"
-#define STREAMING_TYPE_WEBSOCKETS @"websockets"
-
-#define NOTIFICATION_VAD_STOP_EVENT @"STOP_RECORDING"
-#define DEFAULT_SPEECH_MODEL @"WatsonModel"
-#define SERVICE_PATH_MODELS @"/speech-to-text-beta/api/v1/models"
+@interface SpeechToText : NSObject <NSURLSessionDelegate>
 
 
-typedef struct
-{
-    AudioStreamBasicDescription  dataFormat;
-    AudioQueueRef                queue;
-    AudioQueueBufferRef          buffers[NUM_BUFFERS];
-    AudioFileID                  audioFile;
-    SInt64                       currentPacket;
-    bool                         recording;
-    FILE*						 stream;
-    int                          slot;
-} RecordingState;
+@property (nonatomic,retain) STTConfiguration *config;
 
-
-
-id uploaderRef;
-id delegateRef;
-id opusRef;
-
-@interface SpeechToText : NSObject <AVAudioPlayerDelegate,AudioUploadFinishedDelegate,UploaderDelegate,NSURLSessionDelegate>{
-    
-@private
-    NSString* callbackId;
-    RecordingState recordState;
-    NSString *recordRate;
-    char path[256];
-    char wavpath[256];
-    char spxpath[256];
-    
-    HTTPStreamUploader* uploader;
-    WebSocketUploader* wsuploader;
-    AVAudioPlayer *player;
-    
-    NSString* pathPCM;
-    NSString* pathSPX;
-    
-    BOOL useCompression;
-    BOOL isCertificateValidationDisabled;
-    
-}
-
-@property (nonatomic,retain) NSString* sessionCookie;
-@property (nonatomic,retain) NSString* basicAuthPassword;
-@property (nonatomic,retain) NSString* basicAuthUsername;
-@property (nonatomic,retain) NSString* speechModel;
-@property (retain) id delegate; // delegate for sending call back to calling class
-
-+(id)initWithURL:(NSURL *)url;
--(id)initWithURL:(NSURL *)url;
++(id)initWithConfig:(STTConfiguration *)config;
+-(id)initWithConfig:(STTConfiguration *)config;
 
 
 /**
@@ -104,9 +38,9 @@ id opusRef;
 /**
  *  stopRecording and streaming audio from the device microphone
  *
- *  @return NSError - nil if no error
+ *  @return void
  */
-- (NSError*) endRecognize;
+- (void) endRecognize;
 
 
 /**
@@ -133,15 +67,6 @@ id opusRef;
  *  @param isEnabled true/false
  */
 - (void) setIsVADenabled:(bool) isEnabled;
-
-
-/**
- *  setCompressionType
- *
- *  @param compressionType <#compressionType description#>
- */
-- (void) setCompressionType:(NSString *)compressionType;
-
 
 
 /**

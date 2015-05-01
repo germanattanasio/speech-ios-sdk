@@ -8,6 +8,7 @@
 
 #import "FirstViewController.h"
 
+
 @interface FirstViewController ()
 @property (strong, nonatomic) IBOutlet UIButton *ttsButton;
 
@@ -28,15 +29,21 @@
 {
     [super viewDidLoad];
     
-    NSURL *host = [NSURL URLWithString:@"wss://speech.tap.ibm.com/speech-to-text-beta/api/v1/recognize"];
+    // NSURL *host = [NSURL URLWithString:@"wss://speech.tap.ibm.com/speech-to-text-beta/api/v1/recognize"];
     //NSURL *host = [NSURL URLWithString:@"ws://192.168.59.103:9080/speech-to-text-beta/api/v1/models/WatsonModel/recognize"];
     //NSURL *host = [NSURL URLWithString:@"wss://dpev918.innovate.ibm.com/v1/models/WatsonModel/recognize"];
     
-    self.stt = [SpeechToText initWithURL:host];
-    [self.stt setDelegate:self];
     
-    [self.stt setBasicAuthUsername:@"ivaniapi"];
-    [self.stt setBasicAuthPassword:@"Zt1xSp33x"];
+    
+    
+    
+    STTConfiguration *conf = [[STTConfiguration alloc] init];
+    [conf setApiURL:@"https://speech.tap.ibm.com/speech-to-text-beta/api"];
+    [conf setBasicAuthUsername:@"ivaniapi"];
+    [conf setBasicAuthPassword:@"Zt1xSp33x"];
+    
+    self.stt = [SpeechToText initWithConfig:conf];
+    
     
     
     }

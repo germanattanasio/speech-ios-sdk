@@ -22,22 +22,18 @@ typedef void (^RecognizeCallbackBlockType)(NSDictionary*, NSError*);
 
 @interface WebSocketUploader () <SRWebSocketDelegate>
 
-@property (strong,atomic) NSMutableData *buffer;
+@property NSDictionary *headers;
+@property (strong,atomic) NSMutableData *audioBuffer;
 @property (strong,atomic) NSNumber *reconnectAttempts;
 @property (nonatomic,copy) RecognizeCallbackBlockType recognizeCallback;
+@property STTConfiguration *conf;
+@property SRWebSocket *webSocket;
+@property BOOL isConnected;
+@property BOOL isReadyForAudio;
 
 @end
 
-@implementation WebSocketUploader {
-    SRWebSocket *_webSocket;
-    BOOL isConnected;
-    BOOL isReadyForAudio;
-    
-}
-
-@synthesize speechServer;
-@synthesize buffer;
-@synthesize recognizeCallback;
+@implementation WebSocketUploader
 
 /**
  *  connect to an itrans server using websockets
@@ -45,34 +41,31 @@ typedef void (^RecognizeCallbackBlockType)(NSDictionary*, NSError*);
  *  @param speechServer   NSUrl containing the ws or wss format websocket service URI
  *  @param cookie pass a full cookie string that may have been returned in a separate authentication step
  */
-- (void) connect:(NSURL*)speechServerURI headers:(NSDictionary*)headers  {
+- (void) connect:(STTConfiguration*)config headers:(NSDictionary*)headers  {
     
-    self.speechServer = speechServerURI;
-    isConnected = NO;
-    isReadyForAudio = NO;
-    _webSocket.delegate = nil;
+    self.conf = config;
     self.headers = headers;
-   
-    NSLog(@"websocket connection using %@",[self.speechServer absoluteString]);
     
-    NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:self.speechServer];
+    self.isConnected = NO;
+    self.isReadyForAudio = NO;
+   
+    NSLog(@"websocket connection using %@",[[self.conf getWebSocketRecognizeURL] absoluteString]);
+    
+    NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:[self.conf getWebSocketRecognizeURL]];
     
     // set headers
     for(id headerName in headers) {
         [req setValue:[headers objectForKey:headerName] forHTTPHeaderField:headerName];
     }
     
-    _webSocket = [[SRWebSocket alloc] initWithURLRequest:req];
-    
-    _webSocket.delegate = self;
-    
-    NSLog(@"WeBSocket - Opening Connection...");
-    [_webSocket open];
+    self.webSocket = [[SRWebSocket alloc] initWithURLRequest:req];
+    self.webSocket.delegate = self;
+    [self.webSocket open];
 }
 
 - (BOOL) isWebSocketConnected {
     
-    return self->isConnected;
+    return self.isConnected;
 }
 
 - (void) reconnect {
@@ -81,13 +74,13 @@ typedef void (^RecognizeCallbackBlockType)(NSDictionary*, NSError*);
         self.reconnectAttempts = [NSNumber numberWithInt:0];
     }
     
-    [self connect:self.speechServer headers:self.headers];
+    [self connect:self.conf headers:self.headers];
 }
 
 - (void) endSession {
     
     if([self isWebSocketConnected]) {
-        [_webSocket send:@"{\"name\":\"unready\"}"];
+        [self.webSocket send:@"{\"name\":\"unready\"}"];
     } else {
         NSLog(@"tried to end Session but websocket was already closed");
     }
@@ -97,41 +90,41 @@ typedef void (^RecognizeCallbackBlockType)(NSDictionary*, NSError*);
 
 - (void) sendEndOfStreamMarker {
     
-     if(isConnected && isReadyForAudio) {
+     if(self.isConnected && self.isReadyForAudio) {
          NSLog(@"sending end of stream marker");
-         [_webSocket send:[[NSMutableData alloc] initWithLength:0]];
-         isReadyForAudio = NO;
+         [self.webSocket send:[[NSMutableData alloc] initWithLength:0]];
+         self.isReadyForAudio = NO;
      }
 }
 
 - (void) disconnect {
     
-    isReadyForAudio = NO;
-    isConnected = NO;
-    [_webSocket close];
+    self.isReadyForAudio = NO;
+    self.isConnected = NO;
+    [self.webSocket close];
     
 }
 
 - (void) writeData:(NSData*) data {
     
-    if(isConnected && isReadyForAudio) {
+    if(self.isConnected && self.isReadyForAudio) {
         
         // if we had previously buffered audio because we were not connected, send it now
-        if([self.buffer length] > 0) {
+        if([self.audioBuffer length] > 0) {
             
             NSLog(@"sending buffered audio");
-            [_webSocket send:self.buffer];
+            [self.webSocket send:self.audioBuffer];
             
             //reset buffer
-            [self.buffer setData:[NSData dataWithBytes:NULL length:0]];
+            [self.audioBuffer setData:[NSData dataWithBytes:NULL length:0]];
         }
         
-        [_webSocket send:data];
+        [self.webSocket send:data];
     } else {
         // we need to buffer this data and send it when we connect
         NSLog(@"WebSocketUploader - data written but we're not connected yet");
         
-        [self.buffer appendData:data];
+        [self.audioBuffer appendData:data];
     }
     
 }
@@ -142,20 +135,21 @@ typedef void (^RecognizeCallbackBlockType)(NSDictionary*, NSError*);
 - (void)webSocketDidOpen:(SRWebSocket *)webSocket;
 {
     NSLog(@"Websocket Connected");
-    isConnected = YES;
-    [_webSocket send:[self buildQueryJson]];
+    self.isConnected = YES;
+    [self.webSocket send:[self buildQueryJson]];
 }
 
 - (NSString *) buildQueryJson {
     
-    NSString *json = @"{\"model\":\"ModelCI6\",\"action\":\"start\",\"content-type\":\"audio/l16; rate=16000\",\"interim_results\":true,\"continuous\": true}";
+    
+    NSString *json = [NSString stringWithFormat:@"{\"action\":\"start\",\"content-type\":\"%@\",\"interim_results\":true,\"continuous\": true}",self.conf.audioCodec];
     return json;
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error;
 {
     NSLog(@":( Websocket Failed With Error %@", error);
-    _webSocket = nil;
+    self.webSocket = nil;
     
     if ([self.reconnectAttempts intValue] < 3) {
         self.reconnectAttempts = [NSNumber numberWithInt:[self.reconnectAttempts intValue] +1] ;
@@ -165,7 +159,7 @@ typedef void (^RecognizeCallbackBlockType)(NSDictionary*, NSError*);
     } else {
         
         // call the recognize handler block in the clients code
-        recognizeCallback(nil,error);
+        self.recognizeCallback(nil,error);
     }
     
     
@@ -189,7 +183,7 @@ typedef void (^RecognizeCallbackBlockType)(NSDictionary*, NSError*);
         
         /* JSON was malformed, act appropriately here */
         NSLog(@"JSON from service malformed, received %@",json);
-        recognizeCallback(nil,error);
+        self.recognizeCallback(nil,error);
         
     }
     
@@ -202,33 +196,19 @@ typedef void (^RecognizeCallbackBlockType)(NSDictionary*, NSError*);
             NSString *state = [results objectForKey:@"state"];
             
             // if we receive a listening state after having sent audio it means we can now close the connection
-            if ([state isEqualToString:@"listening"] && isConnected && isReadyForAudio){
+            if ([state isEqualToString:@"listening"] && self.isConnected && self.isReadyForAudio){
               
                 [self disconnect];
                 
             } else if([state isEqualToString:@"listening"]) {
                 // we can send binary data now
-                isReadyForAudio = YES;
+                self.isReadyForAudio = YES;
             }
         }
         
-        /*
-        // look for state changes
-        if([results objectForKey:@"newState"] != nil) {
-            NSString *state = [results objectForKey:@"state"];
-            
-            if ([state isEqualToString:@"recoResultAvailable"]) {
-                // this is triggered when we have a final result
-                //[self endSession];
-            } else if ([state isEqualToString:@"ready"]) {
-                // this is triggered after we have sent the unready to signal we want to disconnet
-                [self disconnect];
-            }
-        }
-         */
         
         if([results objectForKey:@"results"] != nil) {
-            recognizeCallback(results,nil);
+            self.recognizeCallback(results,nil);
         }
         
         
@@ -245,10 +225,10 @@ typedef void (^RecognizeCallbackBlockType)(NSDictionary*, NSError*);
 - (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean;
 {
     NSLog(@"WebSocket closed with reason %@",reason);
-    _webSocket.delegate = nil;
-    isConnected = NO;
-    isReadyForAudio = NO;
-    _webSocket = nil;
+    self.webSocket.delegate = nil;
+    self.isConnected = NO;
+    self.isReadyForAudio = NO;
+    self.webSocket = nil;
 }
 
 #pragma mark - delegate

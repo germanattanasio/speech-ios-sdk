@@ -1,9 +1,17 @@
 Watson Speech iOS SDK
 =====================
 
-An SDK for iOS mobile applications enabling use of the Bluemix Watson Speech To Text and Text To Speech APIs
+An SDK for iOS mobile applications enabling use of the Bluemix Watson Speech To Text and Text To Speech APIs from [Watson Developer Cloud][wdc]
 
 The SDK include support for recording and streaming audio and receiving a transcript of the audio in response.
+
+
+Table of Contents
+-----------------
+* [Watson Developer Cloud Speech APIs][wdc]
+
+    * [Installation](#installation)
+    * [Getting Started](#getting started)
 
 Installation
 ------------
@@ -23,7 +31,7 @@ Some additional iOS standard frameworks must be added.
 
 - AudioToolbox.framework
 
---- Quartzcore.framework
+- Quartzcore.framework
 
 - CoreAudio.framework
 
@@ -36,7 +44,7 @@ Some additional iOS standard frameworks must be added.
 
 
 
-Start Coding
+Getting started
 --------------
 
 **Include the header**
@@ -44,16 +52,16 @@ Start Coding
 ```
 #import <watsonsdk/SpeechToText.h>
 ```
+**Create a Configuration**
+```
+	STTConfiguration *conf = [[STTConfiguration alloc] init];
+    [conf setBasicAuthUsername:@"<userid>"];
+    [conf setBasicAuthPassword:@"<password>"];
+```
 
 **Create a SpeechToText instance**
 ```objective-c
-		
-	self.stt = [SpeechToText initWithURL:host];
-    [self.stt setDelegate:self];
-    
-	// Credentials are obtained by inspecting the service instance details in Bluemix
-    [self.stt setBasicAuthUsername:@"xxxxxx"];
-    [self.stt setBasicAuthPassword:@"xxxxxx"];
+	self.stt = [SpeechToText initWithConfig:conf];
 ```
 
 **Get a list of models supported by the service**
@@ -125,8 +133,6 @@ By default the SDK uses Voice Activated Detection (VAD) to detect when a user ha
     }];
 ```
 
-Features
---------
 
-* Speech To Text
-* Text To Speech
+
+[wdc]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/apis/#!/speech-to-text
