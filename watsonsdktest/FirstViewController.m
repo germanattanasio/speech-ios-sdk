@@ -35,7 +35,7 @@
     
     
     
-    
+    // STT setup
     
     STTConfiguration *conf = [[STTConfiguration alloc] init];
     [conf setApiURL:@"https://speech.tap.ibm.com/speech-to-text-beta/api"];
@@ -45,8 +45,16 @@
     self.stt = [SpeechToText initWithConfig:conf];
     
     
+    // TTS setup
+    TTSConfiguration *confTTS = [[TTSConfiguration alloc] init];
+    [confTTS setApiURL:@"https://speech.tap.ibm.com/text-to-speech-beta/api"];
+    [confTTS setBasicAuthUsername:@"ivaniapi"];
+    [confTTS setBasicAuthPassword:@"Zt1xSp33x"];
     
-    }
+    self.tts = [TextToSpeech initWithConfig:confTTS];
+    
+    
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -88,6 +96,27 @@
     
     
     
+}
+
+- (IBAction)pressTTStest:(id)sender {
+    
+
+    // list voices call
+    [self.tts listVoices:^(NSDictionary* res, NSError* err){
+        
+        if(err == nil)
+            NSLog(@"%@",res);
+        else
+            result.text = [err localizedDescription];
+    }];
+    
+    [self.tts synthesize:^(NSData *data, NSError *err) {
+        if(err != nil)
+            result.text = [err localizedDescription];
+        else
+            [self.tts playAudio:data];
+        
+    } theText:@"this is a much longer test to see if the delay and longer sample helps"];
 }
 
 - (void) modelHandler:(NSDictionary *) dict {

@@ -33,6 +33,12 @@
 		C11A66C31754FA1800385896 /* watsonSpeexenc.h in Headers */ = {isa = PBXBuildFile; fileRef = C11A66C11754FA1800385896 /* watsonSpeexenc.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C11B3E931AF398C80062BF7D /* STTConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = C11B3E911AF398C80062BF7D /* STTConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C11B3E941AF398C80062BF7D /* STTConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = C11B3E921AF398C80062BF7D /* STTConfiguration.m */; };
+		C11B3E9B1AF3FEC90062BF7D /* TextToSpeech.h in Headers */ = {isa = PBXBuildFile; fileRef = C11B3E991AF3FEC90062BF7D /* TextToSpeech.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C11B3E9C1AF3FEC90062BF7D /* TextToSpeech.m in Sources */ = {isa = PBXBuildFile; fileRef = C11B3E9A1AF3FEC90062BF7D /* TextToSpeech.m */; };
+		C11B3E9F1AF3FF660062BF7D /* TTSConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = C11B3E9D1AF3FF660062BF7D /* TTSConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C11B3EA01AF3FF660062BF7D /* TTSConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = C11B3E9E1AF3FF660062BF7D /* TTSConfiguration.m */; };
+		C11B3EA21AF41A200062BF7D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C11B3EA11AF41A200062BF7D /* AVFoundation.framework */; };
+		C11B3EA31AF41A320062BF7D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C11B3EA11AF41A200062BF7D /* AVFoundation.framework */; };
 		C11D9E7A1937C57200F2D614 /* beep.wav in Resources */ = {isa = PBXBuildFile; fileRef = C11D9E791937C57200F2D614 /* beep.wav */; };
 		C1203966175623BD008B0297 /* watsonSpeexenc.c in Sources */ = {isa = PBXBuildFile; fileRef = C1203965175623BD008B0297 /* watsonSpeexenc.c */; };
 		C120396817562404008B0297 /* watsonSpeexdec.c in Sources */ = {isa = PBXBuildFile; fileRef = C120396717562404008B0297 /* watsonSpeexdec.c */; };
@@ -243,6 +249,11 @@
 		C11A66E117560AD900385896 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		C11B3E911AF398C80062BF7D /* STTConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTConfiguration.h; sourceTree = "<group>"; };
 		C11B3E921AF398C80062BF7D /* STTConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTConfiguration.m; sourceTree = "<group>"; };
+		C11B3E991AF3FEC90062BF7D /* TextToSpeech.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextToSpeech.h; sourceTree = "<group>"; };
+		C11B3E9A1AF3FEC90062BF7D /* TextToSpeech.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextToSpeech.m; sourceTree = "<group>"; };
+		C11B3E9D1AF3FF660062BF7D /* TTSConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTSConfiguration.h; sourceTree = "<group>"; };
+		C11B3E9E1AF3FF660062BF7D /* TTSConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTSConfiguration.m; sourceTree = "<group>"; };
+		C11B3EA11AF41A200062BF7D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		C11BDA781758A2C600E656B9 /* jodiefuller.spx */ = {isa = PBXFileReference; lastKnownFileType = file; path = jodiefuller.spx; sourceTree = "<group>"; };
 		C11D9E791937C57200F2D614 /* beep.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beep.wav; sourceTree = "<group>"; };
 		C1203965175623BD008B0297 /* watsonSpeexenc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = watsonSpeexenc.c; sourceTree = "<group>"; };
@@ -412,6 +423,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C11B3EA31AF41A320062BF7D /* AVFoundation.framework in Frameworks */,
 				C1D4580519A78BE700093095 /* CFNetwork.framework in Frameworks */,
 				C1D4580419A78BDF00093095 /* Security.framework in Frameworks */,
 				C1B14B831AA0D3DD00864C53 /* libopus.a in Frameworks */,
@@ -433,6 +445,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C11B3EA21AF41A200062BF7D /* AVFoundation.framework in Frameworks */,
 				C1D4580219A78BC400093095 /* CFNetwork.framework in Frameworks */,
 				C1D4580119A78BBB00093095 /* Security.framework in Frameworks */,
 				C1D457FF19A78BB100093095 /* libicucore.dylib in Frameworks */,
@@ -475,6 +488,7 @@
 		C11A645D1754D0E600385896 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C11B3EA11AF41A200062BF7D /* AVFoundation.framework */,
 				C1D4580019A78BBB00093095 /* Security.framework */,
 				C1D457FE19A78BB100093095 /* libicucore.dylib */,
 				C11A645E1754D0E600385896 /* Foundation.framework */,
@@ -502,6 +516,10 @@
 				C1C3743E1A86C5DB0083C69B /* SpeechToText.m */,
 				C11B3E911AF398C80062BF7D /* STTConfiguration.h */,
 				C11B3E921AF398C80062BF7D /* STTConfiguration.m */,
+				C11B3E991AF3FEC90062BF7D /* TextToSpeech.h */,
+				C11B3E9A1AF3FEC90062BF7D /* TextToSpeech.m */,
+				C11B3E9D1AF3FF660062BF7D /* TTSConfiguration.h */,
+				C11B3E9E1AF3FF660062BF7D /* TTSConfiguration.m */,
 			);
 			path = watsonsdk;
 			sourceTree = "<group>";
@@ -904,6 +922,8 @@
 				C1416C32194B48180009C49A /* VadProcessor.h in Headers */,
 				C1C3743B1A8581A00083C69B /* WebSocketUploader.h in Headers */,
 				C1C3743F1A86C5DB0083C69B /* SpeechToText.h in Headers */,
+				C11B3E9F1AF3FF660062BF7D /* TTSConfiguration.h in Headers */,
+				C11B3E9B1AF3FEC90062BF7D /* TextToSpeech.h in Headers */,
 				C11B3E931AF398C80062BF7D /* STTConfiguration.h in Headers */,
 				C11712E31A03DC2E00957080 /* UploaderDelegate.h in Headers */,
 			);
@@ -1107,8 +1127,10 @@
 				C1435D67175775F500EA854D /* vq.c in Sources */,
 				C1435D68175775F500EA854D /* window.c in Sources */,
 				C1435D6B175775F500EA854D /* skeleton.c in Sources */,
+				C11B3EA01AF3FF660062BF7D /* TTSConfiguration.m in Sources */,
 				C1235356199B53FF009A8F8B /* OpusHelper.m in Sources */,
 				C1435D6C175775F500EA854D /* speexenc.c in Sources */,
+				C11B3E9C1AF3FEC90062BF7D /* TextToSpeech.m in Sources */,
 				C1435D6E175775F500EA854D /* wav_io.c in Sources */,
 				C1435D6F175775F500EA854D /* wave_out.c in Sources */,
 			);

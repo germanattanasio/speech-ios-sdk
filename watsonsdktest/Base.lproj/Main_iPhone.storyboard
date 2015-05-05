@@ -39,7 +39,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" misplaced="YES" text="Results will show here" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="20" baselineAdjustment="alignBaselines" minimumFontSize="7" adjustsLetterSpacingToFitWidth="YES" preferredMaxLayoutWidth="302" translatesAutoresizingMaskIntoConstraints="NO" id="ARV-YE-gLe">
-                                <rect key="frame" x="9" y="135" width="302" height="236"/>
+                                <rect key="frame" x="9" y="221" width="302" height="236"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="236" id="iyf-Sm-n2W"/>
                                     <constraint firstAttribute="width" constant="301" id="kN5-BY-NBT"/>
@@ -52,15 +52,13 @@
                                 <rect key="frame" x="80" y="37" width="160" height="2"/>
                                 <color key="backgroundColor" red="0.1490679469" green="0.30670772750000003" blue="0.84420838649999996" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O52-J2-73Z">
-                                <rect key="frame" x="42" y="174" width="237" height="30"/>
-                                <color key="backgroundColor" red="0.60000002384185791" green="0.40000000596046448" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kSo-Gi-JGO">
+                                <rect key="frame" x="20" y="166" width="284" height="30"/>
                                 <state key="normal" title="TTS test">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="onTTSRequest:" destination="vXZ-lx-hvc" eventType="touchDown" id="QOp-rv-wnL"/>
+                                    <action selector="pressTTStest:" destination="vXZ-lx-hvc" eventType="touchDown" id="zdA-6L-K0o"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -73,7 +71,6 @@
                     <connections>
                         <outlet property="result" destination="ARV-YE-gLe" id="CbH-XU-CjR"/>
                         <outlet property="soundbar" destination="p0u-Gv-7so" id="kzd-KJ-9p6"/>
-                        <outlet property="ttsButton" destination="O52-J2-73Z" id="uGi-TB-6fN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>

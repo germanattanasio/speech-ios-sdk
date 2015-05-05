@@ -104,7 +104,6 @@ id opusRef;
 - (id)initWithConfig:(STTConfiguration *)config {
     
     self.config = config;
-    //[self setSpeechServer:newURL];
     
     // set audio encoding flags so they are accessible in c audio callbacks
     isCompressedOpus = [config.audioCodec isEqualToString:WATSONSDK_AUDIO_CODEC_TYPE_SPEEX] ? YES:NO;

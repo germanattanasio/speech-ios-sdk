@@ -26,7 +26,7 @@
 // codecs
 #define WATSONSDK_AUDIO_CODEC_TYPE_PCM @"audio/l16; rate=16000"
 #define WATSONSDK_AUDIO_CODEC_TYPE_SPEEX @"audio/speex; rate=16000"
-#define WATSONSDK_AUDIO_CODEC_TYPE_OPUS @"audio/opus; rate=16000"
+#define WATSONSDK_AUDIO_CODEC_TYPE_OPUS @"audio/ogg; codecs=opus; rate=16000"
 
 // models
 #define WATSONSDK_DEFAULT_STT_MODEL @"WatsonModel"

@@ -31,6 +31,8 @@ Some additional iOS standard frameworks must be added.
 
 - AudioToolbox.framework
 
+- AVFoundation.framework
+
 - Quartzcore.framework
 
 - CoreAudio.framework
@@ -133,6 +135,15 @@ By default the SDK uses Voice Activated Detection (VAD) to detect when a user ha
     }];
 ```
 
+Common issues
+-------------
 
+If you get an error such as...
+
+```
+Undefined symbols for architecture x86_64
+```
+
+Check that all the required frameworks have been added to your project.
 
 [wdc]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/apis/#!/speech-to-text
