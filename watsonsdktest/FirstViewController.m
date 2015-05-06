@@ -116,7 +116,7 @@
         else
             [self.tts playAudio:data];
         
-    } theText:@"this is a much longer test to see if the delay and longer sample helps"];
+    } theText:@"this is a test of the watson text to speech service"];
 }
 
 - (void) modelHandler:(NSDictionary *) dict {

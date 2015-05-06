@@ -18,7 +18,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "TTSConfiguration.h"
 
-@interface TextToSpeech : NSObject <NSURLSessionDelegate,AVAudioPlayerDelegate>
+@interface TextToSpeech : NSObject <NSURLSessionDelegate>
 
 @property (nonatomic,retain) TTSConfiguration *config;
 
