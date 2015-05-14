@@ -1207,7 +1207,7 @@ EXPORT int speex_preprocess_ctl(SpeexPreprocessState *state, int request, void *
       break;
 #endif
    default:
-      speex_warning_int("Unknown speex_preprocess_ctl request: ", request);
+      //speex_warning_int("Unknown speex_preprocess_ctl request: ", request);
       return -1;
    }
    return 0;

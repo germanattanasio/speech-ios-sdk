@@ -22,7 +22,7 @@
 #define WATSONSDK_SERVICE_PATH_SYNTHESIZE @"/v1/synthesize"
 
 // codecs
-#define WATSONSDK_TTS_AUDIO_CODEC_TYPE_OPUS @"audio/ogg"//; codecs=opus"
+#define WATSONSDK_TTS_AUDIO_CODEC_TYPE_OPUS @"audio/opus"//; codecs=opus"
 #define WATSONSDK_TTS_AUDIO_CODEC_TYPE_WAV @"audio/wav"
 
 // voices

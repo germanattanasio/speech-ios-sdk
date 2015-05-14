@@ -1,21 +1,36 @@
-//
-//  OpusHelper.m
-//  watsonsdk
-//
-//  Created by Rob Smart on 13/08/2014.
-//  Copyright (c) 2014 IBM. All rights reserved.
-//
+/**
+ * Copyright 2014 IBM Corp. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 #import "OpusHelper.h"
 #import "opus.h"
+#import "opus_multistream.h"
+#import "opus_defines.h"
+#import "ogg.h"
+#import "opus_header.h"
 
+/* 120ms at 48000 */
+#define MAX_FRAME_SIZE (960*6)
+#define float2int(flt) ((int)(floor(.5+flt)))
 
 
 @interface OpusHelper()
+
 @property (nonatomic) OpusEncoder *encoder;
 @property (nonatomic) uint8_t *encoderOutputBuffer;
 @property (nonatomic) NSUInteger encoderBufferLength;
-//@property (nonatomic) TPCircularBuffer *circularBuffer;
 
 @end
 
@@ -29,11 +44,6 @@
     if (_encoderOutputBuffer) {
         free(_encoderOutputBuffer);
     }
-   /* if (self.circularBuffer) {
-        TPCircularBufferCleanup(_circularBuffer);
-        free(_circularBuffer);
-    }*/
-    
 }
 
 
@@ -64,12 +74,7 @@
     
     self.encoderBufferLength = 16000;
     self.encoderOutputBuffer = malloc(_encoderBufferLength * sizeof(uint8_t));
-  /*  self.circularBuffer = malloc(sizeof(TPCircularBuffer));
-    BOOL success = TPCircularBufferInit(_circularBuffer, kNumberOfSamplesPerChannel * 10);
-    if (!success) {
-        NSLog(@"Error allocating circular buffer");
-        return NO;
-    }*/
+    
     return YES;
 }
 
@@ -97,33 +102,327 @@
 
 - (NSData*) encode:(NSData*) pcmData {
     NSInteger frameSize = 160;
-   // NSLog(@"Input data is %d bytes",pcmData.length);
-
-    opus_int16 *data  = (opus_int16*) [pcmData bytes];//= (opus_int16*)TPCircularBufferTail(_circularBuffer, &availableBytes);
+    
+    opus_int16 *data  = (opus_int16*) [pcmData bytes];
     uint8_t *outBuffer  = malloc(pcmData.length * sizeof(uint8_t));
-
+    
     // The length of the encoded packet
     opus_int32 encodedByteCount = opus_encode(_encoder, data, frameSize, outBuffer, pcmData.length);
-
-    //TPCircularBufferConsume(_circularBuffer, kNumberOfSamplesPerChannel * _inputASBD.mBytesPerFrame);
+    
     if (encodedByteCount < 0) {
         NSLog(@"encoding error %@",[self opusErrorMessage:encodedByteCount]);
         return nil;
     }
-
+    
     // Size data
-    NSData *sizeData = [NSData dataWithBytes: &encodedByteCount length: 1];//[[NSData alloc] initWithBase64EncodedString:[NSString stringWithFormat:@"%d", encodedByteCount] options:NSUTF8StringEncoding];
-
+    NSData *sizeData = [NSData dataWithBytes: &encodedByteCount length: 1];
+    
     // Opus data initialized with size in the first byte
     NSMutableData *outputData = [[NSMutableData alloc] initWithCapacity:320];
     [outputData appendBytes:[sizeData bytes] length:[sizeData length]];
-
+    
     // Append Opus data
     [outputData appendData:[NSData dataWithBytes:outBuffer length:encodedByteCount]];
-
-   // NSLog(@"### Output data is %d(%d, %d) bytes",[outputData length], [sizeData length], encodedByteCount);
-
+    
+    
     return outputData;
+}
+
+/**
+ *  opusToPCM
+ *
+ *  @param oggopus - NSData object containing opus audio in ogg container
+ *
+ *  @return NSData = raw PCM
+ */
+- (NSData*) opusToPCM:(NSData*) oggOpus {
+    
+    return [self decodeOggOpus:oggOpus];
+    
+}
+
+/**
+ *  decodeOggOpus
+ *
+ *  @param oggopus NSData containing ogg opus audio
+ *
+ *  @return NSData - contains PCM audio
+ */
+- (NSData*) decodeOggOpus:(NSData*) oggopus {
+    
+    NSMutableData *pcmOut = [[NSMutableData alloc] init];
+    
+    
+    ogg_sync_state oy;
+    ogg_page       og;
+    ogg_packet     op;
+    ogg_stream_state os;
+    ogg_int64_t audio_size=0;
+    ogg_int32_t opus_serialno;
+    ogg_int64_t page_granule=0;
+    ogg_int64_t link_out=0;
+    OpusMSDecoder *st=NULL;
+    opus_int64 packet_count=0;
+    
+    int eos=0;
+    int channels=-1;
+    int mapping_family;
+    int rate=0;
+    int wav_format=0;
+    int preskip=0;
+    int gran_offset=0;
+    int has_opus_stream=0;
+    int has_tags_packet=0;
+    int fp=0;
+    int streams=0;
+    int frame_size=0;
+    int total_links=0;
+    int stream_init = 0;
+    float manual_gain=0;
+    float gain=1;
+    float *output=0;
+    
+    
+    ogg_sync_init(&oy);
+    
+    int processedByteCount = 0;
+    
+    while (processedByteCount < [oggopus length])
+    {
+        uint8_t *data;
+        int buffersize = (200 < [oggopus length] - processedByteCount) ? 200 : [oggopus length] - processedByteCount;
+        data = ogg_sync_buffer(&oy, buffersize);
+        
+        NSRange range = {processedByteCount, buffersize};
+        [oggopus getBytes:data range:range];
+        processedByteCount += buffersize;
+        
+        ogg_sync_wrote(&oy, buffersize);
+        
+        /*Loop for all complete pages we got (most likely only one)*/
+        while (ogg_sync_pageout(&oy, &og)==1)
+        {
+            if (stream_init == 0) {
+                ogg_stream_init(&os, ogg_page_serialno(&og));
+                stream_init = 1;
+            }
+            if (ogg_page_serialno(&og) != os.serialno) {
+                /* so all streams are read. */
+                ogg_stream_reset_serialno(&os, ogg_page_serialno(&og));
+            }
+            /*Add page to the bitstream*/
+            ogg_stream_pagein(&os, &og);
+            page_granule = ogg_page_granulepos(&og);
+            
+            /*Extract all available packets*/
+            while (ogg_stream_packetout(&os, &op) == 1)
+            {
+                /*OggOpus streams are identified by a magic string in the initial
+                 stream header.*/
+                if (op.b_o_s && op.bytes>=8 && !memcmp(op.packet, "OpusHead", 8)) {
+                    if(has_opus_stream && has_tags_packet)
+                    {
+                        /*If we're seeing another BOS OpusHead now it means
+                         the stream is chained without an EOS.*/
+                        has_opus_stream=0;
+                        if(st)opus_multistream_decoder_destroy(st);
+                        st=NULL;
+                        NSLog(@"Warning: stream ended without EOS and a new stream began");
+                    }
+                    if(!has_opus_stream)
+                    {
+                        if(packet_count>0 && opus_serialno==os.serialno)
+                        {
+                            NSLog(@"Apparent chaining without changing serial number");
+                            return nil;
+                        }
+                        opus_serialno = os.serialno;
+                        has_opus_stream = 1;
+                        has_tags_packet = 0;
+                        link_out = 0;
+                        packet_count = 0;
+                        eos = 0;
+                        total_links++;
+                    } else {
+                        NSLog(@"Warning: ignoring opus stream");
+                    }
+                }
+                
+                
+                if (!has_opus_stream || os.serialno != opus_serialno)
+                    break;
+                /*If first packet in a logical stream, process the Opus header*/
+                if (packet_count==0)
+                {
+                    st = process_header(&op, &rate, &mapping_family, &channels, &preskip, &gain, manual_gain, &streams, wav_format);
+                    if (!st)
+                        return nil;
+                    
+                    if(ogg_stream_packetout(&os, &op)!=0 || og.header[og.header_len-1]==255)
+                    {
+                        /*The format specifies that the initial header and tags packets are on their
+                         own pages. To aid implementors in discovering that their files are wrong
+                         we reject them explicitly here. In some player designs files like this would
+                         fail even without an explicit test.*/
+                        fprintf(stderr, "Extra packets on initial header page. Invalid stream.\n");
+                        return nil;
+                    }
+                    
+                    /*Remember how many samples at the front we were told to skip
+                     so that we can adjust the timestamp counting.*/
+                    gran_offset=preskip;
+                    
+                    if(!output)output=malloc(sizeof(float)*MAX_FRAME_SIZE*channels);
+                    
+                    
+                } else if (packet_count==1)
+                {
+                    has_tags_packet=1;
+                    if(ogg_stream_packetout(&os, &op)!=0 || og.header[og.header_len-1]==255)
+                    {
+                        NSLog(@"Extra packets on initial tags page. Invalid stream.");
+                        return nil;
+                    }
+                } else {
+                    int ret;
+                    opus_int64 maxout;
+                    opus_int64 outsamp;
+                    
+                    
+                    
+                    /*Decode Opus packet*/
+                    ret = opus_multistream_decode_float(st, (unsigned char*)op.packet, op.bytes, output, MAX_FRAME_SIZE, 0);
+                    
+                    
+                    /*If the decoder returned less than zero, we have an error.*/
+                    if (ret<0)
+                    {
+                        fprintf (stderr, "Decoding error: %s\n", opus_strerror(ret));
+                        break;
+                    }
+                    frame_size = ret;
+                    
+                    
+                    /*This handles making sure that our output duration respects
+                     the final end-trim by not letting the output sample count
+                     get ahead of the granpos indicated value.*/
+                    maxout=((page_granule-gran_offset)*rate/48000)-link_out;
+                    outsamp=audio_write(output, channels, frame_size, pcmOut, &preskip, 1,0>maxout?0:maxout,fp);
+                    link_out+=outsamp;
+                    audio_size+=(fp?4:2)*outsamp*channels;
+                }
+                packet_count++;
+                
+                
+            }
+            
+        }
+        
+    }
+    
+    opus_multistream_decoder_destroy(st);
+    if (stream_init)
+        ogg_stream_clear(&os);
+    ogg_sync_clear(&oy);
+    if(output) {
+        free(output);
+    }
+    
+    
+    
+    return pcmOut;
+}
+
+
+#pragma mark static methods
+
+/*Process an Opus header and setup the opus decoder based on it.
+ It takes several pointers for header values which are needed
+ elsewhere in the code.*/
+static OpusMSDecoder *process_header(ogg_packet *op, opus_int32 *rate,
+                                     int *mapping_family, int *channels, int *preskip, float *gain,
+                                     float manual_gain, int *streams, int wav_format)
+{
+    int err;
+    OpusMSDecoder *st;
+    OpusHeader header;
+    
+    if (opus_header_parse(op->packet, op->bytes, &header)==0)
+    {
+        fprintf(stderr, "Cannot parse header\n");
+        return NULL;
+    }
+    
+    *mapping_family = header.channel_mapping;
+    *channels = header.channels;
+    
+    if(!*rate)*rate=header.input_sample_rate;
+    /*If the rate is unspecified we decode to 48000*/
+    if(*rate==0)*rate=48000;
+    if(*rate<8000||*rate>192000){
+        fprintf(stderr,"Warning: Crazy input_rate %d, decoding to 48000 instead.\n",*rate);
+        *rate=48000;
+    }
+    
+    *preskip = header.preskip;
+    st = opus_multistream_decoder_create(48000, header.channels, header.nb_streams, header.nb_coupled, header.stream_map, &err);
+    if(err != OPUS_OK){
+        fprintf(stderr, "Cannot create decoder: %s\n", opus_strerror(err));
+        return NULL;
+    }
+    if (!st)
+    {
+        fprintf (stderr, "Decoder initialization failed: %s\n", opus_strerror(err));
+        return NULL;
+    }
+    
+    *streams=header.nb_streams;
+    
+    fprintf(stderr, "Decoding to %d Hz (%d channel%s)", *rate,
+            *channels, *channels>1?"s":"");
+    if(header.version!=1)fprintf(stderr, ", Header v%d",header.version);
+    fprintf(stderr, "\n");
+    if (header.gain!=0)fprintf(stderr,"Playback gain: %f dB\n", header.gain/256.);
+    if (manual_gain!=0)fprintf(stderr,"Manual gain: %f dB\n", manual_gain);
+    
+    
+    return st;
+}
+
+static opus_int64 audio_write(float *pcm, int channels, int frame_size, NSMutableData *fout,
+                              int *skip, int file, opus_int64 maxout, int fp)
+{
+    opus_int64 sampout=0;
+    int i,tmp_skip;
+    unsigned out_len;
+    short *out;
+    float *output;
+    out=alloca(sizeof(short)*MAX_FRAME_SIZE*channels);
+    maxout=maxout<0?0:maxout;
+    
+    if (skip){
+        tmp_skip = (*skip>frame_size) ? (int)frame_size : *skip;
+        *skip -= tmp_skip;
+    } else {
+        tmp_skip = 0;
+    }
+    
+    output=pcm+channels*tmp_skip;
+    out_len=frame_size-tmp_skip;
+    frame_size=0;
+    
+    for (i=0;i<(int)out_len*channels;i++){
+        out[i]=(short)float2int(fmaxf(-32768,fminf(output[i]*32768.f,32767)));
+    }
+    
+    if(maxout>0)
+    {
+        [fout appendBytes:out length:out_len*2];
+        sampout+=out_len;
+        maxout-=out_len;
+    }
+    
+    return sampout;
 }
 
 @end

@@ -26,7 +26,7 @@
     // set default values
     [self setApiEndpoint:[NSURL URLWithString:WATSONSDK_DEFAULT_TTS_API_ENDPOINT]];
     [self setVoiceName:WATSONSDK_DEFAULT_TTS_VOICE];
-    [self setAudioCodec:WATSONSDK_TTS_AUDIO_CODEC_TYPE_WAV];
+    [self setAudioCodec:WATSONSDK_TTS_AUDIO_CODEC_TYPE_OPUS];
     
     return self;
 }

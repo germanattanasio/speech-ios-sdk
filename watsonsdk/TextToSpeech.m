@@ -15,9 +15,12 @@
  */
 
 #import "TextToSpeech.h"
+#import "OpusHelper.h"
+#import "watsonSpeexdec.h"
 
-@interface TextToSpeech()
+@interface TextToSpeech()<AVAudioPlayerDelegate>
 @property  (strong, nonatomic) AVAudioPlayer *audioPlayer;
+@property OpusHelper* opus;
 
 @end
 
@@ -48,6 +51,9 @@
 - (id)initWithConfig:(TTSConfiguration *)config {
     
     self.config = config;
+    // setup opus helper
+    self.opus = [[OpusHelper alloc] init];
+    
     return self;
 }
 
@@ -127,6 +133,20 @@
         else
             [self.audioPlayer play];
           
+    } else if ([self.config.audioCodec isEqualToString:WATSONSDK_TTS_AUDIO_CODEC_TYPE_OPUS]) {
+        
+        NSError * err;
+        
+        // convert audio to PCM and add wav header
+        audio = [self.opus opusToPCM:audio];
+        audio = [self addWavHeader:audio];
+        
+        self.audioPlayer = [[AVAudioPlayer alloc] initWithData:audio fileTypeHint:AVFileTypeWAVE error:&err];
+        [self.audioPlayer setDelegate:self];
+        if (!self.audioPlayer)
+            return err;
+        else
+            [self.audioPlayer play];
     }
     
     
@@ -135,22 +155,23 @@
 }
 
 
-/**
- *  stripAndAddWavHeader - removes the wav header and metadata from downloaded TTS wav file which does not contain file length
- *  iOS avaudioplayer will not play the wav without the correct headers so we must recreate them
- *
- *  @param wav NSData containing audio
- *
- *  @return NSData with corrected wav header
- */
--(NSData*) stripAndAddWavHeader:(NSData*) wav {
+
+- (void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player
+                                 error:(NSError *)error {
+    NSLog(@"avaudio player error %@",error.localizedDescription);
+}
+
+- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player
+                       successfully:(BOOL)flag {
+    NSLog(@"avaudioplayer finished successfully");
+}
+
+
+- (NSMutableData *)addWavHeader:(NSData *)wavNoheader {
     
     int headerSize = 44;
-    int metadataSize = 48;
-    NSData *wavNoheader= [NSMutableData dataWithData:[wav subdataWithRange:NSMakeRange(headerSize+metadataSize, [wav length])]];
-    
     long totalAudioLen = [wavNoheader length];
-    long totalDataLen = [wavNoheader length] + headerSize;
+    long totalDataLen = [wavNoheader length] + headerSize-8;
     long longSampleRate = 48000;
     int channels = 1;
     long byteRate = 16 * 11025 * channels/8;
@@ -205,6 +226,25 @@
     
     NSMutableData *newWavData = [NSMutableData dataWithBytes:header length:44];
     [newWavData appendBytes:[wavNoheader bytes] length:[wavNoheader length]];
+    return newWavData;
+}
+
+/**
+ *  stripAndAddWavHeader - removes the wav header and metadata from downloaded TTS wav file which does not contain file length
+ *  iOS avaudioplayer will not play the wav without the correct headers so we must recreate them
+ *
+ *  @param wav NSData containing audio
+ *
+ *  @return NSData with corrected wav header
+ */
+-(NSData*) stripAndAddWavHeader:(NSData*) wav {
+    
+    int headerSize = 44;
+    int metadataSize = 48;
+    NSData *wavNoheader= [NSMutableData dataWithData:[wav subdataWithRange:NSMakeRange(headerSize+metadataSize, [wav length])]];
+    
+    NSMutableData *newWavData;
+    newWavData = [self addWavHeader:wavNoheader];
     
     return newWavData;
     

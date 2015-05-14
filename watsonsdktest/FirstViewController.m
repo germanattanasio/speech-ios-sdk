@@ -28,20 +28,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    // NSURL *host = [NSURL URLWithString:@"wss://speech.tap.ibm.com/speech-to-text-beta/api/v1/recognize"];
-    //NSURL *host = [NSURL URLWithString:@"ws://192.168.59.103:9080/speech-to-text-beta/api/v1/models/WatsonModel/recognize"];
-    //NSURL *host = [NSURL URLWithString:@"wss://dpev918.innovate.ibm.com/v1/models/WatsonModel/recognize"];
-    
-    
-    
+
     // STT setup
-    
     STTConfiguration *conf = [[STTConfiguration alloc] init];
     [conf setApiURL:@"https://speech.tap.ibm.com/speech-to-text-beta/api"];
     [conf setBasicAuthUsername:@"ivaniapi"];
     [conf setBasicAuthPassword:@"Zt1xSp33x"];
-    
     self.stt = [SpeechToText initWithConfig:conf];
     
     
@@ -50,7 +42,6 @@
     [confTTS setApiURL:@"https://speech.tap.ibm.com/text-to-speech-beta/api"];
     [confTTS setBasicAuthUsername:@"ivaniapi"];
     [confTTS setBasicAuthPassword:@"Zt1xSp33x"];
-    
     self.tts = [TextToSpeech initWithConfig:confTTS];
     
     
@@ -127,8 +118,6 @@
     NSLog(@"textFieldShouldReturn:");
     
     [textField resignFirstResponder];
-    
-  //  [stt playTTSForString:textField.text];
     
     return YES;
 }

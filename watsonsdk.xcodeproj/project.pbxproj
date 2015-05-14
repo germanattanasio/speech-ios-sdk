@@ -24,6 +24,12 @@
 
 /* Begin PBXBuildFile section */
 		C11712E31A03DC2E00957080 /* UploaderDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = C123FF8719B9FE4100C6A702 /* UploaderDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C11772091AFD191D00C8791A /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C11772081AFD191D00C8791A /* libogg.a */; };
+		C117720D1AFD193600C8791A /* config_types.h in Headers */ = {isa = PBXBuildFile; fileRef = C117720A1AFD193600C8791A /* config_types.h */; };
+		C117720E1AFD193600C8791A /* ogg.h in Headers */ = {isa = PBXBuildFile; fileRef = C117720B1AFD193600C8791A /* ogg.h */; };
+		C117720F1AFD193600C8791A /* os_types.h in Headers */ = {isa = PBXBuildFile; fileRef = C117720C1AFD193600C8791A /* os_types.h */; };
+		C11772141B029BEE00C8791A /* opus_header.h in Headers */ = {isa = PBXBuildFile; fileRef = C11772131B029BEE00C8791A /* opus_header.h */; };
+		C117721E1B02A15000C8791A /* opus_header.c in Sources */ = {isa = PBXBuildFile; fileRef = C117721D1B02A15000C8791A /* opus_header.c */; };
 		C11A645F1754D0E600385896 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C11A645E1754D0E600385896 /* Foundation.framework */; };
 		C11A64961754D98700385896 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C11A64951754D98700385896 /* CoreFoundation.framework */; };
 		C11A649C1754D98700385896 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C11A649A1754D98700385896 /* InfoPlist.strings */; };
@@ -228,6 +234,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C11772081AFD191D00C8791A /* libogg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libogg.a; sourceTree = "<group>"; };
+		C117720A1AFD193600C8791A /* config_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config_types.h; sourceTree = "<group>"; };
+		C117720B1AFD193600C8791A /* ogg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ogg.h; sourceTree = "<group>"; };
+		C117720C1AFD193600C8791A /* os_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = os_types.h; sourceTree = "<group>"; };
+		C11772131B029BEE00C8791A /* opus_header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opus_header.h; sourceTree = "<group>"; };
+		C117721D1B02A15000C8791A /* opus_header.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = opus_header.c; sourceTree = "<group>"; };
 		C11A645B1754D0E600385896 /* libwatsonsdk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libwatsonsdk.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C11A645E1754D0E600385896 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C11A64621754D0E600385896 /* watsonsdk-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "watsonsdk-Prefix.pch"; sourceTree = "<group>"; };
@@ -426,6 +438,7 @@
 				C11B3EA31AF41A320062BF7D /* AVFoundation.framework in Frameworks */,
 				C1D4580519A78BE700093095 /* CFNetwork.framework in Frameworks */,
 				C1D4580419A78BDF00093095 /* Security.framework in Frameworks */,
+				C11772091AFD191D00C8791A /* libogg.a in Frameworks */,
 				C1B14B831AA0D3DD00864C53 /* libopus.a in Frameworks */,
 				C12469841AC9FC8F0037DB5B /* libVADLib.a in Frameworks */,
 				C1D4580319A78BD800093095 /* libicucore.dylib in Frameworks */,
@@ -459,6 +472,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C11772101AFD193B00C8791A /* ogg */ = {
+			isa = PBXGroup;
+			children = (
+				C117720A1AFD193600C8791A /* config_types.h */,
+				C117720B1AFD193600C8791A /* ogg.h */,
+				C117720C1AFD193600C8791A /* os_types.h */,
+			);
+			name = ogg;
+			sourceTree = "<group>";
+		};
 		C11A64521754D0E600385896 = {
 			isa = PBXGroup;
 			children = (
@@ -504,6 +527,7 @@
 		C11A64601754D0E600385896 /* watsonsdk */ = {
 			isa = PBXGroup;
 			children = (
+				C11772101AFD193B00C8791A /* ogg */,
 				C1220B201AEE84A700EADD9B /* VAD */,
 				C1D457F719A760A300093095 /* socketrocket */,
 				C12352A519910606009A8F8B /* opus */,
@@ -598,6 +622,8 @@
 		C12352A519910606009A8F8B /* opus */ = {
 			isa = PBXGroup;
 			children = (
+				C11772131B029BEE00C8791A /* opus_header.h */,
+				C117721D1B02A15000C8791A /* opus_header.c */,
 				C12352A619910606009A8F8B /* opus.h */,
 				C12352A719910606009A8F8B /* opus_defines.h */,
 				C12352A819910606009A8F8B /* opus_multistream.h */,
@@ -611,6 +637,7 @@
 		C1416C33194B49520009C49A /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				C11772081AFD191D00C8791A /* libogg.a */,
 				C12469831AC9FC8F0037DB5B /* libVADLib.a */,
 				C1B14B821AA0D3DC00864C53 /* libopus.a */,
 			);
@@ -850,11 +877,13 @@
 				C1435CFA175775F400EA854D /* _kiss_fft_guts.h in Headers */,
 				C1435CFB175775F400EA854D /* arch.h in Headers */,
 				C1435CFC175775F400EA854D /* cb_search.h in Headers */,
+				C117720D1AFD193600C8791A /* config_types.h in Headers */,
 				C1435CFD175775F400EA854D /* cb_search_arm4.h in Headers */,
 				C1435CFE175775F400EA854D /* cb_search_bfin.h in Headers */,
 				C1435CFF175775F400EA854D /* cb_search_sse.h in Headers */,
 				C1435D00175775F400EA854D /* fftwrap.h in Headers */,
 				C1435D01175775F400EA854D /* filterbank.h in Headers */,
+				C117720F1AFD193600C8791A /* os_types.h in Headers */,
 				C1435D02175775F400EA854D /* filters.h in Headers */,
 				C1435D03175775F400EA854D /* filters_arm4.h in Headers */,
 				C1435D04175775F400EA854D /* filters_bfin.h in Headers */,
@@ -879,6 +908,7 @@
 				C1435D17175775F400EA854D /* modes.h in Headers */,
 				C1435D18175775F400EA854D /* nb_celp.h in Headers */,
 				C1435D19175775F400EA854D /* os_support.h in Headers */,
+				C117720E1AFD193600C8791A /* ogg.h in Headers */,
 				C1435D1A175775F400EA854D /* pseudofloat.h in Headers */,
 				C1435D1B175775F400EA854D /* quant_lsp.h in Headers */,
 				C1435D1C175775F400EA854D /* quant_lsp_bfin.h in Headers */,
@@ -901,6 +931,7 @@
 				C1435D2F175775F400EA854D /* speex_callbacks.h in Headers */,
 				C1435D30175775F400EA854D /* speex_config_types.h in Headers */,
 				C1435D31175775F400EA854D /* speex_echo.h in Headers */,
+				C11772141B029BEE00C8791A /* opus_header.h in Headers */,
 				C1435D32175775F400EA854D /* speex_header.h in Headers */,
 				C1435D33175775F400EA854D /* speex_jitter.h in Headers */,
 				C1435D34175775F400EA854D /* speex_preprocess.h in Headers */,
@@ -1091,6 +1122,7 @@
 				C1435D47175775F400EA854D /* exc_5_64_table.c in Sources */,
 				C1435D48175775F400EA854D /* exc_8_128_table.c in Sources */,
 				C1435D49175775F400EA854D /* fftwrap.c in Sources */,
+				C117721E1B02A15000C8791A /* opus_header.c in Sources */,
 				C1435D4A175775F400EA854D /* filterbank.c in Sources */,
 				C1435D4B175775F400EA854D /* filters.c in Sources */,
 				C1435D4C175775F400EA854D /* gain_table.c in Sources */,
