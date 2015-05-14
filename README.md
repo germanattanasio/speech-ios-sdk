@@ -11,7 +11,7 @@ Table of Contents
 * [Watson Developer Cloud Speech APIs][wdc]
 
     * [Installation](#installation)
-    * [Getting Started](#getting started)
+    * [Speech To Text](#stt)
 
 Installation
 ------------
@@ -46,7 +46,7 @@ Some additional iOS standard frameworks must be added.
 
 
 
-Getting started
+Speech To Text 
 --------------
 
 **Include the header**
