@@ -15,18 +15,18 @@ Table of Contents
     
     * [Speech To Text](#speech-to-text)
     	* [Create a Configuration](#create-a-stt-configuration)  
-    	* [Create a SpeechToText instance](#stt-instance) 
-    	* [List supported models](#list-models) 
-    	* [Get model details](#model-details)	
-    	* [Start Audio Transcription](#stt-start)
-    	* [End Audio Transcription](#stt-end)
-    	* [Speech power levels](#stt-power)
+    	* [Create a SpeechToText instance](#Create-a-SpeechToText-instance) 
+    	* [List supported models](#Get-a-list-of-models-supported-by-the-service) 
+    	* [Get model details](#Get-details-of-a-particular-model)	
+    	* [Start Audio Transcription](#Start-Audio-Transcription)
+    	* [End Audio Transcription](#End-Audio-Transcription)
+    	* [Speech power levels](#Receive-speech-power-levels-during-the-recognize)
     	
-	* [Text To Speech](#tts)
-    	* [Create a Configuration](#tts-config)
-    	* [Create a TextToSpeech instance](#tts-create)
-    	* [List supported voices](#tts-list-voices)
-    	* [Generate and play audio](#tts-play)
+	* [Text To Speech](#text-to-speech)
+    	* [Create a Configuration](#Create-a-Configuration)
+    	* [Create a TextToSpeech instance](#Create-a-TextToSpeech-instance)
+    	* [List supported voices](#Get-a-list-of-voices-supported-by-the-service)
+    	* [Generate and play audio](#Generate-and-play-audio)
 
 Installation
 ------------
@@ -60,7 +60,7 @@ Some additional iOS standard frameworks must be added.
 
 
 
-Include headers <a id="include-headers"></a>
+Include headers
 ---------------
 
 **in Objective-C**
@@ -77,7 +77,7 @@ Include headers <a id="include-headers"></a>
 Add the headers above for Objective-c into a bridging header file.
 
 
-Speech To Text <a id="speech-to-text"></a>
+Speech To Text 
 ==============
 
 Create a STT Configuration
@@ -92,14 +92,14 @@ By default the Configuration will use the IBM Bluemix service API endpoint, cust
 ```
 
 
-Create a SpeechToText instance <a id="stt-instance"></a>
+Create a SpeechToText instance
 ------------------------------
 
 ```objective-c
 	self.stt = [SpeechToText initWithConfig:conf];
 ```
 
-Get a list of models supported by the service <a id="list-models"></a>
+Get a list of models supported by the service
 ------------------------------
 
 **in Objective-C**
@@ -123,7 +123,7 @@ stt!.listModels({
 })
 ```
 
-Get details of a particular model <a id="model-details"></a>
+Get details of a particular model
 ------------------------------
 
 ```objective-c
@@ -135,7 +135,7 @@ Get details of a particular model <a id="model-details"></a>
     } withName:@"WatsonModel"];
 ```
 
-Start Audio Transcription <a id="stt-start"></a>
+Start Audio Transcription
 ------------------------------
 ```objective-c
 	[stt recognize:^(NSDictionary* res, NSError* err){
@@ -148,7 +148,7 @@ Start Audio Transcription <a id="stt-start"></a>
 
 ```
 
-End Audio Transcription <a id="stt-end"></a>
+End Audio Transcription
 ------------------------------
 
 By default the SDK uses Voice Activated Detection (VAD) to detect when a user has stopped speaking, this can be disabled with [stt setIsVADenabled:true]
@@ -160,7 +160,7 @@ By default the SDK uses Voice Activated Detection (VAD) to detect when a user ha
 ```
 
 
-Receive speech power levels during the recognize <a id="stt-power"></a>
+Receive speech power levels during the recognize
 ------------------------------
 
 ```objective-c
@@ -179,11 +179,11 @@ Receive speech power levels during the recognize <a id="stt-power"></a>
 
     	
 
-Text To Speech <a id="tts"></a>
+Text To Speech 
 ==============
 
 
-Create a Configuration <a id="tts-config"></a>
+Create a Configuration
 ---------------
 
 By default the Configuration will use the IBM Bluemix service API endpoint, custom endpoints can be set using `setApiURL` in most cases this is not required.
@@ -195,13 +195,13 @@ By default the Configuration will use the IBM Bluemix service API endpoint, cust
 ```
 
 
-Create a TextToSpeech instance <a id="tts-create"></a>
+Create a TextToSpeech instance 
 ------------------------------
 ```objective-c
 	self.tts = [TextToSpeech initWithConfig:conf];
 ```
 
-Get a list of voices supported by the service <a id="tts-list-voices"></a>
+Get a list of voices supported by the service
 ------------------------------
 
 **in Objective-C**
@@ -225,7 +225,7 @@ Get a list of voices supported by the service <a id="tts-list-voices"></a>
         })
 ```
 
-Generate and play audio <a id="tts-play"></a>
+Generate and play audio
 ------------------------------
 
 **in Objective-C**
