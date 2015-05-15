@@ -15,18 +15,18 @@ Table of Contents
     
     * [Speech To Text](#speech-to-text)
     	* [Create a Configuration](#create-a-stt-configuration)  
-    	* [Create a SpeechToText instance](#Create-a-SpeechToText-instance) 
-    	* [List supported models](#Get-a-list-of-models-supported-by-the-service) 
-    	* [Get model details](#Get-details-of-a-particular-model)	
-    	* [Start Audio Transcription](#Start-Audio-Transcription)
-    	* [End Audio Transcription](#End-Audio-Transcription)
-    	* [Speech power levels](#Receive-speech-power-levels-during-the-recognize)
+    	* [Create a SpeechToText instance](#create-a-speechtotext-instance) 
+    	* [List supported models](#get-a-list-of-models-supported-by-the-service) 
+    	* [Get model details](#get-details-of-a-particular-model)	
+    	* [Start Audio Transcription](#start-audio-transcription)
+    	* [End Audio Transcription](#end-audio-transcription)
+    	* [Speech power levels](#receive-speech-power-levels-during-the-recognize)
     	
 	* [Text To Speech](#text-to-speech)
-    	* [Create a Configuration](#Create-a-Configuration)
-    	* [Create a TextToSpeech instance](#Create-a-TextToSpeech-instance)
-    	* [List supported voices](#Get-a-list-of-voices-supported-by-the-service)
-    	* [Generate and play audio](#Generate-and-play-audio)
+    	* [Create a Configuration](#create-a-configuration)
+    	* [Create a TextToSpeech instance](#create-a-texttospeech-instance)
+    	* [List supported voices](#get-a-list-of-voices-supported-by-the-service)
+    	* [Generate and play audio](#generate-and-play-audio)
 
 Installation
 ------------
