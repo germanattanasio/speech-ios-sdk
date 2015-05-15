@@ -12,6 +12,9 @@ Table of Contents
 
     * [Installation](#installation)
     * [Speech To Text](#stt)
+    	* [Include headers](#sttheaders)
+	* [Text To Speech](#stt)
+    	* [Include headers](#ttsheaders)
 
 Installation
 ------------
@@ -47,19 +50,41 @@ Some additional iOS standard frameworks must be added.
 
 
 Speech To Text 
---------------
+==============
 
-**Include the header**
+
+Include headers
+---------------
+
+**in Objective-C**
 
 ```
-#import <watsonsdk/SpeechToText.h>
+	#import <watsonsdk/SpeechToText.h>
+	#import <watsonsdk/STTConfiguration.h>
 ```
-**Create a Configuration**
+
+**in Swift**
+
+Add the following to a bridging header
+```
+	#import <watsonsdk/SpeechToText.h>
+	#import <watsonsdk/STTConfiguration.h>
+```
+
+
+
+
+Create a Configuration
+---------------
+
+By default the Configuration will use the IBM Bluemix service API endpoint, custom endpoints can be set using `setApiURL` in most cases this is not required.
+
 ```
 	STTConfiguration *conf = [[STTConfiguration alloc] init];
     [conf setBasicAuthUsername:@"<userid>"];
     [conf setBasicAuthPassword:@"<password>"];
 ```
+
 
 **Create a SpeechToText instance**
 ```objective-c
@@ -80,11 +105,12 @@ in Objective-C
 
 in Swift
 ```
-stt.listModels({
-    jsonDict in
-    err in
-    if(err == nil)
-    	...
+stt!.listModels({
+    (jsonDict, err) in
+    
+    if err == nil {
+    	println(jsonDict)
+    }
 })
 ```
 
@@ -134,6 +160,102 @@ By default the SDK uses Voice Activated Detection (VAD) to detect when a user ha
         
     }];
 ```
+
+Text To Speech
+==============
+
+
+Include headers
+---------------
+
+**in Objective-C**
+
+```
+	#import <watsonsdk/TextToSpeech.h>
+	#import <watsonsdk/TTSConfiguration.h>
+```
+
+**in Swift**
+
+Add the following to a bridging header
+```
+	#import <watsonsdk/TextToSpeech.h>
+	#import <watsonsdk/TTSConfiguration.h>
+```
+
+
+
+
+Create a Configuration
+---------------
+
+By default the Configuration will use the IBM Bluemix service API endpoint, custom endpoints can be set using `setApiURL` in most cases this is not required.
+
+```
+	TTSConfiguration *conf = [[TTSConfiguration alloc] init];
+    [conf setBasicAuthUsername:@"<userid>"];
+    [conf setBasicAuthPassword:@"<password>"];
+```
+
+
+**Create a TextToSpeech instance**
+```objective-c
+	self.tts = [TextToSpeech initWithConfig:conf];
+```
+
+**Get a list of voices supported by the service**
+
+in Objective-C
+```
+	[tts listVoices:^(NSDictionary* jsonDict, NSError* err){
+        
+        if(err == nil)
+            ... read values from NSDictionary ...
+
+    }];
+```
+
+in Swift
+```
+	tts!.listVoices({
+            (jsonDict, err) in
+            
+            if err == nil {
+                println(jsonDict)
+            }
+        })
+```
+
+**Generate and play audio**
+
+in Objective-C
+```
+	[self.tts synthesize:^(NSData *data, NSError *err) {
+        if(err != nil)
+            result.text = [err localizedDescription];
+        else
+            [self.tts playAudio:data];
+        
+    } theText:@"Hello World"];
+```
+
+
+in Swift
+```
+	tts!.synthesize({
+		(data, err) in
+            
+		if err != nil {
+        	println(err)
+		} else {
+                
+        	self.tts!.playAudio(data)   
+		}
+            
+	}, theText: "Hello World")
+
+```
+
 
 Common issues
 -------------

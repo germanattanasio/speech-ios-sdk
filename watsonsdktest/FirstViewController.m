@@ -21,9 +21,6 @@
 @synthesize ttsField;
 @synthesize ttsButton = _ttsButton;
 
-- (IBAction)onTTSRequest:(id)sender {
-   // [stt playTTSForString:@"This is a test"];
-}
 
 - (void)viewDidLoad
 {
@@ -114,12 +111,5 @@
     NSLog(@"modelHandler");
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    NSLog(@"textFieldShouldReturn:");
-    
-    [textField resignFirstResponder];
-    
-    return YES;
-}
 
 @end
