@@ -11,10 +11,22 @@ Table of Contents
 * [Watson Developer Cloud Speech APIs][wdc]
 
     * [Installation](#installation)
-    * [Speech To Text](#stt)
-    	* [Include headers](#sttheaders)
-	* [Text To Speech](#stt)
-    	* [Include headers](#ttsheaders)
+    * [Include headers](#include-headers)
+    
+    * [Speech To Text](#speech-to-text)
+    	* [Create a Configuration](#create-a-stt-configuration)  
+    	* [Create a SpeechToText instance](#stt-instance) 
+    	* [List supported models](#list-models) 
+    	* [Get model details](#model-details)	
+    	* [Start Audio Transcription](#stt-start)
+    	* [End Audio Transcription](#stt-end)
+    	* [Speech power levels](#stt-power)
+    	
+	* [Text To Speech](#tts)
+    	* [Create a Configuration](#tts-config)
+    	* [Create a TextToSpeech instance](#tts-create)
+    	* [List supported voices](#tts-list-voices)
+    	* [Generate and play audio](#tts-play)
 
 Installation
 ------------
@@ -48,12 +60,7 @@ Some additional iOS standard frameworks must be added.
 
 
 
-
-Speech To Text 
-==============
-
-
-Include headers
+Include headers <a id="include-headers"></a>
 ---------------
 
 **in Objective-C**
@@ -61,21 +68,20 @@ Include headers
 ```
 	#import <watsonsdk/SpeechToText.h>
 	#import <watsonsdk/STTConfiguration.h>
+	#import <watsonsdk/TextToSpeech.h>
+	#import <watsonsdk/TTSConfiguration.h>
 ```
 
 **in Swift**
 
-Add the following to a bridging header
-```
-	#import <watsonsdk/SpeechToText.h>
-	#import <watsonsdk/STTConfiguration.h>
-```
+Add the headers above for Objective-c into a bridging header file.
 
 
+Speech To Text <a id="speech-to-text"></a>
+==============
 
-
-Create a Configuration
----------------
+Create a STT Configuration
+--------------------------
 
 By default the Configuration will use the IBM Bluemix service API endpoint, custom endpoints can be set using `setApiURL` in most cases this is not required.
 
@@ -86,15 +92,18 @@ By default the Configuration will use the IBM Bluemix service API endpoint, cust
 ```
 
 
-**Create a SpeechToText instance**
+Create a SpeechToText instance <a id="stt-instance"></a>
+------------------------------
+
 ```objective-c
 	self.stt = [SpeechToText initWithConfig:conf];
 ```
 
-**Get a list of models supported by the service**
+Get a list of models supported by the service <a id="list-models"></a>
+------------------------------
 
-in Objective-C
-```
+**in Objective-C**
+```objective-c
 	[stt listModels:^(NSDictionary* jsonDict, NSError* err){
         
         if(err == nil)
@@ -103,7 +112,7 @@ in Objective-C
     }];
 ```
 
-in Swift
+**in Swift**
 ```
 stt!.listModels({
     (jsonDict, err) in
@@ -114,8 +123,10 @@ stt!.listModels({
 })
 ```
 
-**Get details of a particular model**
-```
+Get details of a particular model <a id="model-details"></a>
+------------------------------
+
+```objective-c
 	[stt listModel:^(NSDictionary* jsonDict, NSError* err){
         
         if(err == nil)
@@ -124,8 +135,9 @@ stt!.listModels({
     } withName:@"WatsonModel"];
 ```
 
-**Start Audio Transcription**
-```
+Start Audio Transcription <a id="stt-start"></a>
+------------------------------
+```objective-c
 	[stt recognize:^(NSDictionary* res, NSError* err){
         
         if(err == nil)
@@ -136,10 +148,11 @@ stt!.listModels({
 
 ```
 
-**End Audio Transcription**
+End Audio Transcription <a id="stt-end"></a>
+------------------------------
 
 By default the SDK uses Voice Activated Detection (VAD) to detect when a user has stopped speaking, this can be disabled with [stt setIsVADenabled:true]
-```
+```objective-c
 	NSError* error= [stt endRecognize];
     if(error != nil)
         NSLog(@"error is %@",error.localizedDescription);
@@ -147,9 +160,10 @@ By default the SDK uses Voice Activated Detection (VAD) to detect when a user ha
 ```
 
 
-**Receive speech power levels during the recognize**
+Receive speech power levels during the recognize <a id="stt-power"></a>
+------------------------------
 
-```
+```objective-c
 [stt getPowerLevel:^(float power){
         
 		// user the power level to make a simple UIView graphic indicator 
@@ -161,52 +175,37 @@ By default the SDK uses Voice Activated Detection (VAD) to detect when a user ha
     }];
 ```
 
-Text To Speech
+
+
+    	
+
+Text To Speech <a id="tts"></a>
 ==============
 
 
-Include headers
----------------
-
-**in Objective-C**
-
-```
-	#import <watsonsdk/TextToSpeech.h>
-	#import <watsonsdk/TTSConfiguration.h>
-```
-
-**in Swift**
-
-Add the following to a bridging header
-```
-	#import <watsonsdk/TextToSpeech.h>
-	#import <watsonsdk/TTSConfiguration.h>
-```
-
-
-
-
-Create a Configuration
+Create a Configuration <a id="tts-config"></a>
 ---------------
 
 By default the Configuration will use the IBM Bluemix service API endpoint, custom endpoints can be set using `setApiURL` in most cases this is not required.
 
-```
+```objective-c
 	TTSConfiguration *conf = [[TTSConfiguration alloc] init];
     [conf setBasicAuthUsername:@"<userid>"];
     [conf setBasicAuthPassword:@"<password>"];
 ```
 
 
-**Create a TextToSpeech instance**
+Create a TextToSpeech instance <a id="tts-create"></a>
+------------------------------
 ```objective-c
 	self.tts = [TextToSpeech initWithConfig:conf];
 ```
 
-**Get a list of voices supported by the service**
+Get a list of voices supported by the service <a id="tts-list-voices"></a>
+------------------------------
 
-in Objective-C
-```
+**in Objective-C**
+```objective-c
 	[tts listVoices:^(NSDictionary* jsonDict, NSError* err){
         
         if(err == nil)
@@ -215,7 +214,7 @@ in Objective-C
     }];
 ```
 
-in Swift
+**in Swift**
 ```
 	tts!.listVoices({
             (jsonDict, err) in
@@ -226,10 +225,11 @@ in Swift
         })
 ```
 
-**Generate and play audio**
+Generate and play audio <a id="tts-play"></a>
+------------------------------
 
-in Objective-C
-```
+**in Objective-C**
+```objective-c
 	[self.tts synthesize:^(NSData *data, NSError *err) {
         if(err != nil)
             result.text = [err localizedDescription];
@@ -240,7 +240,7 @@ in Objective-C
 ```
 
 
-in Swift
+**in Swift**
 ```
 	tts!.synthesize({
 		(data, err) in
