@@ -18,15 +18,19 @@
 #import "OpusHelper.h"
 #import "watsonSpeexdec.h"
 
+typedef void (^PlayAudioCallbackBlockType)(NSError*);
+
 @interface TextToSpeech()<AVAudioPlayerDelegate>
 @property  (strong, nonatomic) AVAudioPlayer *audioPlayer;
 @property OpusHelper* opus;
+@property (nonatomic,copy) PlayAudioCallbackBlockType playAudioCallback;
 
 @end
 
 
 @implementation TextToSpeech
 @synthesize audioPlayer;
+@synthesize playAudioCallback;
 
 /**
  *  Static method to return a SpeechToText object given the service url
@@ -119,7 +123,9 @@
     
 }
 
-- (NSError*) playAudio:(NSData *) audio {
+- (void) playAudio:(void (^)(NSError*)) audioHandler  withData:(NSData *) audio {
+    
+    self.playAudioCallback = audioHandler;
     
     if([self.config.audioCodec isEqualToString:WATSONSDK_TTS_AUDIO_CODEC_TYPE_WAV]){
         
@@ -129,7 +135,7 @@
         self.audioPlayer = [[AVAudioPlayer alloc] initWithData:audio error:&err];
         
         if (!self.audioPlayer)
-            return err;
+            self.playAudioCallback(err);
         else
             [self.audioPlayer play];
           
@@ -144,13 +150,10 @@
         self.audioPlayer = [[AVAudioPlayer alloc] initWithData:audio fileTypeHint:AVFileTypeWAVE error:&err];
         [self.audioPlayer setDelegate:self];
         if (!self.audioPlayer)
-            return err;
+            self.playAudioCallback(err);
         else
             [self.audioPlayer play];
     }
-    
-    
-    return nil;
     
 }
 
@@ -158,12 +161,12 @@
 
 - (void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player
                                  error:(NSError *)error {
-    NSLog(@"avaudio player error %@",error.localizedDescription);
+    self.playAudioCallback(error);
 }
 
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player
                        successfully:(BOOL)flag {
-    NSLog(@"avaudioplayer finished successfully");
+   self.playAudioCallback(nil);
 }
 
 

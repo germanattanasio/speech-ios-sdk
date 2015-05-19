@@ -28,5 +28,6 @@
 - (void) synthesize:(void (^)(NSData*, NSError*)) synthesizeHandler theText:(NSString*) text;
 - (void) listVoices:(void (^)(NSDictionary*, NSError*))handler;
 - (void) saveAudio:(NSData*) audio toFile:(NSString*) path;
-- (NSError*) playAudio:(NSData *) audio;
+- (void) playAudio:(void (^)(NSError*)) audioHandler  withData:(NSData *) audio;
+
 @end

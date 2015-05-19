@@ -74,10 +74,10 @@ Include headers
 
 **in Swift**
 
-Add the headers above for Objective-c into a bridging header file.
+*Add the headers above for Objective-c into a bridging header file.*
 
 
-Speech To Text 
+#Speech To Text 
 ==============
 
 Create a STT Configuration
@@ -85,7 +85,7 @@ Create a STT Configuration
 
 By default the Configuration will use the IBM Bluemix service API endpoint, custom endpoints can be set using `setApiURL` in most cases this is not required.
 
-```
+```objective-c
 	STTConfiguration *conf = [[STTConfiguration alloc] init];
     [conf setBasicAuthUsername:@"<userid>"];
     [conf setBasicAuthPassword:@"<password>"];
@@ -95,7 +95,13 @@ By default the Configuration will use the IBM Bluemix service API endpoint, cust
 Create a SpeechToText instance
 ------------------------------
 
+
+
 ```objective-c
+	@property SpeechToText;
+	
+	...
+	
 	self.stt = [SpeechToText initWithConfig:conf];
 ```
 
@@ -231,10 +237,16 @@ Generate and play audio
 **in Objective-C**
 ```objective-c
 	[self.tts synthesize:^(NSData *data, NSError *err) {
-        if(err != nil)
-            result.text = [err localizedDescription];
-        else
-            [self.tts playAudio:data];
+    
+        // play audio and log when playing has finished
+        [self.tts playAudio:^(NSError *err) {
+            
+            if(!err)
+                NSLog(@"audio finished playing");
+            else
+                NSLog(@"error playing audio %@",err.localizedDescription);
+            
+        } withData:data];
         
     } theText:@"Hello World"];
 ```
@@ -245,12 +257,12 @@ Generate and play audio
 	tts!.synthesize({
 		(data, err) in
             
-		if err != nil {
-        	println(err)
-		} else {
-                
-        	self.tts!.playAudio(data)   
-		}
+		tts!.playAudio({
+			(err) in
+            
+				... do something after the audio has played ...
+		
+		}, withData: data)
             
 	}, theText: "Hello World")
 

@@ -99,10 +99,16 @@
     }];
     
     [self.tts synthesize:^(NSData *data, NSError *err) {
-        if(err != nil)
-            result.text = [err localizedDescription];
-        else
-            [self.tts playAudio:data];
+    
+        // play audio and log when playgin has finished
+        [self.tts playAudio:^(NSError *err) {
+            
+            if(!err)
+                NSLog(@"audio finished playing");
+            else
+                NSLog(@"error playing audio %@",err.localizedDescription);
+            
+        } withData:data];
         
     } theText:@"this is a test of the watson text to speech service"];
 }
