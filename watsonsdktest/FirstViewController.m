@@ -25,7 +25,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     // STT setup
     STTConfiguration *conf = [[STTConfiguration alloc] init];
     [conf setApiURL:@"https://speech.tap.ibm.com/speech-to-text-beta/api"];
@@ -67,12 +67,17 @@
     // start recognize
     [stt recognize:^(NSDictionary* res, NSError* err){
         
-        if(err == nil)
+        if(err == nil) {
+            
+            
+            if([self.stt isFinalTranscript:res]) { NSLog(@"this is the final transcript");}
+            
             result.text = [stt getTranscript:res];
-        else
+        } else {
             result.text = [err localizedDescription];
+        }
     }];
-   
+    
     // get power readings until recording has finished
     [stt getPowerLevel:^(float power){
         
@@ -88,7 +93,7 @@
 
 - (IBAction)pressTTStest:(id)sender {
     
-
+    
     // list voices call
     [self.tts listVoices:^(NSDictionary* res, NSError* err){
         
@@ -99,7 +104,7 @@
     }];
     
     [self.tts synthesize:^(NSData *data, NSError *err) {
-    
+        
         // play audio and log when playgin has finished
         [self.tts playAudio:^(NSError *err) {
             

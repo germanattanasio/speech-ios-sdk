@@ -78,6 +78,14 @@
  */
 -(NSString*) getTranscript:(NSDictionary*) results;
 
+/**
+ *  isFinalTranscript : convenience method to check the 'final' value in the dictionary and return
+ *
+ *  @param results NSDictionary
+ *
+ *  @return BOOL
+ */
+-(BOOL) isFinalTranscript:(NSDictionary*) results;
 
 /**
  *  getPowerLevel - listen for updates to the Db level of the speaker, can be used for a voice wave visualization

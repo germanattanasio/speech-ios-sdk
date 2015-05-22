@@ -235,6 +235,31 @@ id opusRef;
 }
 
 /**
+ *  isFinalTranscript : check the 'final' value in the dictionary and return
+ *
+ *  @param results NSDictionary
+ *
+ *  @return BOOL
+ */
+-(BOOL) isFinalTranscript:(NSDictionary*) results {
+    
+    if([results objectForKey:@"results"] != nil) {
+        
+        NSArray *resultArray = [results objectForKey:@"results"];
+        if( [resultArray count] != 0 && [resultArray objectAtIndex:0] != nil) {
+            
+            NSDictionary *result =[resultArray objectAtIndex:0];
+            
+            BOOL isFinal = [[result objectForKey:@"final"] boolValue];
+        
+            return isFinal;
+        }
+    }
+    
+    return nil;
+}
+
+/**
  *  getPowerLevel - listen for updates to the Db level of the speaker, can be used for a voice wave visualization
  *
  *  @param powerHandler - callback block
