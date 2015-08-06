@@ -229,6 +229,9 @@ typedef void (^RecognizeCallbackBlockType)(NSDictionary*, NSError*);
     self.isConnected = NO;
     self.isReadyForAudio = NO;
     self.webSocket = nil;
+    if (code == 1006) { // authentication error
+        [self.conf invalidateToken];
+    }
 }
 
 #pragma mark - delegate

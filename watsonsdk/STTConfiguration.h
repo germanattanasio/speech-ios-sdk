@@ -15,6 +15,7 @@
  */
 
 #import <Foundation/Foundation.h>
+#import "AuthConfiguration.h"
 
 // URLS
 #define WATSONSDK_DEFAULT_STT_API_ENDPOINT @"https://stream.watsonplatform.net/speech-to-text-beta/api"
@@ -32,11 +33,9 @@
 // models
 #define WATSONSDK_DEFAULT_STT_MODEL @"WatsonModel"
 
-@interface STTConfiguration : NSObject
+@interface STTConfiguration : AuthConfiguration
 
 @property NSString* apiURL;
-@property NSString* basicAuthUsername;
-@property NSString* basicAuthPassword;
 @property NSString* modelName;
 @property NSString* audioCodec;
 @property NSURL* apiEndpoint;

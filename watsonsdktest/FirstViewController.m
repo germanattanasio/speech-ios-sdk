@@ -26,19 +26,48 @@
 {
     [super viewDidLoad];
     
+    
     // STT setup
     STTConfiguration *conf = [[STTConfiguration alloc] init];
-    [conf setApiURL:@"https://speech.tap.ibm.com/speech-to-text-beta/api"];
-    [conf setBasicAuthUsername:@"ivaniapi"];
-    [conf setBasicAuthPassword:@"Zt1xSp33x"];
+    //[conf setApiURL:@"https://speech.tap.ibm.com/speech-to-text-beta/api"];
+    //[conf setBasicAuthUsername:@"ivaniapi"];
+    //[conf setBasicAuthPassword:@"Zt1xSp33x"];
+    
+    [conf setApiURL:@"https://stream.watsonplatform.net/speech-to-text/api/"];
+    [conf setTokenGenerator:^(void (^tokenHandler)(NSString *token)){
+        NSURL *url = [[NSURL alloc] initWithString:@"https://speech-to-text-demo.mybluemix.net/token"];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+        [request setHTTPMethod:@"GET"];
+        [request setURL:url];
+        
+        NSError *error = [[NSError alloc] init];
+        NSHTTPURLResponse *responseCode = nil;
+        NSData *oResponseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&responseCode error:&error];
+        if ([responseCode statusCode] != 200) {
+            NSLog(@"Error getting %@, HTTP status code %i", url, [responseCode statusCode]);
+            return;
+        }
+        tokenHandler([[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding]);
+    } ];
+
+    [conf setModelName:@"ja-JP_BroadbandModel"];
+    
     self.stt = [SpeechToText initWithConfig:conf];
     
     
     // TTS setup
     TTSConfiguration *confTTS = [[TTSConfiguration alloc] init];
-    [confTTS setApiURL:@"https://speech.tap.ibm.com/text-to-speech-beta/api"];
-    [confTTS setBasicAuthUsername:@"ivaniapi"];
-    [confTTS setBasicAuthPassword:@"Zt1xSp33x"];
+    //[confTTS setApiURL:@"https://speech.tap.ibm.com/text-to-speech-beta/api"];
+    //[confTTS setBasicAuthUsername:@"ivaniapi"];
+    //[confTTS setBasicAuthPassword:@"Zt1xSp33x"];
+        
+    [confTTS setApiURL:@"https://stream.watsonplatform.net/text-to-speech/api/"];
+
+    [confTTS setTokenGenerator:^(void (^tokenHandler)(NSString *token)){
+        // there are no public token based service
+        // this should return a valid token;
+    }];
+
     self.tts = [TextToSpeech initWithConfig:confTTS];
     
     

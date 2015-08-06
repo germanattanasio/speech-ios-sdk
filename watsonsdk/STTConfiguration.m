@@ -64,13 +64,12 @@
 }
 
 - (NSURL*) getWebSocketRecognizeURL {
+    NSMutableString *uriStr = [[NSMutableString alloc] init];
     
-    NSString *uriStr;
+    [uriStr appendFormat:@"%@%@%@%@%@",WEBSOCKETS_SCHEME,self.apiEndpoint.host,self.apiEndpoint.path,WATSONSDK_SERVICE_PATH_v1,WATSONSDK_SERVICE_PATH_RECOGNIZE];
     
-    if([self.modelName isEqualToString:WATSONSDK_DEFAULT_STT_MODEL]) {
-        uriStr = [NSString stringWithFormat:@"%@%@%@%@%@",WEBSOCKETS_SCHEME,self.apiEndpoint.host,self.apiEndpoint.path,WATSONSDK_SERVICE_PATH_v1,WATSONSDK_SERVICE_PATH_RECOGNIZE];
-    } else {
-        uriStr = [NSString stringWithFormat:@"%@%@%@%@/%@%@",WEBSOCKETS_SCHEME,self.apiEndpoint.host,self.apiEndpoint.path,WATSONSDK_SERVICE_PATH_MODELS,self.modelName,WATSONSDK_SERVICE_PATH_RECOGNIZE];
+    if(![self.modelName isEqualToString:WATSONSDK_DEFAULT_STT_MODEL]) {
+        [uriStr appendFormat:@"?model=%@", self.modelName];
     }
     
     NSURL * url = [NSURL URLWithString:uriStr];
