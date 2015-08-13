@@ -47,7 +47,7 @@
         tokenHandler([[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding]);
     } ];
 
-    [conf setModelName:@"ja-JP_BroadbandModel"];
+    //[conf setModelName:@"ja-JP_BroadbandModel"];
     
     self.stt = [SpeechToText initWithConfig:conf];
     
