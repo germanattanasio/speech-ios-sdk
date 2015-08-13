@@ -91,36 +91,43 @@ typedef void (^PlayAudioCallbackBlockType)(NSError*);
     
     // Create and set authentication headers
     NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
-    NSDictionary* headers = [self createRequestHeaders];
-    [defaultConfigObject setHTTPAdditionalHeaders:headers];
-    NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: defaultConfigObject delegate: self delegateQueue: [NSOperationQueue mainQueue]];
     
-    
-    NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *reqError) {
+    [self.config requestToken:^(AuthConfiguration *config) {
+        NSDictionary* headers = [config createRequestHeaders];
+        [defaultConfigObject setHTTPAdditionalHeaders:headers];
+        NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: defaultConfigObject delegate: self delegateQueue: [NSOperationQueue mainQueue]];
         
-        if(reqError == nil)
-        {
-            NSString * text = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
-            NSLog(@"Data = %@",text);
+        
+        NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *reqError) {
             
-            NSError *localError = nil;
-            NSDictionary *parsedObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:&localError];
-            
-            if (localError != nil) {
-                handler(nil,localError);
+            if(reqError == nil)
+            {
+                NSString * text = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
+                NSLog(@"Data = %@",text);
+                
+                NSError *localError = nil;
+                NSDictionary *parsedObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:&localError];
+                
+                if (localError != nil) {
+                    handler(nil,localError);
+                } else {
+                    handler(parsedObject,nil);
+                }
+                
+                
             } else {
-                handler(parsedObject,nil);
+                if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+                    if ([((NSHTTPURLResponse*)response) statusCode] == 401) { // authentication error
+                        [config invalidateToken];
+                    }
+                }
+                handler(nil,reqError);
             }
             
-            
-        } else {
-            handler(nil,reqError);
-        }
+        }];
         
+        [dataTask resume];
     }];
-    
-    [dataTask resume];
-    
 }
 
 - (void) playAudio:(void (^)(NSError*)) audioHandler  withData:(NSData *) audio {
@@ -271,41 +278,34 @@ typedef void (^PlayAudioCallbackBlockType)(NSError*);
     
     // Create and set authentication headers
     NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
-    NSDictionary* headers = [self createRequestHeaders];
-    [defaultConfigObject setHTTPAdditionalHeaders:headers];
-    NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: defaultConfigObject delegate: self delegateQueue: [NSOperationQueue mainQueue]];
     
-    
-    NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *reqError) {
+    [self.config requestToken:^(AuthConfiguration *config) {
+        NSDictionary* headers = [config createRequestHeaders];
+        [defaultConfigObject setHTTPAdditionalHeaders:headers];
+        NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: defaultConfigObject delegate: self delegateQueue: [NSOperationQueue mainQueue]];
         
-        if(reqError == nil)
-        {
-            handler(data,nil);
         
-        } else {
-            handler(nil,reqError);
-        }
+        NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *reqError) {
+            
+            if(reqError == nil)
+            {
+                handler(data,nil);
+            } else {
+                if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+                    if ([((NSHTTPURLResponse*)response) statusCode] == 401) { // authentication error
+                        [config invalidateToken];
+                    }
+                }
+                handler(nil,reqError);
+            }
+            
+        }];
         
+        [dataTask resume];
     }];
-    
-    [dataTask resume];
+     
     
 }
 
-
-- (NSDictionary*) createRequestHeaders {
-    
-    NSMutableDictionary *headers = [[NSMutableDictionary alloc] init];
-    
-    if(self.config.basicAuthPassword && self.config.basicAuthUsername) {
-        NSString *authStr = [NSString stringWithFormat:@"%@:%@", self.config.basicAuthUsername,self.config.basicAuthPassword];
-        NSData *authData = [authStr dataUsingEncoding:NSUTF8StringEncoding];
-        NSString *authValue = [NSString stringWithFormat:@"Basic %@", [authData base64Encoding]];
-        [headers setObject:authValue forKey:@"Authorization"];
-    }
-    
-    return headers;
-    
-}
 
 @end

@@ -281,35 +281,39 @@ id opusRef;
     
     // Create and set authentication headers
     NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
-    NSDictionary* headers = [self createRequestHeaders];
-    [defaultConfigObject setHTTPAdditionalHeaders:headers];
-    NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: defaultConfigObject delegate: self delegateQueue: [NSOperationQueue mainQueue]];
     
-    
-    NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *reqError) {
+    [self.config requestToken:^(AuthConfiguration *config) {
+        NSDictionary* headers = [config createRequestHeaders];
+        [defaultConfigObject setHTTPAdditionalHeaders:headers];
         
-        if(reqError == nil)
-        {
-            NSString * text = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
-            NSLog(@"Data = %@",text);
+        NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: defaultConfigObject delegate: self delegateQueue: [NSOperationQueue mainQueue]];
+        
+        
+        NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *reqError) {
             
-            NSError *localError = nil;
-            NSDictionary *parsedObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:&localError];
-            
-            if (localError != nil) {
-                handler(nil,localError);
+            if(reqError == nil)
+            {
+                NSString * text = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
+                NSLog(@"Data = %@",text);
+                
+                NSError *localError = nil;
+                NSDictionary *parsedObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:&localError];
+                
+                if (localError != nil) {
+                    handler(nil,localError);
+                } else {
+                    handler(parsedObject,nil);
+                }
+                
+                
             } else {
-                handler(parsedObject,nil);
+                handler(nil,reqError);
             }
             
-            
-        } else {
-            handler(nil,reqError);
-        }
+        }];
         
-    }];
-    
-    [dataTask resume];
+        [dataTask resume];
+     }];
     
 }
 
@@ -411,7 +415,7 @@ id opusRef;
 
 
 #pragma mark audio upload
-
+/*
 - (NSDictionary*) createRequestHeaders {
     
     NSMutableDictionary *headers = [[NSMutableDictionary alloc] init];
@@ -426,7 +430,7 @@ id opusRef;
     return headers;
     
 }
-
+*/
 
 
 - (void) initializeStreaming {
@@ -440,8 +444,11 @@ id opusRef;
     
     
     // connect if we are not connected
-    if(![self.wsuploader isWebSocketConnected])
-        [self.wsuploader connect:self.config headers:[self createRequestHeaders]];
+    if(![self.wsuploader isWebSocketConnected]) {
+        [self.config requestToken:^(AuthConfiguration *config) {
+            [self.wsuploader connect:(STTConfiguration*)config headers:[config createRequestHeaders]];
+        }];
+    }
     
     
     // set a pointer to the wsuploader class so it is accessible in the c callback
