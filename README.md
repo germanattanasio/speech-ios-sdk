@@ -14,7 +14,8 @@ Table of Contents
     * [Include headers](#include-headers)
     
     * [Speech To Text](#speech-to-text)
-    	* [Create a Configuration](#create-a-stt-configuration)  
+    	* [Create a Configuration](#create-a-stt-configuration)
+    	* [Use Token Authentication](#use-token-authentication)
     	* [Create a SpeechToText instance](#create-a-speechtotext-instance) 
     	* [List supported models](#get-a-list-of-models-supported-by-the-service) 
     	* [Get model details](#get-details-of-a-particular-model)	
@@ -22,8 +23,9 @@ Table of Contents
     	* [End Audio Transcription](#end-audio-transcription)
     	* [Speech power levels](#receive-speech-power-levels-during-the-recognize)
     	
-	* [Text To Speech](#text-to-speech)
+    * [Text To Speech](#text-to-speech)
     	* [Create a Configuration](#create-a-configuration)
+    	* [Use Token Authentication](#use-token-authentication)
     	* [Create a TextToSpeech instance](#create-a-texttospeech-instance)
     	* [List supported voices](#get-a-list-of-voices-supported-by-the-service)
     	* [Generate and play audio](#generate-and-play-audio)
@@ -89,6 +91,22 @@ By default the Configuration will use the IBM Bluemix service API endpoint, cust
 	STTConfiguration *conf = [[STTConfiguration alloc] init];
     [conf setBasicAuthUsername:@"<userid>"];
     [conf setBasicAuthPassword:@"<password>"];
+```
+
+Use Token Authentication
+------------------------
+
+If you use tokens (from your own server) to get access to the service, provide a token generator to the Configuration. `userid` and `password` will not be used if a token generator is provided.
+
+
+```objective-c
+   [conf setTokenGenerator:^(void (^tokenHandler)(NSString *token)){
+        // get a token from your server in secure way
+        NSString *token = ...
+
+        // provide the token to the tokenHandler
+        tokenHandler(token);
+    }];
 ```
 
 
@@ -200,6 +218,21 @@ By default the Configuration will use the IBM Bluemix service API endpoint, cust
     [conf setBasicAuthPassword:@"<password>"];
 ```
 
+Use Token Authentication
+------------------------
+
+If you use tokens (from your own server) to get access to the service, provide a token generator to the Configuration. `userid` and `password` will not be used if a token generator is provided.
+
+
+```objective-c
+   [conf setTokenGenerator:^(void (^tokenHandler)(NSString *token)){
+        // get a token from your server in secure way
+        NSString *token = ...
+
+        // provide the token to the tokenHandler
+        tokenHandler(token);
+    }];
+```
 
 Create a TextToSpeech instance 
 ------------------------------
