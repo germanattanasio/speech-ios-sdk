@@ -23,7 +23,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		7EFE11E41B71D07D00EF10BF /* AuthConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EFE11E21B71D07D00EF10BF /* AuthConfiguration.h */; };
+		7EFE11E41B71D07D00EF10BF /* AuthConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EFE11E21B71D07D00EF10BF /* AuthConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7EFE11E51B71D07D00EF10BF /* AuthConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFE11E31B71D07D00EF10BF /* AuthConfiguration.m */; };
 		C11712E31A03DC2E00957080 /* UploaderDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = C123FF8719B9FE4100C6A702 /* UploaderDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C11772091AFD191D00C8791A /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C11772081AFD191D00C8791A /* libogg.a */; };
@@ -397,12 +397,12 @@
 				C117720D1AFD193600C8791A /* config_types.h in Headers */,
 				C117720F1AFD193600C8791A /* os_types.h in Headers */,
 				C117720E1AFD193600C8791A /* ogg.h in Headers */,
-				7EFE11E41B71D07D00EF10BF /* AuthConfiguration.h in Headers */,
 				C11772141B029BEE00C8791A /* opus_header.h in Headers */,
 				C1235355199B53FF009A8F8B /* OpusHelper.h in Headers */,
 				C1D457F419A7609D00093095 /* SRWebSocket.h in Headers */,
 				C1D457F519A7609E00093095 /* SocketRocket-Prefix.pch in Headers */,
 				C1C3743B1A8581A00083C69B /* WebSocketUploader.h in Headers */,
+				7EFE11E41B71D07D00EF10BF /* AuthConfiguration.h in Headers */,
 				C1C3743F1A86C5DB0083C69B /* SpeechToText.h in Headers */,
 				C11B3E9F1AF3FF660062BF7D /* TTSConfiguration.h in Headers */,
 				C11B3E9B1AF3FEC90062BF7D /* TextToSpeech.h in Headers */,
