@@ -14,10 +14,12 @@ Table of Contents
     * [Include headers](#include-headers)
     
     * [Speech To Text](#speech-to-text)
-    	* [Create a Configuration](#create-a-stt-configuration)  
+    	* [Create a Configuration](#create-a-stt-configuration) 
+    	* [Authentication options](#authentication)
     	* [Create a SpeechToText instance](#create-a-speechtotext-instance) 
     	* [List supported models](#get-a-list-of-models-supported-by-the-service) 
     	* [Get model details](#get-details-of-a-particular-model)	
+    	* [Use a named model](#use-a-named-model)
     	* [Start Audio Transcription](#start-audio-transcription)
     	* [End Audio Transcription](#end-audio-transcription)
     	* [Speech power levels](#receive-speech-power-levels-during-the-recognize)
@@ -87,8 +89,39 @@ By default the Configuration will use the IBM Bluemix service API endpoint, cust
 
 ```objective-c
 	STTConfiguration *conf = [[STTConfiguration alloc] init];
+```
+
+Authentication
+----------------
+There are currently two authentication options.
+
+Basic Authentication, using the credentials provided by the Bluemix Service instance.
+
+```objective-c
     [conf setBasicAuthUsername:@"<userid>"];
     [conf setBasicAuthPassword:@"<password>"];
+```
+
+Token authentication, an example token authentication provider is running at https://speech-to-text-demo.mybluemix.net/token 
+
+```objective-c
+
+	[conf setTokenGenerator:^(void (^tokenHandler)(NSString *token)){
+        NSURL *url = [[NSURL alloc] initWithString:@"https://speech-to-text-demo.mybluemix.net/token"];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+        [request setHTTPMethod:@"GET"];
+        [request setURL:url];
+        
+        NSError *error = [[NSError alloc] init];
+        NSHTTPURLResponse *responseCode = nil;
+        NSData *oResponseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&responseCode error:&error];
+        if ([responseCode statusCode] != 200) {
+            NSLog(@"Error getting %@, HTTP status code %i", url, [responseCode statusCode]);
+            return;
+        }
+        tokenHandler([[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding]);
+    } ];
+
 ```
 
 
@@ -141,6 +174,15 @@ Get details of a particular model
     } withName:@"WatsonModel"];
 ```
 
+
+Use a named model
+------------------------------
+
+```objective-c
+[conf setModelName:@"ja-JP_BroadbandModel"];
+```
+
+
 Start Audio Transcription
 ------------------------------
 ```objective-c
@@ -157,7 +199,8 @@ Start Audio Transcription
 End Audio Transcription
 ------------------------------
 
-By default the SDK uses Voice Activated Detection (VAD) to detect when a user has stopped speaking, this can be disabled with [stt setIsVADenabled:true]
+The app must indicate to the SDK when transcription should be ended. 
+
 ```objective-c
 	NSError* error= [stt endRecognize];
     if(error != nil)
@@ -165,6 +208,31 @@ By default the SDK uses Voice Activated Detection (VAD) to detect when a user ha
 
 ```
 
+The STT services VAD end of sentence detection can be used to stop the transcription. The following code can be used in the app to do this.
+
+
+```objective-c
+
+	 // start recognize
+    [stt recognize:^(NSDictionary* res, NSError* err){
+        
+        if(err == nil) {
+            
+            
+            if([self.stt isFinalTranscript:res]) {
+                
+                NSLog(@"this is the final transcript");
+                [stt endRecognize];
+            }
+            
+            result.text = [stt getTranscript:res];
+        } else {
+            result.text = [err localizedDescription];
+        }
+    }];
+
+
+```
 
 Receive speech power levels during the recognize
 ------------------------------
