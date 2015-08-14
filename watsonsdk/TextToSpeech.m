@@ -16,7 +16,6 @@
 
 #import "TextToSpeech.h"
 #import "OpusHelper.h"
-#import "watsonSpeexdec.h"
 
 typedef void (^PlayAudioCallbackBlockType)(NSError*);
 

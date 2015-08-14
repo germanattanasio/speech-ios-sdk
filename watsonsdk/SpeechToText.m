@@ -16,8 +16,6 @@
 
 #import <SpeechToText.h>
 #import "OpusHelper.h"
-#import "watsonSpeexdec.h"
-#import "watsonSpeexenc.h"
 #import "WebSocketUploader.h"
 
 // type defs for block callbacks
@@ -40,7 +38,6 @@ typedef struct
 @interface SpeechToText()
 
 @property NSString* pathPCM;
-@property NSString* pathSPX;
 @property NSTimer *PeakPowerTimer;
 @property OpusHelper* opus;
 @property RecordingState recordState;
@@ -60,11 +57,9 @@ typedef struct
 // static for use by c code
 static BOOL isNewRecordingAllowed;
 static BOOL isCompressedOpus;
-static BOOL isCompressedSpeex;
 static int audioRecordedLength;
 static int serialno;
 static NSString* tmpPCM=nil;
-static NSString* tmpSPX;
 static long pageSeq;
 static bool isTempPathSet = false;
 
@@ -103,8 +98,7 @@ id opusRef;
     self.config = config;
     
     // set audio encoding flags so they are accessible in c audio callbacks
-    isCompressedOpus = [config.audioCodec isEqualToString:WATSONSDK_AUDIO_CODEC_TYPE_SPEEX] ? YES:NO;
-    isCompressedSpeex =[config.audioCodec isEqualToString:WATSONSDK_AUDIO_CODEC_TYPE_OPUS] ? YES:NO;
+    isCompressedOpus = [config.audioCodec isEqualToString:WATSONSDK_AUDIO_CODEC_TYPE_OPUS] ? YES:NO;
     isNewRecordingAllowed=YES;
     
     // setup opus helper
@@ -431,28 +425,11 @@ id opusRef;
     uploaderRef = self.wsuploader;
     
     
-    // write spx header
-    if (isCompressedSpeex)
-        [self writeSpeexHeader];
-    
-    
 }
 
 
 
 #pragma mark audio
-
-- (void)writeSpeexHeader {
-    
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
-    NSString* docDir = [paths objectAtIndex:0];
-    NSString *spxHeaderFile = [NSString stringWithFormat:@"%@%@",docDir,@"/header.bin"];
-    FILE *fo_tmp = fopen([spxHeaderFile UTF8String], "wb");
-    headerToFile(fo_tmp, serialno, &pageSeq);
-    fclose(fo_tmp);
-    
-    [uploaderRef writeData:[NSData dataWithContentsOfFile:spxHeaderFile]];
-}
 
 - (void)setupAudioFormat:(AudioStreamBasicDescription*)format
 {
@@ -500,19 +477,6 @@ void sendAudioOpusEncoded(NSData *data)
     }
 }
 
-void sendAudioSpeexEncoded(NSData *data)
-{
-    if (data!=nil && [data length]!=0) {
-        
-        [SpeechToText setTmpFilePaths];
-        [data writeToFile:tmpPCM atomically:YES];
-        pcmEnc([tmpPCM UTF8String],[tmpSPX UTF8String], 0, serialno, &pageSeq);
-        NSData *compressed = [NSData dataWithContentsOfFile:tmpSPX];
-        [uploaderRef writeData:compressed];
-        
-    }
-}
-
 
 #pragma mark audio callbacks
 
@@ -534,9 +498,7 @@ void AudioInputStreamingCallback(
     NSData *data = [NSData  dataWithBytes:inBuffer->mAudioData length:inBuffer->mAudioDataByteSize];
     audioRecordedLength += [data length];
     
-    if (isCompressedSpeex)
-        sendAudioSpeexEncoded(data);
-    else if(isCompressedOpus)
+    if(isCompressedOpus)
         sendAudioOpusEncoded(data);
     else
         [uploaderRef writeData:data];
@@ -561,21 +523,6 @@ void AudioInputStreamingCallback(
 
 #pragma mark utilities
 
-+ (void) setTmpFilePaths{
-    
-    if (isTempPathSet) {
-        return;
-    }
-    isTempPathSet = true;
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
-                                                         NSUserDomainMask, YES);
-    NSString* docDir = [paths objectAtIndex:0];
-    
-    tmpPCM = [[NSString alloc]initWithFormat:@"%@%@",docDir,@"/tmp.pcm"];
-    tmpSPX = [[NSString alloc]initWithFormat:@"%@%@",docDir,@"/tmp.spx"];
-    
-}
-
 - (void) setFilePaths{
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
@@ -583,7 +530,6 @@ void AudioInputStreamingCallback(
     NSString* docDir = [paths objectAtIndex:0];
     
     self.pathPCM = [NSString stringWithFormat:@"%@%@",docDir,@"/out.pcm"];
-    self.pathSPX = [NSString stringWithFormat:@"%@%@",docDir,@"/out.spx"];
     
 }
 
