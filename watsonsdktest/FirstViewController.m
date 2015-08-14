@@ -93,7 +93,11 @@
         if(err == nil) {
             
             
-            if([self.stt isFinalTranscript:res]) { NSLog(@"this is the final transcript");}
+            if([self.stt isFinalTranscript:res]) {
+                
+                NSLog(@"this is the final transcript");
+                [stt endRecognize];
+            }
             
             result.text = [stt getTranscript:res];
         } else {

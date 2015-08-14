@@ -15,7 +15,6 @@
  */
 
 #import <SpeechToText.h>
-#import "VadProcessor.h"
 #import "OpusHelper.h"
 #import "watsonSpeexdec.h"
 #import "watsonSpeexenc.h"
@@ -23,7 +22,6 @@
 
 // type defs for block callbacks
 #define NUM_BUFFERS 3
-#define NOTIFICATION_VAD_STOP_EVENT @"STOP_RECORDING"
 typedef void (^RecognizeCallbackBlockType)(NSDictionary*, NSError*);
 typedef void (^PowerLevelCallbackBlockType)(float);
 typedef struct
@@ -69,7 +67,6 @@ static NSString* tmpPCM=nil;
 static NSString* tmpSPX;
 static long pageSeq;
 static bool isTempPathSet = false;
-static bool isVadEnabled = true;
 
 
 id uploaderRef;
@@ -108,13 +105,6 @@ id opusRef;
     // set audio encoding flags so they are accessible in c audio callbacks
     isCompressedOpus = [config.audioCodec isEqualToString:WATSONSDK_AUDIO_CODEC_TYPE_SPEEX] ? YES:NO;
     isCompressedSpeex =[config.audioCodec isEqualToString:WATSONSDK_AUDIO_CODEC_TYPE_OPUS] ? YES:NO;
-    
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self
-     selector:@selector(didReceiveVadStopNotification:)
-     name:NOTIFICATION_VAD_STOP_EVENT
-     object:nil];
-    
     isNewRecordingAllowed=YES;
     
     // setup opus helper
@@ -187,17 +177,6 @@ id opusRef;
     
     [self performGet:handler forURL:[self.config getModelServiceURL:modelName]];
     
-}
-
-/**
- *  setIsVADenabled
- *  User voice activated detection to automatically detect when speech has finished and stop the recognize operation
- *
- *  @param isEnabled true/false
- */
-- (void) setIsVADenabled:(bool) isEnabled {
-    
-    isVadEnabled = isEnabled;
 }
 
 
@@ -365,9 +344,6 @@ id opusRef;
             
             if (rc!=0) {
                 NSLog(@"startPlaying AudioQueueStart returned %d.", (int)rc);
-            } else {
-                if(isVadEnabled)
-                    _recordState.slot = VadProcessor_allocate(320,16000);//
             }
         }
     }
@@ -459,13 +435,6 @@ id opusRef;
     if (isCompressedSpeex)
         [self writeSpeexHeader];
     
-    
-}
-
-
--(void)didReceiveVadStopNotification:(NSNotification *)notification {
-    
-    [self endRecognize];
     
 }
 
@@ -579,22 +548,6 @@ void AudioInputStreamingCallback(
         status=-1;
     }
     
-    if(isVadEnabled){
-        VadProcessor_preprocessChunk(recordState->slot,(BYTE*)inBuffer->mAudioData,inBuffer->mAudioDataByteSize);
-        
-        if(VadProcessor_isPausing() == 1)
-        {
-            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_VAD_STOP_EVENT object:nil];
-            if(status == 0) {
-                recordState->currentPacket += inNumberPacketDescriptions;
-            }
-            
-            AudioQueueEnqueueBuffer(recordState->queue, inBuffer, 0, NULL);
-            
-            NSLog(@"VAD Stop!");
-            return;
-        }
-    }
     
     if(status == 0) {
         recordState->currentPacket += inNumberPacketDescriptions;

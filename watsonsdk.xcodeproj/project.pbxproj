@@ -52,8 +52,6 @@
 		C120396817562404008B0297 /* watsonSpeexdec.c in Sources */ = {isa = PBXBuildFile; fileRef = C120396717562404008B0297 /* watsonSpeexdec.c */; };
 		C1235355199B53FF009A8F8B /* OpusHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = C1235353199B53FF009A8F8B /* OpusHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C1235356199B53FF009A8F8B /* OpusHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C1235354199B53FF009A8F8B /* OpusHelper.m */; };
-		C12469841AC9FC8F0037DB5B /* libVADLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C12469831AC9FC8F0037DB5B /* libVADLib.a */; };
-		C1416C32194B48180009C49A /* VadProcessor.h in Headers */ = {isa = PBXBuildFile; fileRef = C1416C31194B48180009C49A /* VadProcessor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C1435CFA175775F400EA854D /* _kiss_fft_guts.h in Headers */ = {isa = PBXBuildFile; fileRef = C1435C78175775F400EA854D /* _kiss_fft_guts.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C1435CFB175775F400EA854D /* arch.h in Headers */ = {isa = PBXBuildFile; fileRef = C1435C79175775F400EA854D /* arch.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C1435CFC175775F400EA854D /* cb_search.h in Headers */ = {isa = PBXBuildFile; fileRef = C1435C7A175775F400EA854D /* cb_search.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -282,8 +280,6 @@
 		C1235353199B53FF009A8F8B /* OpusHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpusHelper.h; sourceTree = "<group>"; };
 		C1235354199B53FF009A8F8B /* OpusHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpusHelper.m; sourceTree = "<group>"; };
 		C123FF8719B9FE4100C6A702 /* UploaderDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UploaderDelegate.h; sourceTree = "<group>"; };
-		C12469831AC9FC8F0037DB5B /* libVADLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libVADLib.a; sourceTree = "<group>"; };
-		C1416C31194B48180009C49A /* VadProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VadProcessor.h; sourceTree = "<group>"; };
 		C1435C78175775F400EA854D /* _kiss_fft_guts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _kiss_fft_guts.h; sourceTree = "<group>"; };
 		C1435C79175775F400EA854D /* arch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = arch.h; sourceTree = "<group>"; };
 		C1435C7A175775F400EA854D /* cb_search.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cb_search.h; sourceTree = "<group>"; };
@@ -444,7 +440,6 @@
 				C1D4580419A78BDF00093095 /* Security.framework in Frameworks */,
 				C11772091AFD191D00C8791A /* libogg.a in Frameworks */,
 				C1B14B831AA0D3DD00864C53 /* libopus.a in Frameworks */,
-				C12469841AC9FC8F0037DB5B /* libVADLib.a in Frameworks */,
 				C1D4580319A78BD800093095 /* libicucore.dylib in Frameworks */,
 				C11A645F1754D0E600385896 /* Foundation.framework in Frameworks */,
 			);
@@ -532,7 +527,6 @@
 			isa = PBXGroup;
 			children = (
 				C11772101AFD193B00C8791A /* ogg */,
-				C1220B201AEE84A700EADD9B /* VAD */,
 				C1D457F719A760A300093095 /* socketrocket */,
 				C12352A519910606009A8F8B /* opus */,
 				C1416C33194B49520009C49A /* lib */,
@@ -617,14 +611,6 @@
 			name = util;
 			sourceTree = "<group>";
 		};
-		C1220B201AEE84A700EADD9B /* VAD */ = {
-			isa = PBXGroup;
-			children = (
-				C1416C31194B48180009C49A /* VadProcessor.h */,
-			);
-			name = VAD;
-			sourceTree = "<group>";
-		};
 		C12352A519910606009A8F8B /* opus */ = {
 			isa = PBXGroup;
 			children = (
@@ -644,7 +630,6 @@
 			isa = PBXGroup;
 			children = (
 				C11772081AFD191D00C8791A /* libogg.a */,
-				C12469831AC9FC8F0037DB5B /* libVADLib.a */,
 				C1B14B821AA0D3DC00864C53 /* libopus.a */,
 			);
 			path = lib;
@@ -957,7 +942,6 @@
 				C1D457F419A7609D00093095 /* SRWebSocket.h in Headers */,
 				C1D457F519A7609E00093095 /* SocketRocket-Prefix.pch in Headers */,
 				C1435D6D175775F500EA854D /* speexenc.h in Headers */,
-				C1416C32194B48180009C49A /* VadProcessor.h in Headers */,
 				C1C3743B1A8581A00083C69B /* WebSocketUploader.h in Headers */,
 				C1C3743F1A86C5DB0083C69B /* SpeechToText.h in Headers */,
 				C11B3E9F1AF3FF660062BF7D /* TTSConfiguration.h in Headers */,
