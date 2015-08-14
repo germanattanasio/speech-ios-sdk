@@ -18,7 +18,7 @@
 #import "AuthConfiguration.h"
 
 // URLS
-#define WATSONSDK_DEFAULT_TTS_API_ENDPOINT @"https://stream.watsonplatform.net/text-to-speech-beta/api"
+#define WATSONSDK_DEFAULT_TTS_API_ENDPOINT @"https://stream.watsonplatform.net/text-to-speech/api/"
 #define WATSONSDK_SERVICE_PATH_VOICES @"/v1/voices"
 #define WATSONSDK_SERVICE_PATH_SYNTHESIZE @"/v1/synthesize"
 
