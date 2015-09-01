@@ -58,9 +58,20 @@
     [confTTS setApiURL:@"https://stream.watsonplatform.net/text-to-speech/api/"];
 
     [confTTS setTokenGenerator:^(void (^tokenHandler)(NSString *token)){
-        // there are no public token based service
-        // this should return a valid token;
-    }];
+        NSURL *url = [[NSURL alloc] initWithString:@"http://text-to-speech-nodejs-tokenfactory.mybluemix.net/token"];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+        [request setHTTPMethod:@"GET"];
+        [request setURL:url];
+        
+        NSError *error = [[NSError alloc] init];
+        NSHTTPURLResponse *responseCode = nil;
+        NSData *oResponseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&responseCode error:&error];
+        if ([responseCode statusCode] != 200) {
+            NSLog(@"Error getting %@, HTTP status code %i", url, [responseCode statusCode]);
+            return;
+        }
+        tokenHandler([[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding]);
+    } ];
 
     self.tts = [TextToSpeech initWithConfig:confTTS];
     
