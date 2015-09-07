@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p0u-Gv-7so">
-                                <rect key="frame" x="9" y="297" width="302" height="4"/>
+                                <rect key="frame" x="9" y="305" width="302" height="4"/>
                                 <color key="backgroundColor" red="0.1960784314" green="0.36078431370000003" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DZc-Xd-MFx">
