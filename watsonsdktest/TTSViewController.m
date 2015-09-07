@@ -80,16 +80,6 @@
 
 - (IBAction)pressSpeak:(id)sender {
     
-    
-    // list voices call
-    [self.tts listVoices:^(NSDictionary* res, NSError* err){
-        
-        if(err == nil)
-            NSLog(@"%@",res);
-        else
-            self.ttsField.text =  [err localizedDescription];
-    }];
-    
     [self.tts synthesize:^(NSData *data, NSError *err) {
         
         // play audio and log when playgin has finished
