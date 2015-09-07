@@ -128,6 +128,11 @@
 
 #pragma mark language model selection
 
+// dismiss keyboard when the background is touched
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.ttsField endEditing:YES];
+}
+
 -(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer{
     // return
     return true;
