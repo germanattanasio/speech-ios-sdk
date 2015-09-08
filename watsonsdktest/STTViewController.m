@@ -30,8 +30,11 @@
     
     // STT setup
     STTConfiguration *conf = [[STTConfiguration alloc] init];
-    
-    [conf setApiURL:@"https://stream.watsonplatform.net/speech-to-text/api/"];
+    // Overriding default settings
+    [conf setAudioCodec:WATSONSDK_AUDIO_CODEC_TYPE_OPUS];
+    [conf setApiURL:@"https://stream-s.watsonplatform.net/speech-to-text/api/"];
+
+//    [conf setApiURL:@"https://stream.watsonplatform.net/speech-to-text/api/"];
     [conf setTokenGenerator:^(void (^tokenHandler)(NSString *token)){
         NSURL *url = [[NSURL alloc] initWithString:@"https://speech-to-text-demo.mybluemix.net/token"];
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
@@ -42,7 +45,7 @@
         NSHTTPURLResponse *responseCode = nil;
         NSData *oResponseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&responseCode error:&error];
         if ([responseCode statusCode] != 200) {
-            NSLog(@"Error getting %@, HTTP status code %i", url, [responseCode statusCode]);
+            NSLog(@"Error getting %@, HTTP status code %li", url, (long)[responseCode statusCode]);
             return;
         }
         tokenHandler([[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding]);
