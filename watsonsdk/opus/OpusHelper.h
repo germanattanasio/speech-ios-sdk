@@ -22,7 +22,7 @@
 @property (nonatomic,strong) dispatch_queue_t processingQueue;
 @property (nonatomic) NSUInteger bitrate;
 
-- (BOOL) createEncoder;
-- (NSData*) encode:(NSData*) pcmData;
+- (BOOL) createEncoder: (int) sampleRate;
+- (NSData*) encode:(NSData*) pcmData frameSize:(int) frameSize;
 - (NSData*) opusToPCM:(NSData*) oggopus;
 @end

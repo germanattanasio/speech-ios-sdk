@@ -15,8 +15,7 @@
  */
 
 #import <SpeechToText.h>
-#import "OpusHelper.h"
-#import "WebSocketUploader.h"
+#import "OggHelper.h"
 
 // type defs for block callbacks
 #define NUM_BUFFERS 3
@@ -39,6 +38,7 @@ typedef struct
 
 @property NSString* pathPCM;
 @property NSTimer *PeakPowerTimer;
+@property OggHelper *ogg;
 @property OpusHelper* opus;
 @property RecordingState recordState;
 @property WebSocketUploader* wsuploader;
@@ -51,24 +51,23 @@ typedef struct
 
 @synthesize recognizeCallback;
 @synthesize powerLevelCallback;
-
+@synthesize ogg = _ogg;
 
 
 // static for use by c code
 static BOOL isNewRecordingAllowed;
 static BOOL isCompressedOpus;
 static int audioRecordedLength;
-static int serialno;
+//static int serialno;
 static NSString* tmpPCM=nil;
-static long pageSeq;
-static bool isTempPathSet = false;
+//static long pageSeq;
+//static bool isTempPathSet = false;
 
 
 id uploaderRef;
 id delegateRef;
 id opusRef;
-
-
+id oggRef;
 
 
 #pragma mark public methods
@@ -94,18 +93,21 @@ id opusRef;
  *  @return SpeechToText
  */
 - (id)initWithConfig:(STTConfiguration *)config {
-    
     self.config = config;
-    
     // set audio encoding flags so they are accessible in c audio callbacks
-    isCompressedOpus = [config.audioCodec isEqualToString:WATSONSDK_AUDIO_CODEC_TYPE_OPUS] ? YES:NO;
+    isCompressedOpus = [config.audioCodec isEqualToString:WATSONSDK_AUDIO_CODEC_TYPE_OPUS] ? YES : NO;
     isNewRecordingAllowed=YES;
     
+    // Adding Ogg instance
+    // setup ogg helper
+    self.ogg = [[OggHelper alloc] init];
+    oggRef = self->_ogg;
+
     // setup opus helper
     self.opus = [[OpusHelper alloc] init];
-    [self.opus createEncoder];
+    [self.opus createEncoder: WATSONSDK_AUDIO_SAMPLE_RATE];
     opusRef = self->_opus;
-    
+
     return self;
 }
 
@@ -229,7 +231,7 @@ id opusRef;
         }
     }
     
-    return nil;
+    return NO;
 }
 
 /**
@@ -418,6 +420,12 @@ id opusRef;
         [self.config requestToken:^(AuthConfiguration *config) {
             [self.wsuploader connect:(STTConfiguration*)config headers:[config createRequestHeaders]];
         }];
+
+        // Adding Ogg Header
+        if(isCompressedOpus){
+            // Indicate sample rate
+            [self.wsuploader writeData:[[self ogg] getOggOpusHeader:WATSONSDK_AUDIO_SAMPLE_RATE]];
+        }
     }
     
     
@@ -433,8 +441,7 @@ id opusRef;
 
 - (void)setupAudioFormat:(AudioStreamBasicDescription*)format
 {
-    
-    format->mSampleRate = 16000.0;
+    format->mSampleRate = WATSONSDK_AUDIO_SAMPLE_RATE;
     format->mFormatID = kAudioFormatLinearPCM;
     format->mFramesPerPacket = 1;
     format->mChannelsPerFrame = 1;
@@ -457,7 +464,7 @@ void sendAudioOpusEncoded(NSData *data)
     if (data!=nil && [data length]!=0) {
         
         NSUInteger length = [data length];
-        NSUInteger chunkSize = 160 * 2; // Frame Size * 2
+        NSUInteger chunkSize = WATSONSDK_AUDIO_FRAME_SIZE * 2;
         NSUInteger offset = 0;
         
         do {
@@ -467,11 +474,15 @@ void sendAudioOpusEncoded(NSData *data)
                                            freeWhenDone:NO];
             
             // opus encode block
-            NSData *compressed = [opusRef encode:chunk];
-            
-            if(compressed !=nil)
-                [uploaderRef writeData:compressed];
-            
+            NSData *compressed = [opusRef encode:chunk frameSize:WATSONSDK_AUDIO_FRAME_SIZE];
+
+            if(compressed != nil){
+                NSMutableData *newData = [oggRef writePacket:compressed frameSize:WATSONSDK_AUDIO_FRAME_SIZE];
+                if(newData != nil){
+                    [uploaderRef writeData:newData];
+                }
+            }
+
             offset += thisChunkSize;
         } while (offset < length);
     }

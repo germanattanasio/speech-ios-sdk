@@ -24,13 +24,14 @@
 #define WATSONSDK_SERVICE_PATH_RECOGNIZE @"/recognize"
 #define WEBSOCKETS_SCHEME @"wss://"
 
-
 // codecs
 #define WATSONSDK_AUDIO_CODEC_TYPE_PCM @"audio/l16; rate=16000"
 #define WATSONSDK_AUDIO_CODEC_TYPE_OPUS @"audio/ogg; codecs=opus; rate=16000"
+#define WATSONSDK_AUDIO_FRAME_SIZE 160
+#define WATSONSDK_AUDIO_SAMPLE_RATE 16000.0
 
 // models
-#define WATSONSDK_DEFAULT_STT_MODEL @"WatsonModel"
+#define WATSONSDK_DEFAULT_STT_MODEL @"en-US_BroadbandModel"
 
 @interface STTConfiguration : AuthConfiguration
 

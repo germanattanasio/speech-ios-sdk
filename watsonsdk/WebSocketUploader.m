@@ -61,6 +61,7 @@ typedef void (^RecognizeCallbackBlockType)(NSDictionary*, NSError*);
     self.webSocket = [[SRWebSocket alloc] initWithURLRequest:req];
     self.webSocket.delegate = self;
     [self.webSocket open];
+    self.audioBuffer = [[NSMutableData alloc] initWithCapacity:0];
 }
 
 - (BOOL) isWebSocketConnected {
@@ -106,24 +107,21 @@ typedef void (^RecognizeCallbackBlockType)(NSDictionary*, NSError*);
 }
 
 - (void) writeData:(NSData*) data {
-    
     if(self.isConnected && self.isReadyForAudio) {
         
         // if we had previously buffered audio because we were not connected, send it now
         if([self.audioBuffer length] > 0) {
-            
             NSLog(@"sending buffered audio");
             [self.webSocket send:self.audioBuffer];
             
             //reset buffer
             [self.audioBuffer setData:[NSData dataWithBytes:NULL length:0]];
         }
-        
         [self.webSocket send:data];
     } else {
         // we need to buffer this data and send it when we connect
         NSLog(@"WebSocketUploader - data written but we're not connected yet");
-        
+
         [self.audioBuffer appendData:data];
     }
     
@@ -139,9 +137,8 @@ typedef void (^RecognizeCallbackBlockType)(NSDictionary*, NSError*);
     [self.webSocket send:[self buildQueryJson]];
 }
 
-- (NSString *) buildQueryJson {
-    
-    
+- (NSString *) buildQueryJson
+{
     NSString *json = [NSString stringWithFormat:@"{\"action\":\"start\",\"content-type\":\"%@\",\"interim_results\":true,\"continuous\": true}",self.conf.audioCodec];
     return json;
 }
@@ -161,8 +158,6 @@ typedef void (^RecognizeCallbackBlockType)(NSDictionary*, NSError*);
         // call the recognize handler block in the clients code
         self.recognizeCallback(nil,error);
     }
-    
-    
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)json;

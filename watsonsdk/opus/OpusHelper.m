@@ -57,7 +57,14 @@
     });
 }
 
-- (BOOL) createEncoder {
+/**
+ *  Create Opus encoder
+ *
+ *  @param sampleRate Audio sample rate
+ *
+ *  @return BOOL
+ */
+- (BOOL) createEncoder: (int) sampleRate {
     if (self.encoder) {
         return YES;
     }
@@ -66,7 +73,7 @@
     // sample rates are 8000,12000,16000,24000,48000
     // number of channels 1 or 2 mono stereo
     // app type choices OPUS_APPLICATION_VOIP,OPUS_APPLICATION_AUDIO,OPUS_APPLICATION_RESTRICTED_LOWDELAY
-    self.encoder = opus_encoder_create(16000, 1, OPUS_APPLICATION_VOIP, &opusError);
+    self.encoder = opus_encoder_create(sampleRate, 1, OPUS_APPLICATION_VOIP, &opusError);
     if (opusError != OPUS_OK) {
         NSLog(@"Error setting up opus encoder, error code is %@",[self opusErrorMessage:opusError]);
         return NO;
@@ -100,31 +107,32 @@
     }
 }
 
-- (NSData*) encode:(NSData*) pcmData {
-    NSInteger frameSize = 160;
+/**
+ *  Opus data encoding
+ *
+ *  @param pcmData   PCM data
+ *  @param frameSize Frame size
+ *
+ *  @return NSMutableData
+ */
+- (NSData*) encode:(NSData*) pcmData frameSize:(int) frameSize{
     
     opus_int16 *data  = (opus_int16*) [pcmData bytes];
     uint8_t *outBuffer  = malloc(pcmData.length * sizeof(uint8_t));
     
     // The length of the encoded packet
-    opus_int32 encodedByteCount = opus_encode(_encoder, data, frameSize, outBuffer, pcmData.length);
+    opus_int32 encodedByteCount = opus_encode(_encoder, data, frameSize, outBuffer, (opus_int32)pcmData.length);
     
     if (encodedByteCount < 0) {
         NSLog(@"encoding error %@",[self opusErrorMessage:encodedByteCount]);
         return nil;
     }
-    
-    // Size data
-    NSData *sizeData = [NSData dataWithBytes: &encodedByteCount length: 1];
-    
+
     // Opus data initialized with size in the first byte
-    NSMutableData *outputData = [[NSMutableData alloc] initWithCapacity:320];
-    [outputData appendBytes:[sizeData bytes] length:[sizeData length]];
-    
+    NSMutableData *outputData = [[NSMutableData alloc] initWithCapacity:frameSize*2];
     // Append Opus data
     [outputData appendData:[NSData dataWithBytes:outBuffer length:encodedByteCount]];
-    
-    
+
     return outputData;
 }
 

@@ -25,11 +25,13 @@
 /* Begin PBXBuildFile section */
 		7EFE11E41B71D07D00EF10BF /* AuthConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EFE11E21B71D07D00EF10BF /* AuthConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7EFE11E51B71D07D00EF10BF /* AuthConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFE11E31B71D07D00EF10BF /* AuthConfiguration.m */; };
+		9BA475891B9D34AA00D66F1E /* OggHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA475871B9D34AA00D66F1E /* OggHelper.h */; };
+		9BA4758A1B9D34AA00D66F1E /* OggHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA475881B9D34AA00D66F1E /* OggHelper.m */; };
+		9BA4758E1B9D354E00D66F1E /* config_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA4758B1B9D354E00D66F1E /* config_types.h */; };
+		9BA4758F1B9D354E00D66F1E /* ogg.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA4758C1B9D354E00D66F1E /* ogg.h */; };
+		9BA475901B9D354E00D66F1E /* os_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA4758D1B9D354E00D66F1E /* os_types.h */; };
 		C11712E31A03DC2E00957080 /* UploaderDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = C123FF8719B9FE4100C6A702 /* UploaderDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C11772091AFD191D00C8791A /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C11772081AFD191D00C8791A /* libogg.a */; };
-		C117720D1AFD193600C8791A /* config_types.h in Headers */ = {isa = PBXBuildFile; fileRef = C117720A1AFD193600C8791A /* config_types.h */; };
-		C117720E1AFD193600C8791A /* ogg.h in Headers */ = {isa = PBXBuildFile; fileRef = C117720B1AFD193600C8791A /* ogg.h */; };
-		C117720F1AFD193600C8791A /* os_types.h in Headers */ = {isa = PBXBuildFile; fileRef = C117720C1AFD193600C8791A /* os_types.h */; };
 		C11772141B029BEE00C8791A /* opus_header.h in Headers */ = {isa = PBXBuildFile; fileRef = C11772131B029BEE00C8791A /* opus_header.h */; };
 		C117721E1B02A15000C8791A /* opus_header.c in Sources */ = {isa = PBXBuildFile; fileRef = C117721D1B02A15000C8791A /* opus_header.c */; };
 		C11A645F1754D0E600385896 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C11A645E1754D0E600385896 /* Foundation.framework */; };
@@ -112,10 +114,12 @@
 /* Begin PBXFileReference section */
 		7EFE11E21B71D07D00EF10BF /* AuthConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthConfiguration.h; sourceTree = "<group>"; };
 		7EFE11E31B71D07D00EF10BF /* AuthConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthConfiguration.m; sourceTree = "<group>"; };
+		9BA475871B9D34AA00D66F1E /* OggHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OggHelper.h; path = ogg/OggHelper.h; sourceTree = "<group>"; };
+		9BA475881B9D34AA00D66F1E /* OggHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OggHelper.m; path = ogg/OggHelper.m; sourceTree = "<group>"; };
+		9BA4758B1B9D354E00D66F1E /* config_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = config_types.h; path = ogg/config_types.h; sourceTree = "<group>"; };
+		9BA4758C1B9D354E00D66F1E /* ogg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ogg.h; path = ogg/ogg.h; sourceTree = "<group>"; };
+		9BA4758D1B9D354E00D66F1E /* os_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = os_types.h; path = ogg/os_types.h; sourceTree = "<group>"; };
 		C11772081AFD191D00C8791A /* libogg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libogg.a; sourceTree = "<group>"; };
-		C117720A1AFD193600C8791A /* config_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config_types.h; sourceTree = "<group>"; };
-		C117720B1AFD193600C8791A /* ogg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ogg.h; sourceTree = "<group>"; };
-		C117720C1AFD193600C8791A /* os_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = os_types.h; sourceTree = "<group>"; };
 		C11772131B029BEE00C8791A /* opus_header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opus_header.h; sourceTree = "<group>"; };
 		C117721D1B02A15000C8791A /* opus_header.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = opus_header.c; sourceTree = "<group>"; };
 		C11A645B1754D0E600385896 /* libwatsonsdk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libwatsonsdk.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -218,9 +222,11 @@
 		C11772101AFD193B00C8791A /* ogg */ = {
 			isa = PBXGroup;
 			children = (
-				C117720A1AFD193600C8791A /* config_types.h */,
-				C117720B1AFD193600C8791A /* ogg.h */,
-				C117720C1AFD193600C8791A /* os_types.h */,
+				9BA4758B1B9D354E00D66F1E /* config_types.h */,
+				9BA4758C1B9D354E00D66F1E /* ogg.h */,
+				9BA4758D1B9D354E00D66F1E /* os_types.h */,
+				9BA475871B9D34AA00D66F1E /* OggHelper.h */,
+				9BA475881B9D34AA00D66F1E /* OggHelper.m */,
 			);
 			name = ogg;
 			sourceTree = "<group>";
@@ -394,20 +400,21 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C117720D1AFD193600C8791A /* config_types.h in Headers */,
-				C117720F1AFD193600C8791A /* os_types.h in Headers */,
-				C117720E1AFD193600C8791A /* ogg.h in Headers */,
 				C11772141B029BEE00C8791A /* opus_header.h in Headers */,
 				C1235355199B53FF009A8F8B /* OpusHelper.h in Headers */,
 				C1D457F419A7609D00093095 /* SRWebSocket.h in Headers */,
 				C1D457F519A7609E00093095 /* SocketRocket-Prefix.pch in Headers */,
+				9BA475891B9D34AA00D66F1E /* OggHelper.h in Headers */,
 				C1C3743B1A8581A00083C69B /* WebSocketUploader.h in Headers */,
 				7EFE11E41B71D07D00EF10BF /* AuthConfiguration.h in Headers */,
+				9BA475901B9D354E00D66F1E /* os_types.h in Headers */,
 				C1C3743F1A86C5DB0083C69B /* SpeechToText.h in Headers */,
+				9BA4758F1B9D354E00D66F1E /* ogg.h in Headers */,
 				C11B3E9F1AF3FF660062BF7D /* TTSConfiguration.h in Headers */,
 				C11B3E9B1AF3FEC90062BF7D /* TextToSpeech.h in Headers */,
 				C11B3E931AF398C80062BF7D /* STTConfiguration.h in Headers */,
 				C11712E31A03DC2E00957080 /* UploaderDelegate.h in Headers */,
+				9BA4758E1B9D354E00D66F1E /* config_types.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -563,6 +570,7 @@
 				C1C374401A86C5DB0083C69B /* SpeechToText.m in Sources */,
 				C11B3E941AF398C80062BF7D /* STTConfiguration.m in Sources */,
 				C11B3EA01AF3FF660062BF7D /* TTSConfiguration.m in Sources */,
+				9BA4758A1B9D34AA00D66F1E /* OggHelper.m in Sources */,
 				C1235356199B53FF009A8F8B /* OpusHelper.m in Sources */,
 				C11B3E9C1AF3FEC90062BF7D /* TextToSpeech.m in Sources */,
 			);

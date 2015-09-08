@@ -18,6 +18,8 @@
 #import <AudioToolbox/AudioQueue.h>
 #import <AudioToolbox/AudioFile.h>
 #import "STTConfiguration.h"
+#import "OpusHelper.h"
+#import "WebSocketUploader.h"
 
 @interface SpeechToText : NSObject <NSURLSessionDelegate>
 
@@ -66,7 +68,7 @@
  *
  *  @param isEnabled true/false
  */
-- (void) setIsVADenabled:(bool) isEnabled;
+//- (void) setIsVADenabled:(bool) isEnabled;
 
 
 /**
