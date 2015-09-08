@@ -56,9 +56,10 @@
 		C16542AB191A0D8500905DCC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C16542AA191A0D8500905DCC /* AppDelegate.m */; };
 		C16542AE191A0D8500905DCC /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C16542AC191A0D8500905DCC /* Main_iPhone.storyboard */; };
 		C16542B1191A0D8500905DCC /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C16542AF191A0D8500905DCC /* Main_iPad.storyboard */; };
-		C16542B4191A0D8500905DCC /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C16542B3191A0D8500905DCC /* FirstViewController.m */; };
+		C16542B4191A0D8500905DCC /* STTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C16542B3191A0D8500905DCC /* STTViewController.m */; };
 		C16542B6191A0D8500905DCC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C16542B5191A0D8500905DCC /* Images.xcassets */; };
 		C16542D4191A0FA100905DCC /* libwatsonsdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C11A645B1754D0E600385896 /* libwatsonsdk.a */; };
+		C17779641B9DBFAA0066269A /* TTSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C17779631B9DBFAA0066269A /* TTSViewController.m */; };
 		C1B14B831AA0D3DD00864C53 /* libopus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C1B14B821AA0D3DC00864C53 /* libopus.a */; };
 		C1C3743B1A8581A00083C69B /* WebSocketUploader.h in Headers */ = {isa = PBXBuildFile; fileRef = C1C374391A8581A00083C69B /* WebSocketUploader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C1C3743C1A8581A00083C69B /* WebSocketUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = C1C3743A1A8581A00083C69B /* WebSocketUploader.m */; };
@@ -162,10 +163,12 @@
 		C16542AA191A0D8500905DCC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		C16542AD191A0D8500905DCC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		C16542B0191A0D8500905DCC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		C16542B2191A0D8500905DCC /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
-		C16542B3191A0D8500905DCC /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
+		C16542B2191A0D8500905DCC /* STTViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STTViewController.h; sourceTree = "<group>"; };
+		C16542B3191A0D8500905DCC /* STTViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STTViewController.m; sourceTree = "<group>"; };
 		C16542B5191A0D8500905DCC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		C16542BC191A0D8500905DCC /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		C17779621B9DBFAA0066269A /* TTSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTSViewController.h; sourceTree = "<group>"; };
+		C17779631B9DBFAA0066269A /* TTSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTSViewController.m; sourceTree = "<group>"; };
 		C1B14B821AA0D3DC00864C53 /* libopus.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libopus.a; sourceTree = "<group>"; };
 		C1C374391A8581A00083C69B /* WebSocketUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebSocketUploader.h; sourceTree = "<group>"; };
 		C1C3743A1A8581A00083C69B /* WebSocketUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebSocketUploader.m; sourceTree = "<group>"; };
@@ -364,8 +367,10 @@
 				C16542AA191A0D8500905DCC /* AppDelegate.m */,
 				C16542AC191A0D8500905DCC /* Main_iPhone.storyboard */,
 				C16542AF191A0D8500905DCC /* Main_iPad.storyboard */,
-				C16542B2191A0D8500905DCC /* FirstViewController.h */,
-				C16542B3191A0D8500905DCC /* FirstViewController.m */,
+				C16542B2191A0D8500905DCC /* STTViewController.h */,
+				C16542B3191A0D8500905DCC /* STTViewController.m */,
+				C17779621B9DBFAA0066269A /* TTSViewController.h */,
+				C17779631B9DBFAA0066269A /* TTSViewController.m */,
 				C16542B5191A0D8500905DCC /* Images.xcassets */,
 				C16542A1191A0D8500905DCC /* Supporting Files */,
 			);
@@ -587,7 +592,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C16542B4191A0D8500905DCC /* FirstViewController.m in Sources */,
+				C17779641B9DBFAA0066269A /* TTSViewController.m in Sources */,
+				C16542B4191A0D8500905DCC /* STTViewController.m in Sources */,
 				C16542AB191A0D8500905DCC /* AppDelegate.m in Sources */,
 				C16542A7191A0D8500905DCC /* main.m in Sources */,
 			);

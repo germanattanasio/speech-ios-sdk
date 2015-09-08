@@ -1,5 +1,5 @@
 //
-//  FirstViewController.h
+//  STTViewController.h
 //  watsonSDKsample
 //
 //  Created by Rob Smart on 30/05/2013.
@@ -9,17 +9,12 @@
 #import <UIKit/UIKit.h>
 #import <watsonsdk/SpeechToText.h>
 #import <watsonsdk/STTConfiguration.h>
-#import <watsonsdk/TextToSpeech.h>
-#import <watsonsdk/TTSConfiguration.h>
 
-@interface FirstViewController : UIViewController<UITextFieldDelegate>
+@interface STTViewController : UIViewController<UITextFieldDelegate,UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property SpeechToText *stt;
-@property TextToSpeech *tts;
 @property IBOutlet UILabel *result;
-@property IBOutlet UITextField *ttsField;
 @property IBOutlet UIView *soundbar;
-
 -(IBAction) pressStartRecord:(id) sender;
 
 
