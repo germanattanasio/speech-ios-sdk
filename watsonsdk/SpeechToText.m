@@ -97,11 +97,6 @@ id oggRef;
     // set audio encoding flags so they are accessible in c audio callbacks
     isCompressedOpus = [config.audioCodec isEqualToString:WATSONSDK_AUDIO_CODEC_TYPE_OPUS] ? YES : NO;
     isNewRecordingAllowed=YES;
-    
-    // Adding Ogg instance
-    // setup ogg helper
-    self.ogg = [[OggHelper alloc] init];
-    oggRef = self->_ogg;
 
     // setup opus helper
     self.opus = [[OpusHelper alloc] init];
@@ -420,14 +415,17 @@ id oggRef;
         [self.config requestToken:^(AuthConfiguration *config) {
             [self.wsuploader connect:(STTConfiguration*)config headers:[config createRequestHeaders]];
         }];
-
-        // Adding Ogg Header
-        if(isCompressedOpus){
-            // Indicate sample rate
-            [self.wsuploader writeData:[[self ogg] getOggOpusHeader:WATSONSDK_AUDIO_SAMPLE_RATE]];
-        }
     }
     
+    // Adding Ogg Header
+    if(isCompressedOpus){
+        // Adding Ogg instance
+        // setup ogg helper
+        self.ogg = [[OggHelper alloc] init];
+        oggRef = self->_ogg;
+        // Indicate sample rate
+        [self.wsuploader writeData:[[self ogg] getOggOpusHeader:WATSONSDK_AUDIO_SAMPLE_RATE]];
+    }
     
     // set a pointer to the wsuploader class so it is accessible in the c callback
     uploaderRef = self.wsuploader;
