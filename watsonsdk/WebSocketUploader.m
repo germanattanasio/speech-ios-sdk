@@ -201,9 +201,29 @@ typedef void (^RecognizeCallbackBlockType)(NSDictionary*, NSError*);
             }
         }
         
+       
+        //"error": "Unable to transcode from audio/ogg; codecs=opus; rate=16000 to audio/x-float-array; rate=16000; channels=1"
+    
+        
         
         if([results objectForKey:@"results"] != nil) {
             self.recognizeCallback(results,nil);
+        }
+        
+        if([results objectForKey:@"error"] != nil) {
+            NSString *errorStr = [results objectForKey:@"error"];
+            
+            NSDictionary *userInfo = @{
+                                       NSLocalizedDescriptionKey: errorStr,
+                                       NSLocalizedFailureReasonErrorKey: errorStr,
+                                       NSLocalizedRecoverySuggestionErrorKey: @""
+                                       };
+            NSError *error = [NSError errorWithDomain:@"WatsonSpeechSDK"
+                                                 code:500
+                                             userInfo:userInfo];
+            
+            self.recognizeCallback(nil,error);
+            [self disconnect];
         }
         
         
