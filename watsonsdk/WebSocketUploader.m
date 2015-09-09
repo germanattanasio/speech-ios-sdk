@@ -207,7 +207,13 @@ typedef void (^RecognizeCallbackBlockType)(NSDictionary*, NSError*);
         
         
         if([results objectForKey:@"results"] != nil) {
-            self.recognizeCallback(results,nil);
+            
+            NSArray *resultsArr = [results objectForKey:@"results"];
+            
+            if([resultsArr count] > 0) {
+                self.recognizeCallback(results,nil);
+
+            }
         }
         
         if([results objectForKey:@"error"] != nil) {
