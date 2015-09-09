@@ -30,11 +30,11 @@
     
     // STT setup
     STTConfiguration *conf = [[STTConfiguration alloc] init];
-    // Overriding default settings
-    [conf setAudioCodec:WATSONSDK_AUDIO_CODEC_TYPE_OPUS];
-    [conf setApiURL:@"https://stream-s.watsonplatform.net/speech-to-text/api/"];
+    
+    // Use opus compression, better for mobile devices.
+    //[conf setAudioCodec:WATSONSDK_AUDIO_CODEC_TYPE_OPUS];
+    //[conf setApiURL:@"https://stream-s.watsonplatform.net/speech-to-text/api/"];
 
-//    [conf setApiURL:@"https://stream.watsonplatform.net/speech-to-text/api/"];
     [conf setTokenGenerator:^(void (^tokenHandler)(NSString *token)){
         NSURL *url = [[NSURL alloc] initWithString:@"https://speech-to-text-demo.mybluemix.net/token"];
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
@@ -99,8 +99,11 @@
             }
             
             result.text = [stt getTranscript:res];
+            
+            
         } else {
-            result.text = [err localizedDescription];
+            NSLog(@"received error from the SDK %@",[err localizedDescription]);
+            [stt endRecognize];
         }
     }];
     
