@@ -24,5 +24,5 @@
 
 - (BOOL) createEncoder: (int) sampleRate;
 - (NSData*) encode:(NSData*) pcmData frameSize:(int) frameSize;
-- (NSData*) opusToPCM:(NSData*) oggopus;
+- (NSData*) opusToPCM:(NSData*) oggOpus sampleRate:(long) sampleRate;
 @end

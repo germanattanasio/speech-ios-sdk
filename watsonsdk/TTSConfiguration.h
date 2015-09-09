@@ -24,10 +24,14 @@
 
 // codecs
 #define WATSONSDK_TTS_AUDIO_CODEC_TYPE_OPUS @"audio/opus"//; codecs=opus"
+#define WATSONSDK_TTS_AUDIO_CODEC_TYPE_OPUS_SAMPLE_RATE 48000   // zero means default or decoder detected sample rate
+
 #define WATSONSDK_TTS_AUDIO_CODEC_TYPE_WAV @"audio/wav"
+#define WATSONSDK_TTS_AUDIO_CODEC_TYPE_WAV_SAMPLE_RATE 22050    // zero means default sample rate: 48000
 
 // voices
 #define WATSONSDK_DEFAULT_TTS_VOICE @"VoiceEnUsMichael"
+
 
 @interface TTSConfiguration : AuthConfiguration
 

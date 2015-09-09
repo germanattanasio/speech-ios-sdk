@@ -23,13 +23,14 @@ typedef void (^PlayAudioCallbackBlockType)(NSError*);
 @property  (strong, nonatomic) AVAudioPlayer *audioPlayer;
 @property OpusHelper* opus;
 @property (nonatomic,copy) PlayAudioCallbackBlockType playAudioCallback;
-
+@property (assign, nonatomic) long sampleRate;
 @end
 
 
 @implementation TextToSpeech
 @synthesize audioPlayer;
 @synthesize playAudioCallback;
+@synthesize sampleRate;
 
 /**
  *  Static method to return a SpeechToText object given the service url
@@ -41,6 +42,7 @@ typedef void (^PlayAudioCallbackBlockType)(NSError*);
 +(id)initWithConfig:(TTSConfiguration *)config {
     
     TextToSpeech *watson = [[self alloc] initWithConfig:config] ;
+    watson.sampleRate = 0;
     return watson;
 }
 
@@ -54,6 +56,7 @@ typedef void (^PlayAudioCallbackBlockType)(NSError*);
 - (id)initWithConfig:(TTSConfiguration *)config {
     
     self.config = config;
+    self.sampleRate = 0;
     // setup opus helper
     self.opus = [[OpusHelper alloc] init];
     
@@ -129,28 +132,36 @@ typedef void (^PlayAudioCallbackBlockType)(NSError*);
     }];
 }
 
+/**
+ *  Play audio data
+ *
+ *  @param audioHandler Audio handler
+ *  @param audio        Audio data
+ */
 - (void) playAudio:(void (^)(NSError*)) audioHandler  withData:(NSData *) audio {
     
     self.playAudioCallback = audioHandler;
     
     if([self.config.audioCodec isEqualToString:WATSONSDK_TTS_AUDIO_CODEC_TYPE_WAV]){
-        
         NSError * err;
         
+        self.sampleRate = WATSONSDK_TTS_AUDIO_CODEC_TYPE_WAV_SAMPLE_RATE;
+
         audio = [self stripAndAddWavHeader:audio];
         self.audioPlayer = [[AVAudioPlayer alloc] initWithData:audio error:&err];
-        
+
         if (!self.audioPlayer)
             self.playAudioCallback(err);
         else
             [self.audioPlayer play];
           
     } else if ([self.config.audioCodec isEqualToString:WATSONSDK_TTS_AUDIO_CODEC_TYPE_OPUS]) {
-        
         NSError * err;
-        
+
+        self.sampleRate = WATSONSDK_TTS_AUDIO_CODEC_TYPE_OPUS_SAMPLE_RATE;
+
         // convert audio to PCM and add wav header
-        audio = [self.opus opusToPCM:audio];
+        audio = [self.opus opusToPCM:audio sampleRate:self.sampleRate];
         audio = [self addWavHeader:audio];
         
         self.audioPlayer = [[AVAudioPlayer alloc] initWithData:audio fileTypeHint:AVFileTypeWAVE error:&err];
@@ -162,8 +173,6 @@ typedef void (^PlayAudioCallbackBlockType)(NSError*);
     }
     
 }
-
-
 
 - (void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player
                                  error:(NSError *)error {
@@ -181,7 +190,7 @@ typedef void (^PlayAudioCallbackBlockType)(NSError*);
     int headerSize = 44;
     long totalAudioLen = [wavNoheader length];
     long totalDataLen = [wavNoheader length] + headerSize-8;
-    long longSampleRate = 48000;
+    long longSampleRate = (self.sampleRate == 0 ? 48000 : self.sampleRate);
     int channels = 1;
     long byteRate = 16 * 11025 * channels/8;
     

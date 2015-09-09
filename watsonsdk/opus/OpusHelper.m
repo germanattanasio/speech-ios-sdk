@@ -143,9 +143,9 @@
  *
  *  @return NSData = raw PCM
  */
-- (NSData*) opusToPCM:(NSData*) oggOpus {
+- (NSData*) opusToPCM:(NSData*) oggOpus sampleRate:(long) sampleRate{
     
-    return [self decodeOggOpus:oggOpus];
+    return [self decodeOggOpus:oggOpus sampleRate:sampleRate];
     
 }
 
@@ -156,7 +156,7 @@
  *
  *  @return NSData - contains PCM audio
  */
-- (NSData*) decodeOggOpus:(NSData*) oggopus {
+- (NSData*) decodeOggOpus:(NSData*) oggopus sampleRate:(long) sampleRate{
     
     NSMutableData *pcmOut = [[NSMutableData alloc] init];
     
@@ -175,7 +175,7 @@
     int eos=0;
     int channels=-1;
     int mapping_family;
-    int rate=0;
+    int rate=(int)sampleRate;
     int wav_format=0;
     int preskip=0;
     int gran_offset=0;
@@ -190,15 +190,15 @@
     float gain=1;
     float *output=0;
     
-    
     ogg_sync_init(&oy);
     
     int processedByteCount = 0;
+    int opusLength = [[NSNumber numberWithLong:[oggopus length]] intValue];
     
-    while (processedByteCount < [oggopus length])
+    while (processedByteCount < opusLength)
     {
-        uint8_t *data;
-        int buffersize = (200 < [oggopus length] - processedByteCount) ? 200 : [oggopus length] - processedByteCount;
+        char *data;
+        int buffersize = (200 < opusLength - processedByteCount) ? 200 : opusLength - processedByteCount;
         data = ogg_sync_buffer(&oy, buffersize);
         
         NSRange range = {processedByteCount, buffersize};
@@ -328,6 +328,7 @@
         
     }
     
+    if(!total_links)fprintf (stderr, "This doesn't look like a Opus file\n");
     opus_multistream_decoder_destroy(st);
     if (stream_init)
         ogg_stream_clear(&os);
@@ -364,6 +365,7 @@ static OpusMSDecoder *process_header(ogg_packet *op, opus_int32 *rate,
     *mapping_family = header.channel_mapping;
     *channels = header.channels;
     
+
     if(!*rate)*rate=header.input_sample_rate;
     /*If the rate is unspecified we decode to 48000*/
     if(*rate==0)*rate=48000;
@@ -371,7 +373,10 @@ static OpusMSDecoder *process_header(ogg_packet *op, opus_int32 *rate,
         fprintf(stderr,"Warning: Crazy input_rate %d, decoding to 48000 instead.\n",*rate);
         *rate=48000;
     }
-    
+
+    if(header.input_sample_rate != *rate)
+        fprintf(stderr, "\n\n\n*** Sample rate detected: %d, using: %d ***\n\n\n", header.input_sample_rate, *rate);
+
     *preskip = header.preskip;
     st = opus_multistream_decoder_create(48000, header.channels, header.nb_streams, header.nb_coupled, header.stream_map, &err);
     if(err != OPUS_OK){
@@ -390,6 +395,7 @@ static OpusMSDecoder *process_header(ogg_packet *op, opus_int32 *rate,
             *channels, *channels>1?"s":"");
     if(header.version!=1)fprintf(stderr, ", Header v%d",header.version);
     fprintf(stderr, "\n");
+
     if (header.gain!=0)fprintf(stderr,"Playback gain: %f dB\n", header.gain/256.);
     if (manual_gain!=0)fprintf(stderr,"Manual gain: %f dB\n", manual_gain);
     
