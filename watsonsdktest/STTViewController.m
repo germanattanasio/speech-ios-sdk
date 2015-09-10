@@ -41,7 +41,6 @@
     
     // Use opus compression, better for mobile devices.
     //[conf setAudioCodec:WATSONSDK_AUDIO_CODEC_TYPE_OPUS];
-    //[conf setApiURL:@"https://stream-s.watsonplatform.net/speech-to-text/api/"];
 
     [conf setTokenGenerator:^(void (^tokenHandler)(NSString *token)){
         NSURL *url = [[NSURL alloc] initWithString:@"https://speech-to-text-demo.mybluemix.net/token"];

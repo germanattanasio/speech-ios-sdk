@@ -38,12 +38,12 @@
  */
 - (void)setApiURL:(NSString *)apiURLStr {
     
-    _apiURL = apiURLStr;
+    self.apiURL = apiURLStr;
     [self setApiEndpoint:[NSURL URLWithString:apiURLStr]];
 }
 
 - (NSString*) apiURL {
-    return _apiURL;
+    return self.apiURL;
 }
 
 
@@ -51,14 +51,14 @@
 
 - (NSURL*) getModelsServiceURL {
     
-    NSString *uriStr = [NSString stringWithFormat:@"%@%@",self.apiURL,WATSONSDK_SERVICE_PATH_MODELS];
+    NSString *uriStr = [NSString stringWithFormat:@"%@://%@%@%@",self.apiEndpoint.scheme,self.apiEndpoint.host,self.apiEndpoint.path,WATSONSDK_SERVICE_PATH_MODELS];
     NSURL * url = [NSURL URLWithString:uriStr];
     return url;
 }
 
 - (NSURL*) getModelServiceURL:(NSString*) modelName {
     
-    NSString *uriStr = [NSString stringWithFormat:@"%@%@/%@",self.apiURL,WATSONSDK_SERVICE_PATH_MODELS,modelName];
+    NSString *uriStr = [NSString stringWithFormat:@"%@://%@%@%@/%@",self.apiEndpoint.scheme,self.apiEndpoint.host,self.apiEndpoint.path,WATSONSDK_SERVICE_PATH_MODELS,modelName];
     NSURL * url = [NSURL URLWithString:uriStr];
     return url;
 }

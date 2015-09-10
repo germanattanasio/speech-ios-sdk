@@ -43,7 +43,7 @@
     [confTTS setApiURL:@"https://stream.watsonplatform.net/text-to-speech/api/"];
     
     [confTTS setTokenGenerator:^(void (^tokenHandler)(NSString *token)){
-        NSURL *url = [[NSURL alloc] initWithString:@"http://text-to-speech-nodejs-tokenfactory.mybluemix.net/token"];
+        NSURL *url = [[NSURL alloc] initWithString:@"https://text-to-speech-nodejs-tokenfactory.mybluemix.net/token"];
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
         [request setHTTPMethod:@"GET"];
         [request setURL:url];
