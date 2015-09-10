@@ -51,14 +51,14 @@
 
 - (NSURL*) getVoicesServiceURL {
     
-    NSString *uriStr = [NSString stringWithFormat:@"%@%@",self.apiURL,WATSONSDK_SERVICE_PATH_VOICES];
+    NSString *uriStr = [NSString stringWithFormat:@"%@://%@%@%@",self.apiEndpoint.scheme,self.apiEndpoint.host,self.apiEndpoint.path,WATSONSDK_SERVICE_PATH_VOICES];
     NSURL * url = [NSURL URLWithString:uriStr];
     return url;
 }
 
 - (NSURL*) getSynthesizeURL:(NSString*) text {
     
-    NSString *uriStr = [NSString stringWithFormat:@"%@%@?voice=%@&accept=%@&text=%@",self.apiURL,WATSONSDK_SERVICE_PATH_SYNTHESIZE,self.voiceName,self.audioCodec,[text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSString *uriStr = [NSString stringWithFormat:@"%@://%@%@%@?voice=%@&accept=%@&text=%@",self.apiEndpoint.scheme,self.apiEndpoint.host,self.apiEndpoint.path,WATSONSDK_SERVICE_PATH_SYNTHESIZE,self.voiceName,self.audioCodec,[text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     NSURL * url = [NSURL URLWithString:uriStr];
     return url;
 }

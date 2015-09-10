@@ -38,12 +38,12 @@
  */
 - (void)setApiURL:(NSString *)apiURLStr {
     
-    self.apiURL = apiURLStr;
+    _apiURL = apiURLStr;
     [self setApiEndpoint:[NSURL URLWithString:apiURLStr]];
 }
 
 - (NSString*) apiURL {
-    return self.apiURL;
+    return _apiURL;
 }
 
 
