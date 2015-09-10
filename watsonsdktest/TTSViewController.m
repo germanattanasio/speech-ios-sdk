@@ -185,7 +185,7 @@
 
 #pragma mark - UIPickerViewDelegate Methods
 
-- (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component;
+- (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component
 {
     return 200;
 }
