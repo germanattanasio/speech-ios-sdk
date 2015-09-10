@@ -209,7 +209,7 @@ The app must indicate to the SDK when transcription should be ended.
 
 ```
 
-The STT services VAD end of sentence detection can be used to stop the transcription. The following code can be used in the app to do this.
+The Speech to Text service end of sentence detection can be used to detect that the user has stopped speaking this is indicated in the transcription result, we can use this to automatically end the recognize operation. The following code can be used in the app to do this.
 
 
 ```objective-c
@@ -365,3 +365,11 @@ Undefined symbols for architecture x86_64
 Check that all the required frameworks have been added to your project.
 
 [wdc]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/apis/#!/speech-to-text
+
+
+## Open Source @ IBM
+[Find more open source projects on the IBM Github Page.](http://ibm.github.io/)
+
+## Copyright and license
+
+Copyright 2015 IBM Corporation under [the Apache 2.0 license](LICENSE).

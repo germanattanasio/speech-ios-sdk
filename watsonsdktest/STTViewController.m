@@ -1,10 +1,18 @@
-//
-//  STTViewController.m
-//  watsonSDKsample
-//
-//  Created by Rob Smart on 30/05/2013.
-//  Copyright (c) 2013 IBM. All rights reserved.
-//
+/**
+ * Copyright IBM Corporation 2015
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ **/
 
 #import "STTViewController.h"
 
@@ -30,11 +38,11 @@
     
     // STT setup
     STTConfiguration *conf = [[STTConfiguration alloc] init];
-    // Overriding default settings
-    [conf setAudioCodec:WATSONSDK_AUDIO_CODEC_TYPE_OPUS];
-    [conf setApiURL:@"https://stream-s.watsonplatform.net/speech-to-text/api/"];
+    
+    // Use opus compression, better for mobile devices.
+    //[conf setAudioCodec:WATSONSDK_AUDIO_CODEC_TYPE_OPUS];
+    //[conf setApiURL:@"https://stream-s.watsonplatform.net/speech-to-text/api/"];
 
-//    [conf setApiURL:@"https://stream.watsonplatform.net/speech-to-text/api/"];
     [conf setTokenGenerator:^(void (^tokenHandler)(NSString *token)){
         NSURL *url = [[NSURL alloc] initWithString:@"https://speech-to-text-demo.mybluemix.net/token"];
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
@@ -99,8 +107,11 @@
             }
             
             result.text = [stt getTranscript:res];
+            
+            
         } else {
-            result.text = [err localizedDescription];
+            NSLog(@"received error from the SDK %@",[err localizedDescription]);
+            [stt endRecognize];
         }
     }];
     
@@ -198,7 +209,7 @@
 
 #pragma mark - UIPickerViewDelegate Methods
 
-- (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component;
+- (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component
 {
     return 200;
 }
