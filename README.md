@@ -365,3 +365,11 @@ Undefined symbols for architecture x86_64
 Check that all the required frameworks have been added to your project.
 
 [wdc]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/apis/#!/speech-to-text
+
+
+## Open Source @ IBM
+[Find more open source projects on the IBM Github Page.](http://ibm.github.io/)
+
+## Copyright and license
+
+Copyright 2015 IBM Corporation under [the Apache 2.0 license](LICENSE).
