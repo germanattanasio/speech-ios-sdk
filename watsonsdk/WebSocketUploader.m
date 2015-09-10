@@ -30,6 +30,7 @@ typedef void (^RecognizeCallbackBlockType)(NSDictionary*, NSError*);
 @property SRWebSocket *webSocket;
 @property BOOL isConnected;
 @property BOOL isReadyForAudio;
+@property BOOL hasDataBeenSent;
 
 @end
 
@@ -118,6 +119,7 @@ typedef void (^RecognizeCallbackBlockType)(NSDictionary*, NSError*);
             [self.audioBuffer setData:[NSData dataWithBytes:NULL length:0]];
         }
         [self.webSocket send:data];
+        self.hasDataBeenSent=YES;
     } else {
         // we need to buffer this data and send it when we connect
         NSLog(@"WebSocketUploader - data written but we're not connected yet");
@@ -134,6 +136,7 @@ typedef void (^RecognizeCallbackBlockType)(NSDictionary*, NSError*);
 {
     NSLog(@"Websocket Connected");
     self.isConnected = YES;
+    self.hasDataBeenSent=NO;
     [self.webSocket send:[self buildQueryJson]];
 }
 
@@ -201,11 +204,6 @@ typedef void (^RecognizeCallbackBlockType)(NSDictionary*, NSError*);
             }
         }
         
-       
-        //"error": "Unable to transcode from audio/ogg; codecs=opus; rate=16000 to audio/x-float-array; rate=16000; channels=1"
-    
-        
-        
         if([results objectForKey:@"results"] != nil) {
             
             NSArray *resultsArr = [results objectForKey:@"results"];
@@ -246,10 +244,29 @@ typedef void (^RecognizeCallbackBlockType)(NSDictionary*, NSError*);
 - (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean;
 {
     NSLog(@"WebSocket closed with reason %@",reason);
+    
+    // sometimes the socket can close immediately before data has been sent
+    if(!self.hasDataBeenSent)
+    {
+        NSString *errorStr = @"Websocket closed before data could be sent";
+        NSDictionary *userInfo = @{
+                                   NSLocalizedDescriptionKey: errorStr,
+                                   NSLocalizedFailureReasonErrorKey: errorStr,
+                                   NSLocalizedRecoverySuggestionErrorKey: @"try reconnecting"
+                                   };
+        NSError *error = [NSError errorWithDomain:@"WatsonSpeechSDK"
+                                             code:code
+                                         userInfo:userInfo];
+        [self webSocket:webSocket didFailWithError:error];
+        return;
+    }
+    
+    
     self.webSocket.delegate = nil;
     self.isConnected = NO;
     self.isReadyForAudio = NO;
     self.webSocket = nil;
+    self.reconnectAttempts = 0;
     if (code == 1006) { // authentication error
         [self.conf invalidateToken];
     }
