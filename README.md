@@ -209,7 +209,7 @@ The app must indicate to the SDK when transcription should be ended.
 
 ```
 
-The STT services VAD end of sentence detection can be used to stop the transcription. The following code can be used in the app to do this.
+The Speech to Text service end of sentence detection can be used to detect that the user has stopped speaking this is indicated in the transcription result, we can use this to automatically end the recognize operation. The following code can be used in the app to do this.
 
 
 ```objective-c
