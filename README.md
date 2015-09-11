@@ -20,6 +20,7 @@ Table of Contents
     	* [List supported models](#get-a-list-of-models-supported-by-the-service) 
     	* [Get model details](#get-details-of-a-particular-model)	
     	* [Use a named model](#use-a-named-model)
+    	* [Enabling audio compression](#enabling-audio-compression)
     	* [Start Audio Transcription](#start-audio-transcription)
     	* [End Audio Transcription](#end-audio-transcription)
     	* [Confidence Score](#obtain-a-confidence-score)
@@ -38,7 +39,7 @@ Installation
 
 **Using the framework**
 
-1. Download the [watsonsdk.framework.zip](https://git.hursley.ibm.com/w3bluemix/WatsoniOSSpeechSDK/blob/master/watsonsdk.framework.zip) and unzip it somewhere convenient
+1. Download the [watsonsdk.framework.zip](https://github.com/watson-developer-cloud/WatsoniOSSpeechSDK/blob/master/watsonsdk.framework.zip) and unzip it somewhere convenient
 2. Once unzipped drag the watsonsdk.framework folder into your xcode project view under the Frameworks folder.
 
 Some additional iOS standard frameworks must be added.
@@ -168,6 +169,9 @@ stt!.listModels({
 Get details of a particular model
 ------------------------------
 
+Available speech recognition models can be obtained using the listModel function.
+
+
 ```objective-c
 	[stt listModel:^(NSDictionary* jsonDict, NSError* err){
         
@@ -180,13 +184,22 @@ Get details of a particular model
 
 Use a named model
 ------------------------------
+The speech recognition model can be changed in the configuration. 
 
 ```objective-c
-[conf setModelName:@"ja-JP_BroadbandModel"];
+	[conf setModelName:@"ja-JP_BroadbandModel"];
+```
+
+Enabling audio compression
+----------------------
+By default audio sent to the server is uncompressed PCM encoded data, compressed audio using the Opus codec can be enabled.
+
+```objective-c
+	[conf setAudioCodec:WATSONSDK_AUDIO_CODEC_TYPE_OPUS];
 ```
 
 
-Start Audio Transcription
+Start audio transcription
 ------------------------------
 ```objective-c
 	[stt recognize:^(NSDictionary* res, NSError* err){
@@ -199,7 +212,7 @@ Start Audio Transcription
 
 ```
 
-End Audio Transcription
+End audio transcription
 ------------------------------
 
 The app must indicate to the SDK when transcription should be ended. 
