@@ -26,6 +26,7 @@ Table of Contents
     	
     * [Text To Speech](#text-to-speech)
     	* [Create a Configuration](#create-a-configuration)
+    	* [Set the voice](#set-the-voice)
     	* [Use Token Authentication](#use-token-authentication)
     	* [Create a TextToSpeech instance](#create-a-texttospeech-instance)
     	* [List supported voices](#get-a-list-of-voices-supported-by-the-service)
@@ -269,12 +270,27 @@ By default the Configuration will use the IBM Bluemix service API endpoint, cust
     [conf setBasicAuthPassword:@"<password>"];
 ```
 
+Set the voice
+-------------
+You can change the voice model used for TTS by setting it in the configuration.
+
+**in Objective-C**
+```objective-c
+    [conf setVoiceName:@"en-US_MichaelVoice"];
+```
+
+**in Swift**
+```
+	conf.voiceName = "en-US_MichaelVoice"
+```
+
+
 Use Token Authentication
 ------------------------
 
 If you use tokens (from your own server) to get access to the service, provide a token generator to the Configuration. `userid` and `password` will not be used if a token generator is provided.
 
-
+**in Objective-C**
 ```objective-c
    [conf setTokenGenerator:^(void (^tokenHandler)(NSString *token)){
         // get a token from your server in secure way
