@@ -260,7 +260,7 @@ typedef void (^PlayAudioCallbackBlockType)(NSError*);
     int headerSize = 44;
     int metadataSize = 48;
 
-    if(sampleRate == 0)
+    if(sampleRate == 0 && [wav length] > 28)
         [wav getBytes:&sampleRate range: NSMakeRange(24, 4)]; // Read wav sample rate from 24
 
     NSData *wavNoheader= [NSMutableData dataWithData:[wav subdataWithRange:NSMakeRange(headerSize+metadataSize, [wav length])]];
