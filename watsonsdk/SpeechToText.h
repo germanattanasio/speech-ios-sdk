@@ -80,6 +80,17 @@
  */
 -(NSString*) getTranscript:(NSDictionary*) results;
 
+
+/**
+ *  getConfidenceScore - convenience method to get the confidence score from the JSON results
+ *
+ *  @param results NSDictionary containing parsed JSON returned from the service
+ *
+ *  @return NSNumber containing score
+ */
+-(NSNumber*) getConfidenceScore:(NSDictionary*) results;
+
+
 /**
  *  isFinalTranscript : convenience method to check the 'final' value in the dictionary and return
  *

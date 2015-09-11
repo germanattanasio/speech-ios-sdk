@@ -30,7 +30,7 @@
 #define WATSONSDK_TTS_AUDIO_CODEC_TYPE_WAV_SAMPLE_RATE 0    // zero means reading the sample rate from wav data
 
 // voices
-#define WATSONSDK_DEFAULT_TTS_VOICE @"VoiceEnUsMichael"
+#define WATSONSDK_DEFAULT_TTS_VOICE @"en-US_MichaelVoice"
 
 
 @interface TTSConfiguration : AuthConfiguration

@@ -22,10 +22,12 @@ Table of Contents
     	* [Use a named model](#use-a-named-model)
     	* [Start Audio Transcription](#start-audio-transcription)
     	* [End Audio Transcription](#end-audio-transcription)
+    	* [Confidence Score](#obtain-a-confidence-score)
     	* [Speech power levels](#receive-speech-power-levels-during-the-recognize)
     	
     * [Text To Speech](#text-to-speech)
     	* [Create a Configuration](#create-a-configuration)
+    	* [Set the voice](#set-the-voice)
     	* [Use Token Authentication](#use-token-authentication)
     	* [Create a TextToSpeech instance](#create-a-texttospeech-instance)
     	* [List supported voices](#get-a-list-of-voices-supported-by-the-service)
@@ -235,6 +237,18 @@ The Speech to Text service end of sentence detection can be used to detect that 
 
 ```
 
+Obtain a confidence score
+-------------------------
+A confidence score is available for any final transcripts (whole sentences).
+This can be obtained by passing the resulting Dictionary object.
+
+```objective-c
+
+    [stt getConfidenceScore:res]
+
+```
+
+
 Receive speech power levels during the recognize
 ------------------------------
 
@@ -269,12 +283,27 @@ By default the Configuration will use the IBM Bluemix service API endpoint, cust
     [conf setBasicAuthPassword:@"<password>"];
 ```
 
+Set the voice
+-------------
+You can change the voice model used for TTS by setting it in the configuration.
+
+**in Objective-C**
+```objective-c
+    [conf setVoiceName:@"en-US_MichaelVoice"];
+```
+
+**in Swift**
+```
+	conf.voiceName = "en-US_MichaelVoice"
+```
+
+
 Use Token Authentication
 ------------------------
 
 If you use tokens (from your own server) to get access to the service, provide a token generator to the Configuration. `userid` and `password` will not be used if a token generator is provided.
 
-
+**in Objective-C**
 ```objective-c
    [conf setTokenGenerator:^(void (^tokenHandler)(NSString *token)){
         // get a token from your server in secure way
