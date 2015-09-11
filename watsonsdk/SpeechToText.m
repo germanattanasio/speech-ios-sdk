@@ -205,6 +205,42 @@ id oggRef;
 }
 
 /**
+ *  getConfidenceScore - convenience method to get the confidence score from the JSON results
+ *
+ *  @param results NSDictionary containing parsed JSON returned from the service
+ *
+ *  @return NSNumber containing score
+ */
+-(NSNumber*) getConfidenceScore:(NSDictionary*) results {
+    
+    if([results objectForKey:@"results"] != nil) {
+        
+        NSArray *resultArray = [results objectForKey:@"results"];
+        if( [resultArray count] != 0 && [resultArray objectAtIndex:0] != nil) {
+            
+            NSDictionary *result =[resultArray objectAtIndex:0];
+            
+            NSArray *alternatives = [result objectForKey:@"alternatives"];
+            
+            if([alternatives objectAtIndex:0] != nil) {
+                NSDictionary *alternative = [alternatives objectAtIndex:0];
+                
+                if([alternative objectForKey:@"confidence"] != nil) {
+                    NSNumber *confidence = [alternative objectForKey:@"confidence"];
+                    
+                    return confidence;
+                }
+            }
+        }
+    }
+    
+    return nil;
+}
+
+
+
+
+/**
  *  isFinalTranscript : check the 'final' value in the dictionary and return
  *
  *  @param results NSDictionary

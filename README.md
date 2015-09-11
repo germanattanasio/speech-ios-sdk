@@ -22,6 +22,7 @@ Table of Contents
     	* [Use a named model](#use-a-named-model)
     	* [Start Audio Transcription](#start-audio-transcription)
     	* [End Audio Transcription](#end-audio-transcription)
+    	* [Confidence Score](#obtain-a-confidence-score)
     	* [Speech power levels](#receive-speech-power-levels-during-the-recognize)
     	
     * [Text To Speech](#text-to-speech)
@@ -235,6 +236,18 @@ The Speech to Text service end of sentence detection can be used to detect that 
 
 
 ```
+
+Obtain a confidence score
+-------------------------
+A confidence score is available for any final transcripts (whole sentences).
+This can be obtained by passing the resulting Dictionary object.
+
+```objective-c
+
+    [stt getConfidenceScore:res]
+
+```
+
 
 Receive speech power levels during the recognize
 ------------------------------

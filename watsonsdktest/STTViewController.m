@@ -104,6 +104,8 @@
                 
                 NSLog(@"this is the final transcript");
                 [stt endRecognize];
+                
+                NSLog(@"confidence score is %@",[stt getConfidenceScore:res]);
             }
             
             result.text = [stt getTranscript:res];
