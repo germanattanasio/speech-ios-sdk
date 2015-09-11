@@ -12,7 +12,7 @@ Table of Contents
 
     * [Installation](#installation)
     * [Include headers](#include-headers)
-    
+    * [Sample Application](#sample-application)
     * [Speech To Text](#speech-to-text)
     	* [Create a Configuration](#create-a-stt-configuration) 
     	* [Authentication options](#authentication)
@@ -82,6 +82,17 @@ Include headers
 
 *Add the headers above for Objective-c into a bridging header file.*
 
+
+#Sample Application
+===================
+
+This repository contains a sample application demonstrating the SDK functionality. 
+
+To run the application clone this repository and then navigate in Finder to folder containing the SDK files.
+
+Double click on the watsonsdk.xcworkspace  to launch xcode.
+
+To run the sample application, change the compile target to 'watsonsdktest' and run on the iPhone simulator.
 
 #Speech To Text 
 ==============
