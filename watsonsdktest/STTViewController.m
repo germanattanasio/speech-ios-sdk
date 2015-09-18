@@ -44,7 +44,7 @@
     //[conf setApiURL:@"https://stream-s.watsonplatform.net/speech-to-text/api/"];
 
     [conf setTokenGenerator:^(void (^tokenHandler)(NSString *token)){
-        NSURL *url = [[NSURL alloc] initWithString:@"https://speech-to-text-demo.mybluemix.net/token"];
+        NSURL *url = [[NSURL alloc] initWithString:@"https://<token-factory-url>"];
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
         [request setHTTPMethod:@"GET"];
         [request setURL:url];
