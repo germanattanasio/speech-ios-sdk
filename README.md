@@ -94,6 +94,8 @@ Double click on the watsonsdk.xcworkspace  to launch xcode.
 
 To run the sample application, change the compile target to 'watsonsdktest' and run on the iPhone simulator.
 
+Note that this is sample code and no security review has been performed on the code.
+
 #Speech To Text 
 ==============
 
