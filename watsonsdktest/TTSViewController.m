@@ -41,7 +41,7 @@
     TTSConfiguration *confTTS = [[TTSConfiguration alloc] init];
     
     [confTTS setTokenGenerator:^(void (^tokenHandler)(NSString *token)){
-        NSURL *url = [[NSURL alloc] initWithString:@"https://text-to-speech-nodejs-tokenfactory.mybluemix.net/token"];
+        NSURL *url = [[NSURL alloc] initWithString:@"https://my-token-factory/token"];
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
         [request setHTTPMethod:@"GET"];
         [request setURL:url];

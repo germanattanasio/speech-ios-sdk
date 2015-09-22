@@ -41,7 +41,7 @@
     
     // Use opus compression, better for mobile devices.
     //[conf setAudioCodec:WATSONSDK_AUDIO_CODEC_TYPE_OPUS];
-    //[conf setApiURL:@"https://stream-s.watsonplatform.net/speech-to-text/api/"];
+    //[conf setApiURL:@"https://stream.watsonplatform.net/speech-to-text/api/"];
 
     [conf setTokenGenerator:^(void (^tokenHandler)(NSString *token)){
         NSURL *url = [[NSURL alloc] initWithString:@"https://<token-factory-url>"];
