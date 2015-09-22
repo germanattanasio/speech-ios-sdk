@@ -119,12 +119,12 @@ Basic Authentication, using the credentials provided by the Bluemix Service inst
     [conf setBasicAuthPassword:@"<password>"];
 ```
 
-Token authentication, an example token authentication provider is running at https://speech-to-text-demo.mybluemix.net/token 
+Token authentication, if a token authentication provider is running at https://my-token-factory/token 
 
 ```objective-c
 
 	[conf setTokenGenerator:^(void (^tokenHandler)(NSString *token)){
-        NSURL *url = [[NSURL alloc] initWithString:@"https://speech-to-text-demo.mybluemix.net/token"];
+        NSURL *url = [[NSURL alloc] initWithString:@"https://my-token-factory/token"];
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
         [request setHTTPMethod:@"GET"];
         [request setURL:url];
