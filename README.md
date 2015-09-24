@@ -39,7 +39,7 @@ Installation
 
 **Using the framework**
 
-1. Download the [watsonsdk.framework.zip](https://github.com/watson-developer-cloud/WatsoniOSSpeechSDK/blob/master/watsonsdk.framework.zip) and unzip it somewhere convenient
+1. Download the [watsonsdk.framework.zip](https://github.com/watson-developer-cloud/speech-ios-sdk/raw/master/watsonsdk.framework.zip) and unzip it somewhere convenient
 2. Once unzipped drag the watsonsdk.framework folder into your xcode project view under the Frameworks folder.
 
 Some additional iOS standard frameworks must be added.
