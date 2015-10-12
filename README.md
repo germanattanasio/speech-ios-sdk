@@ -71,7 +71,7 @@ Include headers
 
 **in Objective-C**
 
-```
+```objective-c
 	#import <watsonsdk/SpeechToText.h>
 	#import <watsonsdk/STTConfiguration.h>
 	#import <watsonsdk/TextToSpeech.h>
@@ -169,7 +169,7 @@ Get a list of models supported by the service
 ```
 
 **in Swift**
-```
+```swift
 stt!.listModels({
     (jsonDict, err) in
     
@@ -319,7 +319,7 @@ You can change the voice model used for TTS by setting it in the configuration.
 ```
 
 **in Swift**
-```
+```swift
 	conf.voiceName = "en-US_MichaelVoice"
 ```
 
@@ -360,7 +360,7 @@ Get a list of voices supported by the service
 ```
 
 **in Swift**
-```
+```swift
 	tts!.listVoices({
             (jsonDict, err) in
             
@@ -392,7 +392,7 @@ Generate and play audio
 
 
 **in Swift**
-```
+```swift
 	tts!.synthesize({
 		(data, err) in
             
