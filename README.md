@@ -90,7 +90,7 @@ This repository contains a sample application demonstrating the SDK functionalit
 
 To run the application clone this repository and then navigate in Finder to folder containing the SDK files.
 
-Double click on the watsonsdk.xcworkspace  to launch xcode.
+Double click on the watsonsdk.xcodeproj  to launch xcode.
 
 To run the sample application, change the compile target to 'watsonsdktest' and run on the iPhone simulator.
 
