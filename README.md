@@ -104,8 +104,13 @@ Create a STT Configuration
 
 By default the Configuration will use the IBM Bluemix service API endpoint, custom endpoints can be set using `setApiURL` in most cases this is not required.
 
+**in Objective-C**
 ```objective-c
 	STTConfiguration *conf = [[STTConfiguration alloc] init];
+```
+**in Swift**
+```swift
+	let conf:STTConfiguration = STTConfiguration()
 ```
 
 Authentication
@@ -114,9 +119,16 @@ There are currently two authentication options.
 
 Basic Authentication, using the credentials provided by the Bluemix Service instance.
 
+**in Objective-C**
 ```objective-c
     [conf setBasicAuthUsername:@"<userid>"];
     [conf setBasicAuthPassword:@"<password>"];
+```
+
+**in Swift**
+```swift
+	conf.basicAuthUsername = "<userid>"
+	conf.basicAuthPassword = "<password>"
 ```
 
 Token authentication, if a token authentication provider is running at https://my-token-factory/token 
@@ -146,13 +158,23 @@ Create a SpeechToText instance
 ------------------------------
 
 
-
+**in Objective-C**
 ```objective-c
 	@property SpeechToText;
 	
 	...
 	
 	self.stt = [SpeechToText initWithConfig:conf];
+```
+
+**in Swift**
+```swift
+	var stt:SpeechToText = SpeechToText();
+	
+	
+	...
+	
+	self.stt = SpeechToText.init(config: conf)
 ```
 
 Get a list of models supported by the service
@@ -239,7 +261,7 @@ The app must indicate to the SDK when transcription should be ended.
 
 The Speech to Text service end of sentence detection can be used to detect that the user has stopped speaking this is indicated in the transcription result, we can use this to automatically end the recognize operation. The following code can be used in the app to do this.
 
-
+**in Objective-C**
 ```objective-c
 
 	 // start recognize
@@ -261,6 +283,25 @@ The Speech to Text service end of sentence detection can be used to detect that 
     }];
 
 
+```
+
+**in Swift**
+```swift
+self.stt.recognize({ (res: [NSObject:AnyObject]!, err: NSError!) -> Void in
+    
+	if err == nil {
+	
+	  if self.stt.isFinalTranscript(res) {
+	  
+	    NSLog(@"this is the final transcript");
+	    self.stt.endRecognize()
+	  }
+	  
+	  result.text = self.stt.getTranscript(res);
+	} else {
+	  result.text = err.localizedDescription;
+	}
+    });
 ```
 
 Obtain a confidence score
