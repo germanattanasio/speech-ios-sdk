@@ -47,23 +47,14 @@ Some additional iOS standard frameworks must be added.
 1. Select your project in the Xcode file explorer and open the "Build Phases" tab. Expand the "Link Binary With Libraries" section and click the + icon
 
 2. Add the following frameworks
-
-- CFNetwork.framework
-
-- AudioToolbox.framework
-
-- AVFoundation.framework
-
-- Quartzcore.framework
-
-- CoreAudio.framework
-
-- Security.framework
-
-- Foundation.framework
-
-- libicucore.dylib
-
+	- AudioToolbox.framework
+	- AVFoundation.framework
+	- CFNetwork.framework
+	- CoreAudio.framework
+	- Foundation.framework
+	- libicucore.tbd (or libicucore.dylib on older versions)
+	- Quartzcore.framework
+	- Security.framework
 
 
 Include headers
@@ -293,7 +284,7 @@ self.stt.recognize({ (res: [NSObject:AnyObject]!, err: NSError!) -> Void in
 	
 	  if self.stt.isFinalTranscript(res) {
 	  
-	    NSLog(@"this is the final transcript");
+	    NSLog("this is the final transcript");
 	    self.stt.endRecognize()
 	  }
 	  
