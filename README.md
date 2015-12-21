@@ -1,5 +1,14 @@
-Watson Speech iOS SDK
-=====================
+# DEPRECATED
+
+The **Watson Speech iOS SDK** has been deprecated in favor of the new [Watson Developer Cloud iOS SDK](https://github.com/watson-developer-cloud/ios-sdk) which currently supports most of the Watson services.
+
+
+----------
+
+# THIS MODULE IS DEPRECATED
+
+## Watson Speech iOS SDK
+
 
 An SDK for iOS mobile applications enabling use of the Bluemix Watson Speech To Text and Text To Speech APIs from [Watson Developer Cloud][wdc]
 
