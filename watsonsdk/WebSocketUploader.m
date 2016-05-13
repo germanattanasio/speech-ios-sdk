@@ -82,7 +82,7 @@ typedef void (^RecognizeCallbackBlockType)(NSDictionary*, NSError*);
 - (void) endSession {
     
     if([self isWebSocketConnected]) {
-        [self.webSocket send:@"{\"name\":\"unready\"}"];
+        [self.webSocket sendString:@"{\"name\":\"unready\"}"];
     } else {
         NSLog(@"tried to end Session but websocket was already closed");
     }
@@ -94,7 +94,7 @@ typedef void (^RecognizeCallbackBlockType)(NSDictionary*, NSError*);
     
      if(self.isConnected && self.isReadyForAudio) {
          NSLog(@"sending end of stream marker");
-         [self.webSocket send:[[NSMutableData alloc] initWithLength:0]];
+         [self.webSocket sendData:[[NSMutableData alloc] initWithLength:0]];
          self.isReadyForAudio = NO;
      }
 }
@@ -113,12 +113,12 @@ typedef void (^RecognizeCallbackBlockType)(NSDictionary*, NSError*);
         // if we had previously buffered audio because we were not connected, send it now
         if([self.audioBuffer length] > 0) {
             NSLog(@"sending buffered audio");
-            [self.webSocket send:self.audioBuffer];
+            [self.webSocket sendData:self.audioBuffer];
             
             //reset buffer
             [self.audioBuffer setData:[NSData dataWithBytes:NULL length:0]];
         }
-        [self.webSocket send:data];
+        [self.webSocket sendData:data];
         self.hasDataBeenSent=YES;
     } else {
         // we need to buffer this data and send it when we connect
@@ -137,7 +137,7 @@ typedef void (^RecognizeCallbackBlockType)(NSDictionary*, NSError*);
     NSLog(@"Websocket Connected");
     self.isConnected = YES;
     self.hasDataBeenSent=NO;
-    [self.webSocket send:[self buildQueryJson]];
+    [self.webSocket sendString:[self buildQueryJson]];
 }
 
 - (NSString *) buildQueryJson
@@ -260,8 +260,7 @@ typedef void (^RecognizeCallbackBlockType)(NSDictionary*, NSError*);
         [self webSocket:webSocket didFailWithError:error];
         return;
     }
-    
-    
+
     self.webSocket.delegate = nil;
     self.isConnected = NO;
     self.isReadyForAudio = NO;
