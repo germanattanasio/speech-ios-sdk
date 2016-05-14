@@ -115,13 +115,13 @@ void writeString(unsigned char *dest, int offset, unsigned char *value, int leng
     [newData appendBytes:oggPage.header length:oggPage.header_len];
     [newData appendBytes:oggPage.body length:oggPage.body_len];
     
-    NSLog(@"[Encoder] Ogg header, %ld bytes are written\n", opusHeaderPacket.bytes);
+//    NSLog(@"[Encoder] Ogg header, %ld bytes are written\n", opusHeaderPacket.bytes);
 
     offset = 0;
     NSString *comments = @"libopus";
-    
+
     int commentsLength = (int)[comments lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
-    NSLog(@"Comments length=%d", commentsLength);
+//    NSLog(@"Comments length=%d", commentsLength);
     unsigned char opusComments[commentsLength + 28];
     writeString(opusComments, offset, (unsigned char *)"OpusTags", 8);
     
@@ -151,7 +151,7 @@ void writeString(unsigned char *dest, int offset, unsigned char *value, int leng
     [newData appendBytes:oggPage.header length:oggPage.header_len];
     [newData appendBytes:oggPage.body length:oggPage.body_len];
 
-    NSLog(@"[Encoder] Ogg comments, %ld bytes are written\n", opusCommentsPacket.bytes);
+//    NSLog(@"[Encoder] Ogg comments, %ld bytes are written\n", opusCommentsPacket.bytes);
     
     return newData;
 }

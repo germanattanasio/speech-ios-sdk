@@ -17,13 +17,14 @@
 #import <Foundation/Foundation.h>
 #import "UploaderDelegate.h"
 #import "STTConfiguration.h"
+#import "SocketRocket.h"
 
 @interface WebSocketUploader : NSObject
 
 - (BOOL) isWebSocketConnected;
 - (void) connect:(STTConfiguration*)config headers:(NSDictionary*)headers;
 - (void) reconnect;
-- (void) disconnect;
+- (void) disconnect: (NSString*) reason;
 - (void) writeData:(NSData*) data;
 - (void) setRecognizeHandler:(void (^)(NSDictionary*, NSError*))handler;
 - (void) sendEndOfStreamMarker;

@@ -1,11 +1,11 @@
 //
 // Copyright 2012 Square Inc.
 // Portions Copyright (c) 2016-present, Facebook, Inc.
-//
+// 
 // All rights reserved.
-//
+// 
 // This source code is licensed under the BSD-style license found in the
-// LICENSE file in the root directory of this source tree. An additional grant
+// LICENSE file in the root directory of this source tree. An additional grant 
 // of patent rights can be found in the PATENTS file in the same directory.
 //
 
@@ -58,21 +58,21 @@ extern NSString *const SRHTTPResponseErrorKey;
 
 /**
  The delegate of the web socket.
- 
+
  The web socket delegate is notified on all state changes that happen to the web socket.
  */
 @property (nonatomic, weak) id <SRWebSocketDelegate> delegate;
 
 /**
  A dispatch queue for scheduling the delegate calls. The queue doesn't need be a serial queue.
- 
+
  If `nil` and `delegateOperationQueue` is `nil`, the socket uses main queue for performing all delegate method calls.
  */
 @property (nonatomic, strong) dispatch_queue_t delegateDispatchQueue;
 
 /**
  An operation queue for scheduling the delegate calls.
- 
+
  If `nil` and `delegateOperationQueue` is `nil`, the socket uses main queue for performing all delegate method calls.
  */
 @property (nonatomic, strong) NSOperationQueue *delegateOperationQueue;
@@ -115,30 +115,30 @@ extern NSString *const SRHTTPResponseErrorKey;
 
 /**
  Send a UTF-8 string or binary data to the server.
- 
+
  @param message UTF-8 String or Data to send.
- 
+
  @deprecated Please use `sendString:` or `sendData` instead.
  */
 - (void)send:(id)message __attribute__((deprecated("Please use `sendString:` or `sendData` instead.")));
 
 /**
  Send a UTF-8 String to the server.
- 
+
  @param string String to send.
  */
 - (void)sendString:(NSString *)string;
 
 /**
  Send binary data to the server.
- 
+
  @param data Data to send.
  */
 - (void)sendData:(NSData *)data;
 
 /**
  Send Ping message to the server with optional data.
- 
+
  @param data Instance of `NSData` or `nil`.
  */
 - (void)sendPing:(NSData *)data;
