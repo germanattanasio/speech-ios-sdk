@@ -69,7 +69,6 @@ id delegateRef;
 id opusRef;
 id oggRef;
 
-
 #pragma mark public methods
 
 /**
@@ -80,7 +79,6 @@ id oggRef;
  *  @return SpeechToText
  */
 +(id)initWithConfig:(STTConfiguration *)config {
-    
     SpeechToText *watson = [[self alloc] initWithConfig:config] ;
     return watson;
 }
@@ -126,23 +124,18 @@ id oggRef;
         
         // populate the error object with the details
         NSError *recordError = [NSError errorWithDomain:@"com.ibm.cio.watsonsdk" code:409 userInfo:details];
-        self.recognizeCallback(nil,recordError);
+        self.recognizeCallback(nil, recordError);
         return;
     }
     
     // don't allow a new recording to be allowed until this transaction has completed
     isNewRecordingAllowed= NO;
     [self startRecordingAudio];
-    
-    
 }
 
--(void) endRecognize
-{
+-(void) endRecognize{
     [self stopRecordingAudio];
-    
-    [self.wsuploader sendEndOfStreamMarker];
-    
+    [[self wsuploader] sendEndOfStreamMarker];
     isNewRecordingAllowed=YES;
 }
 
@@ -184,23 +177,17 @@ id oggRef;
         
         NSArray *resultArray = [results objectForKey:@"results"];
         if( [resultArray count] != 0 && [resultArray objectAtIndex:0] != nil) {
-            
             NSDictionary *result =[resultArray objectAtIndex:0];
-            
             NSArray *alternatives = [result objectForKey:@"alternatives"];
-            
             if([alternatives objectAtIndex:0] != nil) {
                 NSDictionary *alternative = [alternatives objectAtIndex:0];
-                
                 if([alternative objectForKey:@"transcript"] != nil) {
                     NSString *transcript = [alternative objectForKey:@"transcript"];
-                    
                     return transcript;
                 }
             }
         }
     }
-    
     return nil;
 }
 
@@ -299,9 +286,6 @@ id oggRef;
             
             if(reqError == nil)
             {
-                NSString * text = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
-                NSLog(@"Data = %@",text);
-                
                 NSError *localError = nil;
                 NSDictionary *parsedObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:&localError];
                 
@@ -324,7 +308,7 @@ id oggRef;
 }
 
 - (void) startRecordingAudio {
-    
+    NSLog(@"### startRecordingAudio ###");
     // lets start the socket connection right away
     [self initializeStreaming];
     [self setFilePaths];
@@ -377,23 +361,28 @@ id oggRef;
     
 }
 
-
-
 - (void) stopRecordingAudio {
-    
-    NSLog(@"stopRecordingAudio");
-    
-    [self.PeakPowerTimer invalidate];
+    NSLog(@"### stopRecordingAudio ###");
+    if(self.PeakPowerTimer)
+        [self.PeakPowerTimer invalidate];
+
     self.PeakPowerTimer = nil;
     [self setFilePaths];
-    AudioQueueReset (_recordState.queue);
-    AudioQueueStop (_recordState.queue, YES);
-    AudioQueueDispose (_recordState.queue, YES);
-    fclose(_recordState.stream);
-    
+    if(_recordState.queue != NULL){
+        AudioQueueReset(_recordState.queue);
+    }
+    if(_recordState.queue != NULL){
+        AudioQueueStop(_recordState.queue, YES);
+    }
+    if(_recordState.queue != NULL){
+        AudioQueueDispose(_recordState.queue, YES);
+    }
+    if(_recordState.stream != NULL){
+        fclose(_recordState.stream);
+    }
+
     isNewRecordingAllowed = YES;
     NSLog(@"stopRecordingAudio->fclose done");
-    
 }
 
 
@@ -418,41 +407,21 @@ id oggRef;
 
 
 #pragma mark audio upload
-/*
-- (NSDictionary*) createRequestHeaders {
-    
-    NSMutableDictionary *headers = [[NSMutableDictionary alloc] init];
-    
-    if(self.config.basicAuthPassword && self.config.basicAuthUsername) {
-        NSString *authStr = [NSString stringWithFormat:@"%@:%@", self.config.basicAuthUsername,self.config.basicAuthPassword];
-        NSData *authData = [authStr dataUsingEncoding:NSUTF8StringEncoding];
-        NSString *authValue = [NSString stringWithFormat:@"Basic %@", [authData base64Encoding]];
-        [headers setObject:authValue forKey:@"Authorization"];
-    }
-    
-    return headers;
-    
-}
-*/
-
-
 - (void) initializeStreaming {
-    NSLog(@"CALL STARTING STREAM 1050");
-    
+    NSLog(@"### initializeStreaming ###");
     // init the websocket uploader if its nil
     if(self.wsuploader == nil) {
         self.wsuploader = [[WebSocketUploader alloc] init];
         [self.wsuploader setRecognizeHandler:recognizeCallback];
     }
-    
-    
+
     // connect if we are not connected
     if(![self.wsuploader isWebSocketConnected]) {
         [self.config requestToken:^(AuthConfiguration *config) {
             [self.wsuploader connect:(STTConfiguration*)config headers:[config createRequestHeaders]];
         }];
     }
-    
+
     // Adding Ogg Header
     if(isCompressedOpus){
         // Adding Ogg instance
@@ -465,8 +434,6 @@ id oggRef;
     
     // set a pointer to the wsuploader class so it is accessible in the c callback
     uploaderRef = self.wsuploader;
-    
-    
 }
 
 
@@ -538,8 +505,6 @@ void AudioInputStreamingCallback(
     OSStatus status=0;
     RecordingState* recordState = (RecordingState*)inUserData;
     
-    
-    
     NSData *data = [NSData  dataWithBytes:inBuffer->mAudioData length:inBuffer->mAudioDataByteSize];
     audioRecordedLength += [data length];
     
@@ -547,9 +512,6 @@ void AudioInputStreamingCallback(
         sendAudioOpusEncoded(data);
     else
         [uploaderRef writeData:data];
-        
-    
-    
     
     if(fwrite(inBuffer->mAudioData, 1,inBuffer->mAudioDataByteSize, recordState->stream)<=0) {
         status=-1;
@@ -559,12 +521,8 @@ void AudioInputStreamingCallback(
     if(status == 0) {
         recordState->currentPacket += inNumberPacketDescriptions;
     }
-    
     AudioQueueEnqueueBuffer(recordState->queue, inBuffer, 0, NULL);
 }
-
-
-
 
 #pragma mark utilities
 

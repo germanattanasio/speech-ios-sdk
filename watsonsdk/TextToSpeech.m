@@ -104,9 +104,6 @@ typedef void (^PlayAudioCallbackBlockType)(NSError*);
             
             if(reqError == nil)
             {
-                NSString * text = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
-                NSLog(@"Data = %@",text);
-                
                 NSError *localError = nil;
                 NSDictionary *parsedObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:&localError];
                 
@@ -193,9 +190,7 @@ typedef void (^PlayAudioCallbackBlockType)(NSError*);
     long longSampleRate = (self.sampleRate == 0 ? 48000 : self.sampleRate);
     int channels = 1;
     long byteRate = 16 * 11025 * channels/8;
-    
-    
-    
+
     Byte *header = (Byte*)malloc(44);
     header[0] = 'R';  // RIFF/WAVE header
     header[1] = 'I';

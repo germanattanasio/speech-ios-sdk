@@ -15,7 +15,6 @@
  **/
 
 #import "WebSocketUploader.h"
-#import "SRWebSocket.h"
 
 
 typedef void (^RecognizeCallbackBlockType)(NSDictionary*, NSError*);
@@ -30,6 +29,7 @@ typedef void (^RecognizeCallbackBlockType)(NSDictionary*, NSError*);
 @property SRWebSocket *webSocket;
 @property BOOL isConnected;
 @property BOOL isReadyForAudio;
+@property BOOL isReadyForClosure;
 @property BOOL hasDataBeenSent;
 
 @end
@@ -49,6 +49,7 @@ typedef void (^RecognizeCallbackBlockType)(NSDictionary*, NSError*);
     
     self.isConnected = NO;
     self.isReadyForAudio = NO;
+    self.isReadyForClosure = NO;
    
     NSLog(@"websocket connection using %@",[[self.conf getWebSocketRecognizeURL] absoluteString]);
     
@@ -58,7 +59,7 @@ typedef void (^RecognizeCallbackBlockType)(NSDictionary*, NSError*);
     for(id headerName in headers) {
         [req setValue:[headers objectForKey:headerName] forHTTPHeaderField:headerName];
     }
-    
+
     self.webSocket = [[SRWebSocket alloc] initWithURLRequest:req];
     self.webSocket.delegate = self;
     [self.webSocket open];
@@ -80,9 +81,8 @@ typedef void (^RecognizeCallbackBlockType)(NSDictionary*, NSError*);
 }
 
 - (void) endSession {
-    
     if([self isWebSocketConnected]) {
-        [self.webSocket send:@"{\"name\":\"unready\"}"];
+        [self.webSocket sendString:@"{\"name\":\"unready\"}"];
     } else {
         NSLog(@"tried to end Session but websocket was already closed");
     }
@@ -91,34 +91,31 @@ typedef void (^RecognizeCallbackBlockType)(NSDictionary*, NSError*);
 }
 
 - (void) sendEndOfStreamMarker {
-    
      if(self.isConnected && self.isReadyForAudio) {
          NSLog(@"sending end of stream marker");
-         [self.webSocket send:[[NSMutableData alloc] initWithLength:0]];
+         [self.webSocket sendData:[[NSMutableData alloc] initWithLength:0]];
          self.isReadyForAudio = NO;
+         self.isReadyForClosure = YES;
      }
 }
 
-- (void) disconnect {
-    
+- (void) disconnect:(NSString*) reason{
     self.isReadyForAudio = NO;
     self.isConnected = NO;
-    [self.webSocket close];
-    
+    self.isReadyForClosure = NO;
+    [self.webSocket closeWithCode:SRStatusCodeNormal reason: reason];
 }
 
 - (void) writeData:(NSData*) data {
     if(self.isConnected && self.isReadyForAudio) {
-        
         // if we had previously buffered audio because we were not connected, send it now
         if([self.audioBuffer length] > 0) {
             NSLog(@"sending buffered audio");
-            [self.webSocket send:self.audioBuffer];
-            
+            [self.webSocket sendData:self.audioBuffer];
             //reset buffer
             [self.audioBuffer setData:[NSData dataWithBytes:NULL length:0]];
         }
-        [self.webSocket send:data];
+        [self.webSocket sendData:data];
         self.hasDataBeenSent=YES;
     } else {
         // we need to buffer this data and send it when we connect
@@ -137,7 +134,7 @@ typedef void (^RecognizeCallbackBlockType)(NSDictionary*, NSError*);
     NSLog(@"Websocket Connected");
     self.isConnected = YES;
     self.hasDataBeenSent=NO;
-    [self.webSocket send:[self buildQueryJson]];
+    [self.webSocket sendString:[self buildQueryJson]];
 }
 
 - (NSString *) buildQueryJson
@@ -162,7 +159,9 @@ typedef void (^RecognizeCallbackBlockType)(NSDictionary*, NSError*);
         self.recognizeCallback(nil,error);
     }
 }
-
+- (NSString*)boolToString: (BOOL)p{
+    return p ? @"Yes" : @"NO";
+}
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)json;
 {
     
@@ -192,28 +191,25 @@ typedef void (^RecognizeCallbackBlockType)(NSDictionary*, NSError*);
         // look for state changes
         if([results objectForKey:@"state"] != nil) {
             NSString *state = [results objectForKey:@"state"];
-            
+            NSLog(@"### state: %@, isConnected: %@, isReadyForAudio: %@, isReadyForClosure: %@", state, [self boolToString:self.isConnected], [self boolToString:self.isReadyForAudio], [self boolToString:self.isReadyForClosure]);
             // if we receive a listening state after having sent audio it means we can now close the connection
-            if ([state isEqualToString:@"listening"] && self.isConnected && self.isReadyForAudio){
-              
-                [self disconnect];
-                
+            if ([state isEqualToString:@"listening"] && self.isConnected && self.isReadyForClosure){
+                [self disconnect: @"Closure data has been sent"];
             } else if([state isEqualToString:@"listening"]) {
                 // we can send binary data now
                 self.isReadyForAudio = YES;
             }
         }
-        
+
         if([results objectForKey:@"results"] != nil) {
             
             NSArray *resultsArr = [results objectForKey:@"results"];
             
             if([resultsArr count] > 0) {
-                self.recognizeCallback(results,nil);
-
+                self.recognizeCallback(results, nil);
             }
         }
-        
+
         if([results objectForKey:@"error"] != nil) {
             NSString *errorStr = [results objectForKey:@"error"];
             
@@ -225,25 +221,21 @@ typedef void (^RecognizeCallbackBlockType)(NSDictionary*, NSError*);
             NSError *error = [NSError errorWithDomain:@"WatsonSpeechSDK"
                                                  code:500
                                              userInfo:userInfo];
-            
-            self.recognizeCallback(nil,error);
-            [self disconnect];
+            self.recognizeCallback(nil, error);
+            [self disconnect: errorStr];
         }
-        
-        
     }
     else
     {
         // we should have had a dictionary object so this is an error
         NSLog(@"Didn't receive a dictionary json object, closing down");
-        [self disconnect];
+        [self disconnect: @"Didn't receive a dictionary json object, closing down"];
     }
-    
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean;
 {
-    NSLog(@"WebSocket closed with reason %@",reason);
+    NSLog(@"WebSocket closed with reason: %@",reason);
     
     // sometimes the socket can close immediately before data has been sent
     if(!self.hasDataBeenSent)
@@ -260,11 +252,11 @@ typedef void (^RecognizeCallbackBlockType)(NSDictionary*, NSError*);
         [self webSocket:webSocket didFailWithError:error];
         return;
     }
-    
-    
+
     self.webSocket.delegate = nil;
     self.isConnected = NO;
     self.isReadyForAudio = NO;
+    self.isReadyForClosure = NO;
     self.webSocket = nil;
     self.reconnectAttempts = 0;
     if (code == 1006) { // authentication error
