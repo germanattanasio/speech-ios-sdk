@@ -39,23 +39,26 @@
     
     // TTS setup
     TTSConfiguration *confTTS = [[TTSConfiguration alloc] init];
+    [confTTS setBasicAuthUsername:@""];
+    [confTTS setBasicAuthPassword:@""];
+    [confTTS setAudioCodec:WATSONSDK_TTS_AUDIO_CODEC_TYPE_OPUS];
     
-    [confTTS setTokenGenerator:^(void (^tokenHandler)(NSString *token)){
-        NSURL *url = [[NSURL alloc] initWithString:@"https://my-token-factory/token"];
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-        [request setHTTPMethod:@"GET"];
-        [request setURL:url];
-        
-        NSError *error = [[NSError alloc] init];
-        NSHTTPURLResponse *responseCode = nil;
-        NSData *oResponseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&responseCode error:&error];
-        if ([responseCode statusCode] != 200) {
-            NSLog(@"Error getting %@, HTTP status code %i", url, [responseCode statusCode]);
-            return;
-        }
-        tokenHandler([[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding]);
-    } ];
-    
+//    [confTTS setTokenGenerator:^(void (^tokenHandler)(NSString *token)){
+//        NSURL *url = [[NSURL alloc] initWithString:@"https://my-token-factory/token"];
+//        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+//        [request setHTTPMethod:@"GET"];
+//        [request setURL:url];
+//        
+//        NSError *error = [[NSError alloc] init];
+//        NSHTTPURLResponse *responseCode = nil;
+//        NSData *oResponseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&responseCode error:&error];
+//        if ([responseCode statusCode] != 200) {
+//            NSLog(@"Error getting %@, HTTP status code %li", url, (long)[responseCode statusCode]);
+//            return;
+//        }
+//        tokenHandler([[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding]);
+//    } ];
+//    
     self.tts = [TextToSpeech initWithConfig:confTTS];
     
     
@@ -87,15 +90,17 @@
 - (IBAction)pressSpeak:(id)sender {
     
     [self.tts synthesize:^(NSData *data, NSError *err) {
-        
+        if(err){
+            NSLog(@"Error requesting data: %@", [err description]);
+            return;
+        }
         // play audio and log when playgin has finished
         [self.tts playAudio:^(NSError *err) {
-            
-            if(!err)
-                NSLog(@"audio finished playing");
+            if(err)
+                NSLog(@"error playing audio %@",[err localizedDescription]);
             else
-                NSLog(@"error playing audio %@",err.localizedDescription);
-            
+                NSLog(@"audio finished playing");
+
         } withData:data];
         
     } theText:self.ttsField.text];

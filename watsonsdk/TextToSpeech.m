@@ -65,7 +65,7 @@ typedef void (^PlayAudioCallbackBlockType)(NSError*);
 
 
 - (void) synthesize:(void (^)(NSData*, NSError*)) synthesizeHandler theText:(NSString*) text {
-    
+
     [self performDataGet:synthesizeHandler forURL:[self.config getSynthesizeURL:text]];
 }
 
@@ -84,58 +84,12 @@ typedef void (^PlayAudioCallbackBlockType)(NSError*);
 #pragma mark private methods
 
 /**
- *  performGet - shared method for performing GET requests to a given url calling a handler parameter with the result
- *
- *  @param handler (^)(NSDictionary*, NSError*))
- *  @param url     url to perform GET request on
- */
-- (void) performGet:(void (^)(NSDictionary*, NSError*))handler forURL:(NSURL*)url{
-    
-    // Create and set authentication headers
-    NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
-    
-    [self.config requestToken:^(AuthConfiguration *config) {
-        NSDictionary* headers = [config createRequestHeaders];
-        [defaultConfigObject setHTTPAdditionalHeaders:headers];
-        NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: defaultConfigObject delegate: self delegateQueue: [NSOperationQueue mainQueue]];
-        
-        
-        NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *reqError) {
-            
-            if(reqError == nil)
-            {
-                NSError *localError = nil;
-                NSDictionary *parsedObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:&localError];
-                
-                if (localError != nil) {
-                    handler(nil,localError);
-                } else {
-                    handler(parsedObject,nil);
-                }
-                
-                
-            } else {
-                if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-                    if ([((NSHTTPURLResponse*)response) statusCode] == 401) { // authentication error
-                        [config invalidateToken];
-                    }
-                }
-                handler(nil,reqError);
-            }
-            
-        }];
-        
-        [dataTask resume];
-    }];
-}
-
-/**
  *  Play audio data
  *
  *  @param audioHandler Audio handler
  *  @param audio        Audio data
  */
-- (void) playAudio:(void (^)(NSError*)) audioHandler  withData:(NSData *) audio {
+- (void) playAudio:(void (^)(NSError*)) audioHandler withData:(NSData *) audio {
     
     self.playAudioCallback = audioHandler;
     
@@ -274,6 +228,55 @@ typedef void (^PlayAudioCallbackBlockType)(NSError*);
     [ audio writeToFile:path atomically:true];
 }
 
+/**
+ *  performGet - shared method for performing GET requests to a given url calling a handler parameter with the result
+ *
+ *  @param handler (^)(NSDictionary*, NSError*))
+ *  @param url     url to perform GET request on
+ */
+- (void) performGet:(void (^)(NSDictionary*, NSError*))handler forURL:(NSURL*)url{
+    // Create and set authentication headers
+    NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
+    
+    [self.config requestToken:^(AuthConfiguration *config) {
+        NSDictionary* headers = [config createRequestHeaders];
+        [defaultConfigObject setHTTPAdditionalHeaders:headers];
+        NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: defaultConfigObject delegate: self delegateQueue: [NSOperationQueue mainQueue]];
+        
+        NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *reqError) {
+            if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+                NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*) response;
+                if([httpResponse statusCode] != 200){
+                    NSDictionary *userInfo = @{
+                                               NSLocalizedDescriptionKey: @"",
+                                               NSLocalizedFailureReasonErrorKey: @"",
+                                               NSLocalizedRecoverySuggestionErrorKey: @""
+                                               };
+                    reqError = [NSError errorWithDomain: WATSONSDK_TTS_ERROR_DOMAIN
+                                                   code: [httpResponse statusCode]
+                                               userInfo: userInfo];
+                    [config invalidateToken];
+                }
+            }
+            if(reqError)
+            {
+                handler(nil,reqError);
+            } else {
+                NSError *localError = nil;
+                NSDictionary *parsedObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:&localError];
+                if (localError != nil) {
+                    handler(nil,localError);
+                } else {
+                    handler(parsedObject,nil);
+                }
+            }
+            
+        }];
+        
+        [dataTask resume];
+    }];
+}
+
 
 /**
  *  performGet - shared method for performing GET requests to a given url calling a handler parameter with the result
@@ -290,24 +293,33 @@ typedef void (^PlayAudioCallbackBlockType)(NSError*);
         NSDictionary* headers = [config createRequestHeaders];
         [defaultConfigObject setHTTPAdditionalHeaders:headers];
         NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: defaultConfigObject delegate: self delegateQueue: [NSOperationQueue mainQueue]];
-        
-        
         NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *reqError) {
-            
-            if(reqError == nil)
-            {
-                handler(data,nil);
-            } else {
-                if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-                    if ([((NSHTTPURLResponse*)response) statusCode] == 401) { // authentication error
-                        [config invalidateToken];
-                    }
+            if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+                NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*) response;
+                if([httpResponse statusCode] != 200)
+                {
+                    NSDictionary *userInfo = @{
+                                               NSLocalizedDescriptionKey: @"",
+                                               NSLocalizedFailureReasonErrorKey: @"",
+                                               NSLocalizedRecoverySuggestionErrorKey: @""
+                                               };
+                    reqError = [NSError errorWithDomain: WATSONSDK_TTS_ERROR_DOMAIN
+                                                   code: [httpResponse statusCode]
+                                               userInfo:userInfo];
+
+                    [config invalidateToken];
                 }
-                handler(nil,reqError);
             }
-            
+            if(reqError){
+                NSLog(@"Error: %@", [reqError description]);
+                handler(nil, reqError);
+            }
+            else {
+                NSLog(@"Succeed: %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+                handler(data, nil);
+            }
         }];
-        
+
         [dataTask resume];
     }];
      

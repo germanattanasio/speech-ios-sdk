@@ -40,24 +40,26 @@
     STTConfiguration *conf = [[STTConfiguration alloc] init];
     
     // Use opus compression, better for mobile devices.
-    //[conf setAudioCodec:WATSONSDK_AUDIO_CODEC_TYPE_OPUS];
-    //[conf setApiURL:@"https://stream.watsonplatform.net/speech-to-text/api/"];
+    [conf setBasicAuthUsername:@""];
+    [conf setBasicAuthPassword:@""];
+    [conf setAudioCodec:WATSONSDK_AUDIO_CODEC_TYPE_OPUS];
+    [conf setModelName:@"en-US_BroadbandModel"];
 
-    [conf setTokenGenerator:^(void (^tokenHandler)(NSString *token)){
-        NSURL *url = [[NSURL alloc] initWithString:@"https://<token-factory-url>"];
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-        [request setHTTPMethod:@"GET"];
-        [request setURL:url];
-        
-        NSError *error = [[NSError alloc] init];
-        NSHTTPURLResponse *responseCode = nil;
-        NSData *oResponseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&responseCode error:&error];
-        if ([responseCode statusCode] != 200) {
-            NSLog(@"Error getting %@, HTTP status code %li", url, (long)[responseCode statusCode]);
-            return;
-        }
-        tokenHandler([[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding]);
-    } ];
+//    [conf setTokenGenerator:^(void (^tokenHandler)(NSString *token)){
+//        NSURL *url = [[NSURL alloc] initWithString:@"https://<token-factory-url>"];
+//        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+//        [request setHTTPMethod:@"GET"];
+//        [request setURL:url];
+//        
+//        NSError *error = [[NSError alloc] init];
+//        NSHTTPURLResponse *responseCode = nil;
+//        NSData *oResponseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&responseCode error:&error];
+//        if ([responseCode statusCode] != 200) {
+//            NSLog(@"Error getting %@, HTTP status code %li", url, (long)[responseCode statusCode]);
+//            return;
+//        }
+//        tokenHandler([[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding]);
+//    } ];
     
     self.stt = [SpeechToText initWithConfig:conf];
     

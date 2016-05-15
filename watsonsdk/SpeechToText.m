@@ -119,11 +119,13 @@ id oggRef;
     if(!isNewRecordingAllowed)
     {
         NSLog(@"Transcription already in progress");
-        NSMutableDictionary* details = [NSMutableDictionary dictionary];
-        [details setValue:@"A voice query is already in progress" forKey:NSLocalizedDescriptionKey];
-        
+        NSDictionary *userInfo = @{
+                                   NSLocalizedDescriptionKey: @"A voice query is already in progress",
+                                   NSLocalizedFailureReasonErrorKey: @"",
+                                   NSLocalizedRecoverySuggestionErrorKey: @""
+                                   };
         // populate the error object with the details
-        NSError *recordError = [NSError errorWithDomain:@"com.ibm.cio.watsonsdk" code:409 userInfo:details];
+        NSError *recordError = [NSError errorWithDomain: WATSONSDK_STT_ERROR_DOMAIN code:WATSONSDK_STT_ERROR_CODE userInfo: userInfo];
         self.recognizeCallback(nil, recordError);
         return;
     }

@@ -164,30 +164,22 @@ typedef void (^RecognizeCallbackBlockType)(NSDictionary*, NSError*);
 }
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)json;
 {
-    
-    NSLog(@"received --> %@",json);
-    
+//    NSLog(@"received --> %@",json);   
     NSData *data = [json dataUsingEncoding:NSUTF8StringEncoding];
     // this should be JSON parse it but check for errors
     
     NSError *error = nil;
-    id object = [NSJSONSerialization
-                 JSONObjectWithData:data
-                 options:0
-                 error:&error];
-    
+    id object = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+
     if(error) {
-        
         /* JSON was malformed, act appropriately here */
-        NSLog(@"JSON from service malformed, received %@",json);
+        NSLog(@"JSON from service malformed, received %@", json);
         self.recognizeCallback(nil,error);
-        
     }
     
     if([object isKindOfClass:[NSDictionary class]])
     {
         NSDictionary *results = object;
-        
         // look for state changes
         if([results objectForKey:@"state"] != nil) {
             NSString *state = [results objectForKey:@"state"];
@@ -218,8 +210,8 @@ typedef void (^RecognizeCallbackBlockType)(NSDictionary*, NSError*);
                                        NSLocalizedFailureReasonErrorKey: errorStr,
                                        NSLocalizedRecoverySuggestionErrorKey: @""
                                        };
-            NSError *error = [NSError errorWithDomain:@"WatsonSpeechSDK"
-                                                 code:500
+            NSError *error = [NSError errorWithDomain: WATSONSDK_STT_ERROR_DOMAIN
+                                                 code: WATSONSDK_STT_ERROR_CODE
                                              userInfo:userInfo];
             self.recognizeCallback(nil, error);
             [self disconnect: errorStr];
