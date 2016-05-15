@@ -39,8 +39,8 @@
     
     // TTS setup
     TTSConfiguration *confTTS = [[TTSConfiguration alloc] init];
-    [confTTS setBasicAuthUsername:@""];
-    [confTTS setBasicAuthPassword:@""];
+    [confTTS setBasicAuthUsername:@"<your-username>"];
+    [confTTS setBasicAuthPassword:@"<your-password>"];
     [confTTS setAudioCodec:WATSONSDK_TTS_AUDIO_CODEC_TYPE_OPUS];
     
 //    [confTTS setTokenGenerator:^(void (^tokenHandler)(NSString *token)){

@@ -37,13 +37,13 @@
     
     
     // STT setup
-    STTConfiguration *conf = [[STTConfiguration alloc] init];
+    STTConfiguration *confSTT = [[STTConfiguration alloc] init];
     
     // Use opus compression, better for mobile devices.
-    [conf setBasicAuthUsername:@""];
-    [conf setBasicAuthPassword:@""];
-    [conf setAudioCodec:WATSONSDK_AUDIO_CODEC_TYPE_OPUS];
-    [conf setModelName:@"en-US_BroadbandModel"];
+    [confSTT setBasicAuthUsername:@"<your-username>"];
+    [confSTT setBasicAuthPassword:@"<your-password>"];
+    [confSTT setAudioCodec:WATSONSDK_AUDIO_CODEC_TYPE_OPUS];
+    [confSTT setModelName:@"en-US_BroadbandModel"];
 
 //    [conf setTokenGenerator:^(void (^tokenHandler)(NSString *token)){
 //        NSURL *url = [[NSURL alloc] initWithString:@"https://<token-factory-url>"];
@@ -61,7 +61,7 @@
 //        tokenHandler([[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding]);
 //    } ];
     
-    self.stt = [SpeechToText initWithConfig:conf];
+    self.stt = [SpeechToText initWithConfig:confSTT];
     
     
     // list models call to populate picker
