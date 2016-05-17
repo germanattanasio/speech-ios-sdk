@@ -119,7 +119,7 @@ typedef void (^RecognizeCallbackBlockType)(NSDictionary*, NSError*);
         self.hasDataBeenSent=YES;
     } else {
         // we need to buffer this data and send it when we connect
-        NSLog(@"WebSocketUploader - data written but we're not connected yet");
+        NSLog(@"buffering data and establishing connection");
 
         [self.audioBuffer appendData:data];
     }

@@ -416,15 +416,20 @@ Generate and play audio
 
 **in Objective-C**
 ```objective-c
-	[self.tts synthesize:^(NSData *data, NSError *err) {
-    
+	[self.tts synthesize:^(NSData *data, NSError *reqErr) {
+    	
+    	// request error
+    	if(reqErr){
+            NSLog(@"Error requesting data: %@", [reqErr description]);
+            return;
+        }
+
         // play audio and log when playing has finished
         [self.tts playAudio:^(NSError *err) {
-            
-            if(!err)
-                NSLog(@"audio finished playing");
+            if(err)
+                NSLog(@"error playing audio %@", [err localizedDescription]);
             else
-                NSLog(@"error playing audio %@",err.localizedDescription);
+            	NSLog(@"audio finished playing");
             
         } withData:data];
         
@@ -434,16 +439,21 @@ Generate and play audio
 
 **in Swift**
 ```swift
-	tts!.synthesize({
-		(data, err) in
-            
-		tts!.playAudio({
-			(err) in
-            
-				... do something after the audio has played ...
-		
-		}, withData: data)
-            
+
+	tts!.synthesize({ (data: NSData!, reqError: NSError!) -> Void in
+        if reqError == nil{
+			tts!.playAudio({ (error: NSError!) -> Void in
+				if error == nil{
+					... do something after the audio has played ...
+				}
+				else{
+					... data error handling ...
+				}
+			}, withData: data)
+        }
+        else
+        	... request error handling ...
+
 	}, theText: "Hello World")
 
 ```

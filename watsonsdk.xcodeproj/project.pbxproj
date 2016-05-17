@@ -25,6 +25,8 @@
 /* Begin PBXBuildFile section */
 		7EFE11E41B71D07D00EF10BF /* AuthConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EFE11E21B71D07D00EF10BF /* AuthConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7EFE11E51B71D07D00EF10BF /* AuthConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFE11E31B71D07D00EF10BF /* AuthConfiguration.m */; };
+		9B375ABB1CEB0C2500A6F9D4 /* SwiftTTSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B375ABA1CEB0C2500A6F9D4 /* SwiftTTSViewController.swift */; };
+		9B375ABD1CEB194400A6F9D4 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BA060401CE6D9320018CA5B /* libicucore.tbd */; };
 		9BA060411CE6D9320018CA5B /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BA060401CE6D9320018CA5B /* libicucore.tbd */; };
 		9BA475891B9D34AA00D66F1E /* OggHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA475871B9D34AA00D66F1E /* OggHelper.h */; };
 		9BA4758A1B9D34AA00D66F1E /* OggHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA475881B9D34AA00D66F1E /* OggHelper.m */; };
@@ -48,6 +50,12 @@
 		9BCAD8421CE6BF1200BE3B5F /* SocketRocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD8311CE6BF1200BE3B5F /* SocketRocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9BCAD8431CE6BF1200BE3B5F /* SRWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD8321CE6BF1200BE3B5F /* SRWebSocket.h */; };
 		9BCAD8441CE6BF1200BE3B5F /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD8331CE6BF1200BE3B5F /* SRWebSocket.m */; };
+		9BF43ED21CEAC81900EC0185 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF43ED11CEAC81900EC0185 /* AppDelegate.swift */; };
+		9BF43ED41CEAC81900EC0185 /* SwiftSTTViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF43ED31CEAC81900EC0185 /* SwiftSTTViewController.swift */; };
+		9BF43ED71CEAC81900EC0185 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BF43ED51CEAC81900EC0185 /* Main.storyboard */; };
+		9BF43ED91CEAC81900EC0185 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BF43ED81CEAC81900EC0185 /* Assets.xcassets */; };
+		9BF43EDC1CEAC81900EC0185 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BF43EDA1CEAC81900EC0185 /* LaunchScreen.storyboard */; };
+		9BF43EE11CEAC82E00EC0185 /* libwatsonsdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C11A645B1754D0E600385896 /* libwatsonsdk.a */; };
 		C11712E31A03DC2E00957080 /* UploaderDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = C123FF8719B9FE4100C6A702 /* UploaderDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C11772091AFD191D00C8791A /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C11772081AFD191D00C8791A /* libogg.a */; };
 		C11772141B029BEE00C8791A /* opus_header.h in Headers */ = {isa = PBXBuildFile; fileRef = C11772131B029BEE00C8791A /* opus_header.h */; };
@@ -71,8 +79,7 @@
 		C16542A5191A0D8500905DCC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C16542A3191A0D8500905DCC /* InfoPlist.strings */; };
 		C16542A7191A0D8500905DCC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C16542A6191A0D8500905DCC /* main.m */; };
 		C16542AB191A0D8500905DCC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C16542AA191A0D8500905DCC /* AppDelegate.m */; };
-		C16542AE191A0D8500905DCC /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C16542AC191A0D8500905DCC /* Main_iPhone.storyboard */; };
-		C16542B1191A0D8500905DCC /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C16542AF191A0D8500905DCC /* Main_iPad.storyboard */; };
+		C16542AE191A0D8500905DCC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C16542AC191A0D8500905DCC /* Main.storyboard */; };
 		C16542B4191A0D8500905DCC /* STTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C16542B3191A0D8500905DCC /* STTViewController.m */; };
 		C16542B6191A0D8500905DCC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C16542B5191A0D8500905DCC /* Images.xcassets */; };
 		C16542D4191A0FA100905DCC /* libwatsonsdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C11A645B1754D0E600385896 /* libwatsonsdk.a */; };
@@ -127,6 +134,8 @@
 /* Begin PBXFileReference section */
 		7EFE11E21B71D07D00EF10BF /* AuthConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthConfiguration.h; sourceTree = "<group>"; };
 		7EFE11E31B71D07D00EF10BF /* AuthConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthConfiguration.m; sourceTree = "<group>"; };
+		9B375ABA1CEB0C2500A6F9D4 /* SwiftTTSViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftTTSViewController.swift; sourceTree = "<group>"; };
+		9B375ABC1CEB184200A6F9D4 /* SwiftSpeechHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftSpeechHeader.h; sourceTree = "<group>"; };
 		9BA060401CE6D9320018CA5B /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		9BA475871B9D34AA00D66F1E /* OggHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OggHelper.h; path = ogg/OggHelper.h; sourceTree = "<group>"; };
 		9BA475881B9D34AA00D66F1E /* OggHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OggHelper.m; path = ogg/OggHelper.m; sourceTree = "<group>"; };
@@ -150,6 +159,13 @@
 		9BCAD8311CE6BF1200BE3B5F /* SocketRocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketRocket.h; sourceTree = "<group>"; };
 		9BCAD8321CE6BF1200BE3B5F /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRWebSocket.h; sourceTree = "<group>"; };
 		9BCAD8331CE6BF1200BE3B5F /* SRWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRWebSocket.m; sourceTree = "<group>"; };
+		9BF43ECF1CEAC81900EC0185 /* watsonsdktest-swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "watsonsdktest-swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9BF43ED11CEAC81900EC0185 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		9BF43ED31CEAC81900EC0185 /* SwiftSTTViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftSTTViewController.swift; sourceTree = "<group>"; };
+		9BF43ED61CEAC81900EC0185 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		9BF43ED81CEAC81900EC0185 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9BF43EDB1CEAC81900EC0185 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		9BF43EDD1CEAC81900EC0185 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C11772081AFD191D00C8791A /* libogg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libogg.a; sourceTree = "<group>"; };
 		C11772131B029BEE00C8791A /* opus_header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opus_header.h; sourceTree = "<group>"; };
 		C117721D1B02A15000C8791A /* opus_header.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = opus_header.c; sourceTree = "<group>"; };
@@ -180,7 +196,7 @@
 		C1235353199B53FF009A8F8B /* OpusHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpusHelper.h; sourceTree = "<group>"; };
 		C1235354199B53FF009A8F8B /* OpusHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpusHelper.m; sourceTree = "<group>"; };
 		C123FF8719B9FE4100C6A702 /* UploaderDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UploaderDelegate.h; sourceTree = "<group>"; };
-		C165429B191A0D8500905DCC /* watsonsdktest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = watsonsdktest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C165429B191A0D8500905DCC /* watsonsdktest-objective-c.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "watsonsdktest-objective-c.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C165429D191A0D8500905DCC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		C16542A2191A0D8500905DCC /* watsonsdktest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "watsonsdktest-Info.plist"; sourceTree = "<group>"; };
 		C16542A4191A0D8500905DCC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -188,8 +204,7 @@
 		C16542A8191A0D8500905DCC /* watsonsdktest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "watsonsdktest-Prefix.pch"; sourceTree = "<group>"; };
 		C16542A9191A0D8500905DCC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C16542AA191A0D8500905DCC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		C16542AD191A0D8500905DCC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
-		C16542B0191A0D8500905DCC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		C16542AD191A0D8500905DCC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C16542B2191A0D8500905DCC /* STTViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STTViewController.h; sourceTree = "<group>"; };
 		C16542B3191A0D8500905DCC /* STTViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STTViewController.m; sourceTree = "<group>"; };
 		C16542B5191A0D8500905DCC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -204,6 +219,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		9BF43ECC1CEAC81900EC0185 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B375ABD1CEB194400A6F9D4 /* libicucore.tbd in Frameworks */,
+				9BF43EE11CEAC82E00EC0185 /* libwatsonsdk.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C11A64581754D0E600385896 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -306,6 +330,21 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
+		9BF43ED01CEAC81900EC0185 /* watsonsdktest-swift */ = {
+			isa = PBXGroup;
+			children = (
+				9BF43ED11CEAC81900EC0185 /* AppDelegate.swift */,
+				9BF43ED31CEAC81900EC0185 /* SwiftSTTViewController.swift */,
+				9B375ABA1CEB0C2500A6F9D4 /* SwiftTTSViewController.swift */,
+				9BF43ED51CEAC81900EC0185 /* Main.storyboard */,
+				9BF43ED81CEAC81900EC0185 /* Assets.xcassets */,
+				9BF43EDA1CEAC81900EC0185 /* LaunchScreen.storyboard */,
+				9BF43EDD1CEAC81900EC0185 /* Info.plist */,
+				9B375ABC1CEB184200A6F9D4 /* SwiftSpeechHeader.h */,
+			);
+			path = "watsonsdktest-swift";
+			sourceTree = "<group>";
+		};
 		C11772101AFD193B00C8791A /* ogg */ = {
 			isa = PBXGroup;
 			children = (
@@ -321,13 +360,10 @@
 		C11A64521754D0E600385896 = {
 			isa = PBXGroup;
 			children = (
-				C11A66E117560AD900385896 /* CFNetwork.framework */,
-				C11A66DF17560A4E00385896 /* QuartzCore.framework */,
-				C11A66DD175609B500385896 /* CoreAudio.framework */,
-				C11A66DB1756098E00385896 /* AudioToolbox.framework */,
 				C11A64601754D0E600385896 /* watsonsdk */,
 				C11A64971754D98700385896 /* watsonResources */,
-				C16542A0191A0D8500905DCC /* watsonsdktest */,
+				C16542A0191A0D8500905DCC /* watsonsdktest-objective-c */,
+				9BF43ED01CEAC81900EC0185 /* watsonsdktest-swift */,
 				C11A645D1754D0E600385896 /* Frameworks */,
 				C11A645C1754D0E600385896 /* Products */,
 			);
@@ -338,7 +374,8 @@
 			children = (
 				C11A645B1754D0E600385896 /* libwatsonsdk.a */,
 				C11A64941754D98700385896 /* watsonsdk.bundle */,
-				C165429B191A0D8500905DCC /* watsonsdktest.app */,
+				C165429B191A0D8500905DCC /* watsonsdktest-objective-c.app */,
+				9BF43ECF1CEAC81900EC0185 /* watsonsdktest-swift.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -347,6 +384,10 @@
 			isa = PBXGroup;
 			children = (
 				9BA060401CE6D9320018CA5B /* libicucore.tbd */,
+				C11A66E117560AD900385896 /* CFNetwork.framework */,
+				C11A66DF17560A4E00385896 /* QuartzCore.framework */,
+				C11A66DD175609B500385896 /* CoreAudio.framework */,
+				C11A66DB1756098E00385896 /* AudioToolbox.framework */,
 				C11B3EA11AF41A200062BF7D /* AVFoundation.framework */,
 				C1D4580019A78BBB00093095 /* Security.framework */,
 				C11A645E1754D0E600385896 /* Foundation.framework */,
@@ -440,13 +481,12 @@
 			path = lib;
 			sourceTree = "<group>";
 		};
-		C16542A0191A0D8500905DCC /* watsonsdktest */ = {
+		C16542A0191A0D8500905DCC /* watsonsdktest-objective-c */ = {
 			isa = PBXGroup;
 			children = (
 				C16542A9191A0D8500905DCC /* AppDelegate.h */,
 				C16542AA191A0D8500905DCC /* AppDelegate.m */,
-				C16542AC191A0D8500905DCC /* Main_iPhone.storyboard */,
-				C16542AF191A0D8500905DCC /* Main_iPad.storyboard */,
+				C16542AC191A0D8500905DCC /* Main.storyboard */,
 				C16542B2191A0D8500905DCC /* STTViewController.h */,
 				C16542B3191A0D8500905DCC /* STTViewController.m */,
 				C17779621B9DBFAA0066269A /* TTSViewController.h */,
@@ -454,7 +494,7 @@
 				C16542B5191A0D8500905DCC /* Images.xcassets */,
 				C16542A1191A0D8500905DCC /* Supporting Files */,
 			);
-			path = watsonsdktest;
+			path = "watsonsdktest-objective-c";
 			sourceTree = "<group>";
 		};
 		C16542A1191A0D8500905DCC /* Supporting Files */ = {
@@ -503,6 +543,23 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		9BF43ECE1CEAC81900EC0185 /* watsonsdktest-swift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9BF43EDE1CEAC81900EC0185 /* Build configuration list for PBXNativeTarget "watsonsdktest-swift" */;
+			buildPhases = (
+				9BF43ECB1CEAC81900EC0185 /* Sources */,
+				9BF43ECC1CEAC81900EC0185 /* Frameworks */,
+				9BF43ECD1CEAC81900EC0185 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "watsonsdktest-swift";
+			productName = "watsonsdktest-swift";
+			productReference = 9BF43ECF1CEAC81900EC0185 /* watsonsdktest-swift.app */;
+			productType = "com.apple.product-type.application";
+		};
 		C11A645A1754D0E600385896 /* watsonsdk */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C11A64801754D0E700385896 /* Build configuration list for PBXNativeTarget "watsonsdk" */;
@@ -540,9 +597,9 @@
 			productReference = C11A64941754D98700385896 /* watsonsdk.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
-		C165429A191A0D8500905DCC /* watsonsdktest */ = {
+		C165429A191A0D8500905DCC /* watsonsdktest-objective-c */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C16542CE191A0D8500905DCC /* Build configuration list for PBXNativeTarget "watsonsdktest" */;
+			buildConfigurationList = C16542CE191A0D8500905DCC /* Build configuration list for PBXNativeTarget "watsonsdktest-objective-c" */;
 			buildPhases = (
 				C1654297191A0D8500905DCC /* Sources */,
 				C1654298191A0D8500905DCC /* Frameworks */,
@@ -552,9 +609,9 @@
 			);
 			dependencies = (
 			);
-			name = watsonsdktest;
-			productName = watsonsdktest;
-			productReference = C165429B191A0D8500905DCC /* watsonsdktest.app */;
+			name = "watsonsdktest-objective-c";
+			productName = "watsonsdktest-objective-c";
+			productReference = C165429B191A0D8500905DCC /* watsonsdktest-objective-c.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -563,9 +620,15 @@
 		C11A64531754D0E600385896 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0720;
 				LastTestingUpgradeCheck = 0630;
 				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = IBM;
+				TargetAttributes = {
+					9BF43ECE1CEAC81900EC0185 = {
+						CreatedOnToolsVersion = 7.2;
+					};
+				};
 			};
 			buildConfigurationList = C11A64561754D0E600385896 /* Build configuration list for PBXProject "watsonsdk" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -583,12 +646,23 @@
 				C11A645A1754D0E600385896 /* watsonsdk */,
 				C11A64891754D6AB00385896 /* Framework */,
 				C11A64931754D98700385896 /* watsonResources */,
-				C165429A191A0D8500905DCC /* watsonsdktest */,
+				C165429A191A0D8500905DCC /* watsonsdktest-objective-c */,
+				9BF43ECE1CEAC81900EC0185 /* watsonsdktest-swift */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		9BF43ECD1CEAC81900EC0185 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9BF43EDC1CEAC81900EC0185 /* LaunchScreen.storyboard in Resources */,
+				9BF43ED91CEAC81900EC0185 /* Assets.xcassets in Resources */,
+				9BF43ED71CEAC81900EC0185 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C11A64921754D98700385896 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -602,9 +676,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C16542B1191A0D8500905DCC /* Main_iPad.storyboard in Resources */,
 				C16542B6191A0D8500905DCC /* Images.xcassets in Resources */,
-				C16542AE191A0D8500905DCC /* Main_iPhone.storyboard in Resources */,
+				C16542AE191A0D8500905DCC /* Main.storyboard in Resources */,
 				C16542A5191A0D8500905DCC /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -623,7 +696,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -e\n\nmkdir -p \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers\"\n\n# Link the \"Current\" version to \"A\"\n/bin/ln -sfh A \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/Current\"\n/bin/ln -sfh Versions/Current/Headers \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Headers\"\n/bin/ln -sfh \"Versions/Current/${PRODUCT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/${PRODUCT_NAME}\"\n\n# The -a ensures that the headers maintain the source modification date so that we don't constantly\n# cause propagating rebuilds of files that import these headers.\n/bin/cp -a \"${TARGET_BUILD_DIR}/${PUBLIC_HEADERS_FOLDER_PATH}/\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers\"\necho \"${TARGET_BUILD_DIR}/${PUBLIC_HEADERS_FOLDER_PATH}/\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/\" > ~/watsonsdklocation.txt\n\n# create a zip of the framework and add it to the project root\ncd ${BUILT_PRODUCTS_DIR}\nzip -r ${SRCROOT}/${PRODUCT_NAME}.framework.zip ${PRODUCT_NAME}.framework\n\n# [Rob] we need to copy the other headers keeping their folder structure\n#echo 'SRCROOT:'${SRCROOT}\n#cd ${SRCROOT}/watsonsdk\n\n# I have to move up a directory due to my layout.\n# echo 'Copying Headers into Framework..'\n#for H in `find ./ -name \"*.h\"`;  do\n#echo ${H}\n#ditto ${H} ${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers/${H}\n#done\n";
+			shellScript = "set -e\n\nmkdir -p \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers\"\n\n# Link the \"Current\" version to \"A\"\n/bin/ln -sfh A \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/Current\"\n/bin/ln -sfh Versions/Current/Headers \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Headers\"\n/bin/ln -sfh \"Versions/Current/${PRODUCT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/${PRODUCT_NAME}\"\n\n# The -a ensures that the headers maintain the source modification date so that we don't constantly\n# cause propagating rebuilds of files that import these headers.\n/bin/cp -a \"${TARGET_BUILD_DIR}/${PUBLIC_HEADERS_FOLDER_PATH}/\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers\"\necho \"${TARGET_BUILD_DIR}/${PUBLIC_HEADERS_FOLDER_PATH}/\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/\" > ~/watsonsdklocation.txt\n\n# create a zip of the framework and add it to the project root\ncd ${BUILT_PRODUCTS_DIR}\nzip -r ${SRCROOT}/${PRODUCT_NAME}.framework.zip ${PRODUCT_NAME}.framework\nunzip -o ${SRCROOT}/${PRODUCT_NAME}.framework.zip -d /Users/mihui/Documents/Work/Projects/Mobile/Dialog-Mobile/platforms/ios/Dialog\\ Mobile/Frameworks/\n# [Rob] we need to copy the other headers keeping their folder structure\n#echo 'SRCROOT:'${SRCROOT}\n#cd ${SRCROOT}/watsonsdk\n\n# I have to move up a directory due to my layout.\n# echo 'Copying Headers into Framework..'\n#for H in `find ./ -name \"*.h\"`;  do\n#echo ${H}\n#ditto ${H} ${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers/${H}\n#done\n";
 		};
 		C11A648F1754D6DA00385896 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -641,6 +714,16 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		9BF43ECB1CEAC81900EC0185 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9BF43ED41CEAC81900EC0185 /* SwiftSTTViewController.swift in Sources */,
+				9B375ABB1CEB0C2500A6F9D4 /* SwiftTTSViewController.swift in Sources */,
+				9BF43ED21CEAC81900EC0185 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C11A64571754D0E600385896 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -704,6 +787,22 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		9BF43ED51CEAC81900EC0185 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9BF43ED61CEAC81900EC0185 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		9BF43EDA1CEAC81900EC0185 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9BF43EDB1CEAC81900EC0185 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
 		C11A649A1754D98700385896 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -720,25 +819,78 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		C16542AC191A0D8500905DCC /* Main_iPhone.storyboard */ = {
+		C16542AC191A0D8500905DCC /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				C16542AD191A0D8500905DCC /* Base */,
 			);
-			name = Main_iPhone.storyboard;
-			sourceTree = "<group>";
-		};
-		C16542AF191A0D8500905DCC /* Main_iPad.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C16542B0191A0D8500905DCC /* Base */,
-			);
-			name = Main_iPad.storyboard;
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		9BF43EDF1CEAC81900EC0185 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "watsonsdktest-swift/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.cio.watsonsdktest-swift";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "watsonsdktest-swift/SwiftSpeechHeader.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9BF43EE01CEAC81900EC0185 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "watsonsdktest-swift/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.cio.watsonsdktest-swift";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "watsonsdktest-swift/SwiftSpeechHeader.h";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		C11A647E1754D0E700385896 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -929,7 +1081,7 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "watsonsdktest/watsonsdktest-Prefix.pch";
+				GCC_PREFIX_HEADER = "watsonsdktest-objective-c/watsonsdktest-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -939,7 +1091,7 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
-				INFOPLIST_FILE = "watsonsdktest/watsonsdktest-Info.plist";
+				INFOPLIST_FILE = "watsonsdktest-objective-c/watsonsdktest-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -966,13 +1118,13 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "watsonsdktest/watsonsdktest-Prefix.pch";
+				GCC_PREFIX_HEADER = "watsonsdktest-objective-c/watsonsdktest-Prefix.pch";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
-				INFOPLIST_FILE = "watsonsdktest/watsonsdktest-Info.plist";
+				INFOPLIST_FILE = "watsonsdktest-objective-c/watsonsdktest-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -984,6 +1136,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		9BF43EDE1CEAC81900EC0185 /* Build configuration list for PBXNativeTarget "watsonsdktest-swift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9BF43EDF1CEAC81900EC0185 /* Debug */,
+				9BF43EE01CEAC81900EC0185 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		C11A64561754D0E600385896 /* Build configuration list for PBXProject "watsonsdk" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1020,7 +1181,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C16542CE191A0D8500905DCC /* Build configuration list for PBXNativeTarget "watsonsdktest" */ = {
+		C16542CE191A0D8500905DCC /* Build configuration list for PBXNativeTarget "watsonsdktest-objective-c" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C16542CA191A0D8500905DCC /* Debug */,
