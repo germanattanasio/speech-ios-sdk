@@ -9,7 +9,7 @@
         <!--SwiftSTT View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="SwiftSTTViewController" customModule="watsonsdktest_swift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="SwiftSTTViewController" customModule="Swift_Sample" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -286,7 +286,7 @@
         <!--SwiftTTS View Controller-->
         <scene sceneID="vnz-TS-DrA">
             <objects>
-                <viewController id="pd5-N1-MXS" customClass="SwiftTTSViewController" customModule="watsonsdktest_swift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="pd5-N1-MXS" customClass="SwiftTTSViewController" customModule="Swift_Sample" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="tOi-2m-Bwb"/>
                         <viewControllerLayoutGuide type="bottom" id="bwh-KO-NJG"/>

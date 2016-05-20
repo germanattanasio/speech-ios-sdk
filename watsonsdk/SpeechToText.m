@@ -282,12 +282,26 @@ id oggRef;
         [defaultConfigObject setHTTPAdditionalHeaders:headers];
         
         NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: defaultConfigObject delegate: self delegateQueue: [NSOperationQueue mainQueue]];
-        
-        
+
         NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *reqError) {
-            
-            if(reqError == nil)
+            if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+                NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*) response;
+                if([httpResponse statusCode] != 200){
+                    NSDictionary *userInfo = @{
+                                               NSLocalizedDescriptionKey: @"",
+                                               NSLocalizedFailureReasonErrorKey: @"",
+                                               NSLocalizedRecoverySuggestionErrorKey: @""
+                                               };
+                    reqError = [NSError errorWithDomain: WATSONSDK_STT_ERROR_DOMAIN
+                                                   code: [httpResponse statusCode]
+                                               userInfo: userInfo];
+                    [config invalidateToken];
+                }
+            }
+            if(reqError)
             {
+                handler(nil,reqError);
+            } else {
                 NSError *localError = nil;
                 NSDictionary *parsedObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:&localError];
                 
@@ -296,10 +310,7 @@ id oggRef;
                 } else {
                     handler(parsedObject,nil);
                 }
-                
-                
-            } else {
-                handler(nil,reqError);
+
             }
             
         }];

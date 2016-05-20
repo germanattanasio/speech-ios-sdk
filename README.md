@@ -21,7 +21,7 @@ Table of Contents
 
     * [Installation](#installation)
     * [Include headers](#include-headers)
-    * [Sample Application](#sample-application)
+    * [Sample Applications](#sample-applications)
     * [Speech To Text](#speech-to-text)
     	* [Create a Configuration](#create-a-stt-configuration) 
     	* [Authentication options](#authentication)

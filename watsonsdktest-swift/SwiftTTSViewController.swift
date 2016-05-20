@@ -16,7 +16,7 @@
 
 import UIKit
 
-class SwiftTTSViewController: UIViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
+class SwiftTTSViewController: UIViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UIGestureRecognizerDelegate {
 
     var ttsVoices: NSArray?
     var ttsInstance: TextToSpeech?
@@ -95,9 +95,23 @@ class SwiftTTSViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         self.ttsVoices = dict.objectForKey("voices") as? NSArray
         self.getUIPickerViewInstance().backgroundColor = UIColor.whiteColor()
         self.hidePickerView(true, withAnimation: false)
+        
+        let gestureRecognizer:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "pickerViewTapGestureRecognized:")
+        self.getUIPickerViewInstance().addGestureRecognizer(gestureRecognizer);
+        gestureRecognizer.delegate = self
 
         self.view.addSubview(self.getUIPickerViewInstance())
-        let row = (self.ttsVoices?.count)! - 1
+        var row = 0
+        if let list = self.ttsVoices{
+            for var i = 0; i < list.count; i += 1{
+                if list.objectAtIndex(i).objectForKey("name") as? String == self.ttsInstance?.config.voiceName{
+                    row = i
+                }
+            }
+        }
+        else{
+            row = (self.ttsVoices?.count)! - 1
+        }
         self.getUIPickerViewInstance().selectRow(row, inComponent: 0, animated: false)
         self.onSelectedModel(row)
     }
@@ -135,7 +149,17 @@ class SwiftTTSViewController: UIViewController, UITextFieldDelegate, UIPickerVie
             self.getUIPickerViewInstance().hidden = hide
         }
     }
-    // pickerview delegate methods
+    func pickerViewTapGestureRecognized(sender: UIGestureRecognizer){
+        self.onSelectedModel(self.getUIPickerViewInstance().selectedRowInComponent(0))
+    }
+
+    // UIGestureRecognizerDelegate
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+    // UIGestureRecognizerDelegate
+
+    // UIPickerView delegate methods
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int{
         return 1
     }
@@ -166,7 +190,7 @@ class SwiftTTSViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         self.onSelectedModel(row)
         self.hidePickerView(true, withAnimation: true)
     }
-    // pickerview delegate methods
+    // UIPickerView delegate methods
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

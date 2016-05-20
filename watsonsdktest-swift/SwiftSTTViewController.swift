@@ -109,7 +109,17 @@ class SwiftSTTViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         self.hidePickerView(true, withAnimation: false)
 
         self.view.addSubview(self.getUIPickerViewInstance())
-        let row = (self.sttLanguageModels?.count)! - 1
+        var row = 0
+        if let list = self.sttLanguageModels{
+            for var i = 0; i < list.count; i += 1{
+                if list.objectAtIndex(i).objectForKey("name") as? String == self.sttInstance?.config.modelName{
+                    row = i
+                }
+            }
+        }
+        else{
+            row = (self.sttLanguageModels?.count)! - 1
+        }
         self.getUIPickerViewInstance().selectRow(row, inComponent: 0, animated: false)
         self.onSelectedModel(row)
     }
@@ -149,7 +159,7 @@ class SwiftSTTViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         }
     }
     
-    // pickerview delegate methods
+    // UIPickerView delegate methods
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int{
         return 1
     }
@@ -180,7 +190,7 @@ class SwiftSTTViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         self.onSelectedModel(row)
         self.hidePickerView(true, withAnimation: true)
     }
-    // pickerview delegate methods
+    // UIPickerView delegate methods
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

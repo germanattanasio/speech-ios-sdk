@@ -68,7 +68,7 @@
         if(err == nil)
             [self voiceHandler:res];
         else
-            self.ttsField.text = [err localizedDescription];
+            self.ttsField.text = [err description];
     }];
     
 }
@@ -107,10 +107,9 @@
 }
 
 - (void) voiceHandler:(NSDictionary *) dict {
-    
+
     self.TTSVoices = [dict objectForKey:@"voices"];
-    
-    
+
     [self.pickerView setBackgroundColor:[UIColor whiteColor]];
     [self.pickerView setOpaque:YES];
     [self.pickerView setHidden:YES];
@@ -119,10 +118,21 @@
     UITapGestureRecognizer* gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pickerViewTapGestureRecognized:)];
     [self.pickerView addGestureRecognizer:gestureRecognizer];
     gestureRecognizer.delegate = self;
-    
-    
+
     [self.view addSubview:self.pickerView];
     
+    if(self.TTSVoices){
+        long row = self.TTSVoices.count - 1;
+        for (long i = 0; i < self.TTSVoices.count; i++) {
+            NSDictionary *voice = self.TTSVoices[i];
+            if([[voice objectForKey:@"name"] isEqualToString:self.tts.config.voiceName]){
+                row = i;
+                break;
+            }
+        }
+        [self.pickerView selectRow:row inComponent:0 animated:NO];
+        [self onSelectedModel:row];
+    }
 }
 
 
@@ -139,20 +149,22 @@
     return true;
 }
 
--(void)pickerViewTapGestureRecognized:(UIGestureRecognizer *)sender {
-    
+-(void)onSelectedModel:(long) row{
     if(self.TTSVoices != nil)
     {
-        NSDictionary *voice = [self.TTSVoices objectAtIndex:[self.pickerView selectedRowInComponent:0]];
+        NSDictionary *voice = [self.TTSVoices objectAtIndex:row];
         
         NSString *voiceName = [voice objectForKey:@"name"];
         NSString *voiceGender = [voice objectForKey:@"gender"];
         
-        self.voiceSelectorButton.titleLabel.text = [NSString stringWithFormat:@"    %@: %@",voiceGender,voiceName];
+        [self.voiceSelectorButton setTitle:[NSString stringWithFormat:@"%@: %@",voiceGender,voiceName] forState:UIControlStateNormal];
         [[self.tts config] setVoiceName:voiceName];
         [self.pickerView setHidden:YES];
     }
-    
+}
+
+-(void)pickerViewTapGestureRecognized:(UIGestureRecognizer *)sender {
+    [self onSelectedModel:[self.pickerView selectedRowInComponent:0]];
 }
 
 - (UIPickerView *)pickerView
@@ -214,28 +226,13 @@
     
     NSString *voiceName = [voice objectForKey:@"name"];
     NSString *voiceGender = [voice objectForKey:@"gender"];
-    
-    tView.text=[NSString stringWithFormat:@"    %@: %@",voiceGender,voiceName];
+    tView.text=[NSString stringWithFormat:@"%@: %@",voiceGender,voiceName];
     return tView;
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    
-    if(self.TTSVoices != nil)
-    {
-        NSDictionary *voice = [self.TTSVoices objectAtIndex:row];
-        
-        NSString *voiceName = [voice objectForKey:@"name"];
-        NSString *voiceGender = [voice objectForKey:@"gender"];
-        
-        
-        self.voiceSelectorButton.titleLabel.text = [NSString stringWithFormat:@"    %@: %@",voiceGender,voiceName];
-        
-        [[self.tts config] setVoiceName:voiceName];
-        [self.pickerView setHidden:YES];
-    }
-    
+    [self onSelectedModel:row];
 }
 
 

@@ -70,7 +70,7 @@
         if(err == nil)
             [self modelHandler:res];
         else
-            result.text = [err localizedDescription];
+            result.text = [err description];
     }];
     
 }
@@ -149,7 +149,18 @@
     
     [self.view addSubview:self.pickerView];
     // select the us broadband model by default
-    [self.pickerView selectRow:self.STTLanguageModels.count-1 inComponent:0 animated:NO];
+    if(self.STTLanguageModels){
+        long row = self.STTLanguageModels.count - 1;
+        for (long i = 0; i < self.STTLanguageModels.count; i++) {
+            NSDictionary *model = self.STTLanguageModels[i];
+            if([[model objectForKey:@"name"] isEqualToString:self.stt.config.modelName]){
+                row = i;
+                break;
+            }
+        }
+        [self.pickerView selectRow:row inComponent:0 animated:NO];
+        [self onSelectedModel:row];
+    }
     
 }
 
@@ -163,19 +174,22 @@
 }
 
 -(void)pickerViewTapGestureRecognized:(UIGestureRecognizer *)sender {
-    
+
+    [self onSelectedModel:[self.pickerView selectedRowInComponent:0]];
+}
+
+-(void)onSelectedModel:(long) row{
+
     if(self.STTLanguageModels != nil)
     {
-        NSDictionary *model = [self.STTLanguageModels objectAtIndex:[self.pickerView selectedRowInComponent:0]];
+        NSDictionary *model = [self.STTLanguageModels objectAtIndex:row];
         
         NSString *modelName = [model objectForKey:@"name"];
         NSString *modelDesc = [model objectForKey:@"description"];
-        
-        self.modelSelectorButton.titleLabel.text = [NSString stringWithFormat:@"    %@",modelDesc];
+        [self.modelSelectorButton setTitle:[NSString stringWithFormat:@"%@",modelDesc] forState:UIControlStateNormal];
         [[self.stt config] setModelName:modelName];
         [self.pickerView setHidden:YES];
     }
-    
 }
 
 - (UIPickerView *)pickerView
@@ -240,21 +254,7 @@
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    
-    if(self.STTLanguageModels != nil)
-    {
-        NSDictionary *model = [self.STTLanguageModels objectAtIndex:row];
-        
-        NSString *modelName = [model objectForKey:@"name"];
-        NSString *modelDesc = [model objectForKey:@"description"];
-        
-        
-        self.modelSelectorButton.titleLabel.text = [NSString stringWithFormat:@"    %@",modelDesc];
-        
-        [[self.stt config] setModelName:modelName];
-        [self.pickerView setHidden:YES];
-    }
-    
+    [self onSelectedModel:row];
 }
 
 
