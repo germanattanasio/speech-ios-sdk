@@ -27,6 +27,8 @@
 		7EFE11E51B71D07D00EF10BF /* AuthConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFE11E31B71D07D00EF10BF /* AuthConfiguration.m */; };
 		9B375ABB1CEB0C2500A6F9D4 /* SwiftTTSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B375ABA1CEB0C2500A6F9D4 /* SwiftTTSViewController.swift */; };
 		9B375ABD1CEB194400A6F9D4 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BA060401CE6D9320018CA5B /* libicucore.tbd */; };
+		9B47E7451CEF5B4A003E0860 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B47E7431CEF5B4A003E0860 /* LaunchScreen.storyboard */; };
+		9B47E7481CEF5B77003E0860 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B47E7461CEF5B77003E0860 /* LaunchScreen.storyboard */; };
 		9BA060411CE6D9320018CA5B /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BA060401CE6D9320018CA5B /* libicucore.tbd */; };
 		9BA475891B9D34AA00D66F1E /* OggHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA475871B9D34AA00D66F1E /* OggHelper.h */; };
 		9BA4758A1B9D34AA00D66F1E /* OggHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA475881B9D34AA00D66F1E /* OggHelper.m */; };
@@ -54,7 +56,6 @@
 		9BF43ED41CEAC81900EC0185 /* SwiftSTTViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF43ED31CEAC81900EC0185 /* SwiftSTTViewController.swift */; };
 		9BF43ED71CEAC81900EC0185 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BF43ED51CEAC81900EC0185 /* Main.storyboard */; };
 		9BF43ED91CEAC81900EC0185 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BF43ED81CEAC81900EC0185 /* Assets.xcassets */; };
-		9BF43EDC1CEAC81900EC0185 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BF43EDA1CEAC81900EC0185 /* LaunchScreen.storyboard */; };
 		9BF43EE11CEAC82E00EC0185 /* libwatsonsdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C11A645B1754D0E600385896 /* libwatsonsdk.a */; };
 		C11712E31A03DC2E00957080 /* UploaderDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = C123FF8719B9FE4100C6A702 /* UploaderDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C11772091AFD191D00C8791A /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C11772081AFD191D00C8791A /* libogg.a */; };
@@ -136,6 +137,8 @@
 		7EFE11E31B71D07D00EF10BF /* AuthConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthConfiguration.m; sourceTree = "<group>"; };
 		9B375ABA1CEB0C2500A6F9D4 /* SwiftTTSViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftTTSViewController.swift; sourceTree = "<group>"; };
 		9B375ABC1CEB184200A6F9D4 /* SwiftSpeechHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftSpeechHeader.h; sourceTree = "<group>"; };
+		9B47E7441CEF5B4A003E0860 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		9B47E7471CEF5B77003E0860 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9BA060401CE6D9320018CA5B /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		9BA475871B9D34AA00D66F1E /* OggHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OggHelper.h; path = ogg/OggHelper.h; sourceTree = "<group>"; };
 		9BA475881B9D34AA00D66F1E /* OggHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OggHelper.m; path = ogg/OggHelper.m; sourceTree = "<group>"; };
@@ -159,12 +162,11 @@
 		9BCAD8311CE6BF1200BE3B5F /* SocketRocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketRocket.h; sourceTree = "<group>"; };
 		9BCAD8321CE6BF1200BE3B5F /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRWebSocket.h; sourceTree = "<group>"; };
 		9BCAD8331CE6BF1200BE3B5F /* SRWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRWebSocket.m; sourceTree = "<group>"; };
-		9BF43ECF1CEAC81900EC0185 /* watsonsdktest-swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "watsonsdktest-swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9BF43ECF1CEAC81900EC0185 /* Swift Sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Swift Sample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BF43ED11CEAC81900EC0185 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9BF43ED31CEAC81900EC0185 /* SwiftSTTViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftSTTViewController.swift; sourceTree = "<group>"; };
 		9BF43ED61CEAC81900EC0185 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9BF43ED81CEAC81900EC0185 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		9BF43EDB1CEAC81900EC0185 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9BF43EDD1CEAC81900EC0185 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C11772081AFD191D00C8791A /* libogg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libogg.a; sourceTree = "<group>"; };
 		C11772131B029BEE00C8791A /* opus_header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opus_header.h; sourceTree = "<group>"; };
@@ -196,7 +198,7 @@
 		C1235353199B53FF009A8F8B /* OpusHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpusHelper.h; sourceTree = "<group>"; };
 		C1235354199B53FF009A8F8B /* OpusHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpusHelper.m; sourceTree = "<group>"; };
 		C123FF8719B9FE4100C6A702 /* UploaderDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UploaderDelegate.h; sourceTree = "<group>"; };
-		C165429B191A0D8500905DCC /* watsonsdktest-objective-c.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "watsonsdktest-objective-c.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C165429B191A0D8500905DCC /* OC Sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OC Sample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C165429D191A0D8500905DCC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		C16542A2191A0D8500905DCC /* watsonsdktest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "watsonsdktest-Info.plist"; sourceTree = "<group>"; };
 		C16542A4191A0D8500905DCC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -338,9 +340,9 @@
 				9B375ABA1CEB0C2500A6F9D4 /* SwiftTTSViewController.swift */,
 				9BF43ED51CEAC81900EC0185 /* Main.storyboard */,
 				9BF43ED81CEAC81900EC0185 /* Assets.xcassets */,
-				9BF43EDA1CEAC81900EC0185 /* LaunchScreen.storyboard */,
 				9BF43EDD1CEAC81900EC0185 /* Info.plist */,
 				9B375ABC1CEB184200A6F9D4 /* SwiftSpeechHeader.h */,
+				9B47E7431CEF5B4A003E0860 /* LaunchScreen.storyboard */,
 			);
 			path = "watsonsdktest-swift";
 			sourceTree = "<group>";
@@ -374,8 +376,8 @@
 			children = (
 				C11A645B1754D0E600385896 /* libwatsonsdk.a */,
 				C11A64941754D98700385896 /* watsonsdk.bundle */,
-				C165429B191A0D8500905DCC /* watsonsdktest-objective-c.app */,
-				9BF43ECF1CEAC81900EC0185 /* watsonsdktest-swift.app */,
+				C165429B191A0D8500905DCC /* OC Sample.app */,
+				9BF43ECF1CEAC81900EC0185 /* Swift Sample.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -493,6 +495,7 @@
 				C17779631B9DBFAA0066269A /* TTSViewController.m */,
 				C16542B5191A0D8500905DCC /* Images.xcassets */,
 				C16542A1191A0D8500905DCC /* Supporting Files */,
+				9B47E7461CEF5B77003E0860 /* LaunchScreen.storyboard */,
 			);
 			path = "watsonsdktest-objective-c";
 			sourceTree = "<group>";
@@ -543,9 +546,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		9BF43ECE1CEAC81900EC0185 /* watsonsdktest-swift */ = {
+		9BF43ECE1CEAC81900EC0185 /* Swift Sample */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9BF43EDE1CEAC81900EC0185 /* Build configuration list for PBXNativeTarget "watsonsdktest-swift" */;
+			buildConfigurationList = 9BF43EDE1CEAC81900EC0185 /* Build configuration list for PBXNativeTarget "Swift Sample" */;
 			buildPhases = (
 				9BF43ECB1CEAC81900EC0185 /* Sources */,
 				9BF43ECC1CEAC81900EC0185 /* Frameworks */,
@@ -555,9 +558,9 @@
 			);
 			dependencies = (
 			);
-			name = "watsonsdktest-swift";
+			name = "Swift Sample";
 			productName = "watsonsdktest-swift";
-			productReference = 9BF43ECF1CEAC81900EC0185 /* watsonsdktest-swift.app */;
+			productReference = 9BF43ECF1CEAC81900EC0185 /* Swift Sample.app */;
 			productType = "com.apple.product-type.application";
 		};
 		C11A645A1754D0E600385896 /* watsonsdk */ = {
@@ -597,9 +600,9 @@
 			productReference = C11A64941754D98700385896 /* watsonsdk.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
-		C165429A191A0D8500905DCC /* watsonsdktest-objective-c */ = {
+		C165429A191A0D8500905DCC /* OC Sample */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C16542CE191A0D8500905DCC /* Build configuration list for PBXNativeTarget "watsonsdktest-objective-c" */;
+			buildConfigurationList = C16542CE191A0D8500905DCC /* Build configuration list for PBXNativeTarget "OC Sample" */;
 			buildPhases = (
 				C1654297191A0D8500905DCC /* Sources */,
 				C1654298191A0D8500905DCC /* Frameworks */,
@@ -609,9 +612,9 @@
 			);
 			dependencies = (
 			);
-			name = "watsonsdktest-objective-c";
+			name = "OC Sample";
 			productName = "watsonsdktest-objective-c";
-			productReference = C165429B191A0D8500905DCC /* watsonsdktest-objective-c.app */;
+			productReference = C165429B191A0D8500905DCC /* OC Sample.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -646,8 +649,8 @@
 				C11A645A1754D0E600385896 /* watsonsdk */,
 				C11A64891754D6AB00385896 /* Framework */,
 				C11A64931754D98700385896 /* watsonResources */,
-				C165429A191A0D8500905DCC /* watsonsdktest-objective-c */,
-				9BF43ECE1CEAC81900EC0185 /* watsonsdktest-swift */,
+				C165429A191A0D8500905DCC /* OC Sample */,
+				9BF43ECE1CEAC81900EC0185 /* Swift Sample */,
 			);
 		};
 /* End PBXProject section */
@@ -657,7 +660,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9BF43EDC1CEAC81900EC0185 /* LaunchScreen.storyboard in Resources */,
+				9B47E7451CEF5B4A003E0860 /* LaunchScreen.storyboard in Resources */,
 				9BF43ED91CEAC81900EC0185 /* Assets.xcassets in Resources */,
 				9BF43ED71CEAC81900EC0185 /* Main.storyboard in Resources */,
 			);
@@ -677,6 +680,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C16542B6191A0D8500905DCC /* Images.xcassets in Resources */,
+				9B47E7481CEF5B77003E0860 /* LaunchScreen.storyboard in Resources */,
 				C16542AE191A0D8500905DCC /* Main.storyboard in Resources */,
 				C16542A5191A0D8500905DCC /* InfoPlist.strings in Resources */,
 			);
@@ -787,20 +791,28 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		9B47E7431CEF5B4A003E0860 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9B47E7441CEF5B4A003E0860 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		9B47E7461CEF5B77003E0860 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9B47E7471CEF5B77003E0860 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
 		9BF43ED51CEAC81900EC0185 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				9BF43ED61CEAC81900EC0185 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		9BF43EDA1CEAC81900EC0185 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9BF43EDB1CEAC81900EC0185 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 		C11A649A1754D98700385896 /* InfoPlist.strings */ = {
@@ -850,10 +862,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = "watsonsdktest-swift/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.cio.watsonsdktest-swift";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.cio.watsonsdk.swift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "watsonsdktest-swift/SwiftSpeechHeader.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -881,10 +893,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = "watsonsdktest-swift/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.cio.watsonsdktest-swift";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.cio.watsonsdk.swift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "watsonsdktest-swift/SwiftSpeechHeader.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1094,6 +1106,7 @@
 				INFOPLIST_FILE = "watsonsdktest-objective-c/watsonsdktest-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.cio.watsonsdk.objetivec;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -1127,6 +1140,7 @@
 				INFOPLIST_FILE = "watsonsdktest-objective-c/watsonsdktest-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.cio.watsonsdk.objetivec;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -1136,7 +1150,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9BF43EDE1CEAC81900EC0185 /* Build configuration list for PBXNativeTarget "watsonsdktest-swift" */ = {
+		9BF43EDE1CEAC81900EC0185 /* Build configuration list for PBXNativeTarget "Swift Sample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9BF43EDF1CEAC81900EC0185 /* Debug */,
@@ -1181,7 +1195,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C16542CE191A0D8500905DCC /* Build configuration list for PBXNativeTarget "watsonsdktest-objective-c" */ = {
+		C16542CE191A0D8500905DCC /* Build configuration list for PBXNativeTarget "OC Sample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C16542CA191A0D8500905DCC /* Debug */,
