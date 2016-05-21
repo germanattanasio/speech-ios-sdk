@@ -26,9 +26,10 @@ class SwiftSTTViewController: UIViewController, UITextFieldDelegate, UIPickerVie
     @IBOutlet var soundbar: UIView!
     @IBOutlet var result: UILabel!
     var pickerView: UIPickerView!
-    let pickerViewHeight:CGFloat = 250
+    let pickerViewHeight:CGFloat = 250.0
     let pickerViewAnimationDuration: NSTimeInterval = 0.5
     let pickerViewAnimationDelay: NSTimeInterval = 0.1
+    let pickerViewPositionOffset: CGFloat = 33.0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +57,6 @@ class SwiftSTTViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         self.sttInstance?.recognize({ (result: [NSObject : AnyObject]!, error: NSError!) -> Void in
             if(error == nil){
                 let isFinal = self.sttInstance?.isFinalTranscript(result)
-                print(isFinal)
                 if isFinal == nil || isFinal == false{
                     self.result.text = self.sttInstance?.getTranscript(result)
                 }
@@ -126,7 +126,7 @@ class SwiftSTTViewController: UIViewController, UITextFieldDelegate, UIPickerVie
 
     func getUIPickerViewInstance() -> UIPickerView{
         guard let _ = self.pickerView else{
-            let pickerViewframe = CGRectMake(0, UIScreen.mainScreen().bounds.height - self.pickerViewHeight, UIScreen.mainScreen().bounds.width, self.pickerViewHeight)
+            let pickerViewframe = CGRectMake(0, UIScreen.mainScreen().bounds.height - self.pickerViewHeight + self.pickerViewPositionOffset, UIScreen.mainScreen().bounds.width, self.pickerViewHeight)
             self.pickerView = UIPickerView(frame: pickerViewframe)
             self.pickerView.dataSource = self
             self.pickerView.delegate = self
@@ -143,11 +143,11 @@ class SwiftSTTViewController: UIViewController, UITextFieldDelegate, UIPickerVie
             UIView.animateWithDuration(self.pickerViewAnimationDuration, delay: self.pickerViewAnimationDelay, options: .CurveEaseInOut, animations: { () -> Void in
                 var frame = self.getUIPickerViewInstance().frame
                 if hide{
-                    frame.origin.y = (UIScreen.mainScreen().bounds.height)
+                    frame.origin.y = UIScreen.mainScreen().bounds.height
                 }
                 else{
                     self.getUIPickerViewInstance().hidden = hide
-                    frame.origin.y = UIScreen.mainScreen().bounds.height - self.pickerViewHeight
+                    frame.origin.y = UIScreen.mainScreen().bounds.height - self.pickerViewHeight + self.pickerViewPositionOffset
                 }
                 self.getUIPickerViewInstance().frame =  frame
                 }) { (Bool) -> Void in

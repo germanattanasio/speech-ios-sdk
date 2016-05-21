@@ -26,9 +26,10 @@ class SwiftTTSViewController: UIViewController, UITextFieldDelegate, UIPickerVie
     @IBOutlet var ttsField: UITextView!
 
     var pickerView: UIPickerView!
-    let pickerViewHeight:CGFloat = 250
+    let pickerViewHeight:CGFloat = 250.0
     let pickerViewAnimationDuration: NSTimeInterval = 0.5
     let pickerViewAnimationDelay: NSTimeInterval = 0.1
+    let pickerViewPositionOffset: CGFloat = 33.0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,17 +51,20 @@ class SwiftTTSViewController: UIViewController, UITextFieldDelegate, UIPickerVie
             }
         })
     }
-    
+    // dismiss keyboard when the background is touched
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.ttsField.endEditing(true)
+    }
     // start recording
     @IBAction func onStartSynthesizing(sender: AnyObject) {
         self.ttsInstance?.synthesize({ (data: NSData!, reqError: NSError!) -> Void in
             if reqError == nil {
                 self.ttsInstance?.playAudio({ (error: NSError!) -> Void in
                     if error == nil{
-                        print("audio finished playing")
+                        print("Audio finished playing")
                     }
                     else{
-                        print("error playing audio %@", error.localizedDescription)
+                        print("Error playing audio %@", error.localizedDescription)
                     }
 
                     }, withData: data)
@@ -71,15 +75,17 @@ class SwiftTTSViewController: UIViewController, UITextFieldDelegate, UIPickerVie
             
             }, theText: self.ttsField.text)
     }
-
+    // show picker view when the button is clicked
     @IBAction func onSelectingModel(sender: AnyObject) {
         self.hidePickerView(false, withAnimation: true)
     }
     
+    // hide picker view
     func onHidingPickerView(){
         self.hidePickerView(true, withAnimation: true)
     }
     
+    // set voice name when the picker view data is changed
     func onSelectedModel(row: Int){
         guard let voices = self.ttsVoices else{
             return
@@ -90,15 +96,16 @@ class SwiftTTSViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         self.voiceSelectorButton.setTitle(String(format: "%@: %@", voiceGender, voiceName), forState: .Normal)
         self.ttsInstance?.config.voiceName = voiceName
     }
-    
+
+    // setup picker view after the response is back
     func voiceHandler(dict: NSDictionary){
         self.ttsVoices = dict.objectForKey("voices") as? NSArray
         self.getUIPickerViewInstance().backgroundColor = UIColor.whiteColor()
         self.hidePickerView(true, withAnimation: false)
         
-        let gestureRecognizer:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "pickerViewTapGestureRecognized:")
-        self.getUIPickerViewInstance().addGestureRecognizer(gestureRecognizer);
+        let gestureRecognizer:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: Selector("pickerViewTapGestureRecognized:"))
         gestureRecognizer.delegate = self
+        self.getUIPickerViewInstance().addGestureRecognizer(gestureRecognizer);
 
         self.view.addSubview(self.getUIPickerViewInstance())
         var row = 0
@@ -115,9 +122,11 @@ class SwiftTTSViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         self.getUIPickerViewInstance().selectRow(row, inComponent: 0, animated: false)
         self.onSelectedModel(row)
     }
+
+    // get picker view initialized
     func getUIPickerViewInstance() -> UIPickerView{
         guard let _ = self.pickerView else{
-            let pickerViewframe = CGRectMake(0, UIScreen.mainScreen().bounds.height - self.pickerViewHeight, UIScreen.mainScreen().bounds.width, self.pickerViewHeight)
+            let pickerViewframe = CGRectMake(0, UIScreen.mainScreen().bounds.height - self.pickerViewHeight + self.pickerViewPositionOffset, UIScreen.mainScreen().bounds.width, self.pickerViewHeight)
             self.pickerView = UIPickerView(frame: pickerViewframe)
             self.pickerView.dataSource = self
             self.pickerView.delegate = self
@@ -129,6 +138,7 @@ class SwiftTTSViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         return self.pickerView
     }
     
+    // display/show picker view with animations
     func hidePickerView(hide: Bool, withAnimation: Bool){
         if withAnimation{
             UIView.animateWithDuration(self.pickerViewAnimationDuration, delay: self.pickerViewAnimationDelay, options: .CurveEaseInOut, animations: { () -> Void in
@@ -138,7 +148,7 @@ class SwiftTTSViewController: UIViewController, UITextFieldDelegate, UIPickerVie
                 }
                 else{
                     self.getUIPickerViewInstance().hidden = hide
-                    frame.origin.y = UIScreen.mainScreen().bounds.height - self.pickerViewHeight
+                    frame.origin.y = UIScreen.mainScreen().bounds.height - self.pickerViewHeight + self.pickerViewPositionOffset
                 }
                 self.getUIPickerViewInstance().frame =  frame
                 }) { (Bool) -> Void in
@@ -149,6 +159,7 @@ class SwiftTTSViewController: UIViewController, UITextFieldDelegate, UIPickerVie
             self.getUIPickerViewInstance().hidden = hide
         }
     }
+
     func pickerViewTapGestureRecognized(sender: UIGestureRecognizer){
         self.onSelectedModel(self.getUIPickerViewInstance().selectedRowInComponent(0))
     }
@@ -191,7 +202,7 @@ class SwiftTTSViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         self.hidePickerView(true, withAnimation: true)
     }
     // UIPickerView delegate methods
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
