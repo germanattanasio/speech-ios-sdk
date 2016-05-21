@@ -92,16 +92,10 @@
 
 -(IBAction) pressStartRecord:(id) sender
 {
-    
-    
-    
-    
     // start recognize
     [stt recognize:^(NSDictionary* res, NSError* err){
         
         if(err == nil) {
-            
-            
             if([self.stt isFinalTranscript:res]) {
                 
                 NSLog(@"this is the final transcript");
@@ -109,12 +103,10 @@
                 
                 NSLog(@"confidence score is %@",[stt getConfidenceScore:res]);
             }
-            
+
             result.text = [stt getTranscript:res];
-            
-            
         } else {
-            NSLog(@"received error from the SDK %@",[err localizedDescription]);
+            NSLog(@"received error from the SDK %@",[err description]);
             [stt endRecognize];
         }
     }];
