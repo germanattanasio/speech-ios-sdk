@@ -154,14 +154,11 @@ typedef void (^RecognizeCallbackBlockType)(NSDictionary*, NSError*);
         // try and open the socket again.
         [self reconnect];
     } else {
-        
         // call the recognize handler block in the clients code
         self.recognizeCallback(nil,error);
     }
 }
-- (NSString*)boolToString: (BOOL)p{
-    return p ? @"Yes" : @"NO";
-}
+
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)json;
 {
 //    NSLog(@"received --> %@",json);   
@@ -183,13 +180,13 @@ typedef void (^RecognizeCallbackBlockType)(NSDictionary*, NSError*);
         // look for state changes
         if([results objectForKey:@"state"] != nil) {
             NSString *state = [results objectForKey:@"state"];
-            NSLog(@"### state: %@, isConnected: %@, isReadyForAudio: %@, isReadyForClosure: %@", state, [self boolToString:self.isConnected], [self boolToString:self.isReadyForAudio], [self boolToString:self.isReadyForClosure]);
             // if we receive a listening state after having sent audio it means we can now close the connection
             if ([state isEqualToString:@"listening"] && self.isConnected && self.isReadyForClosure){
                 [self disconnect: @"Closure data has been sent"];
             } else if([state isEqualToString:@"listening"]) {
                 // we can send binary data now
                 self.isReadyForAudio = YES;
+                NSLog(@"Start sending audio data");
             }
         }
 
