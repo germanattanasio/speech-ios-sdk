@@ -33,10 +33,6 @@
 // models
 #define WATSONSDK_DEFAULT_STT_MODEL @"en-US_BroadbandModel"
 
-// errors
-#define WATSONSDK_STT_ERROR_DOMAIN @"WASTONSPEECHSDK"
-#define WATSONSDK_STT_ERROR_CODE 409
-
 @interface STTConfiguration : AuthConfiguration
 
 @property NSString* apiURL;

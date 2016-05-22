@@ -17,6 +17,8 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 #import "TTSConfiguration.h"
+#import "OpusHelper.h"
+#import "SpeechUtility.h"
 
 @interface TextToSpeech : NSObject <NSURLSessionDelegate>
 

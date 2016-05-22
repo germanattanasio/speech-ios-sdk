@@ -32,10 +32,6 @@
 // voices
 #define WATSONSDK_DEFAULT_TTS_VOICE @"en-US_MichaelVoice"
 
-// errors
-#define WATSONSDK_TTS_ERROR_DOMAIN @"WASTONSPEECHSDK"
-#define WATSONSDK_TTS_ERROR_CODE 500
-
 @interface TTSConfiguration : AuthConfiguration
 
 @property NSString* apiURL;

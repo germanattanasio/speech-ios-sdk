@@ -18,8 +18,9 @@
 #import <AudioToolbox/AudioQueue.h>
 #import <AudioToolbox/AudioFile.h>
 #import "STTConfiguration.h"
+#import "WebSocketAudioStreamer.h"
 #import "OpusHelper.h"
-#import "WebSocketUploader.h"
+#import "OggHelper.h"
 
 @interface SpeechToText : NSObject <NSURLSessionDelegate>
 
