@@ -25,15 +25,19 @@
 /* Begin PBXBuildFile section */
 		7EFE11E41B71D07D00EF10BF /* AuthConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EFE11E21B71D07D00EF10BF /* AuthConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7EFE11E51B71D07D00EF10BF /* AuthConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFE11E31B71D07D00EF10BF /* AuthConfiguration.m */; };
+		9B36693F1CF21A5400806BEE /* WebSocketAudioStreamer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B36693D1CF21A5400806BEE /* WebSocketAudioStreamer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B3669401CF21A5400806BEE /* WebSocketAudioStreamer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B36693E1CF21A5400806BEE /* WebSocketAudioStreamer.m */; };
 		9B375ABB1CEB0C2500A6F9D4 /* SwiftTTSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B375ABA1CEB0C2500A6F9D4 /* SwiftTTSViewController.swift */; };
 		9B375ABD1CEB194400A6F9D4 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BA060401CE6D9320018CA5B /* libicucore.tbd */; };
 		9B47E7451CEF5B4A003E0860 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B47E7431CEF5B4A003E0860 /* LaunchScreen.storyboard */; };
 		9B47E7481CEF5B77003E0860 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B47E7461CEF5B77003E0860 /* LaunchScreen.storyboard */; };
+		9B47E7581CF21645003E0860 /* SpeechUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B47E7561CF21645003E0860 /* SpeechUtility.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B47E7591CF21645003E0860 /* SpeechUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B47E7571CF21645003E0860 /* SpeechUtility.m */; };
 		9BA060411CE6D9320018CA5B /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BA060401CE6D9320018CA5B /* libicucore.tbd */; };
-		9BA475891B9D34AA00D66F1E /* OggHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA475871B9D34AA00D66F1E /* OggHelper.h */; };
+		9BA475891B9D34AA00D66F1E /* OggHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA475871B9D34AA00D66F1E /* OggHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9BA4758A1B9D34AA00D66F1E /* OggHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA475881B9D34AA00D66F1E /* OggHelper.m */; };
 		9BA4758E1B9D354E00D66F1E /* config_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA4758B1B9D354E00D66F1E /* config_types.h */; };
-		9BA4758F1B9D354E00D66F1E /* ogg.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA4758C1B9D354E00D66F1E /* ogg.h */; };
+		9BA4758F1B9D354E00D66F1E /* ogg.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA4758C1B9D354E00D66F1E /* ogg.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9BA475901B9D354E00D66F1E /* os_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA4758D1B9D354E00D66F1E /* os_types.h */; };
 		9BCAD8341CE6BF1200BE3B5F /* SRDelegateController.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD8201CE6BF1200BE3B5F /* SRDelegateController.h */; };
 		9BCAD8351CE6BF1200BE3B5F /* SRDelegateController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD8211CE6BF1200BE3B5F /* SRDelegateController.m */; };
@@ -57,7 +61,6 @@
 		9BF43ED71CEAC81900EC0185 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BF43ED51CEAC81900EC0185 /* Main.storyboard */; };
 		9BF43ED91CEAC81900EC0185 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BF43ED81CEAC81900EC0185 /* Assets.xcassets */; };
 		9BF43EE11CEAC82E00EC0185 /* libwatsonsdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C11A645B1754D0E600385896 /* libwatsonsdk.a */; };
-		C11712E31A03DC2E00957080 /* UploaderDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = C123FF8719B9FE4100C6A702 /* UploaderDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C11772091AFD191D00C8791A /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C11772081AFD191D00C8791A /* libogg.a */; };
 		C11772141B029BEE00C8791A /* opus_header.h in Headers */ = {isa = PBXBuildFile; fileRef = C11772131B029BEE00C8791A /* opus_header.h */; };
 		C117721E1B02A15000C8791A /* opus_header.c in Sources */ = {isa = PBXBuildFile; fileRef = C117721D1B02A15000C8791A /* opus_header.c */; };
@@ -86,8 +89,6 @@
 		C16542D4191A0FA100905DCC /* libwatsonsdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C11A645B1754D0E600385896 /* libwatsonsdk.a */; };
 		C17779641B9DBFAA0066269A /* TTSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C17779631B9DBFAA0066269A /* TTSViewController.m */; };
 		C1B14B831AA0D3DD00864C53 /* libopus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C1B14B821AA0D3DC00864C53 /* libopus.a */; };
-		C1C3743B1A8581A00083C69B /* WebSocketUploader.h in Headers */ = {isa = PBXBuildFile; fileRef = C1C374391A8581A00083C69B /* WebSocketUploader.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C1C3743C1A8581A00083C69B /* WebSocketUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = C1C3743A1A8581A00083C69B /* WebSocketUploader.m */; };
 		C1C3743F1A86C5DB0083C69B /* SpeechToText.h in Headers */ = {isa = PBXBuildFile; fileRef = C1C3743D1A86C5DB0083C69B /* SpeechToText.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C1C374401A86C5DB0083C69B /* SpeechToText.m in Sources */ = {isa = PBXBuildFile; fileRef = C1C3743E1A86C5DB0083C69B /* SpeechToText.m */; };
 		C1D4580119A78BBB00093095 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1D4580019A78BBB00093095 /* Security.framework */; };
@@ -135,10 +136,14 @@
 /* Begin PBXFileReference section */
 		7EFE11E21B71D07D00EF10BF /* AuthConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthConfiguration.h; sourceTree = "<group>"; };
 		7EFE11E31B71D07D00EF10BF /* AuthConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthConfiguration.m; sourceTree = "<group>"; };
+		9B36693D1CF21A5400806BEE /* WebSocketAudioStreamer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebSocketAudioStreamer.h; sourceTree = "<group>"; };
+		9B36693E1CF21A5400806BEE /* WebSocketAudioStreamer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebSocketAudioStreamer.m; sourceTree = "<group>"; };
 		9B375ABA1CEB0C2500A6F9D4 /* SwiftTTSViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftTTSViewController.swift; sourceTree = "<group>"; };
 		9B375ABC1CEB184200A6F9D4 /* SwiftSpeechHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftSpeechHeader.h; sourceTree = "<group>"; };
 		9B47E7441CEF5B4A003E0860 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9B47E7471CEF5B77003E0860 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		9B47E7561CF21645003E0860 /* SpeechUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeechUtility.h; sourceTree = "<group>"; };
+		9B47E7571CF21645003E0860 /* SpeechUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeechUtility.m; sourceTree = "<group>"; };
 		9BA060401CE6D9320018CA5B /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		9BA475871B9D34AA00D66F1E /* OggHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OggHelper.h; path = ogg/OggHelper.h; sourceTree = "<group>"; };
 		9BA475881B9D34AA00D66F1E /* OggHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OggHelper.m; path = ogg/OggHelper.m; sourceTree = "<group>"; };
@@ -197,7 +202,6 @@
 		C12352A919910606009A8F8B /* opus_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opus_types.h; sourceTree = "<group>"; };
 		C1235353199B53FF009A8F8B /* OpusHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpusHelper.h; sourceTree = "<group>"; };
 		C1235354199B53FF009A8F8B /* OpusHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpusHelper.m; sourceTree = "<group>"; };
-		C123FF8719B9FE4100C6A702 /* UploaderDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UploaderDelegate.h; sourceTree = "<group>"; };
 		C165429B191A0D8500905DCC /* OC Sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OC Sample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C165429D191A0D8500905DCC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		C16542A2191A0D8500905DCC /* watsonsdktest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "watsonsdktest-Info.plist"; sourceTree = "<group>"; };
@@ -213,8 +217,6 @@
 		C17779621B9DBFAA0066269A /* TTSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTSViewController.h; sourceTree = "<group>"; };
 		C17779631B9DBFAA0066269A /* TTSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTSViewController.m; sourceTree = "<group>"; };
 		C1B14B821AA0D3DC00864C53 /* libopus.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libopus.a; sourceTree = "<group>"; };
-		C1C374391A8581A00083C69B /* WebSocketUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebSocketUploader.h; sourceTree = "<group>"; };
-		C1C3743A1A8581A00083C69B /* WebSocketUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebSocketUploader.m; sourceTree = "<group>"; };
 		C1C3743D1A86C5DB0083C69B /* SpeechToText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeechToText.h; sourceTree = "<group>"; };
 		C1C3743E1A86C5DB0083C69B /* SpeechToText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeechToText.m; sourceTree = "<group>"; };
 		C1D4580019A78BBB00093095 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -275,6 +277,8 @@
 				9BCAD8311CE6BF1200BE3B5F /* SocketRocket.h */,
 				9BCAD8321CE6BF1200BE3B5F /* SRWebSocket.h */,
 				9BCAD8331CE6BF1200BE3B5F /* SRWebSocket.m */,
+				9B36693D1CF21A5400806BEE /* WebSocketAudioStreamer.h */,
+				9B36693E1CF21A5400806BEE /* WebSocketAudioStreamer.m */,
 			);
 			path = websocket;
 			sourceTree = "<group>";
@@ -405,9 +409,7 @@
 				9BCAD7C51CE5BC8B00BE3B5F /* websocket */,
 				C11772101AFD193B00C8791A /* ogg */,
 				C12352A519910606009A8F8B /* opus */,
-				C1416C33194B49520009C49A /* lib */,
-				C11A66BF1754F9DA00385896 /* Upload */,
-				C11A64611754D0E600385896 /* Supporting Files */,
+				C1416C33194B49520009C49A /* libs */,
 				C1C3743D1A86C5DB0083C69B /* SpeechToText.h */,
 				C1C3743E1A86C5DB0083C69B /* SpeechToText.m */,
 				C11B3E911AF398C80062BF7D /* STTConfiguration.h */,
@@ -418,6 +420,9 @@
 				C11B3E9E1AF3FF660062BF7D /* TTSConfiguration.m */,
 				7EFE11E21B71D07D00EF10BF /* AuthConfiguration.h */,
 				7EFE11E31B71D07D00EF10BF /* AuthConfiguration.m */,
+				9B47E7561CF21645003E0860 /* SpeechUtility.h */,
+				9B47E7571CF21645003E0860 /* SpeechUtility.m */,
+				C11A64611754D0E600385896 /* Supporting Files */,
 			);
 			path = watsonsdk;
 			sourceTree = "<group>";
@@ -449,16 +454,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		C11A66BF1754F9DA00385896 /* Upload */ = {
-			isa = PBXGroup;
-			children = (
-				C123FF8719B9FE4100C6A702 /* UploaderDelegate.h */,
-				C1C374391A8581A00083C69B /* WebSocketUploader.h */,
-				C1C3743A1A8581A00083C69B /* WebSocketUploader.m */,
-			);
-			name = Upload;
-			sourceTree = "<group>";
-		};
 		C12352A519910606009A8F8B /* opus */ = {
 			isa = PBXGroup;
 			children = (
@@ -474,12 +469,13 @@
 			path = opus;
 			sourceTree = "<group>";
 		};
-		C1416C33194B49520009C49A /* lib */ = {
+		C1416C33194B49520009C49A /* libs */ = {
 			isa = PBXGroup;
 			children = (
 				C11772081AFD191D00C8791A /* libogg.a */,
 				C1B14B821AA0D3DC00864C53 /* libopus.a */,
 			);
+			name = libs;
 			path = lib;
 			sourceTree = "<group>";
 		};
@@ -522,18 +518,18 @@
 				9BCAD8421CE6BF1200BE3B5F /* SocketRocket.h in Headers */,
 				C11772141B029BEE00C8791A /* opus_header.h in Headers */,
 				C1235355199B53FF009A8F8B /* OpusHelper.h in Headers */,
-				9BA475891B9D34AA00D66F1E /* OggHelper.h in Headers */,
-				C1C3743B1A8581A00083C69B /* WebSocketUploader.h in Headers */,
+				9B47E7581CF21645003E0860 /* SpeechUtility.h in Headers */,
+				9B36693F1CF21A5400806BEE /* WebSocketAudioStreamer.h in Headers */,
 				7EFE11E41B71D07D00EF10BF /* AuthConfiguration.h in Headers */,
 				9BCAD83C1CE6BF1200BE3B5F /* SRError.h in Headers */,
-				9BA475901B9D354E00D66F1E /* os_types.h in Headers */,
-				C1C3743F1A86C5DB0083C69B /* SpeechToText.h in Headers */,
 				9BA4758F1B9D354E00D66F1E /* ogg.h in Headers */,
+				9BA475891B9D34AA00D66F1E /* OggHelper.h in Headers */,
+				C1C3743F1A86C5DB0083C69B /* SpeechToText.h in Headers */,
 				C11B3E9F1AF3FF660062BF7D /* TTSConfiguration.h in Headers */,
 				C11B3E9B1AF3FEC90062BF7D /* TextToSpeech.h in Headers */,
+				9BA475901B9D354E00D66F1E /* os_types.h in Headers */,
 				9BCAD8381CE6BF1200BE3B5F /* SRIOConsumerPool.h in Headers */,
 				C11B3E931AF398C80062BF7D /* STTConfiguration.h in Headers */,
-				C11712E31A03DC2E00957080 /* UploaderDelegate.h in Headers */,
 				9BCAD8431CE6BF1200BE3B5F /* SRWebSocket.h in Headers */,
 				9BCAD8341CE6BF1200BE3B5F /* SRDelegateController.h in Headers */,
 				9BCAD83A1CE6BF1200BE3B5F /* SRRunLoopThread.h in Headers */,
@@ -734,8 +730,8 @@
 			files = (
 				7EFE11E51B71D07D00EF10BF /* AuthConfiguration.m in Sources */,
 				9BCAD8351CE6BF1200BE3B5F /* SRDelegateController.m in Sources */,
+				9B47E7591CF21645003E0860 /* SpeechUtility.m in Sources */,
 				C117721E1B02A15000C8791A /* opus_header.c in Sources */,
-				C1C3743C1A8581A00083C69B /* WebSocketUploader.m in Sources */,
 				9BCAD8441CE6BF1200BE3B5F /* SRWebSocket.m in Sources */,
 				9BCAD8391CE6BF1200BE3B5F /* SRIOConsumerPool.m in Sources */,
 				C1C374401A86C5DB0083C69B /* SpeechToText.m in Sources */,
@@ -747,6 +743,7 @@
 				9BA4758A1B9D34AA00D66F1E /* OggHelper.m in Sources */,
 				C1235356199B53FF009A8F8B /* OpusHelper.m in Sources */,
 				9BCAD83F1CE6BF1200BE3B5F /* SRHash.m in Sources */,
+				9B3669401CF21A5400806BEE /* WebSocketAudioStreamer.m in Sources */,
 				C11B3E9C1AF3FEC90062BF7D /* TextToSpeech.m in Sources */,
 				9BCAD8411CE6BF1200BE3B5F /* SRURLUtilities.m in Sources */,
 			);
