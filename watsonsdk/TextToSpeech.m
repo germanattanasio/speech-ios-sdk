@@ -15,7 +15,6 @@
  **/
 
 #import "TextToSpeech.h"
-#import "OpusHelper.h"
 
 typedef void (^PlayAudioCallbackBlockType)(NSError*);
 
@@ -247,14 +246,7 @@ typedef void (^PlayAudioCallbackBlockType)(NSError*);
             if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
                 NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*) response;
                 if([httpResponse statusCode] != 200){
-                    NSDictionary *userInfo = @{
-                                               NSLocalizedDescriptionKey: @"",
-                                               NSLocalizedFailureReasonErrorKey: @"",
-                                               NSLocalizedRecoverySuggestionErrorKey: @""
-                                               };
-                    reqError = [NSError errorWithDomain: WATSONSDK_TTS_ERROR_DOMAIN
-                                                   code: [httpResponse statusCode]
-                                               userInfo: userInfo];
+                    reqError = [SpeechUtility raiseErrorWithCode:[httpResponse statusCode]];
                     [config invalidateToken];
                 }
             }
@@ -296,17 +288,8 @@ typedef void (^PlayAudioCallbackBlockType)(NSError*);
         NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *reqError) {
             if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
                 NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*) response;
-                if([httpResponse statusCode] != 200)
-                {
-                    NSDictionary *userInfo = @{
-                                               NSLocalizedDescriptionKey: @"",
-                                               NSLocalizedFailureReasonErrorKey: @"",
-                                               NSLocalizedRecoverySuggestionErrorKey: @""
-                                               };
-                    reqError = [NSError errorWithDomain: WATSONSDK_TTS_ERROR_DOMAIN
-                                                   code: [httpResponse statusCode]
-                                               userInfo:userInfo];
-
+                if([httpResponse statusCode] != 200){
+                    reqError = [SpeechUtility raiseErrorWithCode:[httpResponse statusCode]];
                     [config invalidateToken];
                 }
             }

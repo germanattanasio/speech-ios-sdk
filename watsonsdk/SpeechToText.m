@@ -15,7 +15,6 @@
  **/
 
 #import <SpeechToText.h>
-#import "OggHelper.h"
 
 // type defs for block callbacks
 #define NUM_BUFFERS 3
@@ -41,7 +40,7 @@ typedef struct
 @property OggHelper *ogg;
 @property OpusHelper* opus;
 @property RecordingState recordState;
-@property WebSocketUploader* wsuploader;
+@property WebSocketAudioStreamer* wsUploader;
 @property (nonatomic,copy) RecognizeCallbackBlockType recognizeCallback;
 @property (nonatomic,copy) PowerLevelCallbackBlockType powerLevelCallback;
 
@@ -119,13 +118,7 @@ id oggRef;
     if(!isNewRecordingAllowed)
     {
         NSLog(@"Transcription already in progress");
-        NSDictionary *userInfo = @{
-                                   NSLocalizedDescriptionKey: @"A voice query is already in progress",
-                                   NSLocalizedFailureReasonErrorKey: @"",
-                                   NSLocalizedRecoverySuggestionErrorKey: @""
-                                   };
-        // populate the error object with the details
-        NSError *recordError = [NSError errorWithDomain: WATSONSDK_STT_ERROR_DOMAIN code:WATSONSDK_STT_ERROR_CODE userInfo: userInfo];
+        NSError *recordError = [SpeechUtility raiseErrorWithMessage:@"A voice query is already in progress"];
         self.recognizeCallback(nil, recordError);
         return;
     }
@@ -137,7 +130,7 @@ id oggRef;
 
 -(void) endRecognize{
     [self stopRecordingAudio];
-    [[self wsuploader] sendEndOfStreamMarker];
+    [[self wsUploader] sendEndOfStreamMarker];
     isNewRecordingAllowed=YES;
 }
 
@@ -287,14 +280,7 @@ id oggRef;
             if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
                 NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*) response;
                 if([httpResponse statusCode] != 200){
-                    NSDictionary *userInfo = @{
-                                               NSLocalizedDescriptionKey: @"",
-                                               NSLocalizedFailureReasonErrorKey: @"",
-                                               NSLocalizedRecoverySuggestionErrorKey: @""
-                                               };
-                    reqError = [NSError errorWithDomain: WATSONSDK_STT_ERROR_DOMAIN
-                                                   code: [httpResponse statusCode]
-                                               userInfo: userInfo];
+                    reqError = [SpeechUtility raiseErrorWithCode:[httpResponse statusCode] message:@"" reason:@"" suggestion:@""];
                     [config invalidateToken];
                 }
             }
@@ -423,15 +409,15 @@ id oggRef;
 - (void) initializeStreaming {
     NSLog(@"### initializeStreaming ###");
     // init the websocket uploader if its nil
-    if(self.wsuploader == nil) {
-        self.wsuploader = [[WebSocketUploader alloc] init];
-        [self.wsuploader setRecognizeHandler:recognizeCallback];
+    if(self.wsUploader == nil) {
+        self.wsUploader = [[WebSocketAudioStreamer alloc] init];
+        [self.wsUploader setRecognizeHandler:recognizeCallback];
     }
 
     // connect if we are not connected
-    if(![self.wsuploader isWebSocketConnected]) {
+    if(![self.wsUploader isWebSocketConnected]) {
         [self.config requestToken:^(AuthConfiguration *config) {
-            [self.wsuploader connect:(STTConfiguration*)config headers:[config createRequestHeaders]];
+            [self.wsUploader connect:(STTConfiguration*)config headers:[config createRequestHeaders]];
         }];
     }
 
@@ -442,14 +428,12 @@ id oggRef;
         self.ogg = [[OggHelper alloc] init];
         oggRef = self->_ogg;
         // Indicate sample rate
-        [self.wsuploader writeData:[[self ogg] getOggOpusHeader:WATSONSDK_AUDIO_SAMPLE_RATE]];
+        [self.wsUploader writeData:[[self ogg] getOggOpusHeader:WATSONSDK_AUDIO_SAMPLE_RATE]];
     }
     
     // set a pointer to the wsuploader class so it is accessible in the c callback
-    uploaderRef = self.wsuploader;
+    uploaderRef = self.wsUploader;
 }
-
-
 
 #pragma mark audio
 
