@@ -92,8 +92,8 @@
                     // testing updating model
                     NSArray *words = [NSArray arrayWithObjects:
                                       [[TTSCustomWord initWithWord: @"UT" translation: @"Utilization"] produceDictionary],
-                                      [[TTSCustomWord initWithWord: @"MIHUI" translation: @"Me Who-A"] produceDictionary],
-                                      [[TTSCustomWord initWithWord: @"LOL" translation: @"Laughing out loud, ha ha ha ha ha"] produceDictionary],
+                                      [[TTSCustomWord initWithWord: @"MIHUI" translation: @"Me Who A"] produceDictionary],
+                                      [[TTSCustomWord initWithWord: @"LOL" translation: @"Laughing out loud ha ha ha ha ha"] produceDictionary],
                                       [[TTSCustomWord initWithWord: @"IEEE" translation: @"I triple E"] produceDictionary],
                                       nil];
 
