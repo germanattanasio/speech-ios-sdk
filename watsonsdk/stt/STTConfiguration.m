@@ -49,32 +49,28 @@
 
 #pragma mark convenience methods for obtaining service URLs
 
-- (NSURL*) getModelsServiceURL {
-    
-    NSString *uriStr = [NSString stringWithFormat:@"%@://%@%@%@",self.apiEndpoint.scheme,self.apiEndpoint.host,self.apiEndpoint.path,WATSONSDK_SERVICE_PATH_MODELS];
+- (NSURL*)getModelsServiceURL {
+    NSString *uriStr = [NSString stringWithFormat:@"%@://%@%@%@", self.apiEndpoint.scheme, self.apiEndpoint.host, self.apiEndpoint.path, WATSONSDK_SERVICE_PATH_MODELS];
     NSURL * url = [NSURL URLWithString:uriStr];
     return url;
 }
 
-- (NSURL*) getModelServiceURL:(NSString*) modelName {
-    
+- (NSURL*)getModelServiceURL:(NSString*) modelName {
     NSString *uriStr = [NSString stringWithFormat:@"%@://%@%@%@/%@",self.apiEndpoint.scheme,self.apiEndpoint.host,self.apiEndpoint.path,WATSONSDK_SERVICE_PATH_MODELS,modelName];
     NSURL * url = [NSURL URLWithString:uriStr];
     return url;
 }
 
-- (NSURL*) getWebSocketRecognizeURL {
+- (NSURL*)getWebSocketRecognizeURL {
     NSMutableString *uriStr = [[NSMutableString alloc] init];
-    
-    [uriStr appendFormat:@"%@%@%@%@%@",WEBSOCKETS_SCHEME,self.apiEndpoint.host,self.apiEndpoint.path,WATSONSDK_SERVICE_PATH_v1,WATSONSDK_SERVICE_PATH_RECOGNIZE];
-    
+
+    [uriStr appendFormat:@"%@%@%@%@%@", WEBSOCKETS_SCHEME, self.apiEndpoint.host, self.apiEndpoint.path, WATSONSDK_SERVICE_PATH_v1, WATSONSDK_SERVICE_PATH_RECOGNIZE];
+
     if(![self.modelName isEqualToString:WATSONSDK_DEFAULT_STT_MODEL]) {
         [uriStr appendFormat:@"?model=%@", self.modelName];
     }
-    
     NSURL * url = [NSURL URLWithString:uriStr];
     return url;
 }
-
 
 @end

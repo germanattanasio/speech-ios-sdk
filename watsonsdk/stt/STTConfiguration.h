@@ -43,9 +43,8 @@
 
 
 - (id)init;
-- (NSURL*) getModelsServiceURL;
-- (NSURL*) getModelServiceURL:(NSString*) modelName;
-- (NSURL*) getWebSocketRecognizeURL;
-
+- (NSURL*)getModelsServiceURL;
+- (NSURL*)getModelServiceURL:(NSString*) modelName;
+- (NSURL*)getWebSocketRecognizeURL;
 
 @end

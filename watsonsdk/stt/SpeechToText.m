@@ -57,11 +57,6 @@ typedef struct
 static BOOL isNewRecordingAllowed;
 static BOOL isCompressedOpus;
 static int audioRecordedLength;
-//static int serialno;
-static NSString* tmpPCM=nil;
-//static long pageSeq;
-//static bool isTempPathSet = false;
-
 
 id uploaderRef;
 id delegateRef;
@@ -93,7 +88,7 @@ id oggRef;
     self.config = config;
     // set audio encoding flags so they are accessible in c audio callbacks
     isCompressedOpus = [config.audioCodec isEqualToString:WATSONSDK_AUDIO_CODEC_TYPE_OPUS] ? YES : NO;
-    isNewRecordingAllowed=YES;
+    isNewRecordingAllowed = YES;
 
     // setup opus helper
     self.opus = [[OpusHelper alloc] init];
@@ -109,29 +104,22 @@ id oggRef;
  *  @param recognizeHandler (^)(NSDictionary*, NSError*)
  */
 - (void) recognize:(void (^)(NSDictionary*, NSError*)) recognizeHandler {
-    
-    // perform asset here
-    
     // store the block
     self.recognizeCallback = recognizeHandler;
-    
-    if(!isNewRecordingAllowed)
-    {
-        NSLog(@"Transcription already in progress");
-        NSError *recordError = [SpeechUtility raiseErrorWithMessage:@"A voice query is already in progress"];
-        self.recognizeCallback(nil, recordError);
+
+    if(isNewRecordingAllowed) {
+        // don't allow a new recording to be allowed until this transaction has completed
+        isNewRecordingAllowed = NO;
+        [self startRecordingAudio];
         return;
     }
-    
-    // don't allow a new recording to be allowed until this transaction has completed
-    isNewRecordingAllowed= NO;
-    [self startRecordingAudio];
+    NSError *recordError = [SpeechUtility raiseErrorWithMessage:@"A voice query is already in progress"];
+    self.recognizeCallback(nil, recordError);
 }
 
 -(void) endRecognize{
     [self stopRecordingAudio];
     [[self wsUploader] sendEndOfStreamMarker];
-    isNewRecordingAllowed=YES;
 }
 
 
@@ -265,49 +253,31 @@ id oggRef;
  *  @param handler (^)(NSDictionary*, NSError*))
  *  @param url     url to perform GET request on
  */
-- (void) performGet:(void (^)(NSDictionary*, NSError*))handler forURL:(NSURL*)url{
-    
+- (void) performGet:(void (^)(NSDictionary*, NSError*))handler forURL:(NSURL*)url {
+    [self performGet:handler forURL:url disableCache:NO];
+}
+- (void) performGet:(void (^)(NSDictionary*, NSError*))handler forURL:(NSURL*)url disableCache:(BOOL) withoutCache {
     // Create and set authentication headers
     NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
+    
+    if(withoutCache)
+        [defaultConfigObject setURLCache:nil];
     
     [self.config requestToken:^(AuthConfiguration *config) {
         NSDictionary* headers = [config createRequestHeaders];
         [defaultConfigObject setHTTPAdditionalHeaders:headers];
-        
         NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: defaultConfigObject delegate: self delegateQueue: [NSOperationQueue mainQueue]];
-
-        NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *reqError) {
-            if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-                NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*) response;
-                if([httpResponse statusCode] != 200){
-                    reqError = [SpeechUtility raiseErrorWithCode:[httpResponse statusCode] message:@"" reason:@"" suggestion:@""];
-                    [config invalidateToken];
-                }
-            }
-            if(reqError)
-            {
-                handler(nil,reqError);
-            } else {
-                NSError *localError = nil;
-                NSDictionary *parsedObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:&localError];
-                
-                if (localError != nil) {
-                    handler(nil,localError);
-                } else {
-                    handler(parsedObject,nil);
-                }
-
-            }
-            
+        
+        NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+            [SpeechUtility processJSON:handler config:config response:response data:data error:error];
         }];
         
         [dataTask resume];
-     }];
-    
+    }];
 }
 
+
 - (void) startRecordingAudio {
-    NSLog(@"### startRecordingAudio ###");
     // lets start the socket connection right away
     [self initializeStreaming];
     [self setFilePaths];
@@ -379,9 +349,7 @@ id oggRef;
     if(_recordState.stream != NULL){
         fclose(_recordState.stream);
     }
-
     isNewRecordingAllowed = YES;
-    NSLog(@"stopRecordingAudio->fclose done");
 }
 
 
@@ -407,7 +375,6 @@ id oggRef;
 
 #pragma mark audio upload
 - (void) initializeStreaming {
-    NSLog(@"### initializeStreaming ###");
     // init the websocket uploader if its nil
     if(self.wsUploader == nil) {
         self.wsUploader = [[WebSocketAudioStreamer alloc] init];
