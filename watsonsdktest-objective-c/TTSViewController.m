@@ -32,15 +32,14 @@
 @synthesize ttsButton = _ttsButton;
 
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
+    NSString *credentialFilePath = [[NSBundle mainBundle] pathForResource:@"Credentials" ofType:@"plist"];
+    NSDictionary *credentials = [[NSDictionary alloc] initWithContentsOfFile:credentialFilePath];
     // TTS setup
     TTSConfiguration *confTTS = [[TTSConfiguration alloc] init];
-    [confTTS setBasicAuthUsername:@"<your-username>"];
-    [confTTS setBasicAuthPassword:@"<your-password>"];
+    [confTTS setBasicAuthUsername:credentials[@"TTSUsername"]];
+    [confTTS setBasicAuthPassword:credentials[@"TTSPassword"]];
     [confTTS setAudioCodec:WATSONSDK_TTS_AUDIO_CODEC_TYPE_OPUS];
     
 //    [confTTS setTokenGenerator:^(void (^tokenHandler)(NSString *token)){
@@ -58,37 +57,26 @@
 //        }
 //        tokenHandler([[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding]);
 //    } ];
-//    
+//
+    
+    __weak typeof(self) weakSelf = self;
+
     self.tts = [TextToSpeech initWithConfig:confTTS];
-    
-    
     // list voices call to populate picker
     [self.tts listVoices:^(NSDictionary* res, NSError* err){
-        
         if(err == nil)
-            [self voiceHandler:res];
+            [weakSelf voiceHandler:res];
         else
-            self.ttsField.text = [err description];
+            weakSelf.ttsField.text = [err description];
     }];
-    
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (IBAction)pressSelectVoice:(id)sender {
-    
     [self.pickerView setHidden:NO];
     [self.pickerView setOpaque:YES];
-    
-    
 }
 
 - (IBAction)pressSpeak:(id)sender {
-    
     [self.tts synthesize:^(NSData *data, NSError *reqErr) {
         if(reqErr){
             NSLog(@"Error requesting data: %@", [reqErr description]);
@@ -97,13 +85,22 @@
         // play audio and log when playgin has finished
         [self.tts playAudio:^(NSError *err) {
             if(err)
-                NSLog(@"error playing audio %@",[err localizedDescription]);
+                NSLog(@"Error playing audio %@",[err localizedDescription]);
             else
-                NSLog(@"audio finished playing");
+                NSLog(@"Audio finished playing");
 
         } withData:data];
         
     } theText:self.ttsField.text];
+    
+    [self.tts queryPronunciation:^(NSDictionary* dict, NSError* error) {
+        if(error){
+            NSLog(@"Error requesting data: %@", [error description]);
+        }
+        else{
+            NSLog(@"Pronunciation: [%@]", [dict objectForKey:@"pronunciation"]);
+        }
+    } text: self.ttsField.text];
 }
 
 - (void) voiceHandler:(NSDictionary *) dict {
@@ -163,12 +160,11 @@
     }
 }
 
--(void)pickerViewTapGestureRecognized:(UIGestureRecognizer *)sender {
+- (void)pickerViewTapGestureRecognized:(UIGestureRecognizer *)sender {
     [self onSelectedModel:[self.pickerView selectedRowInComponent:0]];
 }
 
-- (UIPickerView *)pickerView
-{
+- (UIPickerView *)pickerView {
     if (!_pickerView)
     {
         int pickerHeight = 250;
@@ -180,61 +176,54 @@
     return _pickerView;
 }
 
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 #pragma mark - UIPickerViewDataSource Methods
 
 // returns the number of 'columns' to display.
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
-{
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
     return 1;
 }
 
 // returns the # of rows in each component..
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
-{
-    
-    if(self.TTSVoices != nil)
-    {
-        return [self.TTSVoices count];
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    if(self.TTSVoices == nil) {
+        return 0;
     }
-    
-    return 0;
+    return [self.TTSVoices count];
 }
 
 #pragma mark - UIPickerViewDelegate Methods
 
-- (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component
-{
+- (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component {
     return 200;
 }
 
-- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component
-{
+- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {
     return 50;
 }
 
-- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
-{
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
     UILabel* tView = (UILabel*)view;
-    if (!tView)
-    {
+    if (!tView) {
         tView = [[UILabel alloc] init];
         [tView setFont:[UIFont fontWithName:@"Helvetica" size:14]];
         tView.numberOfLines=1;
     }
     // Fill the label text here
     NSDictionary *voice = [self.TTSVoices objectAtIndex:row];
-    
+
     NSString *voiceName = [voice objectForKey:@"name"];
     NSString *voiceGender = [voice objectForKey:@"gender"];
     tView.text=[NSString stringWithFormat:@"%@: %@",voiceGender,voiceName];
     return tView;
 }
 
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
-{
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     [self onSelectedModel:row];
 }
-
-
 
 @end
