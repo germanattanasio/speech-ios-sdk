@@ -34,10 +34,12 @@ class SwiftSTTViewController: UIViewController, UITextFieldDelegate, UIPickerVie
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
+        let credentialFilePath = NSBundle.mainBundle().pathForResource("Credentials", ofType: "plist")
+        let credentials = NSDictionary(contentsOfFile: credentialFilePath!)
+
         let confSTT: STTConfiguration = STTConfiguration()
-        confSTT.basicAuthUsername = "<your-username>"
-        confSTT.basicAuthPassword = "<your-password>"
+        confSTT.basicAuthUsername = credentials!["STTUsername"] as! String
+        confSTT.basicAuthPassword = credentials!["STTPassword"] as! String
         confSTT.audioCodec = WATSONSDK_AUDIO_CODEC_TYPE_OPUS
         confSTT.modelName = WATSONSDK_DEFAULT_STT_MODEL
 

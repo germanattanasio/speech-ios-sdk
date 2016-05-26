@@ -35,9 +35,12 @@ class SwiftTTSViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        let credentialFilePath = NSBundle.mainBundle().pathForResource("Credentials", ofType: "plist")
+        let credentials = NSDictionary(contentsOfFile: credentialFilePath!)
+        
         let confTTS: TTSConfiguration = TTSConfiguration()
-        confTTS.basicAuthUsername = "<your-username>"
-        confTTS.basicAuthPassword = "<your-password>"
+        confTTS.basicAuthUsername = credentials?["TTSUsername"] as! String
+        confTTS.basicAuthPassword = credentials?["TTSPassword"] as! String
         confTTS.audioCodec = WATSONSDK_TTS_AUDIO_CODEC_TYPE_OPUS
         confTTS.voiceName = WATSONSDK_DEFAULT_TTS_VOICE
 
