@@ -21,7 +21,8 @@
 #define WATSONSDK_DEFAULT_TTS_API_ENDPOINT @"https://stream.watsonplatform.net/text-to-speech/api/"
 #define WATSONSDK_SERVICE_PATH_VOICES @"/v1/voices"
 #define WATSONSDK_SERVICE_PATH_SYNTHESIZE @"/v1/synthesize"
-
+#define WATSONSDK_SERVICE_PATH_CUSTOMIZATIONS @"/v1/customizations"
+#define WATSONSDK_SERVICE_PATH_PRONUNCIATION @"/v1/pronunciation"
 // codecs
 #define WATSONSDK_TTS_AUDIO_CODEC_TYPE_OPUS @"audio/opus"//; codecs=opus"
 #define WATSONSDK_TTS_AUDIO_CODEC_TYPE_OPUS_SAMPLE_RATE 48000   // zero means decoder detected sample rate
@@ -41,7 +42,11 @@
 @property BOOL isCertificateValidationDisabled;
 
 - (id)init;
-- (NSURL*) getVoicesServiceURL;
-- (NSURL*) getSynthesizeURL:(NSString*) text;
-
+- (NSURL*)getVoicesServiceURL;
+- (NSURL*)getPronunciationURL: (NSString*) text;
+- (NSURL*)getPronunciationURL: (NSString*) text voice:(NSString*) theVoice format: (NSString*)theFormat;
+- (NSURL*)getSynthesizeURL:(NSString*) text;
+- (NSURL*)getSynthesizeURL:(NSString*) text customizationId:(NSString*) customizationId;
+- (NSURL*)getCustomizationURL;
+- (NSURL*)getCustomizationURL:(NSString*) customizationId;
 @end

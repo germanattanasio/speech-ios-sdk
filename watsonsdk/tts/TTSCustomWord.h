@@ -10,4 +10,12 @@
 
 @interface TTSCustomWord : NSObject
 
+@property NSString* word;
+@property NSString* translation;
+
+- (id) initWithWord: (NSString*) text translation:(NSString*) translation;
++ (id) initWithWord: (NSString*) text translation:(NSString*) translation;
+
+-(NSMutableDictionary*)produceDictionary;
+-(NSData*)producePostData;
 @end
