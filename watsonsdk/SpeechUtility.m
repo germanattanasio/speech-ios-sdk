@@ -15,7 +15,6 @@
  **/
 
 #import "SpeechUtility.h"
-#define WATSON_WEBSOCKETS_ERROR_CODE 506
 
 @implementation SpeechUtility
 
@@ -115,6 +114,93 @@
                                         message:errorMessage
                                          reason:@"WebSockets error"
                                      suggestion:@"Close connection"];
+}
+
++ (void) processData: (void (^)(id, NSError*))handler
+                  config: (AuthConfiguration*) authConfig
+                response:(NSURLResponse*) httpResponse
+                    data:(NSData*) responseData
+                   error: (NSError*) requestError
+{
+    // request error
+    if(requestError){
+        handler(nil, requestError);
+        return;
+    }
+    
+    NSDictionary *responseObject = nil;
+    NSError *dataError = nil;
+
+    if ([httpResponse isKindOfClass:[NSHTTPURLResponse class]]) {
+        NSHTTPURLResponse *theResponse = (NSHTTPURLResponse*) httpResponse;
+        NSLog(@"--> status code: %ld", (long)[theResponse statusCode]);
+        
+        if([theResponse statusCode] == 200 || [theResponse statusCode] == 304) {
+            handler(responseData, nil);
+        }
+        else{
+            responseObject = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&dataError];
+            // response error handling
+            // https://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/text-to-speech/api/v1/#response-handling
+            requestError = [SpeechUtility raiseErrorWithCode:[[responseObject valueForKey:@"code"] integerValue] message:[responseObject valueForKey:@"code_description"] reason:[responseObject valueForKey:@"error"] suggestion:@""];
+            NSLog(@"server error");
+            handler(nil, requestError);
+        }
+        return;
+    }
+
+    dataError = [SpeechUtility raiseErrorWithCode:0];
+    handler(nil, dataError);
+}
+
++ (void) processJSON: (void (^)(id, NSError*))handler
+                  config: (AuthConfiguration*) authConfig
+                response:(NSURLResponse*) httpResponse
+                    data:(NSData*) responseData
+                   error: (NSError*) requestError
+{
+    // request error
+    if(requestError){
+        handler(nil, requestError);
+        return;
+    }
+    
+    NSError *dataError = nil;
+    NSDictionary *responseObject = nil;
+    
+    if ([httpResponse isKindOfClass:[NSHTTPURLResponse class]]) {
+        NSHTTPURLResponse *theResponse = (NSHTTPURLResponse*) httpResponse;
+        NSLog(@"--> status code: %ld", (long)[theResponse statusCode]);
+        
+        if([theResponse statusCode] == 201 || [theResponse statusCode] == 204) {
+            NSData *noContent = [@"{}" dataUsingEncoding:NSUTF8StringEncoding];
+            responseObject = [NSJSONSerialization JSONObjectWithData:noContent options:NSJSONReadingMutableContainers error:&dataError];
+            handler(responseObject, nil);
+        }
+        else{
+            responseObject = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&dataError];
+            if([theResponse statusCode] == 200) {
+                handler(responseObject, nil);
+            }
+            else{
+                if(dataError == nil){
+                    // response error handling
+                    // https://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/text-to-speech/api/v1/#response-handling
+                    requestError = [SpeechUtility raiseErrorWithCode:[[responseObject valueForKey:@"code"] integerValue] message:[responseObject valueForKey:@"code_description"] reason:[responseObject valueForKey:@"error"] suggestion:@""];
+                    NSLog(@"server error");
+                    handler(nil, requestError);
+                }
+                else{
+                    NSLog(@"data error");
+                    handler(nil, dataError);
+                }
+            }
+        }
+        return;
+    }
+    
+    dataError = [SpeechUtility raiseErrorWithCode:0];
+    handler(nil, dataError);
 }
 
 @end
