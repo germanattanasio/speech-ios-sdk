@@ -10,4 +10,9 @@
 
 @interface TTSCustomizationDetailTableViewCell : UITableViewCell
 
+@property (nonatomic, retain) IBOutlet UILabel *word;
+@property (nonatomic, retain) IBOutlet UILabel *translation;
+@property (nonatomic, retain) IBOutlet UIButton *oldTranslation;
+@property (nonatomic, retain) IBOutlet UIButton *currentTranslation;
+
 @end

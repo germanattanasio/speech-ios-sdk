@@ -10,4 +10,8 @@
 
 @implementation TTSCustomizationDetailTableViewCell
 
+@synthesize word = _word;
+@synthesize translation = _translation;
+@synthesize oldTranslation = _oldTranslation;
+@synthesize currentTranslation = _currentTranslation;
 @end
