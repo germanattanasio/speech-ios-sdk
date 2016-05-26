@@ -21,7 +21,6 @@
 @property NSString* basicAuthUsername;
 @property NSString* basicAuthPassword;
 
-
 @property (readonly) NSString *token;
 @property (copy, nonatomic) void (^tokenGenerator) (void (^tokenHandler)(NSString *token));
 
