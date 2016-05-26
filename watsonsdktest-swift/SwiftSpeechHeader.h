@@ -20,6 +20,4 @@
 
 #endif /* SwiftSpeechHeader_h */
 #import <watsonsdk/SpeechToText.h>
-#import <watsonsdk/STTConfiguration.h>
 #import <watsonsdk/TextToSpeech.h>
-#import <watsonsdk/TTSConfiguration.h>
