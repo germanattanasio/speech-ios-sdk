@@ -16,7 +16,6 @@
 
 #import <UIKit/UIKit.h>
 #import <watsonsdk/SpeechToText.h>
-#import <watsonsdk/STTConfiguration.h>
 
 @interface STTViewController : UIViewController<UITextFieldDelegate,UIPickerViewDataSource, UIPickerViewDelegate>
 
