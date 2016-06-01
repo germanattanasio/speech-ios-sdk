@@ -24,6 +24,10 @@ NSError *SRErrorWithCodeDescription(NSInteger code, NSString *description)
 
 NSError *SRErrorWithCodeDescriptionUnderlyingError(NSInteger code, NSString *description, NSError *underlyingError)
 {
+    if(underlyingError == nil) {
+        underlyingError = [[NSError alloc] initWithDomain:SRWebSocketErrorDomain code:0 userInfo:@{ NSLocalizedDescriptionKey: description }];
+    }
+
     return [NSError errorWithDomain:SRWebSocketErrorDomain
                                code:code
                            userInfo:@{ NSLocalizedDescriptionKey: description,
