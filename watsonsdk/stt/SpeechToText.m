@@ -117,6 +117,10 @@ id oggRef;
     self.recognizeCallback(nil, recordError);
 }
 
+-(void) endTransmission{
+    [[self wsUploader] sendEndOfStreamMarker];
+}
+
 -(void) endRecognize{
     [self stopRecordingAudio];
     [[self wsUploader] sendEndOfStreamMarker];
