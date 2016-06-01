@@ -181,6 +181,12 @@ typedef void (^PlayAudioCallbackBlockType)(NSError*);
     
 }
 
+- (void)stopAudio {
+    [self.audioPlayer stop];
+    [self.audioPlayer setDelegate:nil];
+    self.audioPlayer = nil;
+}
+
 - (void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player
                                  error:(NSError *)error {
     self.playAudioCallback(error);
@@ -323,6 +329,7 @@ typedef void (^PlayAudioCallbackBlockType)(NSError*);
 - (void) performDataGet:(void (^)(NSData*, NSError*))handler forURL:(NSURL*)url {
     [self performDataGet:handler forURL:url disableCache:NO];
 }
+
 - (void) performDataGet:(void (^)(NSData*, NSError*))handler forURL:(NSURL*)url disableCache:(BOOL) withoutCache {
     
     // Create and set authentication headers
