@@ -45,6 +45,12 @@
  */
 - (void) endRecognize;
 
+- (void) endTransmission;
+
+/**
+ * Stop recording
+ */
+- (void) stopRecordingAudio;
 
 /**
  *  listModels - List speech models supported by the service
