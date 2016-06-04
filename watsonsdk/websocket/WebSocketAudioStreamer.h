@@ -27,7 +27,8 @@
 - (void) disconnect: (NSString*) reason;
 - (void) writeData:(NSData*) data;
 - (void) setRecognizeHandler:(void (^)(NSDictionary*, NSError*))handler;
-- (void) sendEndOfStreamMarker;
+- (void) setAudioDataHandler:(void (^)(NSData*))handler;
+- (BOOL) sendEndOfStreamMarker;
 
 
 @end
