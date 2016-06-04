@@ -39,7 +39,7 @@
 		9B36695E1CF3549400806BEE /* TTSConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B36695A1CF3549400806BEE /* TTSConfiguration.m */; };
 		9B3669641CF354B800806BEE /* SpeechToText.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3669601CF354B800806BEE /* SpeechToText.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B3669651CF354B800806BEE /* SpeechToText.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3669611CF354B800806BEE /* SpeechToText.m */; };
-		9B3669661CF354B800806BEE /* STTConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3669621CF354B800806BEE /* STTConfiguration.h */; };
+		9B3669661CF354B800806BEE /* STTConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3669621CF354B800806BEE /* STTConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B3669671CF354B800806BEE /* STTConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3669631CF354B800806BEE /* STTConfiguration.m */; };
 		9B375ABB1CEB0C2500A6F9D4 /* SwiftTTSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B375ABA1CEB0C2500A6F9D4 /* SwiftTTSViewController.swift */; };
 		9B375ABD1CEB194400A6F9D4 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BA060401CE6D9320018CA5B /* libicucore.tbd */; };
@@ -572,11 +572,11 @@
 				9B47E7581CF21645003E0860 /* SpeechUtility.h in Headers */,
 				9B36695B1CF3549400806BEE /* TextToSpeech.h in Headers */,
 				9B3669641CF354B800806BEE /* SpeechToText.h in Headers */,
+				9B3669661CF354B800806BEE /* STTConfiguration.h in Headers */,
 				9B1BCEE31CF69D440076FE2D /* TTSCustomWord.h in Headers */,
 				9B3669551CF3546C00806BEE /* TTSCustomVoice.h in Headers */,
 				9B36693F1CF21A5400806BEE /* WebSocketAudioStreamer.h in Headers */,
 				9BCAD83C1CE6BF1200BE3B5F /* SRError.h in Headers */,
-				9B3669661CF354B800806BEE /* STTConfiguration.h in Headers */,
 				9BA4758F1B9D354E00D66F1E /* ogg.h in Headers */,
 				9BA475891B9D34AA00D66F1E /* OggHelper.h in Headers */,
 				9BA475901B9D354E00D66F1E /* os_types.h in Headers */,
@@ -749,7 +749,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -e\n\nmkdir -p \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers\"\n\n# Link the \"Current\" version to \"A\"\n/bin/ln -sfh A \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/Current\"\n/bin/ln -sfh Versions/Current/Headers \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Headers\"\n/bin/ln -sfh \"Versions/Current/${PRODUCT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/${PRODUCT_NAME}\"\n\n# The -a ensures that the headers maintain the source modification date so that we don't constantly\n# cause propagating rebuilds of files that import these headers.\n/bin/cp -a \"${TARGET_BUILD_DIR}/${PUBLIC_HEADERS_FOLDER_PATH}/\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers\"\necho \"${TARGET_BUILD_DIR}/${PUBLIC_HEADERS_FOLDER_PATH}/\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/\" > ~/watsonsdklocation.txt\n\n# create a zip of the framework and add it to the project root\ncd ${BUILT_PRODUCTS_DIR}\nzip -r ${SRCROOT}/${PRODUCT_NAME}.framework.zip ${PRODUCT_NAME}.framework\nunzip -o ${SRCROOT}/${PRODUCT_NAME}.framework.zip -d /Users/mihui/Documents/Work/Projects/Mobile/Dialog-Mobile/platforms/ios/GOMWW/Frameworks/\n# [Rob] we need to copy the other headers keeping their folder structure\n#echo 'SRCROOT:'${SRCROOT}\n#cd ${SRCROOT}/watsonsdk\n\n# I have to move up a directory due to my layout.\n# echo 'Copying Headers into Framework..'\n#for H in `find ./ -name \"*.h\"`;  do\n#echo ${H}\n#ditto ${H} ${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers/${H}\n#done\n";
+			shellScript = "set -e\n\nmkdir -p \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers\"\n\n# Link the \"Current\" version to \"A\"\n/bin/ln -sfh A \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/Current\"\n/bin/ln -sfh Versions/Current/Headers \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Headers\"\n/bin/ln -sfh \"Versions/Current/${PRODUCT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/${PRODUCT_NAME}\"\n\n# The -a ensures that the headers maintain the source modification date so that we don't constantly\n# cause propagating rebuilds of files that import these headers.\n/bin/cp -a \"${TARGET_BUILD_DIR}/${PUBLIC_HEADERS_FOLDER_PATH}/\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers\"\necho \"${TARGET_BUILD_DIR}/${PUBLIC_HEADERS_FOLDER_PATH}/\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/\" > ~/watsonsdklocation.txt\n\n# create a zip of the framework and add it to the project root\ncd ${BUILT_PRODUCTS_DIR}\nzip -r ${SRCROOT}/${PRODUCT_NAME}.framework.zip ${PRODUCT_NAME}.framework\n\n# [Rob] we need to copy the other headers keeping their folder structure\n#echo 'SRCROOT:'${SRCROOT}\n#cd ${SRCROOT}/watsonsdk\n\n# I have to move up a directory due to my layout.\n# echo 'Copying Headers into Framework..'\n#for H in `find ./ -name \"*.h\"`;  do\n#echo ${H}\n#ditto ${H} ${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers/${H}\n#done\n";
 		};
 		C11A648F1754D6DA00385896 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
