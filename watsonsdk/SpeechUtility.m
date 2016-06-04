@@ -18,7 +18,14 @@
 
 @implementation SpeechUtility
 
-// refer to http://tools.ietf.org/html/rfc6455
+/**
+ *  Find proper error message with error code
+ *  refer to http://tools.ietf.org/html/rfc6455
+ *
+ *  @param code error code
+ *
+ *  @return error message
+ */
 + (NSString *)findUnexpectedErrorWithCode:(NSInteger)code {
     switch (code) {
         // http
@@ -93,11 +100,28 @@
     }
 }
 
+/**
+ *  Produce customized error with code
+ *
+ *  @param code error code
+ *
+ *  @return customized error
+ */
 + (NSError *)raiseErrorWithCode:(NSInteger)code{
     NSString* errorMessage = [SpeechUtility findUnexpectedErrorWithCode:code];
     return [SpeechUtility raiseErrorWithCode:code message:errorMessage reason:errorMessage suggestion:@""];
 }
 
+/**
+ *  Produce customized error with code
+ *
+ *  @param code              error codde
+ *  @param errorMessage      error message
+ *  @param reasonMessage     reason
+ *  @param suggestionMessage suggestion
+ *
+ *  @return customized error
+ */
 + (NSError *)raiseErrorWithCode:(NSInteger)code message:(NSString *)errorMessage reason:(NSString *)reasonMessage suggestion:(NSString *)suggestionMessage{
     NSDictionary *userInfo = @{
                                NSLocalizedDescriptionKey: errorMessage,
@@ -109,6 +133,13 @@
                                      userInfo:userInfo];
 }
 
+/**
+ *  Produce customized error with message
+ *
+ *  @param errorMessage error message
+ *
+ *  @return customized error
+ */
 + (NSError*)raiseErrorWithMessage:(NSString*) errorMessage{
     return [SpeechUtility raiseErrorWithCode:WATSON_WEBSOCKETS_ERROR_CODE
                                         message:errorMessage
@@ -116,6 +147,15 @@
                                      suggestion:@"Close connection"];
 }
 
+/**
+ *  Invoke proper callbacks by data in response
+ *
+ *  @param handler      callback
+ *  @param authConfig   authentication configuration
+ *  @param httpResponse response instance
+ *  @param responseData response data
+ *  @param requestError request error
+ */
 + (void) processData: (void (^)(id, NSError*))handler
                   config: (AuthConfiguration*) authConfig
                 response:(NSURLResponse*) httpResponse
@@ -153,6 +193,15 @@
     handler(nil, dataError);
 }
 
+/**
+ *  Invoke proper callbacks by parsing JSON data
+ *
+ *  @param handler      callback
+ *  @param authConfig   authentication configuration
+ *  @param httpResponse response instance
+ *  @param responseData response data
+ *  @param requestError request error
+ */
 + (void) processJSON: (void (^)(id, NSError*))handler
                   config: (AuthConfiguration*) authConfig
                 response:(NSURLResponse*) httpResponse
