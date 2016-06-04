@@ -30,7 +30,28 @@
 +(id)initWithConfig:(STTConfiguration *)config;
 -(id)initWithConfig:(STTConfiguration *)config;
 
-
+/**
+ *  stream audio from the device microphone to the STT service
+ *
+ *  @param recognizeHandler (^)(NSDictionary*, NSError*)
+ *  @param dataHandler      (^) (NSData*)
+ *  @param powerHandler     (^)(float)
+ */
+- (void) recognize:(void (^)(NSDictionary*, NSError*)) recognizeHandler dataHandler: (void (^) (NSData*)) dataHandler powerHandler: (void (^)(float)) powerHandler;
+/**
+ *  stream audio from the device microphone to the STT service
+ *
+ *  @param recognizeHandler (^)(NSDictionary*, NSError*)
+ *  @param dataHandler      (^) (NSData*)
+ */
+- (void) recognize:(void (^)(NSDictionary*, NSError*)) recognizeHandler dataHandler: (void (^) (NSData*)) dataHandler;
+/**
+ *  stream audio from the device microphone to the STT service
+ *
+ *  @param recognizeHandler (^)(NSDictionary*, NSError*)
+ *  @param powerHandler     (^)(float)
+ */
+- (void) recognize:(void (^)(NSDictionary*, NSError*)) recognizeHandler powerHandler: (void (^)(float)) powerHandler;
 /**
  *  stream audio from the device microphone to the STT service
  *
@@ -45,7 +66,17 @@
  */
 - (void) endRecognize;
 
-- (void) endTransmission;
+/**
+ *  send out end marker
+ *
+ *  @return if the data has been sent directly, return NO if the data is bufferred because the connection is not established
+ */
+- (BOOL) endTransmission;
+
+/**
+ *  Disconnect
+ */
+- (void) endConnection;
 
 /**
  * Stop recording
@@ -58,7 +89,6 @@
  *  @param handler(NSDictionary*, NSError*) block to be called when response has been received from the service
  */
 - (void) listModels:(void (^)(NSDictionary*, NSError*))handler;
-
 
 /**
  *  listModel details with a given model ID

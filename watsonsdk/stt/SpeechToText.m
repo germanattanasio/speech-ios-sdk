@@ -20,6 +20,8 @@
 #define NUM_BUFFERS 3
 typedef void (^RecognizeCallbackBlockType)(NSDictionary*, NSError*);
 typedef void (^PowerLevelCallbackBlockType)(float);
+typedef void (^AudioDataCallbackBlockType)(NSData*);
+
 typedef struct
 {
     AudioStreamBasicDescription  dataFormat;
@@ -28,7 +30,6 @@ typedef struct
     AudioFileID                  audioFile;
     SInt64                       currentPacket;
     bool                         recording;
-    FILE*						 stream;
     int                          slot;
 } RecordingState;
 
@@ -40,9 +41,12 @@ typedef struct
 @property OggHelper *ogg;
 @property OpusHelper* opus;
 @property RecordingState recordState;
-@property WebSocketAudioStreamer* wsUploader;
-@property (nonatomic,copy) RecognizeCallbackBlockType recognizeCallback;
-@property (nonatomic,copy) PowerLevelCallbackBlockType powerLevelCallback;
+@property WebSocketAudioStreamer* audioStreamer;
+@property (nonatomic, copy) RecognizeCallbackBlockType recognizeCallback;
+@property (nonatomic, copy) PowerLevelCallbackBlockType powerLevelCallback;
+
+// For capturing data has been sent out
+@property (nonatomic, copy) AudioDataCallbackBlockType audioDataCallback;
 
 @end
 
@@ -50,6 +54,7 @@ typedef struct
 
 @synthesize recognizeCallback;
 @synthesize powerLevelCallback;
+@synthesize audioDataCallback;
 @synthesize ogg = _ogg;
 
 
@@ -58,8 +63,7 @@ static BOOL isNewRecordingAllowed;
 static BOOL isCompressedOpus;
 static int audioRecordedLength;
 
-id uploaderRef;
-id delegateRef;
+id audioStreamerRef;
 id opusRef;
 id oggRef;
 
@@ -103,9 +107,42 @@ id oggRef;
  *
  *  @param recognizeHandler (^)(NSDictionary*, NSError*)
  */
-- (void) recognize:(void (^)(NSDictionary*, NSError*)) recognizeHandler {
+- (void) recognize:(void (^)(NSDictionary*, NSError*)) recognizeHandler{
+    [self recognize:recognizeHandler dataHandler:nil powerHandler:nil];
+}
+
+/**
+ *  stream audio from the device microphone to the STT service
+ *
+ *  @param recognizeHandler (^)(NSDictionary*, NSError*)
+ *  @param powerHandler (void (^)(float))
+ */
+- (void) recognize:(void (^)(NSDictionary*, NSError*)) recognizeHandler dataHandler: (void (^)(NSData *)) dataHandler {
+    [self recognize:recognizeHandler dataHandler:dataHandler powerHandler:nil];
+}
+
+/**
+ *  stream audio from the device microphone to the STT service
+ *
+ *  @param recognizeHandler (^)(NSDictionary*, NSError*)
+ *  @param powerHandler (void (^)(float))
+ */
+- (void) recognize:(void (^)(NSDictionary*, NSError*)) recognizeHandler powerHandler: (void (^)(float)) powerHandler {
+    [self recognize:recognizeHandler dataHandler:nil powerHandler:powerHandler];
+}
+
+/**
+ *  stream audio from the device microphone to the STT service
+ *
+ *  @param recognizeHandler (^)(NSDictionary*, NSError*)
+ *  @param dataHandler (void (^) (NSData*))
+ *  @param powerHandler (void (^)(float))
+ */
+- (void) recognize:(void (^)(NSDictionary*, NSError*)) recognizeHandler dataHandler: (void (^) (NSData*)) dataHandler powerHandler: (void (^)(float)) powerHandler {
     // store the block
     self.recognizeCallback = recognizeHandler;
+    self.audioDataCallback = dataHandler;
+    self.powerLevelCallback = powerHandler;
 
     if(isNewRecordingAllowed) {
         // don't allow a new recording to be allowed until this transaction has completed
@@ -113,19 +150,35 @@ id oggRef;
         [self startRecordingAudio];
         return;
     }
-    NSError *recordError = [SpeechUtility raiseErrorWithMessage:@"A voice query is already in progress"];
-    self.recognizeCallback(nil, recordError);
+    // NSError *recordError = [SpeechUtility raiseErrorWithMessage:@"A voice query is already in progress"];
+    // self.recognizeCallback(nil, recordError);
 }
 
--(void) endTransmission{
-    [[self wsUploader] sendEndOfStreamMarker];
+/**
+ *  send out end marker of a stream
+ *
+ *  @return YES if the data has been sent directly; NO if the data is bufferred because the connection is not established
+ */
+-(BOOL) endTransmission {
+    return [[self audioStreamer] sendEndOfStreamMarker];
 }
 
+/**
+ *  Disconnect
+ */
+-(void) endConnection {
+    [[self audioStreamer] disconnect:@"Manually terminating socket connection"];
+}
+
+/**
+ *  stopRecording and streaming audio from the device microphone
+ *
+ *  @return void
+ */
 -(void) endRecognize{
     [self stopRecordingAudio];
-    [[self wsUploader] sendEndOfStreamMarker];
+    [self endTransmission];
 }
-
 
 /**
  *  listModels - List speech models supported by the service
@@ -211,9 +264,6 @@ id oggRef;
     return nil;
 }
 
-
-
-
 /**
  *  isFinalTranscript : check the 'final' value in the dictionary and return
  *
@@ -245,7 +295,6 @@ id oggRef;
  *  @param powerHandler - callback block
  */
 - (void) getPowerLevel:(void (^)(float)) powerHandler {
-    
     self.powerLevelCallback = powerHandler;
 }
 
@@ -260,6 +309,14 @@ id oggRef;
 - (void) performGet:(void (^)(NSDictionary*, NSError*))handler forURL:(NSURL*)url {
     [self performGet:handler forURL:url disableCache:NO];
 }
+
+/**
+ *  performGet
+ *
+ *  @param handler      callback of data / error
+ *  @param url          URL
+ *  @param withoutCache disable cache
+ */
 - (void) performGet:(void (^)(NSDictionary*, NSError*))handler forURL:(NSURL*)url disableCache:(BOOL) withoutCache {
     // Create and set authentication headers
     NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -281,10 +338,12 @@ id oggRef;
 }
 
 
+/**
+ *  Start recording audio
+ */
 - (void) startRecordingAudio {
     // lets start the socket connection right away
     [self initializeStreaming];
-    [self setFilePaths];
     [self setupAudioFormat:&_recordState.dataFormat];
     
     _recordState.currentPacket = 0;
@@ -303,44 +362,43 @@ id oggRef;
         
         for(int i = 0; i < NUM_BUFFERS; i++) {
             
-            AudioQueueAllocateBuffer(_recordState.queue,
-                                     16000.0, &_recordState.buffers[i]);
-            AudioQueueEnqueueBuffer(_recordState.queue,
-                                    _recordState.buffers[i], 0, NULL);
+            AudioQueueAllocateBuffer(_recordState.queue, WATSONSDK_AUDIO_SAMPLE_RATE, &_recordState.buffers[i]);
+            AudioQueueEnqueueBuffer(_recordState.queue, _recordState.buffers[i], 0, NULL);
         }
-        
-        _recordState.stream=fopen([self.pathPCM UTF8String],"wb");
-        BOOL openFileOk = (_recordState.stream!=NULL);
-        
-        if(openFileOk) {
-            
-            _recordState.recording = true;
-            OSStatus rc = AudioQueueStart(_recordState.queue, NULL);
+
+        _recordState.recording = true;
+        status = AudioQueueStart(_recordState.queue, NULL);
+        if (status == 0) {
+
             UInt32 enableMetering = 1;
-            status = AudioQueueSetProperty(_recordState.queue, kAudioQueueProperty_EnableLevelMetering, &enableMetering,sizeof(enableMetering));
-            
+            status = AudioQueueSetProperty(_recordState.queue, kAudioQueueProperty_EnableLevelMetering, &enableMetering, sizeof(enableMetering));
+
             // start peak power timer
-            self.PeakPowerTimer = [NSTimer scheduledTimerWithTimeInterval:0.125
-                                                                   target:self
-                                                                 selector:@selector(samplePeakPower)
-                                                                 userInfo:nil
-                                                                  repeats:YES];
-            
-            if (rc!=0) {
-                NSLog(@"startPlaying AudioQueueStart returned %d.", (int)rc);
+            if(status == 0){
+                self.PeakPowerTimer = [NSTimer scheduledTimerWithTimeInterval:0.125
+                                                                       target:self
+                                                                     selector:@selector(samplePeakPower)
+                                                                     userInfo:nil
+                                                                      repeats:YES];
             }
         }
     }
-    
 }
 
+/**
+ *  Stop recording
+ */
 - (void) stopRecordingAudio {
-    NSLog(@"### stopRecordingAudio ###");
+    if(isNewRecordingAllowed) {
+        NSLog(@"### Record stopped ###");
+        return;
+    }
+    NSLog(@"### Stopping recording ###");
     if(self.PeakPowerTimer)
         [self.PeakPowerTimer invalidate];
 
     self.PeakPowerTimer = nil;
-    [self setFilePaths];
+
     if(_recordState.queue != NULL){
         AudioQueueReset(_recordState.queue);
     }
@@ -350,9 +408,6 @@ id oggRef;
     if(_recordState.queue != NULL){
         AudioQueueDispose(_recordState.queue, YES);
     }
-    if(_recordState.stream != NULL){
-        fclose(_recordState.stream);
-    }
     isNewRecordingAllowed = YES;
 }
 
@@ -361,34 +416,35 @@ id oggRef;
  *  samplePeakPower - Get the decibel level from the AudioQueue
  */
 - (void) samplePeakPower {
-    
     AudioQueueLevelMeterState meters[1];
     UInt32 dlen = sizeof(meters);
     OSErr Status = AudioQueueGetProperty(_recordState.queue,kAudioQueueProperty_CurrentLevelMeterDB,meters,&dlen);
-    
+
     if (Status == 0) {
-        
-        if(self.powerLevelCallback !=nil) {
+        if(self.powerLevelCallback != nil) {
             self.powerLevelCallback(meters[0].mAveragePower);
         }
-        
     }
 }
 
 
 
-#pragma mark audio upload
+#pragma mark audio streaming
+
+/**
+ *  Initialize streaming
+ */
 - (void) initializeStreaming {
-    // init the websocket uploader if its nil
-    if(self.wsUploader == nil) {
-        self.wsUploader = [[WebSocketAudioStreamer alloc] init];
-        [self.wsUploader setRecognizeHandler:recognizeCallback];
-    }
+
+    // init the websocket streamer
+    self.audioStreamer = [[WebSocketAudioStreamer alloc] init];
+    [self.audioStreamer setRecognizeHandler:recognizeCallback];
+    [self.audioStreamer setAudioDataHandler:audioDataCallback];
 
     // connect if we are not connected
-    if(![self.wsUploader isWebSocketConnected]) {
+    if(![self.audioStreamer isWebSocketConnected]) {
         [self.config requestToken:^(AuthConfiguration *config) {
-            [self.wsUploader connect:(STTConfiguration*)config headers:[config createRequestHeaders]];
+            [self.audioStreamer connect:(STTConfiguration*)config headers:[config createRequestHeaders]];
         }];
     }
 
@@ -399,11 +455,11 @@ id oggRef;
         self.ogg = [[OggHelper alloc] init];
         oggRef = self->_ogg;
         // Indicate sample rate
-        [self.wsUploader writeData:[[self ogg] getOggOpusHeader:WATSONSDK_AUDIO_SAMPLE_RATE]];
+        [self.audioStreamer writeData:[[self ogg] getOggOpusHeader:WATSONSDK_AUDIO_SAMPLE_RATE]];
     }
     
     // set a pointer to the wsuploader class so it is accessible in the c callback
-    uploaderRef = self.wsUploader;
+    audioStreamerRef = self.audioStreamer;
 }
 
 #pragma mark audio
@@ -426,8 +482,6 @@ int getAudioRecordedLengthInMs()
     return audioRecordedLength/32;
 }
 
-
-
 void sendAudioOpusEncoded(NSData *data)
 {
     if (data!=nil && [data length]!=0) {
@@ -448,7 +502,7 @@ void sendAudioOpusEncoded(NSData *data)
             if(compressed != nil){
                 NSMutableData *newData = [oggRef writePacket:compressed frameSize:WATSONSDK_AUDIO_FRAME_SIZE];
                 if(newData != nil){
-                    [uploaderRef writeData:newData];
+                    [audioStreamerRef writeData:newData];
                 }
             }
 
@@ -457,10 +511,7 @@ void sendAudioOpusEncoded(NSData *data)
     }
 }
 
-
 #pragma mark audio callbacks
-
-
 
 void AudioInputStreamingCallback(
                                  void *inUserData,
@@ -475,35 +526,17 @@ void AudioInputStreamingCallback(
     
     NSData *data = [NSData  dataWithBytes:inBuffer->mAudioData length:inBuffer->mAudioDataByteSize];
     audioRecordedLength += [data length];
-    
+
     if(isCompressedOpus)
         sendAudioOpusEncoded(data);
     else
-        [uploaderRef writeData:data];
-    
-    if(fwrite(inBuffer->mAudioData, 1,inBuffer->mAudioDataByteSize, recordState->stream)<=0) {
-        status=-1;
-    }
-    
-    
+        [audioStreamerRef writeData:data];
+
     if(status == 0) {
         recordState->currentPacket += inNumberPacketDescriptions;
     }
     AudioQueueEnqueueBuffer(recordState->queue, inBuffer, 0, NULL);
 }
-
-#pragma mark utilities
-
-- (void) setFilePaths{
-    
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
-                                                         NSUserDomainMask, YES);
-    NSString* docDir = [paths objectAtIndex:0];
-    
-    self.pathPCM = [NSString stringWithFormat:@"%@%@",docDir,@"/out.pcm"];
-    
-}
-
 
 @end
 
