@@ -26,7 +26,9 @@
 
 // codecs
 #define WATSONSDK_AUDIO_CODEC_TYPE_PCM @"audio/l16; rate=16000"
-#define WATSONSDK_AUDIO_CODEC_TYPE_OPUS @"audio/ogg; codecs=opus; rate=16000"
+//#define WATSONSDK_AUDIO_CODEC_TYPE_WAV @"audio/wav"
+//#define WATSONSDK_AUDIO_CODEC_TYPE_FLAC @"audio/flac"
+#define WATSONSDK_AUDIO_CODEC_TYPE_OPUS @"audio/ogg;codecs=opus"
 #define WATSONSDK_AUDIO_FRAME_SIZE 160
 #define WATSONSDK_AUDIO_SAMPLE_RATE 16000.0
 
@@ -35,10 +37,14 @@
 
 @interface STTConfiguration : AuthConfiguration
 
-@property NSString* apiURL;
-@property NSString* modelName;
-@property NSString* audioCodec;
-@property NSURL* apiEndpoint;
+@property NSString *apiURL;
+@property NSString *modelName;
+@property NSString *audioCodec;
+@property NSNumber *interimResults;
+@property NSNumber *continuous;
+@property NSNumber *inactivityTimeout;
+
+@property NSURL *apiEndpoint;
 @property BOOL isCertificateValidationDisabled;
 
 
@@ -46,5 +52,6 @@
 - (NSURL*)getModelsServiceURL;
 - (NSURL*)getModelServiceURL:(NSString*) modelName;
 - (NSURL*)getWebSocketRecognizeURL;
+- (NSString *)getStartMessage;
 
 @end

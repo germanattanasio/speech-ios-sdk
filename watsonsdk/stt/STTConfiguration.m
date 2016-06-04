@@ -27,7 +27,10 @@
     [self setApiEndpoint:[NSURL URLWithString:WATSONSDK_DEFAULT_STT_API_ENDPOINT]];
     [self setModelName:WATSONSDK_DEFAULT_STT_MODEL];
     [self setAudioCodec:WATSONSDK_AUDIO_CODEC_TYPE_PCM];
-    
+    [self setInterimResults: [NSNumber numberWithBool:YES]];
+    [self setContinuous:[NSNumber numberWithBool:NO]];
+    [self setInactivityTimeout:[NSNumber numberWithInt:30]];
+
     return self;
 }
 
@@ -55,12 +58,24 @@
     return url;
 }
 
+/**
+ *  Service URL of loading model
+ *
+ *  @param modelName Model name
+ *
+ *  @return NSURL
+ */
 - (NSURL*)getModelServiceURL:(NSString*) modelName {
     NSString *uriStr = [NSString stringWithFormat:@"%@://%@%@%@/%@",self.apiEndpoint.scheme,self.apiEndpoint.host,self.apiEndpoint.path,WATSONSDK_SERVICE_PATH_MODELS,modelName];
     NSURL * url = [NSURL URLWithString:uriStr];
     return url;
 }
 
+/**
+ *  WebSockets URL of Speech Recognition
+ *
+ *  @return NSURL
+ */
 - (NSURL*)getWebSocketRecognizeURL {
     NSMutableString *uriStr = [[NSMutableString alloc] init];
 
@@ -71,6 +86,30 @@
     }
     NSURL * url = [NSURL URLWithString:uriStr];
     return url;
+}
+
+/**
+ *  Organize JSON string for start message of WebSockets
+ *
+ *  @return JSON string
+ */
+- (NSString *)getStartMessage{
+    NSString *jsonString = @"";
+
+    NSMutableDictionary *inputParameters = [[NSMutableDictionary alloc] init];
+    [inputParameters setValue:@"start" forKey:@"action"];
+    [inputParameters setValue:self.audioCodec forKey:@"content-type"];
+    [inputParameters setValue:self.interimResults forKey:@"interim_results"];
+    [inputParameters setValue:self.continuous forKey:@"continuous"];
+    [inputParameters setValue:self.inactivityTimeout forKey:@"inactivity_timeout"];
+
+    NSError *error = nil;
+    if([NSJSONSerialization isValidJSONObject:inputParameters]){
+        NSData *data = [NSJSONSerialization dataWithJSONObject:inputParameters options:NSJSONWritingPrettyPrinted error:&error];
+        if(error == nil)
+            jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    }
+    return jsonString;
 }
 
 @end
