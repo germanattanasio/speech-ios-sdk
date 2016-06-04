@@ -86,11 +86,16 @@
     [self.pickerView setOpaque:YES];
 }
 
--(IBAction) pressStartRecord:(id) sender
-{
+-(IBAction) pressStartRecord:(id) sender {
     // start recognize
     [stt recognize:^(NSDictionary* res, NSError* err){
-        
+        // make sure the connection and recording process are finished
+        if(res == nil && err == nil){
+            [stt stopRecordingAudio];
+            [stt endConnection];
+            return;
+        }
+
         if(err == nil) {
             if([self.stt isFinalTranscript:res]) {
                 
@@ -99,17 +104,15 @@
                 
                 NSLog(@"confidence score is %@",[stt getConfidenceScore:res]);
             }
-
             result.text = [stt getTranscript:res];
-        } else {
+        }
+        else {
             NSLog(@"received error from the SDK %@",[err description]);
             [stt endRecognize];
         }
-    }];
-    
-    // get power readings until recording has finished
-    [stt getPowerLevel:^(float power){
-        
+    } dataHandler:^(NSData* data) {
+        NSLog(@"sent out %lu bytes", (unsigned long)[data length]);
+    } powerHandler:^(float power) {
         CGRect frm = self.soundbar.frame;
         frm.size.width = 3*(70 + power);
         self.soundbar.frame = frm;
