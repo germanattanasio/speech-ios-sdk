@@ -18,6 +18,9 @@
 
 @implementation AuthConfiguration
 
+@synthesize basicAuthUsername = _basicAuthUsername;
+@synthesize basicAuthPassword = _basicAuthPassword;
+
 - (id) init
 {
     self = [super init];

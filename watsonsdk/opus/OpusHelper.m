@@ -166,7 +166,7 @@
     ogg_packet     op;
     ogg_stream_state os;
     ogg_int64_t audio_size=0;
-    ogg_int32_t opus_serialno;
+    long opus_serialno;
     ogg_int64_t page_granule=0;
     ogg_int64_t link_out=0;
     OpusMSDecoder *st=NULL;
@@ -299,8 +299,7 @@
                     
                     
                     /*Decode Opus packet*/
-                    ret = opus_multistream_decode_float(st, (unsigned char*)op.packet, op.bytes, output, MAX_FRAME_SIZE, 0);
-                    
+                    ret = opus_multistream_decode_float(st, (unsigned char*)op.packet, (int)op.bytes, output, MAX_FRAME_SIZE, 0);
                     
                     /*If the decoder returned less than zero, we have an error.*/
                     if (ret<0)
@@ -356,7 +355,7 @@ static OpusMSDecoder *process_header(ogg_packet *op, opus_int32 *rate,
     OpusMSDecoder *st;
     OpusHeader header;
     
-    if (opus_header_parse(op->packet, op->bytes, &header)==0)
+    if (opus_header_parse(op->packet, (int)op->bytes, &header)==0)
     {
         fprintf(stderr, "Cannot parse header\n");
         return NULL;

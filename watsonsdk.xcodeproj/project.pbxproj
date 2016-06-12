@@ -25,11 +25,33 @@
 /* Begin PBXBuildFile section */
 		7EFE11E41B71D07D00EF10BF /* AuthConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EFE11E21B71D07D00EF10BF /* AuthConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7EFE11E51B71D07D00EF10BF /* AuthConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFE11E31B71D07D00EF10BF /* AuthConfiguration.m */; };
+		9B1BCEE31CF69D440076FE2D /* TTSCustomWord.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B1BCEE11CF69D440076FE2D /* TTSCustomWord.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B1BCEE41CF69D440076FE2D /* TTSCustomWord.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B1BCEE21CF69D440076FE2D /* TTSCustomWord.m */; };
+		9B1BCEEB1CF6CAAD0076FE2D /* STTConfiguration.m in Headers */ = {isa = PBXBuildFile; fileRef = 9B3669631CF354B800806BEE /* STTConfiguration.m */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B1BCEF41CF704C10076FE2D /* TTSCustomizationDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B1BCEF31CF704C10076FE2D /* TTSCustomizationDetailTableViewCell.m */; };
+		9B36693F1CF21A5400806BEE /* WebSocketAudioStreamer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B36693D1CF21A5400806BEE /* WebSocketAudioStreamer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B3669401CF21A5400806BEE /* WebSocketAudioStreamer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B36693E1CF21A5400806BEE /* WebSocketAudioStreamer.m */; };
+		9B3669551CF3546C00806BEE /* TTSCustomVoice.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3669531CF3546C00806BEE /* TTSCustomVoice.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B3669561CF3546C00806BEE /* TTSCustomVoice.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3669541CF3546C00806BEE /* TTSCustomVoice.m */; };
+		9B36695B1CF3549400806BEE /* TextToSpeech.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3669571CF3549400806BEE /* TextToSpeech.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B36695C1CF3549400806BEE /* TextToSpeech.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3669581CF3549400806BEE /* TextToSpeech.m */; };
+		9B36695D1CF3549400806BEE /* TTSConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3669591CF3549400806BEE /* TTSConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B36695E1CF3549400806BEE /* TTSConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B36695A1CF3549400806BEE /* TTSConfiguration.m */; };
+		9B3669641CF354B800806BEE /* SpeechToText.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3669601CF354B800806BEE /* SpeechToText.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B3669651CF354B800806BEE /* SpeechToText.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3669611CF354B800806BEE /* SpeechToText.m */; };
+		9B3669661CF354B800806BEE /* STTConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3669621CF354B800806BEE /* STTConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B3669671CF354B800806BEE /* STTConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3669631CF354B800806BEE /* STTConfiguration.m */; };
+		9B375ABB1CEB0C2500A6F9D4 /* SwiftTTSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B375ABA1CEB0C2500A6F9D4 /* SwiftTTSViewController.swift */; };
+		9B375ABD1CEB194400A6F9D4 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BA060401CE6D9320018CA5B /* libicucore.tbd */; };
+		9B47E7451CEF5B4A003E0860 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B47E7431CEF5B4A003E0860 /* LaunchScreen.storyboard */; };
+		9B47E7481CEF5B77003E0860 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B47E7461CEF5B77003E0860 /* LaunchScreen.storyboard */; };
+		9B47E7581CF21645003E0860 /* SpeechUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B47E7561CF21645003E0860 /* SpeechUtility.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B47E7591CF21645003E0860 /* SpeechUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B47E7571CF21645003E0860 /* SpeechUtility.m */; };
 		9BA060411CE6D9320018CA5B /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BA060401CE6D9320018CA5B /* libicucore.tbd */; };
-		9BA475891B9D34AA00D66F1E /* OggHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA475871B9D34AA00D66F1E /* OggHelper.h */; };
+		9BA475891B9D34AA00D66F1E /* OggHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA475871B9D34AA00D66F1E /* OggHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9BA4758A1B9D34AA00D66F1E /* OggHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA475881B9D34AA00D66F1E /* OggHelper.m */; };
 		9BA4758E1B9D354E00D66F1E /* config_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA4758B1B9D354E00D66F1E /* config_types.h */; };
-		9BA4758F1B9D354E00D66F1E /* ogg.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA4758C1B9D354E00D66F1E /* ogg.h */; };
+		9BA4758F1B9D354E00D66F1E /* ogg.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA4758C1B9D354E00D66F1E /* ogg.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9BA475901B9D354E00D66F1E /* os_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA4758D1B9D354E00D66F1E /* os_types.h */; };
 		9BCAD8341CE6BF1200BE3B5F /* SRDelegateController.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD8201CE6BF1200BE3B5F /* SRDelegateController.h */; };
 		9BCAD8351CE6BF1200BE3B5F /* SRDelegateController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD8211CE6BF1200BE3B5F /* SRDelegateController.m */; };
@@ -48,19 +70,21 @@
 		9BCAD8421CE6BF1200BE3B5F /* SocketRocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD8311CE6BF1200BE3B5F /* SocketRocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9BCAD8431CE6BF1200BE3B5F /* SRWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD8321CE6BF1200BE3B5F /* SRWebSocket.h */; };
 		9BCAD8441CE6BF1200BE3B5F /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD8331CE6BF1200BE3B5F /* SRWebSocket.m */; };
-		C11712E31A03DC2E00957080 /* UploaderDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = C123FF8719B9FE4100C6A702 /* UploaderDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9BF00C9A1CF5A2BD00624702 /* TTSCustomizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF00C961CF5A10100624702 /* TTSCustomizationViewController.m */; };
+		9BF00CA01CF5AB7F00624702 /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9BF00C9E1CF5A8DE00624702 /* Credentials.plist */; };
+		9BF00CA11CF5AB8100624702 /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9BF00C9E1CF5A8DE00624702 /* Credentials.plist */; };
+		9BF00CA71CF6268000624702 /* TTSCustomizationDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF00CA31CF620E500624702 /* TTSCustomizationDetailViewController.m */; };
+		9BF43ED21CEAC81900EC0185 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF43ED11CEAC81900EC0185 /* AppDelegate.swift */; };
+		9BF43ED41CEAC81900EC0185 /* SwiftSTTViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF43ED31CEAC81900EC0185 /* SwiftSTTViewController.swift */; };
+		9BF43ED71CEAC81900EC0185 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BF43ED51CEAC81900EC0185 /* Main.storyboard */; };
+		9BF43ED91CEAC81900EC0185 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BF43ED81CEAC81900EC0185 /* Assets.xcassets */; };
+		9BF43EE11CEAC82E00EC0185 /* libwatsonsdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C11A645B1754D0E600385896 /* libwatsonsdk.a */; };
 		C11772091AFD191D00C8791A /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C11772081AFD191D00C8791A /* libogg.a */; };
 		C11772141B029BEE00C8791A /* opus_header.h in Headers */ = {isa = PBXBuildFile; fileRef = C11772131B029BEE00C8791A /* opus_header.h */; };
 		C117721E1B02A15000C8791A /* opus_header.c in Sources */ = {isa = PBXBuildFile; fileRef = C117721D1B02A15000C8791A /* opus_header.c */; };
 		C11A645F1754D0E600385896 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C11A645E1754D0E600385896 /* Foundation.framework */; };
 		C11A64961754D98700385896 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C11A64951754D98700385896 /* CoreFoundation.framework */; };
 		C11A649C1754D98700385896 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C11A649A1754D98700385896 /* InfoPlist.strings */; };
-		C11B3E931AF398C80062BF7D /* STTConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = C11B3E911AF398C80062BF7D /* STTConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C11B3E941AF398C80062BF7D /* STTConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = C11B3E921AF398C80062BF7D /* STTConfiguration.m */; };
-		C11B3E9B1AF3FEC90062BF7D /* TextToSpeech.h in Headers */ = {isa = PBXBuildFile; fileRef = C11B3E991AF3FEC90062BF7D /* TextToSpeech.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C11B3E9C1AF3FEC90062BF7D /* TextToSpeech.m in Sources */ = {isa = PBXBuildFile; fileRef = C11B3E9A1AF3FEC90062BF7D /* TextToSpeech.m */; };
-		C11B3E9F1AF3FF660062BF7D /* TTSConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = C11B3E9D1AF3FF660062BF7D /* TTSConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C11B3EA01AF3FF660062BF7D /* TTSConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = C11B3E9E1AF3FF660062BF7D /* TTSConfiguration.m */; };
 		C11B3EA21AF41A200062BF7D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C11B3EA11AF41A200062BF7D /* AVFoundation.framework */; };
 		C11B3EA31AF41A320062BF7D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C11B3EA11AF41A200062BF7D /* AVFoundation.framework */; };
 		C11D9E7A1937C57200F2D614 /* beep.wav in Resources */ = {isa = PBXBuildFile; fileRef = C11D9E791937C57200F2D614 /* beep.wav */; };
@@ -71,17 +95,12 @@
 		C16542A5191A0D8500905DCC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C16542A3191A0D8500905DCC /* InfoPlist.strings */; };
 		C16542A7191A0D8500905DCC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C16542A6191A0D8500905DCC /* main.m */; };
 		C16542AB191A0D8500905DCC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C16542AA191A0D8500905DCC /* AppDelegate.m */; };
-		C16542AE191A0D8500905DCC /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C16542AC191A0D8500905DCC /* Main_iPhone.storyboard */; };
-		C16542B1191A0D8500905DCC /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C16542AF191A0D8500905DCC /* Main_iPad.storyboard */; };
+		C16542AE191A0D8500905DCC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C16542AC191A0D8500905DCC /* Main.storyboard */; };
 		C16542B4191A0D8500905DCC /* STTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C16542B3191A0D8500905DCC /* STTViewController.m */; };
 		C16542B6191A0D8500905DCC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C16542B5191A0D8500905DCC /* Images.xcassets */; };
 		C16542D4191A0FA100905DCC /* libwatsonsdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C11A645B1754D0E600385896 /* libwatsonsdk.a */; };
 		C17779641B9DBFAA0066269A /* TTSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C17779631B9DBFAA0066269A /* TTSViewController.m */; };
 		C1B14B831AA0D3DD00864C53 /* libopus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C1B14B821AA0D3DC00864C53 /* libopus.a */; };
-		C1C3743B1A8581A00083C69B /* WebSocketUploader.h in Headers */ = {isa = PBXBuildFile; fileRef = C1C374391A8581A00083C69B /* WebSocketUploader.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C1C3743C1A8581A00083C69B /* WebSocketUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = C1C3743A1A8581A00083C69B /* WebSocketUploader.m */; };
-		C1C3743F1A86C5DB0083C69B /* SpeechToText.h in Headers */ = {isa = PBXBuildFile; fileRef = C1C3743D1A86C5DB0083C69B /* SpeechToText.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C1C374401A86C5DB0083C69B /* SpeechToText.m in Sources */ = {isa = PBXBuildFile; fileRef = C1C3743E1A86C5DB0083C69B /* SpeechToText.m */; };
 		C1D4580119A78BBB00093095 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1D4580019A78BBB00093095 /* Security.framework */; };
 		C1D4580219A78BC400093095 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C11A66E117560AD900385896 /* CFNetwork.framework */; };
 		C1D4580419A78BDF00093095 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1D4580019A78BBB00093095 /* Security.framework */; };
@@ -127,6 +146,28 @@
 /* Begin PBXFileReference section */
 		7EFE11E21B71D07D00EF10BF /* AuthConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthConfiguration.h; sourceTree = "<group>"; };
 		7EFE11E31B71D07D00EF10BF /* AuthConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthConfiguration.m; sourceTree = "<group>"; };
+		9B1BCEE11CF69D440076FE2D /* TTSCustomWord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTSCustomWord.h; sourceTree = "<group>"; };
+		9B1BCEE21CF69D440076FE2D /* TTSCustomWord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTSCustomWord.m; sourceTree = "<group>"; };
+		9B1BCEF21CF704C10076FE2D /* TTSCustomizationDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTSCustomizationDetailTableViewCell.h; sourceTree = "<group>"; };
+		9B1BCEF31CF704C10076FE2D /* TTSCustomizationDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTSCustomizationDetailTableViewCell.m; sourceTree = "<group>"; };
+		9B36693D1CF21A5400806BEE /* WebSocketAudioStreamer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebSocketAudioStreamer.h; sourceTree = "<group>"; };
+		9B36693E1CF21A5400806BEE /* WebSocketAudioStreamer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebSocketAudioStreamer.m; sourceTree = "<group>"; };
+		9B3669531CF3546C00806BEE /* TTSCustomVoice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTSCustomVoice.h; sourceTree = "<group>"; };
+		9B3669541CF3546C00806BEE /* TTSCustomVoice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTSCustomVoice.m; sourceTree = "<group>"; };
+		9B3669571CF3549400806BEE /* TextToSpeech.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextToSpeech.h; sourceTree = "<group>"; };
+		9B3669581CF3549400806BEE /* TextToSpeech.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextToSpeech.m; sourceTree = "<group>"; };
+		9B3669591CF3549400806BEE /* TTSConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTSConfiguration.h; sourceTree = "<group>"; };
+		9B36695A1CF3549400806BEE /* TTSConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTSConfiguration.m; sourceTree = "<group>"; };
+		9B3669601CF354B800806BEE /* SpeechToText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeechToText.h; sourceTree = "<group>"; };
+		9B3669611CF354B800806BEE /* SpeechToText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeechToText.m; sourceTree = "<group>"; };
+		9B3669621CF354B800806BEE /* STTConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTConfiguration.h; sourceTree = "<group>"; };
+		9B3669631CF354B800806BEE /* STTConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTConfiguration.m; sourceTree = "<group>"; };
+		9B375ABA1CEB0C2500A6F9D4 /* SwiftTTSViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftTTSViewController.swift; sourceTree = "<group>"; };
+		9B375ABC1CEB184200A6F9D4 /* SwiftSpeechHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftSpeechHeader.h; sourceTree = "<group>"; };
+		9B47E7441CEF5B4A003E0860 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		9B47E7471CEF5B77003E0860 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		9B47E7561CF21645003E0860 /* SpeechUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeechUtility.h; sourceTree = "<group>"; };
+		9B47E7571CF21645003E0860 /* SpeechUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeechUtility.m; sourceTree = "<group>"; };
 		9BA060401CE6D9320018CA5B /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		9BA475871B9D34AA00D66F1E /* OggHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OggHelper.h; path = ogg/OggHelper.h; sourceTree = "<group>"; };
 		9BA475881B9D34AA00D66F1E /* OggHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OggHelper.m; path = ogg/OggHelper.m; sourceTree = "<group>"; };
@@ -150,6 +191,17 @@
 		9BCAD8311CE6BF1200BE3B5F /* SocketRocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketRocket.h; sourceTree = "<group>"; };
 		9BCAD8321CE6BF1200BE3B5F /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRWebSocket.h; sourceTree = "<group>"; };
 		9BCAD8331CE6BF1200BE3B5F /* SRWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRWebSocket.m; sourceTree = "<group>"; };
+		9BF00C951CF5A10100624702 /* TTSCustomizationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTSCustomizationViewController.h; sourceTree = "<group>"; };
+		9BF00C961CF5A10100624702 /* TTSCustomizationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTSCustomizationViewController.m; sourceTree = "<group>"; };
+		9BF00C9E1CF5A8DE00624702 /* Credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Credentials.plist; sourceTree = "<group>"; };
+		9BF00CA21CF620E500624702 /* TTSCustomizationDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTSCustomizationDetailViewController.h; sourceTree = "<group>"; };
+		9BF00CA31CF620E500624702 /* TTSCustomizationDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTSCustomizationDetailViewController.m; sourceTree = "<group>"; };
+		9BF43ECF1CEAC81900EC0185 /* Swift Sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Swift Sample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9BF43ED11CEAC81900EC0185 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		9BF43ED31CEAC81900EC0185 /* SwiftSTTViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftSTTViewController.swift; sourceTree = "<group>"; };
+		9BF43ED61CEAC81900EC0185 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		9BF43ED81CEAC81900EC0185 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9BF43EDD1CEAC81900EC0185 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C11772081AFD191D00C8791A /* libogg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libogg.a; sourceTree = "<group>"; };
 		C11772131B029BEE00C8791A /* opus_header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opus_header.h; sourceTree = "<group>"; };
 		C117721D1B02A15000C8791A /* opus_header.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = opus_header.c; sourceTree = "<group>"; };
@@ -165,12 +217,6 @@
 		C11A66DD175609B500385896 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		C11A66DF17560A4E00385896 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		C11A66E117560AD900385896 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
-		C11B3E911AF398C80062BF7D /* STTConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTConfiguration.h; sourceTree = "<group>"; };
-		C11B3E921AF398C80062BF7D /* STTConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTConfiguration.m; sourceTree = "<group>"; };
-		C11B3E991AF3FEC90062BF7D /* TextToSpeech.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextToSpeech.h; sourceTree = "<group>"; };
-		C11B3E9A1AF3FEC90062BF7D /* TextToSpeech.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextToSpeech.m; sourceTree = "<group>"; };
-		C11B3E9D1AF3FF660062BF7D /* TTSConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTSConfiguration.h; sourceTree = "<group>"; };
-		C11B3E9E1AF3FF660062BF7D /* TTSConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTSConfiguration.m; sourceTree = "<group>"; };
 		C11B3EA11AF41A200062BF7D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		C11D9E791937C57200F2D614 /* beep.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beep.wav; sourceTree = "<group>"; };
 		C12352A619910606009A8F8B /* opus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opus.h; sourceTree = "<group>"; };
@@ -179,8 +225,7 @@
 		C12352A919910606009A8F8B /* opus_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opus_types.h; sourceTree = "<group>"; };
 		C1235353199B53FF009A8F8B /* OpusHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpusHelper.h; sourceTree = "<group>"; };
 		C1235354199B53FF009A8F8B /* OpusHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpusHelper.m; sourceTree = "<group>"; };
-		C123FF8719B9FE4100C6A702 /* UploaderDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UploaderDelegate.h; sourceTree = "<group>"; };
-		C165429B191A0D8500905DCC /* watsonsdktest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = watsonsdktest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C165429B191A0D8500905DCC /* OC Sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OC Sample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C165429D191A0D8500905DCC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		C16542A2191A0D8500905DCC /* watsonsdktest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "watsonsdktest-Info.plist"; sourceTree = "<group>"; };
 		C16542A4191A0D8500905DCC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -188,22 +233,26 @@
 		C16542A8191A0D8500905DCC /* watsonsdktest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "watsonsdktest-Prefix.pch"; sourceTree = "<group>"; };
 		C16542A9191A0D8500905DCC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C16542AA191A0D8500905DCC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		C16542AD191A0D8500905DCC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
-		C16542B0191A0D8500905DCC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		C16542AD191A0D8500905DCC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C16542B2191A0D8500905DCC /* STTViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STTViewController.h; sourceTree = "<group>"; };
 		C16542B3191A0D8500905DCC /* STTViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STTViewController.m; sourceTree = "<group>"; };
 		C16542B5191A0D8500905DCC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		C17779621B9DBFAA0066269A /* TTSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTSViewController.h; sourceTree = "<group>"; };
 		C17779631B9DBFAA0066269A /* TTSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTSViewController.m; sourceTree = "<group>"; };
 		C1B14B821AA0D3DC00864C53 /* libopus.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libopus.a; sourceTree = "<group>"; };
-		C1C374391A8581A00083C69B /* WebSocketUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebSocketUploader.h; sourceTree = "<group>"; };
-		C1C3743A1A8581A00083C69B /* WebSocketUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebSocketUploader.m; sourceTree = "<group>"; };
-		C1C3743D1A86C5DB0083C69B /* SpeechToText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeechToText.h; sourceTree = "<group>"; };
-		C1C3743E1A86C5DB0083C69B /* SpeechToText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeechToText.m; sourceTree = "<group>"; };
 		C1D4580019A78BBB00093095 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		9BF43ECC1CEAC81900EC0185 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B375ABD1CEB194400A6F9D4 /* libicucore.tbd in Frameworks */,
+				9BF43EE11CEAC82E00EC0185 /* libwatsonsdk.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C11A64581754D0E600385896 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -242,6 +291,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9B3669521CF3546C00806BEE /* tts */ = {
+			isa = PBXGroup;
+			children = (
+				9B3669571CF3549400806BEE /* TextToSpeech.h */,
+				9B3669581CF3549400806BEE /* TextToSpeech.m */,
+				9B3669591CF3549400806BEE /* TTSConfiguration.h */,
+				9B36695A1CF3549400806BEE /* TTSConfiguration.m */,
+				9B3669531CF3546C00806BEE /* TTSCustomVoice.h */,
+				9B3669541CF3546C00806BEE /* TTSCustomVoice.m */,
+				9B1BCEE11CF69D440076FE2D /* TTSCustomWord.h */,
+				9B1BCEE21CF69D440076FE2D /* TTSCustomWord.m */,
+			);
+			path = tts;
+			sourceTree = "<group>";
+		};
+		9B36695F1CF354B800806BEE /* stt */ = {
+			isa = PBXGroup;
+			children = (
+				9B3669601CF354B800806BEE /* SpeechToText.h */,
+				9B3669611CF354B800806BEE /* SpeechToText.m */,
+				9B3669621CF354B800806BEE /* STTConfiguration.h */,
+				9B3669631CF354B800806BEE /* STTConfiguration.m */,
+			);
+			path = stt;
+			sourceTree = "<group>";
+		};
 		9BCAD7C51CE5BC8B00BE3B5F /* websocket */ = {
 			isa = PBXGroup;
 			children = (
@@ -249,6 +324,8 @@
 				9BCAD8311CE6BF1200BE3B5F /* SocketRocket.h */,
 				9BCAD8321CE6BF1200BE3B5F /* SRWebSocket.h */,
 				9BCAD8331CE6BF1200BE3B5F /* SRWebSocket.m */,
+				9B36693D1CF21A5400806BEE /* WebSocketAudioStreamer.h */,
+				9B36693E1CF21A5400806BEE /* WebSocketAudioStreamer.m */,
 			);
 			path = websocket;
 			sourceTree = "<group>";
@@ -306,6 +383,21 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
+		9BF43ED01CEAC81900EC0185 /* watsonsdktest-swift */ = {
+			isa = PBXGroup;
+			children = (
+				9BF43ED11CEAC81900EC0185 /* AppDelegate.swift */,
+				9BF43ED31CEAC81900EC0185 /* SwiftSTTViewController.swift */,
+				9B375ABA1CEB0C2500A6F9D4 /* SwiftTTSViewController.swift */,
+				9BF43ED51CEAC81900EC0185 /* Main.storyboard */,
+				9BF43ED81CEAC81900EC0185 /* Assets.xcassets */,
+				9BF43EDD1CEAC81900EC0185 /* Info.plist */,
+				9B375ABC1CEB184200A6F9D4 /* SwiftSpeechHeader.h */,
+				9B47E7431CEF5B4A003E0860 /* LaunchScreen.storyboard */,
+			);
+			path = "watsonsdktest-swift";
+			sourceTree = "<group>";
+		};
 		C11772101AFD193B00C8791A /* ogg */ = {
 			isa = PBXGroup;
 			children = (
@@ -321,13 +413,10 @@
 		C11A64521754D0E600385896 = {
 			isa = PBXGroup;
 			children = (
-				C11A66E117560AD900385896 /* CFNetwork.framework */,
-				C11A66DF17560A4E00385896 /* QuartzCore.framework */,
-				C11A66DD175609B500385896 /* CoreAudio.framework */,
-				C11A66DB1756098E00385896 /* AudioToolbox.framework */,
 				C11A64601754D0E600385896 /* watsonsdk */,
 				C11A64971754D98700385896 /* watsonResources */,
-				C16542A0191A0D8500905DCC /* watsonsdktest */,
+				C16542A0191A0D8500905DCC /* watsonsdktest-objective-c */,
+				9BF43ED01CEAC81900EC0185 /* watsonsdktest-swift */,
 				C11A645D1754D0E600385896 /* Frameworks */,
 				C11A645C1754D0E600385896 /* Products */,
 			);
@@ -338,7 +427,8 @@
 			children = (
 				C11A645B1754D0E600385896 /* libwatsonsdk.a */,
 				C11A64941754D98700385896 /* watsonsdk.bundle */,
-				C165429B191A0D8500905DCC /* watsonsdktest.app */,
+				C165429B191A0D8500905DCC /* OC Sample.app */,
+				9BF43ECF1CEAC81900EC0185 /* Swift Sample.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -347,6 +437,10 @@
 			isa = PBXGroup;
 			children = (
 				9BA060401CE6D9320018CA5B /* libicucore.tbd */,
+				C11A66E117560AD900385896 /* CFNetwork.framework */,
+				C11A66DF17560A4E00385896 /* QuartzCore.framework */,
+				C11A66DD175609B500385896 /* CoreAudio.framework */,
+				C11A66DB1756098E00385896 /* AudioToolbox.framework */,
 				C11B3EA11AF41A200062BF7D /* AVFoundation.framework */,
 				C1D4580019A78BBB00093095 /* Security.framework */,
 				C11A645E1754D0E600385896 /* Foundation.framework */,
@@ -359,22 +453,17 @@
 		C11A64601754D0E600385896 /* watsonsdk */ = {
 			isa = PBXGroup;
 			children = (
-				9BCAD7C51CE5BC8B00BE3B5F /* websocket */,
+				9B36695F1CF354B800806BEE /* stt */,
+				9B3669521CF3546C00806BEE /* tts */,
 				C11772101AFD193B00C8791A /* ogg */,
 				C12352A519910606009A8F8B /* opus */,
-				C1416C33194B49520009C49A /* lib */,
-				C11A66BF1754F9DA00385896 /* Upload */,
-				C11A64611754D0E600385896 /* Supporting Files */,
-				C1C3743D1A86C5DB0083C69B /* SpeechToText.h */,
-				C1C3743E1A86C5DB0083C69B /* SpeechToText.m */,
-				C11B3E911AF398C80062BF7D /* STTConfiguration.h */,
-				C11B3E921AF398C80062BF7D /* STTConfiguration.m */,
-				C11B3E991AF3FEC90062BF7D /* TextToSpeech.h */,
-				C11B3E9A1AF3FEC90062BF7D /* TextToSpeech.m */,
-				C11B3E9D1AF3FF660062BF7D /* TTSConfiguration.h */,
-				C11B3E9E1AF3FF660062BF7D /* TTSConfiguration.m */,
+				C1416C33194B49520009C49A /* libs */,
+				9BCAD7C51CE5BC8B00BE3B5F /* websocket */,
 				7EFE11E21B71D07D00EF10BF /* AuthConfiguration.h */,
 				7EFE11E31B71D07D00EF10BF /* AuthConfiguration.m */,
+				9B47E7561CF21645003E0860 /* SpeechUtility.h */,
+				9B47E7571CF21645003E0860 /* SpeechUtility.m */,
+				C11A64611754D0E600385896 /* Supporting Files */,
 			);
 			path = watsonsdk;
 			sourceTree = "<group>";
@@ -399,21 +488,12 @@
 		C11A64981754D98700385896 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				9BF00C9E1CF5A8DE00624702 /* Credentials.plist */,
 				C11A64991754D98700385896 /* watsonResources-Info.plist */,
 				C11A649A1754D98700385896 /* InfoPlist.strings */,
 				C11A649D1754D98700385896 /* watsonResources-Prefix.pch */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		C11A66BF1754F9DA00385896 /* Upload */ = {
-			isa = PBXGroup;
-			children = (
-				C123FF8719B9FE4100C6A702 /* UploaderDelegate.h */,
-				C1C374391A8581A00083C69B /* WebSocketUploader.h */,
-				C1C3743A1A8581A00083C69B /* WebSocketUploader.m */,
-			);
-			name = Upload;
 			sourceTree = "<group>";
 		};
 		C12352A519910606009A8F8B /* opus */ = {
@@ -431,30 +511,37 @@
 			path = opus;
 			sourceTree = "<group>";
 		};
-		C1416C33194B49520009C49A /* lib */ = {
+		C1416C33194B49520009C49A /* libs */ = {
 			isa = PBXGroup;
 			children = (
 				C11772081AFD191D00C8791A /* libogg.a */,
 				C1B14B821AA0D3DC00864C53 /* libopus.a */,
 			);
+			name = libs;
 			path = lib;
 			sourceTree = "<group>";
 		};
-		C16542A0191A0D8500905DCC /* watsonsdktest */ = {
+		C16542A0191A0D8500905DCC /* watsonsdktest-objective-c */ = {
 			isa = PBXGroup;
 			children = (
 				C16542A9191A0D8500905DCC /* AppDelegate.h */,
 				C16542AA191A0D8500905DCC /* AppDelegate.m */,
-				C16542AC191A0D8500905DCC /* Main_iPhone.storyboard */,
-				C16542AF191A0D8500905DCC /* Main_iPad.storyboard */,
 				C16542B2191A0D8500905DCC /* STTViewController.h */,
 				C16542B3191A0D8500905DCC /* STTViewController.m */,
 				C17779621B9DBFAA0066269A /* TTSViewController.h */,
 				C17779631B9DBFAA0066269A /* TTSViewController.m */,
+				9BF00C951CF5A10100624702 /* TTSCustomizationViewController.h */,
+				9BF00C961CF5A10100624702 /* TTSCustomizationViewController.m */,
+				9BF00CA21CF620E500624702 /* TTSCustomizationDetailViewController.h */,
+				9BF00CA31CF620E500624702 /* TTSCustomizationDetailViewController.m */,
+				9B1BCEF21CF704C10076FE2D /* TTSCustomizationDetailTableViewCell.h */,
+				9B1BCEF31CF704C10076FE2D /* TTSCustomizationDetailTableViewCell.m */,
+				C16542AC191A0D8500905DCC /* Main.storyboard */,
+				9B47E7461CEF5B77003E0860 /* LaunchScreen.storyboard */,
 				C16542B5191A0D8500905DCC /* Images.xcassets */,
 				C16542A1191A0D8500905DCC /* Supporting Files */,
 			);
-			path = watsonsdktest;
+			path = "watsonsdktest-objective-c";
 			sourceTree = "<group>";
 		};
 		C16542A1191A0D8500905DCC /* Supporting Files */ = {
@@ -475,22 +562,25 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7EFE11E41B71D07D00EF10BF /* AuthConfiguration.h in Headers */,
+				9B36695D1CF3549400806BEE /* TTSConfiguration.h in Headers */,
+				9B1BCEEB1CF6CAAD0076FE2D /* STTConfiguration.m in Headers */,
 				9BCAD8361CE6BF1200BE3B5F /* SRIOConsumer.h in Headers */,
 				9BCAD8421CE6BF1200BE3B5F /* SocketRocket.h in Headers */,
 				C11772141B029BEE00C8791A /* opus_header.h in Headers */,
 				C1235355199B53FF009A8F8B /* OpusHelper.h in Headers */,
-				9BA475891B9D34AA00D66F1E /* OggHelper.h in Headers */,
-				C1C3743B1A8581A00083C69B /* WebSocketUploader.h in Headers */,
-				7EFE11E41B71D07D00EF10BF /* AuthConfiguration.h in Headers */,
+				9B47E7581CF21645003E0860 /* SpeechUtility.h in Headers */,
+				9B36695B1CF3549400806BEE /* TextToSpeech.h in Headers */,
+				9B3669641CF354B800806BEE /* SpeechToText.h in Headers */,
+				9B3669661CF354B800806BEE /* STTConfiguration.h in Headers */,
+				9B1BCEE31CF69D440076FE2D /* TTSCustomWord.h in Headers */,
+				9B3669551CF3546C00806BEE /* TTSCustomVoice.h in Headers */,
+				9B36693F1CF21A5400806BEE /* WebSocketAudioStreamer.h in Headers */,
 				9BCAD83C1CE6BF1200BE3B5F /* SRError.h in Headers */,
-				9BA475901B9D354E00D66F1E /* os_types.h in Headers */,
-				C1C3743F1A86C5DB0083C69B /* SpeechToText.h in Headers */,
 				9BA4758F1B9D354E00D66F1E /* ogg.h in Headers */,
-				C11B3E9F1AF3FF660062BF7D /* TTSConfiguration.h in Headers */,
-				C11B3E9B1AF3FEC90062BF7D /* TextToSpeech.h in Headers */,
+				9BA475891B9D34AA00D66F1E /* OggHelper.h in Headers */,
+				9BA475901B9D354E00D66F1E /* os_types.h in Headers */,
 				9BCAD8381CE6BF1200BE3B5F /* SRIOConsumerPool.h in Headers */,
-				C11B3E931AF398C80062BF7D /* STTConfiguration.h in Headers */,
-				C11712E31A03DC2E00957080 /* UploaderDelegate.h in Headers */,
 				9BCAD8431CE6BF1200BE3B5F /* SRWebSocket.h in Headers */,
 				9BCAD8341CE6BF1200BE3B5F /* SRDelegateController.h in Headers */,
 				9BCAD83A1CE6BF1200BE3B5F /* SRRunLoopThread.h in Headers */,
@@ -503,6 +593,23 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		9BF43ECE1CEAC81900EC0185 /* Swift Sample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9BF43EDE1CEAC81900EC0185 /* Build configuration list for PBXNativeTarget "Swift Sample" */;
+			buildPhases = (
+				9BF43ECB1CEAC81900EC0185 /* Sources */,
+				9BF43ECC1CEAC81900EC0185 /* Frameworks */,
+				9BF43ECD1CEAC81900EC0185 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Swift Sample";
+			productName = "watsonsdktest-swift";
+			productReference = 9BF43ECF1CEAC81900EC0185 /* Swift Sample.app */;
+			productType = "com.apple.product-type.application";
+		};
 		C11A645A1754D0E600385896 /* watsonsdk */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C11A64801754D0E700385896 /* Build configuration list for PBXNativeTarget "watsonsdk" */;
@@ -540,9 +647,9 @@
 			productReference = C11A64941754D98700385896 /* watsonsdk.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
-		C165429A191A0D8500905DCC /* watsonsdktest */ = {
+		C165429A191A0D8500905DCC /* OC Sample */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C16542CE191A0D8500905DCC /* Build configuration list for PBXNativeTarget "watsonsdktest" */;
+			buildConfigurationList = C16542CE191A0D8500905DCC /* Build configuration list for PBXNativeTarget "OC Sample" */;
 			buildPhases = (
 				C1654297191A0D8500905DCC /* Sources */,
 				C1654298191A0D8500905DCC /* Frameworks */,
@@ -552,9 +659,9 @@
 			);
 			dependencies = (
 			);
-			name = watsonsdktest;
-			productName = watsonsdktest;
-			productReference = C165429B191A0D8500905DCC /* watsonsdktest.app */;
+			name = "OC Sample";
+			productName = "watsonsdktest-objective-c";
+			productReference = C165429B191A0D8500905DCC /* OC Sample.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -563,9 +670,15 @@
 		C11A64531754D0E600385896 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0720;
 				LastTestingUpgradeCheck = 0630;
 				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = IBM;
+				TargetAttributes = {
+					9BF43ECE1CEAC81900EC0185 = {
+						CreatedOnToolsVersion = 7.2;
+					};
+				};
 			};
 			buildConfigurationList = C11A64561754D0E600385896 /* Build configuration list for PBXProject "watsonsdk" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -583,12 +696,24 @@
 				C11A645A1754D0E600385896 /* watsonsdk */,
 				C11A64891754D6AB00385896 /* Framework */,
 				C11A64931754D98700385896 /* watsonResources */,
-				C165429A191A0D8500905DCC /* watsonsdktest */,
+				C165429A191A0D8500905DCC /* OC Sample */,
+				9BF43ECE1CEAC81900EC0185 /* Swift Sample */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		9BF43ECD1CEAC81900EC0185 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B47E7451CEF5B4A003E0860 /* LaunchScreen.storyboard in Resources */,
+				9BF00CA11CF5AB8100624702 /* Credentials.plist in Resources */,
+				9BF43ED91CEAC81900EC0185 /* Assets.xcassets in Resources */,
+				9BF43ED71CEAC81900EC0185 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C11A64921754D98700385896 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -602,9 +727,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C16542B1191A0D8500905DCC /* Main_iPad.storyboard in Resources */,
 				C16542B6191A0D8500905DCC /* Images.xcassets in Resources */,
-				C16542AE191A0D8500905DCC /* Main_iPhone.storyboard in Resources */,
+				9B47E7481CEF5B77003E0860 /* LaunchScreen.storyboard in Resources */,
+				9BF00CA01CF5AB7F00624702 /* Credentials.plist in Resources */,
+				C16542AE191A0D8500905DCC /* Main.storyboard in Resources */,
 				C16542A5191A0D8500905DCC /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -641,26 +767,39 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		9BF43ECB1CEAC81900EC0185 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9BF43ED41CEAC81900EC0185 /* SwiftSTTViewController.swift in Sources */,
+				9B375ABB1CEB0C2500A6F9D4 /* SwiftTTSViewController.swift in Sources */,
+				9BF43ED21CEAC81900EC0185 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C11A64571754D0E600385896 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				7EFE11E51B71D07D00EF10BF /* AuthConfiguration.m in Sources */,
 				9BCAD8351CE6BF1200BE3B5F /* SRDelegateController.m in Sources */,
+				9B47E7591CF21645003E0860 /* SpeechUtility.m in Sources */,
 				C117721E1B02A15000C8791A /* opus_header.c in Sources */,
-				C1C3743C1A8581A00083C69B /* WebSocketUploader.m in Sources */,
 				9BCAD8441CE6BF1200BE3B5F /* SRWebSocket.m in Sources */,
+				9B3669671CF354B800806BEE /* STTConfiguration.m in Sources */,
+				9B3669651CF354B800806BEE /* SpeechToText.m in Sources */,
 				9BCAD8391CE6BF1200BE3B5F /* SRIOConsumerPool.m in Sources */,
-				C1C374401A86C5DB0083C69B /* SpeechToText.m in Sources */,
-				C11B3E941AF398C80062BF7D /* STTConfiguration.m in Sources */,
 				9BCAD83D1CE6BF1200BE3B5F /* SRError.m in Sources */,
+				9B36695E1CF3549400806BEE /* TTSConfiguration.m in Sources */,
 				9BCAD8371CE6BF1200BE3B5F /* SRIOConsumer.m in Sources */,
-				C11B3EA01AF3FF660062BF7D /* TTSConfiguration.m in Sources */,
+				9B1BCEE41CF69D440076FE2D /* TTSCustomWord.m in Sources */,
 				9BCAD83B1CE6BF1200BE3B5F /* SRRunLoopThread.m in Sources */,
+				9B3669561CF3546C00806BEE /* TTSCustomVoice.m in Sources */,
 				9BA4758A1B9D34AA00D66F1E /* OggHelper.m in Sources */,
+				9B36695C1CF3549400806BEE /* TextToSpeech.m in Sources */,
 				C1235356199B53FF009A8F8B /* OpusHelper.m in Sources */,
 				9BCAD83F1CE6BF1200BE3B5F /* SRHash.m in Sources */,
-				C11B3E9C1AF3FEC90062BF7D /* TextToSpeech.m in Sources */,
+				9B3669401CF21A5400806BEE /* WebSocketAudioStreamer.m in Sources */,
 				9BCAD8411CE6BF1200BE3B5F /* SRURLUtilities.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -676,10 +815,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BF00CA71CF6268000624702 /* TTSCustomizationDetailViewController.m in Sources */,
+				9BF00C9A1CF5A2BD00624702 /* TTSCustomizationViewController.m in Sources */,
 				C17779641B9DBFAA0066269A /* TTSViewController.m in Sources */,
 				C16542B4191A0D8500905DCC /* STTViewController.m in Sources */,
 				C16542AB191A0D8500905DCC /* AppDelegate.m in Sources */,
 				C16542A7191A0D8500905DCC /* main.m in Sources */,
+				9B1BCEF41CF704C10076FE2D /* TTSCustomizationDetailTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -704,6 +846,30 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		9B47E7431CEF5B4A003E0860 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9B47E7441CEF5B4A003E0860 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		9B47E7461CEF5B77003E0860 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9B47E7471CEF5B77003E0860 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		9BF43ED51CEAC81900EC0185 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9BF43ED61CEAC81900EC0185 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
 		C11A649A1754D98700385896 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -720,25 +886,78 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		C16542AC191A0D8500905DCC /* Main_iPhone.storyboard */ = {
+		C16542AC191A0D8500905DCC /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				C16542AD191A0D8500905DCC /* Base */,
 			);
-			name = Main_iPhone.storyboard;
-			sourceTree = "<group>";
-		};
-		C16542AF191A0D8500905DCC /* Main_iPad.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C16542B0191A0D8500905DCC /* Base */,
-			);
-			name = Main_iPad.storyboard;
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		9BF43EDF1CEAC81900EC0185 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "watsonsdktest-swift/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.cio.watsonsdk.swift;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "watsonsdktest-swift/SwiftSpeechHeader.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9BF43EE01CEAC81900EC0185 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "watsonsdktest-swift/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.cio.watsonsdk.swift;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "watsonsdktest-swift/SwiftSpeechHeader.h";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		C11A647E1754D0E700385896 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -806,6 +1025,7 @@
 		C11A64811754D0E700385896 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				DEAD_CODE_STRIPPING = NO;
 				DSTROOT = /tmp/watsonsdk.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -831,6 +1051,7 @@
 		C11A64821754D0E700385896 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				DEAD_CODE_STRIPPING = NO;
 				DSTROOT = /tmp/watsonsdk.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -845,7 +1066,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/watsonsdk/lib",
 				);
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -856,22 +1077,24 @@
 		C11A648B1754D6AB00385896 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/lib";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/inc/**";
-				VALID_ARCHS = "armv7 armv7s i386";
+				VALID_ARCHS = "arm64 armv7 armv7s i386 x86_64";
 			};
 			name = Debug;
 		};
 		C11A648C1754D6AB00385896 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/lib";
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/inc/**";
-				VALID_ARCHS = "armv7 armv7s i386";
+				VALID_ARCHS = "arm64 armv7 armv7s i386 x86_64";
 			};
 			name = Release;
 		};
@@ -929,7 +1152,7 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "watsonsdktest/watsonsdktest-Prefix.pch";
+				GCC_PREFIX_HEADER = "watsonsdktest-objective-c/watsonsdktest-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -939,9 +1162,10 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
-				INFOPLIST_FILE = "watsonsdktest/watsonsdktest-Info.plist";
+				INFOPLIST_FILE = "watsonsdktest-objective-c/watsonsdktest-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.cio.watsonsdk.objetivec;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -966,15 +1190,16 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "watsonsdktest/watsonsdktest-Prefix.pch";
+				GCC_PREFIX_HEADER = "watsonsdktest-objective-c/watsonsdktest-Prefix.pch";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
-				INFOPLIST_FILE = "watsonsdktest/watsonsdktest-Info.plist";
+				INFOPLIST_FILE = "watsonsdktest-objective-c/watsonsdktest-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.cio.watsonsdk.objetivec;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -984,6 +1209,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		9BF43EDE1CEAC81900EC0185 /* Build configuration list for PBXNativeTarget "Swift Sample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9BF43EDF1CEAC81900EC0185 /* Debug */,
+				9BF43EE01CEAC81900EC0185 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		C11A64561754D0E600385896 /* Build configuration list for PBXProject "watsonsdk" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1020,7 +1254,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C16542CE191A0D8500905DCC /* Build configuration list for PBXNativeTarget "watsonsdktest" */ = {
+		C16542CE191A0D8500905DCC /* Build configuration list for PBXNativeTarget "OC Sample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C16542CA191A0D8500905DCC /* Debug */,

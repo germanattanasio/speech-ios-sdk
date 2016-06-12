@@ -21,7 +21,7 @@ Table of Contents
 
     * [Installation](#installation)
     * [Include headers](#include-headers)
-    * [Sample Application](#sample-application)
+    * [Sample Applications](#sample-applications)
     * [Speech To Text](#speech-to-text)
     	* [Create a Configuration](#create-a-stt-configuration) 
     	* [Authentication options](#authentication)
@@ -81,20 +81,22 @@ Include headers
 **in Swift**
 
 *Add the headers above for Objective-c into a bridging header file.*
+	- Use SwiftSpeechHeader.h in Swift sample
 
-
-#Sample Application
+#Sample Applications
 ===================
 
 This repository contains a sample application demonstrating the SDK functionality. 
 
 To run the application clone this repository and then navigate in Finder to folder containing the SDK files.
 
-Double click on the watsonsdk.xcodeproj  to launch xcode.
+Double click on the watsonsdk.xcodeproj  to launch Xcode.
 
-To run the sample application, change the compile target to 'watsonsdktest' and run on the iPhone simulator.
+To run the sample application, change the compile target to 'watsonsdktest-objective-c' or 'watsonsdktest-swift' and run on the iPhone simulator.
 
 Note that this is sample code and no security review has been performed on the code.
+
+The Swift sample was tested in Xcode 7.2.
 
 #Speech To Text 
 ==============
@@ -416,15 +418,20 @@ Generate and play audio
 
 **in Objective-C**
 ```objective-c
-	[self.tts synthesize:^(NSData *data, NSError *err) {
-    
+	[self.tts synthesize:^(NSData *data, NSError *reqErr) {
+    	
+    	// request error
+    	if(reqErr){
+            NSLog(@"Error requesting data: %@", [reqErr description]);
+            return;
+        }
+
         // play audio and log when playing has finished
         [self.tts playAudio:^(NSError *err) {
-            
-            if(!err)
-                NSLog(@"audio finished playing");
+            if(err)
+                NSLog(@"error playing audio %@", [err localizedDescription]);
             else
-                NSLog(@"error playing audio %@",err.localizedDescription);
+            	NSLog(@"audio finished playing");
             
         } withData:data];
         
@@ -434,16 +441,21 @@ Generate and play audio
 
 **in Swift**
 ```swift
-	tts!.synthesize({
-		(data, err) in
-            
-		tts!.playAudio({
-			(err) in
-            
-				... do something after the audio has played ...
-		
-		}, withData: data)
-            
+
+	tts!.synthesize({ (data: NSData!, reqError: NSError!) -> Void in
+        if reqError == nil{
+			tts!.playAudio({ (error: NSError!) -> Void in
+				if error == nil{
+					... do something after the audio has played ...
+				}
+				else{
+					... data error handling ...
+				}
+			}, withData: data)
+        }
+        else
+        	... request error handling ...
+
 	}, theText: "Hello World")
 
 ```
@@ -468,4 +480,4 @@ Check that all the required frameworks have been added to your project.
 
 ## Copyright and license
 
-Copyright 2015 IBM Corporation under [the Apache 2.0 license](LICENSE).
+Copyright 2016 IBM Corporation under [the Apache 2.0 license](LICENSE).
