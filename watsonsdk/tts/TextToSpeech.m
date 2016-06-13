@@ -53,7 +53,7 @@ typedef void (^PlayAudioCallbackBlockType)(NSError*);
  *  @return SpeechToText
  */
 - (id)initWithConfig:(TTSConfiguration *)config {
-    
+    self = [super init];
     self.config = config;
     self.sampleRate = 0;
     // setup opus helper
@@ -255,6 +255,7 @@ typedef void (^PlayAudioCallbackBlockType)(NSError*);
     
     NSMutableData *newWavData = [NSMutableData dataWithBytes:header length:44];
     [newWavData appendBytes:[wavNoheader bytes] length:[wavNoheader length]];
+    free(header);
     return newWavData;
 }
 

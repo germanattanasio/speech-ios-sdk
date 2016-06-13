@@ -172,7 +172,7 @@
     OpusMSDecoder *st=NULL;
     opus_int64 packet_count=0;
     
-    int eos=0;
+    //int eos=0; // stored value is never read
     int channels=-1;
     int mapping_family;
     int rate=(int)sampleRate;
@@ -249,7 +249,7 @@
                         has_tags_packet = 0;
                         link_out = 0;
                         packet_count = 0;
-                        eos = 0;
+                        //eos = 0; // stored value is never read
                         total_links++;
                     } else {
                         NSLog(@"Warning: ignoring opus stream");
@@ -422,7 +422,7 @@ static opus_int64 audio_write(float *pcm, int channels, int frame_size, NSMutabl
     
     output=pcm+channels*tmp_skip;
     out_len=frame_size-tmp_skip;
-    frame_size=0;
+    //frame_size=0; // stored value is never read
     
     for (i=0;i<(int)out_len*channels;i++){
         out[i]=(short)float2int(fmaxf(-32768,fminf(output[i]*32768.f,32767)));
@@ -432,7 +432,7 @@ static opus_int64 audio_write(float *pcm, int channels, int frame_size, NSMutabl
     {
         [fout appendBytes:out length:out_len*2];
         sampout+=out_len;
-        maxout-=out_len;
+        //maxout-=out_len; // stored value is never read
     }
     
     return sampout;
