@@ -89,6 +89,7 @@ id oggRef;
  *  @return SpeechToText
  */
 - (id)initWithConfig:(STTConfiguration *)config {
+    self = [super init];
     self.config = config;
     // set audio encoding flags so they are accessible in c audio callbacks
     isCompressedOpus = [config.audioCodec isEqualToString:WATSONSDK_AUDIO_CODEC_TYPE_OPUS] ? YES : NO;
