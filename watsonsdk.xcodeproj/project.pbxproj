@@ -672,7 +672,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
 				LastTestingUpgradeCheck = 0630;
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = IBM;
 				TargetAttributes = {
 					9BF43ECE1CEAC81900EC0185 = {
@@ -972,6 +972,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -983,7 +984,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
 				"PUBLIC_HEADERS_FOLDER_PATH[sdk=*]" = "$(PROJECT_NAME)Headers";
@@ -1011,7 +1012,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				"PUBLIC_HEADERS_FOLDER_PATH[sdk=*]" = "$(PROJECT_NAME)Headers";
@@ -1025,7 +1026,6 @@
 		C11A64811754D0E700385896 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
 				DEAD_CODE_STRIPPING = NO;
 				DSTROOT = /tmp/watsonsdk.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1051,7 +1051,6 @@
 		C11A64821754D0E700385896 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
 				DEAD_CODE_STRIPPING = NO;
 				DSTROOT = /tmp/watsonsdk.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1077,7 +1076,6 @@
 		C11A648B1754D6AB00385896 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/lib";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1089,7 +1087,6 @@
 		C11A648C1754D6AB00385896 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/lib";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1110,6 +1107,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.cio.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = watsonsdk;
 				SDKROOT = iphoneos;
 				WRAPPER_EXTENSION = bundle;
@@ -1130,6 +1128,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.cio.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = watsonsdk;
 				SDKROOT = iphoneos;
 				WRAPPER_EXTENSION = bundle;
@@ -1163,7 +1162,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = "watsonsdktest-objective-c/watsonsdktest-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.cio.watsonsdk.objetivec;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1197,7 +1195,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = "watsonsdktest-objective-c/watsonsdktest-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.cio.watsonsdk.objetivec;
 				PRODUCT_NAME = "$(TARGET_NAME)";
