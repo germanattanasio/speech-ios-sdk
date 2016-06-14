@@ -58,7 +58,7 @@
     } else if(self.basicAuthPassword && self.basicAuthUsername) {
         NSString *authStr = [NSString stringWithFormat:@"%@:%@", self.basicAuthUsername,self.basicAuthPassword];
         NSData *authData = [authStr dataUsingEncoding:NSUTF8StringEncoding];
-        NSString *authValue = [NSString stringWithFormat:@"Basic %@", [authData base64Encoding]];
+        NSString *authValue = [NSString stringWithFormat:@"Basic %@", [authData base64EncodedStringWithOptions:0]];
         [headers setObject:authValue forKey:@"Authorization"];
     }
     

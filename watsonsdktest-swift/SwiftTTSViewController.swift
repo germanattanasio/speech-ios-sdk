@@ -106,14 +106,14 @@ class SwiftTTSViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         self.getUIPickerViewInstance().backgroundColor = UIColor.whiteColor()
         self.hidePickerView(true, withAnimation: false)
         
-        let gestureRecognizer:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: Selector("pickerViewTapGestureRecognized:"))
+        let gestureRecognizer:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SwiftTTSViewController.pickerViewTapGestureRecognized))
         gestureRecognizer.delegate = self
         self.getUIPickerViewInstance().addGestureRecognizer(gestureRecognizer);
 
         self.view.addSubview(self.getUIPickerViewInstance())
         var row = 0
         if let list = self.ttsVoices{
-            for var i = 0; i < list.count; i += 1{
+            for i in 0 ..< list.count{
                 if list.objectAtIndex(i).objectForKey("name") as? String == self.ttsInstance?.config.voiceName{
                     row = i
                 }

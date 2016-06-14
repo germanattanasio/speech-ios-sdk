@@ -113,7 +113,7 @@ class SwiftSTTViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         self.view.addSubview(self.getUIPickerViewInstance())
         var row = 0
         if let list = self.sttLanguageModels{
-            for var i = 0; i < list.count; i += 1{
+            for i in 0 ..< list.count{
                 if list.objectAtIndex(i).objectForKey("name") as? String == self.sttInstance?.config.modelName{
                     row = i
                 }
