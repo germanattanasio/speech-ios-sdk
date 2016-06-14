@@ -14,8 +14,8 @@
 				C11A648F1754D6DA00385896 /* ShellScript */,
 			);
 			dependencies = (
+				4FC433521D0F9AB200ECEFD3 /* PBXTargetDependency */,
 				C11A64A21754DA2D00385896 /* PBXTargetDependency */,
-				C11A648E1754D6B300385896 /* PBXTargetDependency */,
 			);
 			name = Framework;
 			productName = Framework;
@@ -23,6 +23,58 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		4FC4331C1D0EE82F00ECEFD3 /* AuthConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFE11E31B71D07D00EF10BF /* AuthConfiguration.m */; };
+		4FC4331D1D0EE83F00ECEFD3 /* SRDelegateController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD8211CE6BF1200BE3B5F /* SRDelegateController.m */; };
+		4FC4331E1D0EE84800ECEFD3 /* SpeechUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B47E7571CF21645003E0860 /* SpeechUtility.m */; };
+		4FC4331F1D0EE85100ECEFD3 /* opus_header.c in Sources */ = {isa = PBXBuildFile; fileRef = C117721D1B02A15000C8791A /* opus_header.c */; };
+		4FC433201D0EE85D00ECEFD3 /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD8331CE6BF1200BE3B5F /* SRWebSocket.m */; };
+		4FC433211D0EE87000ECEFD3 /* SRURLUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD8301CE6BF1200BE3B5F /* SRURLUtilities.m */; };
+		4FC433221D0EE87B00ECEFD3 /* WebSocketAudioStreamer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B36693E1CF21A5400806BEE /* WebSocketAudioStreamer.m */; };
+		4FC433231D0EE88400ECEFD3 /* SRHash.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD82E1CE6BF1200BE3B5F /* SRHash.m */; };
+		4FC433241D0EE88E00ECEFD3 /* OpusHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C1235354199B53FF009A8F8B /* OpusHelper.m */; };
+		4FC433251D0EE89900ECEFD3 /* TextToSpeech.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3669581CF3549400806BEE /* TextToSpeech.m */; };
+		4FC433261D0EE8A400ECEFD3 /* OggHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA475881B9D34AA00D66F1E /* OggHelper.m */; };
+		4FC433271D0EE8B400ECEFD3 /* TTSCustomWord.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B1BCEE21CF69D440076FE2D /* TTSCustomWord.m */; };
+		4FC433281D0EE8C000ECEFD3 /* SRIOConsumer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD8241CE6BF1200BE3B5F /* SRIOConsumer.m */; };
+		4FC433291D0EE95100ECEFD3 /* TTSConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B36695A1CF3549400806BEE /* TTSConfiguration.m */; };
+		4FC4332A1D0EE95A00ECEFD3 /* SRError.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD82C1CE6BF1200BE3B5F /* SRError.m */; };
+		4FC4332B1D0EE96200ECEFD3 /* SRIOConsumerPool.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD8261CE6BF1200BE3B5F /* SRIOConsumerPool.m */; };
+		4FC4332C1D0EE96E00ECEFD3 /* SpeechToText.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3669611CF354B800806BEE /* SpeechToText.m */; };
+		4FC4332D1D0EE9B000ECEFD3 /* STTConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3669631CF354B800806BEE /* STTConfiguration.m */; };
+		4FC4332E1D0EE9C500ECEFD3 /* SRRunLoopThread.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD8291CE6BF1200BE3B5F /* SRRunLoopThread.m */; };
+		4FC4332F1D0EE9E800ECEFD3 /* TTSCustomVoice.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3669541CF3546C00806BEE /* TTSCustomVoice.m */; };
+		4FC433311D0EEA3000ECEFD3 /* OggHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA475871B9D34AA00D66F1E /* OggHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4FC433321D0EEA3B00ECEFD3 /* ogg.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA4758C1B9D354E00D66F1E /* ogg.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4FC433331D0EEA4500ECEFD3 /* WebSocketAudioStreamer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B36693D1CF21A5400806BEE /* WebSocketAudioStreamer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4FC433341D0EEA5200ECEFD3 /* TTSCustomVoice.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3669531CF3546C00806BEE /* TTSCustomVoice.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4FC433351D0EEA5200ECEFD3 /* TTSCustomWord.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B1BCEE11CF69D440076FE2D /* TTSCustomWord.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4FC433361D0EEAA100ECEFD3 /* STTConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3669621CF354B800806BEE /* STTConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4FC433371D0EEAB100ECEFD3 /* SpeechToText.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3669601CF354B800806BEE /* SpeechToText.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4FC433381D0EEAB100ECEFD3 /* TextToSpeech.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3669571CF3549400806BEE /* TextToSpeech.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4FC433391D0EEAC700ECEFD3 /* SpeechUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B47E7561CF21645003E0860 /* SpeechUtility.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4FC4333A1D0EEADD00ECEFD3 /* OpusHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = C1235353199B53FF009A8F8B /* OpusHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4FC4333B1D0EEAE300ECEFD3 /* SocketRocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD8311CE6BF1200BE3B5F /* SocketRocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4FC4333C1D0EFA2500ECEFD3 /* TTSConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3669591CF3549400806BEE /* TTSConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4FC4333D1D0EFA5400ECEFD3 /* AuthConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EFE11E21B71D07D00EF10BF /* AuthConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4FC4333E1D0EFA8000ECEFD3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C11B3EA11AF41A200062BF7D /* AVFoundation.framework */; };
+		4FC4333F1D0EFA8000ECEFD3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C11A645E1754D0E600385896 /* Foundation.framework */; };
+		4FC433401D0EFA8B00ECEFD3 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1D4580019A78BBB00093095 /* Security.framework */; };
+		4FC433411D0EFA9000ECEFD3 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C11A66E117560AD900385896 /* CFNetwork.framework */; };
+		4FC433421D0EFAAC00ECEFD3 /* libopus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C1B14B821AA0D3DC00864C53 /* libopus.a */; };
+		4FC433431D0EFAB000ECEFD3 /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C11772081AFD191D00C8791A /* libogg.a */; };
+		4FC433441D0EFAE000ECEFD3 /* SRIOConsumer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD8231CE6BF1200BE3B5F /* SRIOConsumer.h */; };
+		4FC433451D0EFB1800ECEFD3 /* opus_header.h in Headers */ = {isa = PBXBuildFile; fileRef = C11772131B029BEE00C8791A /* opus_header.h */; };
+		4FC433461D0EFB2100ECEFD3 /* SRError.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD82B1CE6BF1200BE3B5F /* SRError.h */; };
+		4FC433471D0EFB2900ECEFD3 /* os_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA4758D1B9D354E00D66F1E /* os_types.h */; };
+		4FC433481D0EFB4000ECEFD3 /* SRIOConsumerPool.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD8251CE6BF1200BE3B5F /* SRIOConsumerPool.h */; };
+		4FC433491D0EFB4900ECEFD3 /* SRWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD8321CE6BF1200BE3B5F /* SRWebSocket.h */; };
+		4FC4334A1D0EFB5200ECEFD3 /* SRDelegateController.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD8201CE6BF1200BE3B5F /* SRDelegateController.h */; };
+		4FC4334B1D0EFB5B00ECEFD3 /* SRRunLoopThread.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD8281CE6BF1200BE3B5F /* SRRunLoopThread.h */; };
+		4FC4334C1D0EFB6300ECEFD3 /* config_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA4758B1B9D354E00D66F1E /* config_types.h */; };
+		4FC4334D1D0EFBE000ECEFD3 /* SRURLUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD82F1CE6BF1200BE3B5F /* SRURLUtilities.h */; };
+		4FC4334E1D0EFBEA00ECEFD3 /* SRHash.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD82D1CE6BF1200BE3B5F /* SRHash.h */; };
+		4FC4334F1D0EFC2A00ECEFD3 /* watsonsdk.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FC433161D0EE7AA00ECEFD3 /* watsonsdk.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4FC433501D0EFC4400ECEFD3 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BA060401CE6D9320018CA5B /* libicucore.tbd */; };
 		7EFE11E41B71D07D00EF10BF /* AuthConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EFE11E21B71D07D00EF10BF /* AuthConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7EFE11E51B71D07D00EF10BF /* AuthConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFE11E31B71D07D00EF10BF /* AuthConfiguration.m */; };
 		9B1BCEE31CF69D440076FE2D /* TTSCustomWord.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B1BCEE11CF69D440076FE2D /* TTSCustomWord.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -108,12 +160,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		C11A648D1754D6B300385896 /* PBXContainerItemProxy */ = {
+		4FC433511D0F9AB200ECEFD3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C11A64531754D0E600385896 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = C11A645A1754D0E600385896;
-			remoteInfo = watsonsdk;
+			remoteGlobalIDString = 4FC433131D0EE7AA00ECEFD3;
+			remoteInfo = WatsonSDK;
 		};
 		C11A64A11754DA2D00385896 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -144,6 +196,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4FC433141D0EE7AA00ECEFD3 /* WatsonSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WatsonSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4FC433161D0EE7AA00ECEFD3 /* watsonsdk.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = watsonsdk.h; sourceTree = "<group>"; };
+		4FC433181D0EE7AA00ECEFD3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7EFE11E21B71D07D00EF10BF /* AuthConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthConfiguration.h; sourceTree = "<group>"; };
 		7EFE11E31B71D07D00EF10BF /* AuthConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthConfiguration.m; sourceTree = "<group>"; };
 		9B1BCEE11CF69D440076FE2D /* TTSCustomWord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTSCustomWord.h; sourceTree = "<group>"; };
@@ -244,6 +299,20 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		4FC433101D0EE7AA00ECEFD3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4FC433501D0EFC4400ECEFD3 /* libicucore.tbd in Frameworks */,
+				4FC4333E1D0EFA8000ECEFD3 /* AVFoundation.framework in Frameworks */,
+				4FC433411D0EFA9000ECEFD3 /* CFNetwork.framework in Frameworks */,
+				4FC433401D0EFA8B00ECEFD3 /* Security.framework in Frameworks */,
+				4FC433431D0EFAB000ECEFD3 /* libogg.a in Frameworks */,
+				4FC433421D0EFAAC00ECEFD3 /* libopus.a in Frameworks */,
+				4FC4333F1D0EFA8000ECEFD3 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9BF43ECC1CEAC81900EC0185 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -291,6 +360,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4FC433151D0EE7AA00ECEFD3 /* WatsonSDK */ = {
+			isa = PBXGroup;
+			children = (
+				4FC433161D0EE7AA00ECEFD3 /* watsonsdk.h */,
+				4FC433181D0EE7AA00ECEFD3 /* Info.plist */,
+			);
+			name = WatsonSDK;
+			path = watsonspeech;
+			sourceTree = "<group>";
+		};
 		9B3669521CF3546C00806BEE /* tts */ = {
 			isa = PBXGroup;
 			children = (
@@ -417,6 +496,7 @@
 				C11A64971754D98700385896 /* watsonResources */,
 				C16542A0191A0D8500905DCC /* watsonsdktest-objective-c */,
 				9BF43ED01CEAC81900EC0185 /* watsonsdktest-swift */,
+				4FC433151D0EE7AA00ECEFD3 /* WatsonSDK */,
 				C11A645D1754D0E600385896 /* Frameworks */,
 				C11A645C1754D0E600385896 /* Products */,
 			);
@@ -429,6 +509,7 @@
 				C11A64941754D98700385896 /* watsonsdk.bundle */,
 				C165429B191A0D8500905DCC /* OC Sample.app */,
 				9BF43ECF1CEAC81900EC0185 /* Swift Sample.app */,
+				4FC433141D0EE7AA00ECEFD3 /* WatsonSDK.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -558,6 +639,38 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		4FC433111D0EE7AA00ECEFD3 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4FC4333D1D0EFA5400ECEFD3 /* AuthConfiguration.h in Headers */,
+				4FC4333C1D0EFA2500ECEFD3 /* TTSConfiguration.h in Headers */,
+				4FC4333B1D0EEAE300ECEFD3 /* SocketRocket.h in Headers */,
+				4FC4333A1D0EEADD00ECEFD3 /* OpusHelper.h in Headers */,
+				4FC433391D0EEAC700ECEFD3 /* SpeechUtility.h in Headers */,
+				4FC433361D0EEAA100ECEFD3 /* STTConfiguration.h in Headers */,
+				4FC433381D0EEAB100ECEFD3 /* TextToSpeech.h in Headers */,
+				4FC433371D0EEAB100ECEFD3 /* SpeechToText.h in Headers */,
+				4FC433351D0EEA5200ECEFD3 /* TTSCustomWord.h in Headers */,
+				4FC433341D0EEA5200ECEFD3 /* TTSCustomVoice.h in Headers */,
+				4FC433331D0EEA4500ECEFD3 /* WebSocketAudioStreamer.h in Headers */,
+				4FC433321D0EEA3B00ECEFD3 /* ogg.h in Headers */,
+				4FC433311D0EEA3000ECEFD3 /* OggHelper.h in Headers */,
+				4FC4334F1D0EFC2A00ECEFD3 /* watsonsdk.h in Headers */,
+				4FC4334E1D0EFBEA00ECEFD3 /* SRHash.h in Headers */,
+				4FC4334D1D0EFBE000ECEFD3 /* SRURLUtilities.h in Headers */,
+				4FC4334C1D0EFB6300ECEFD3 /* config_types.h in Headers */,
+				4FC4334B1D0EFB5B00ECEFD3 /* SRRunLoopThread.h in Headers */,
+				4FC4334A1D0EFB5200ECEFD3 /* SRDelegateController.h in Headers */,
+				4FC433491D0EFB4900ECEFD3 /* SRWebSocket.h in Headers */,
+				4FC433481D0EFB4000ECEFD3 /* SRIOConsumerPool.h in Headers */,
+				4FC433471D0EFB2900ECEFD3 /* os_types.h in Headers */,
+				4FC433461D0EFB2100ECEFD3 /* SRError.h in Headers */,
+				4FC433451D0EFB1800ECEFD3 /* opus_header.h in Headers */,
+				4FC433441D0EFAE000ECEFD3 /* SRIOConsumer.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C11A64861754D17900385896 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -593,6 +706,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		4FC433131D0EE7AA00ECEFD3 /* WatsonSDK */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4FC4331B1D0EE7AA00ECEFD3 /* Build configuration list for PBXNativeTarget "WatsonSDK" */;
+			buildPhases = (
+				4FC4330F1D0EE7AA00ECEFD3 /* Sources */,
+				4FC433101D0EE7AA00ECEFD3 /* Frameworks */,
+				4FC433111D0EE7AA00ECEFD3 /* Headers */,
+				4FC433121D0EE7AA00ECEFD3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WatsonSDK;
+			productName = watsonspeech;
+			productReference = 4FC433141D0EE7AA00ECEFD3 /* WatsonSDK.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		9BF43ECE1CEAC81900EC0185 /* Swift Sample */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9BF43EDE1CEAC81900EC0185 /* Build configuration list for PBXNativeTarget "Swift Sample" */;
@@ -675,6 +806,9 @@
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = IBM;
 				TargetAttributes = {
+					4FC433131D0EE7AA00ECEFD3 = {
+						CreatedOnToolsVersion = 7.3;
+					};
 					9BF43ECE1CEAC81900EC0185 = {
 						CreatedOnToolsVersion = 7.2;
 					};
@@ -698,11 +832,19 @@
 				C11A64931754D98700385896 /* watsonResources */,
 				C165429A191A0D8500905DCC /* OC Sample */,
 				9BF43ECE1CEAC81900EC0185 /* Swift Sample */,
+				4FC433131D0EE7AA00ECEFD3 /* WatsonSDK */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		4FC433121D0EE7AA00ECEFD3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9BF43ECD1CEAC81900EC0185 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -762,11 +904,38 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -e\nset +u\n# Avoid recursively calling this script.\nif [[ $SF_MASTER_SCRIPT_RUNNING ]]\nthen\nexit 0\nfi\nset -u\nexport SF_MASTER_SCRIPT_RUNNING=1\n\nSF_TARGET_NAME=${PROJECT_NAME}\nSF_EXECUTABLE_PATH=\"lib${SF_TARGET_NAME}.a\"\nSF_WRAPPER_NAME=\"${SF_TARGET_NAME}.framework\"\n\n# The following conditionals come from\n# https://github.com/kstenerud/iOS-Universal-Framework\n\nif [[ \"$SDK_NAME\" =~ ([A-Za-z]+) ]]\nthen\nSF_SDK_PLATFORM=${BASH_REMATCH[1]}\nelse\necho \"Could not find platform name from SDK_NAME: $SDK_NAME\"\nexit 1\nfi\n\nif [[ \"$SDK_NAME\" =~ ([0-9]+.*$) ]]\nthen\nSF_SDK_VERSION=${BASH_REMATCH[1]}\nelse\necho \"Could not find sdk version from SDK_NAME: $SDK_NAME\"\nexit 1\nfi\n\nif [[ \"$SF_SDK_PLATFORM\" = \"iphoneos\" ]]\nthen\nSF_OTHER_PLATFORM=iphonesimulator\nelse\nSF_OTHER_PLATFORM=iphoneos\nfi\n\nif [[ \"$BUILT_PRODUCTS_DIR\" =~ (.*)$SF_SDK_PLATFORM$ ]]\nthen\nSF_OTHER_BUILT_PRODUCTS_DIR=\"${BASH_REMATCH[1]}${SF_OTHER_PLATFORM}\"\nelse\necho \"Could not find platform name from build products directory: $BUILT_PRODUCTS_DIR\"\nexit 1\nfi\n\n# Build the other platform.\nxcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk ${SF_OTHER_PLATFORM}${SF_SDK_VERSION} BUILD_DIR=\"${BUILD_DIR}\" OBJROOT=\"${OBJROOT}\" BUILD_ROOT=\"${BUILD_ROOT}\" SYMROOT=\"${SYMROOT}\" $ACTION\n\n# Smash the two static libraries into one fat binary and store it in the .framework\nlipo -create \"${BUILT_PRODUCTS_DIR}/${SF_EXECUTABLE_PATH}\" \"${SF_OTHER_BUILT_PRODUCTS_DIR}/${SF_EXECUTABLE_PATH}\" -output \"${BUILT_PRODUCTS_DIR}/${SF_WRAPPER_NAME}/Versions/A/${SF_TARGET_NAME}\"\n\n# Copy the binary to the other architecture folder to have a complete framework in both.\ncp -a \"${BUILT_PRODUCTS_DIR}/${SF_WRAPPER_NAME}/Versions/A/${SF_TARGET_NAME}\" \"${SF_OTHER_BUILT_PRODUCTS_DIR}/${SF_WRAPPER_NAME}/Versions/A/${SF_TARGET_NAME}\"\n\necho done\n";
+			shellScript = "set -e\nset +u\necho nacho\n# Avoid recursively calling this script.\nif [[ $SF_MASTER_SCRIPT_RUNNING ]]\nthen\nexit 0\nfi\nset -u\nexport SF_MASTER_SCRIPT_RUNNING=1\n\n# Replicate what Xcode defines\nSF_EXECUTABLE_NAME=\"WatsonSDK\"\nSF_WRAPPER_NAME=\"WatsonSDK.framework\"\nSF_EXECUTABLE_PATH=\"${SF_WRAPPER_NAME}/${SF_EXECUTABLE_NAME}\"\n\n\n# The following conditionals come from\n# https://github.com/kstenerud/iOS-Universal-Framework\n\nif [[ \"$SDK_NAME\" =~ ([A-Za-z]+) ]]\nthen\nSF_SDK_PLATFORM=${BASH_REMATCH[1]}\nelse\necho \"Could not find platform name from SDK_NAME: $SDK_NAME\"\nexit 1\nfi\n\nif [[ \"$SDK_NAME\" =~ ([0-9]+.*$) ]]\nthen\nSF_SDK_VERSION=${BASH_REMATCH[1]}\nelse\necho \"Could not find sdk version from SDK_NAME: $SDK_NAME\"\nexit 1\nfi\n\nif [[ \"$SF_SDK_PLATFORM\" = \"iphoneos\" ]]\nthen\nSF_OTHER_PLATFORM=iphonesimulator\nelse\nSF_OTHER_PLATFORM=iphoneos\nfi\n\nif [[ \"$BUILT_PRODUCTS_DIR\" =~ (.*)$SF_SDK_PLATFORM$ ]]\nthen\nSF_OTHER_BUILT_PRODUCTS_DIR=\"${BASH_REMATCH[1]}${SF_OTHER_PLATFORM}\"\nelse\necho \"Could not find platform name from build products directory: $BUILT_PRODUCTS_DIR\"\nexit 1\nfi\n\n# Build the other platform.\nxcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk ${SF_OTHER_PLATFORM}${SF_SDK_VERSION} BUILD_DIR=\"${BUILD_DIR}\" OBJROOT=\"${OBJROOT}\" BUILD_ROOT=\"${BUILD_ROOT}\" SYMROOT=\"${SYMROOT}\" $ACTION\n\n# Create directory for universal builds\nUNIVERSAL_BUILD_PRODUCTS_DIR=$(dirname \"${BUILT_PRODUCTS_DIR}\")\"/${CONFIGURATION}-universal/\"\nmkdir -p \"${UNIVERSAL_BUILD_PRODUCTS_DIR}\"\n\n# Copy iphoneos platform into the universal directory (must be iphoneos so Info.plist is correct)\nIPHONEOS_BUILD_PRODUCTS_DIR=$(dirname \"${BUILT_PRODUCTS_DIR}\")\"/${CONFIGURATION}-iphoneos/\"\ncp -R \"${IPHONEOS_BUILD_PRODUCTS_DIR}/${SF_WRAPPER_NAME}\" \"${UNIVERSAL_BUILD_PRODUCTS_DIR}/${SF_WRAPPER_NAME}\"\n\n# Make the framework universal\nlipo -create \"${BUILT_PRODUCTS_DIR}/${SF_EXECUTABLE_PATH}\" \"${SF_OTHER_BUILT_PRODUCTS_DIR}/${SF_EXECUTABLE_PATH}\" -output \"${UNIVERSAL_BUILD_PRODUCTS_DIR}/${SF_EXECUTABLE_PATH}\"\n\necho done\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		4FC4330F1D0EE7AA00ECEFD3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4FC4331C1D0EE82F00ECEFD3 /* AuthConfiguration.m in Sources */,
+				4FC4331D1D0EE83F00ECEFD3 /* SRDelegateController.m in Sources */,
+				4FC4331E1D0EE84800ECEFD3 /* SpeechUtility.m in Sources */,
+				4FC4331F1D0EE85100ECEFD3 /* opus_header.c in Sources */,
+				4FC433201D0EE85D00ECEFD3 /* SRWebSocket.m in Sources */,
+				4FC4332D1D0EE9B000ECEFD3 /* STTConfiguration.m in Sources */,
+				4FC4332C1D0EE96E00ECEFD3 /* SpeechToText.m in Sources */,
+				4FC4332B1D0EE96200ECEFD3 /* SRIOConsumerPool.m in Sources */,
+				4FC4332A1D0EE95A00ECEFD3 /* SRError.m in Sources */,
+				4FC433291D0EE95100ECEFD3 /* TTSConfiguration.m in Sources */,
+				4FC433281D0EE8C000ECEFD3 /* SRIOConsumer.m in Sources */,
+				4FC433271D0EE8B400ECEFD3 /* TTSCustomWord.m in Sources */,
+				4FC4332E1D0EE9C500ECEFD3 /* SRRunLoopThread.m in Sources */,
+				4FC4332F1D0EE9E800ECEFD3 /* TTSCustomVoice.m in Sources */,
+				4FC433261D0EE8A400ECEFD3 /* OggHelper.m in Sources */,
+				4FC433251D0EE89900ECEFD3 /* TextToSpeech.m in Sources */,
+				4FC433241D0EE88E00ECEFD3 /* OpusHelper.m in Sources */,
+				4FC433231D0EE88400ECEFD3 /* SRHash.m in Sources */,
+				4FC433221D0EE87B00ECEFD3 /* WebSocketAudioStreamer.m in Sources */,
+				4FC433211D0EE87000ECEFD3 /* SRURLUtilities.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9BF43ECB1CEAC81900EC0185 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -828,10 +997,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		C11A648E1754D6B300385896 /* PBXTargetDependency */ = {
+		4FC433521D0F9AB200ECEFD3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = C11A645A1754D0E600385896 /* watsonsdk */;
-			targetProxy = C11A648D1754D6B300385896 /* PBXContainerItemProxy */;
+			target = 4FC433131D0EE7AA00ECEFD3 /* WatsonSDK */;
+			targetProxy = 4FC433511D0F9AB200ECEFD3 /* PBXContainerItemProxy */;
 		};
 		C11A64A21754DA2D00385896 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -897,6 +1066,91 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		4FC433191D0EE7AA00ECEFD3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = watsonspeech/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/watsonsdk/lib",
+				);
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.jp.watsonspeech;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		4FC4331A1D0EE7AA00ECEFD3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = watsonspeech/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/watsonsdk/lib",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.jp.watsonspeech;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		9BF43EDF1CEAC81900EC0185 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -985,7 +1239,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				"PUBLIC_HEADERS_FOLDER_PATH[sdk=*]" = "$(PROJECT_NAME)Headers";
 				SDKROOT = iphoneos;
@@ -1206,6 +1460,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		4FC4331B1D0EE7AA00ECEFD3 /* Build configuration list for PBXNativeTarget "WatsonSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4FC433191D0EE7AA00ECEFD3 /* Debug */,
+				4FC4331A1D0EE7AA00ECEFD3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		9BF43EDE1CEAC81900EC0185 /* Build configuration list for PBXNativeTarget "Swift Sample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
