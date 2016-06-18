@@ -16,7 +16,6 @@
 
 #import <Foundation/Foundation.h>
 #import "STTConfiguration.h"
-#import "SocketRocket.h"
 #import "SpeechUtility.h"
 
 @interface WebSocketAudioStreamer : NSObject

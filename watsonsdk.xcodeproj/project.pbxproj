@@ -53,7 +53,7 @@
 		4FC433381D0EEAB100ECEFD3 /* TextToSpeech.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3669571CF3549400806BEE /* TextToSpeech.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4FC433391D0EEAC700ECEFD3 /* SpeechUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B47E7561CF21645003E0860 /* SpeechUtility.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4FC4333A1D0EEADD00ECEFD3 /* OpusHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = C1235353199B53FF009A8F8B /* OpusHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4FC4333B1D0EEAE300ECEFD3 /* SocketRocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD8311CE6BF1200BE3B5F /* SocketRocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4FC4333B1D0EEAE300ECEFD3 /* SocketRocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD8311CE6BF1200BE3B5F /* SocketRocket.h */; };
 		4FC4333C1D0EFA2500ECEFD3 /* TTSConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3669591CF3549400806BEE /* TTSConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4FC4333D1D0EFA5400ECEFD3 /* AuthConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EFE11E21B71D07D00EF10BF /* AuthConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4FC4333E1D0EFA8000ECEFD3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C11B3EA11AF41A200062BF7D /* AVFoundation.framework */; };
@@ -65,7 +65,7 @@
 		4FC433441D0EFAE000ECEFD3 /* SRIOConsumer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD8231CE6BF1200BE3B5F /* SRIOConsumer.h */; };
 		4FC433451D0EFB1800ECEFD3 /* opus_header.h in Headers */ = {isa = PBXBuildFile; fileRef = C11772131B029BEE00C8791A /* opus_header.h */; };
 		4FC433461D0EFB2100ECEFD3 /* SRError.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD82B1CE6BF1200BE3B5F /* SRError.h */; };
-		4FC433471D0EFB2900ECEFD3 /* os_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA4758D1B9D354E00D66F1E /* os_types.h */; };
+		4FC433471D0EFB2900ECEFD3 /* os_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA4758D1B9D354E00D66F1E /* os_types.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4FC433481D0EFB4000ECEFD3 /* SRIOConsumerPool.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD8251CE6BF1200BE3B5F /* SRIOConsumerPool.h */; };
 		4FC433491D0EFB4900ECEFD3 /* SRWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD8321CE6BF1200BE3B5F /* SRWebSocket.h */; };
 		4FC4334A1D0EFB5200ECEFD3 /* SRDelegateController.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD8201CE6BF1200BE3B5F /* SRDelegateController.h */; };
@@ -104,7 +104,7 @@
 		9BA4758A1B9D34AA00D66F1E /* OggHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA475881B9D34AA00D66F1E /* OggHelper.m */; };
 		9BA4758E1B9D354E00D66F1E /* config_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA4758B1B9D354E00D66F1E /* config_types.h */; };
 		9BA4758F1B9D354E00D66F1E /* ogg.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA4758C1B9D354E00D66F1E /* ogg.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9BA475901B9D354E00D66F1E /* os_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA4758D1B9D354E00D66F1E /* os_types.h */; };
+		9BA475901B9D354E00D66F1E /* os_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA4758D1B9D354E00D66F1E /* os_types.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9BCAD8341CE6BF1200BE3B5F /* SRDelegateController.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD8201CE6BF1200BE3B5F /* SRDelegateController.h */; };
 		9BCAD8351CE6BF1200BE3B5F /* SRDelegateController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD8211CE6BF1200BE3B5F /* SRDelegateController.m */; };
 		9BCAD8361CE6BF1200BE3B5F /* SRIOConsumer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD8231CE6BF1200BE3B5F /* SRIOConsumer.h */; };
@@ -119,7 +119,7 @@
 		9BCAD83F1CE6BF1200BE3B5F /* SRHash.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD82E1CE6BF1200BE3B5F /* SRHash.m */; };
 		9BCAD8401CE6BF1200BE3B5F /* SRURLUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD82F1CE6BF1200BE3B5F /* SRURLUtilities.h */; };
 		9BCAD8411CE6BF1200BE3B5F /* SRURLUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD8301CE6BF1200BE3B5F /* SRURLUtilities.m */; };
-		9BCAD8421CE6BF1200BE3B5F /* SocketRocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD8311CE6BF1200BE3B5F /* SocketRocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9BCAD8421CE6BF1200BE3B5F /* SocketRocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD8311CE6BF1200BE3B5F /* SocketRocket.h */; };
 		9BCAD8431CE6BF1200BE3B5F /* SRWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD8321CE6BF1200BE3B5F /* SRWebSocket.h */; };
 		9BCAD8441CE6BF1200BE3B5F /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD8331CE6BF1200BE3B5F /* SRWebSocket.m */; };
 		9BF00C9A1CF5A2BD00624702 /* TTSCustomizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF00C961CF5A10100624702 /* TTSCustomizationViewController.m */; };
@@ -1467,6 +1467,7 @@
 				4FC4331A1D0EE7AA00ECEFD3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9BF43EDE1CEAC81900EC0185 /* Build configuration list for PBXNativeTarget "Swift Sample" */ = {
 			isa = XCConfigurationList;
