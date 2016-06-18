@@ -48,8 +48,9 @@ Installation
 
 **Using the framework**
 
-1. Download the [watsonsdk.framework.zip](https://github.com/watson-developer-cloud/speech-ios-sdk/raw/master/watsonsdk.framework.zip) and unzip it somewhere convenient
-2. Once unzipped drag the watsonsdk.framework folder into your xcode project view under the Frameworks folder.
+1. Download the [WatsonSDK.framework.zip](https://github.com/watson-developer-cloud/speech-ios-sdk/raw/master/WatsonSDK.framework.zip) and unzip it somewhere convenient
+2. Download [libogg.a](https://github.com/watson-developer-cloud/speech-ios-sdk/raw/master/watsonsdk/lib/libogg.a) and [libopus.a](https://github.com/watson-developer-cloud/speech-ios-sdk/raw/master/watsonsdk/lib/libopus.a)
+3. Drag libogg.a, libopus.a and the unziped WatsonSDK.framework folder into your xcode project view under the Frameworks folder.
 
 Some additional iOS standard frameworks must be added.
 
@@ -72,10 +73,7 @@ Include headers
 **in Objective-C**
 
 ```objective-c
-	#import <watsonsdk/SpeechToText.h>
-	#import <watsonsdk/STTConfiguration.h>
-	#import <watsonsdk/TextToSpeech.h>
-	#import <watsonsdk/TTSConfiguration.h>
+	#import <WatsonSDK/WatsonSDK.h>
 ```
 
 **in Swift**
