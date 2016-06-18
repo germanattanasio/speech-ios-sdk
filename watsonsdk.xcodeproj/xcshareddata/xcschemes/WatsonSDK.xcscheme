@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4FC433131D0EE7AA00ECEFD3"
-               BuildableName = "watsonsdk.framework"
+               BuildableName = "WatsonSDK.framework"
                BlueprintName = "WatsonSDK"
                ReferencedContainer = "container:watsonsdk.xcodeproj">
             </BuildableReference>
@@ -46,7 +46,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4FC433131D0EE7AA00ECEFD3"
-            BuildableName = "watsonsdk.framework"
+            BuildableName = "WatsonSDK.framework"
             BlueprintName = "WatsonSDK"
             ReferencedContainer = "container:watsonsdk.xcodeproj">
          </BuildableReference>
@@ -64,7 +64,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4FC433131D0EE7AA00ECEFD3"
-            BuildableName = "watsonsdk.framework"
+            BuildableName = "WatsonSDK.framework"
             BlueprintName = "WatsonSDK"
             ReferencedContainer = "container:watsonsdk.xcodeproj">
          </BuildableReference>

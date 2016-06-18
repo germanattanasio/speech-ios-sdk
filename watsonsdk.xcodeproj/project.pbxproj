@@ -53,7 +53,7 @@
 		4FC433381D0EEAB100ECEFD3 /* TextToSpeech.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3669571CF3549400806BEE /* TextToSpeech.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4FC433391D0EEAC700ECEFD3 /* SpeechUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B47E7561CF21645003E0860 /* SpeechUtility.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4FC4333A1D0EEADD00ECEFD3 /* OpusHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = C1235353199B53FF009A8F8B /* OpusHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4FC4333B1D0EEAE300ECEFD3 /* SocketRocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD8311CE6BF1200BE3B5F /* SocketRocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4FC4333B1D0EEAE300ECEFD3 /* SocketRocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD8311CE6BF1200BE3B5F /* SocketRocket.h */; };
 		4FC4333C1D0EFA2500ECEFD3 /* TTSConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3669591CF3549400806BEE /* TTSConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4FC4333D1D0EFA5400ECEFD3 /* AuthConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EFE11E21B71D07D00EF10BF /* AuthConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4FC4333E1D0EFA8000ECEFD3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C11B3EA11AF41A200062BF7D /* AVFoundation.framework */; };
@@ -65,7 +65,7 @@
 		4FC433441D0EFAE000ECEFD3 /* SRIOConsumer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD8231CE6BF1200BE3B5F /* SRIOConsumer.h */; };
 		4FC433451D0EFB1800ECEFD3 /* opus_header.h in Headers */ = {isa = PBXBuildFile; fileRef = C11772131B029BEE00C8791A /* opus_header.h */; };
 		4FC433461D0EFB2100ECEFD3 /* SRError.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD82B1CE6BF1200BE3B5F /* SRError.h */; };
-		4FC433471D0EFB2900ECEFD3 /* os_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA4758D1B9D354E00D66F1E /* os_types.h */; };
+		4FC433471D0EFB2900ECEFD3 /* os_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA4758D1B9D354E00D66F1E /* os_types.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4FC433481D0EFB4000ECEFD3 /* SRIOConsumerPool.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD8251CE6BF1200BE3B5F /* SRIOConsumerPool.h */; };
 		4FC433491D0EFB4900ECEFD3 /* SRWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD8321CE6BF1200BE3B5F /* SRWebSocket.h */; };
 		4FC4334A1D0EFB5200ECEFD3 /* SRDelegateController.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD8201CE6BF1200BE3B5F /* SRDelegateController.h */; };
@@ -73,7 +73,7 @@
 		4FC4334C1D0EFB6300ECEFD3 /* config_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA4758B1B9D354E00D66F1E /* config_types.h */; };
 		4FC4334D1D0EFBE000ECEFD3 /* SRURLUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD82F1CE6BF1200BE3B5F /* SRURLUtilities.h */; };
 		4FC4334E1D0EFBEA00ECEFD3 /* SRHash.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD82D1CE6BF1200BE3B5F /* SRHash.h */; };
-		4FC4334F1D0EFC2A00ECEFD3 /* watsonsdk.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FC433161D0EE7AA00ECEFD3 /* watsonsdk.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4FC4334F1D0EFC2A00ECEFD3 /* WatsonSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FC433161D0EE7AA00ECEFD3 /* WatsonSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4FC433501D0EFC4400ECEFD3 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BA060401CE6D9320018CA5B /* libicucore.tbd */; };
 		7EFE11E41B71D07D00EF10BF /* AuthConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EFE11E21B71D07D00EF10BF /* AuthConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7EFE11E51B71D07D00EF10BF /* AuthConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFE11E31B71D07D00EF10BF /* AuthConfiguration.m */; };
@@ -104,7 +104,7 @@
 		9BA4758A1B9D34AA00D66F1E /* OggHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA475881B9D34AA00D66F1E /* OggHelper.m */; };
 		9BA4758E1B9D354E00D66F1E /* config_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA4758B1B9D354E00D66F1E /* config_types.h */; };
 		9BA4758F1B9D354E00D66F1E /* ogg.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA4758C1B9D354E00D66F1E /* ogg.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9BA475901B9D354E00D66F1E /* os_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA4758D1B9D354E00D66F1E /* os_types.h */; };
+		9BA475901B9D354E00D66F1E /* os_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA4758D1B9D354E00D66F1E /* os_types.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9BCAD8341CE6BF1200BE3B5F /* SRDelegateController.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD8201CE6BF1200BE3B5F /* SRDelegateController.h */; };
 		9BCAD8351CE6BF1200BE3B5F /* SRDelegateController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD8211CE6BF1200BE3B5F /* SRDelegateController.m */; };
 		9BCAD8361CE6BF1200BE3B5F /* SRIOConsumer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD8231CE6BF1200BE3B5F /* SRIOConsumer.h */; };
@@ -119,7 +119,7 @@
 		9BCAD83F1CE6BF1200BE3B5F /* SRHash.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD82E1CE6BF1200BE3B5F /* SRHash.m */; };
 		9BCAD8401CE6BF1200BE3B5F /* SRURLUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD82F1CE6BF1200BE3B5F /* SRURLUtilities.h */; };
 		9BCAD8411CE6BF1200BE3B5F /* SRURLUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD8301CE6BF1200BE3B5F /* SRURLUtilities.m */; };
-		9BCAD8421CE6BF1200BE3B5F /* SocketRocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD8311CE6BF1200BE3B5F /* SocketRocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9BCAD8421CE6BF1200BE3B5F /* SocketRocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD8311CE6BF1200BE3B5F /* SocketRocket.h */; };
 		9BCAD8431CE6BF1200BE3B5F /* SRWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD8321CE6BF1200BE3B5F /* SRWebSocket.h */; };
 		9BCAD8441CE6BF1200BE3B5F /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD8331CE6BF1200BE3B5F /* SRWebSocket.m */; };
 		9BF00C9A1CF5A2BD00624702 /* TTSCustomizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF00C961CF5A10100624702 /* TTSCustomizationViewController.m */; };
@@ -197,7 +197,7 @@
 
 /* Begin PBXFileReference section */
 		4FC433141D0EE7AA00ECEFD3 /* WatsonSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WatsonSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4FC433161D0EE7AA00ECEFD3 /* watsonsdk.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = watsonsdk.h; sourceTree = "<group>"; };
+		4FC433161D0EE7AA00ECEFD3 /* WatsonSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WatsonSDK.h; sourceTree = "<group>"; };
 		4FC433181D0EE7AA00ECEFD3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7EFE11E21B71D07D00EF10BF /* AuthConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthConfiguration.h; sourceTree = "<group>"; };
 		7EFE11E31B71D07D00EF10BF /* AuthConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthConfiguration.m; sourceTree = "<group>"; };
@@ -363,7 +363,7 @@
 		4FC433151D0EE7AA00ECEFD3 /* WatsonSDK */ = {
 			isa = PBXGroup;
 			children = (
-				4FC433161D0EE7AA00ECEFD3 /* watsonsdk.h */,
+				4FC433161D0EE7AA00ECEFD3 /* WatsonSDK.h */,
 				4FC433181D0EE7AA00ECEFD3 /* Info.plist */,
 			);
 			name = WatsonSDK;
@@ -656,7 +656,7 @@
 				4FC433331D0EEA4500ECEFD3 /* WebSocketAudioStreamer.h in Headers */,
 				4FC433321D0EEA3B00ECEFD3 /* ogg.h in Headers */,
 				4FC433311D0EEA3000ECEFD3 /* OggHelper.h in Headers */,
-				4FC4334F1D0EFC2A00ECEFD3 /* watsonsdk.h in Headers */,
+				4FC4334F1D0EFC2A00ECEFD3 /* WatsonSDK.h in Headers */,
 				4FC4334E1D0EFBEA00ECEFD3 /* SRHash.h in Headers */,
 				4FC4334D1D0EFBE000ECEFD3 /* SRURLUtilities.h in Headers */,
 				4FC4334C1D0EFB6300ECEFD3 /* config_types.h in Headers */,
@@ -891,7 +891,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -e\n\nmkdir -p \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers\"\n\n# Link the \"Current\" version to \"A\"\n/bin/ln -sfh A \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/Current\"\n/bin/ln -sfh Versions/Current/Headers \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Headers\"\n/bin/ln -sfh \"Versions/Current/${PRODUCT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/${PRODUCT_NAME}\"\n\n# The -a ensures that the headers maintain the source modification date so that we don't constantly\n# cause propagating rebuilds of files that import these headers.\n/bin/cp -a \"${TARGET_BUILD_DIR}/${PUBLIC_HEADERS_FOLDER_PATH}/\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers\"\necho \"${TARGET_BUILD_DIR}/${PUBLIC_HEADERS_FOLDER_PATH}/\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/\" > ~/watsonsdklocation.txt\n\n# create a zip of the framework and add it to the project root\ncd ${BUILT_PRODUCTS_DIR}\nzip -r ${SRCROOT}/${PRODUCT_NAME}.framework.zip ${PRODUCT_NAME}.framework\n\n# [Rob] we need to copy the other headers keeping their folder structure\n#echo 'SRCROOT:'${SRCROOT}\n#cd ${SRCROOT}/watsonsdk\n\n# I have to move up a directory due to my layout.\n# echo 'Copying Headers into Framework..'\n#for H in `find ./ -name \"*.h\"`;  do\n#echo ${H}\n#ditto ${H} ${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers/${H}\n#done\n";
+			shellScript = "# Please build \"Framework\" target to update WatsonSDK.framework.zip file\n# Below code is disabled since we have:\n# - \"WatsonSDK\" target which creates a dynamic framework\n# - \"Framework\" target which uses \"WatsonSDK\" target to create an universal version.\nexit 0\nset -e\n\nmkdir -p \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers\"\n\n# Link the \"Current\" version to \"A\"\n/bin/ln -sfh A \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/Current\"\n/bin/ln -sfh Versions/Current/Headers \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Headers\"\n/bin/ln -sfh \"Versions/Current/${PRODUCT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/${PRODUCT_NAME}\"\n\n# The -a ensures that the headers maintain the source modification date so that we don't constantly\n# cause propagating rebuilds of files that import these headers.\n/bin/cp -a \"${TARGET_BUILD_DIR}/${PUBLIC_HEADERS_FOLDER_PATH}/\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers\"\necho \"${TARGET_BUILD_DIR}/${PUBLIC_HEADERS_FOLDER_PATH}/\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/\" > ~/watsonsdklocation.txt\n\n# create a zip of the framework and add it to the project root\ncd ${BUILT_PRODUCTS_DIR}\nzip -r ${SRCROOT}/${PRODUCT_NAME}.framework.zip ${PRODUCT_NAME}.framework\n\n# [Rob] we need to copy the other headers keeping their folder structure\n#echo 'SRCROOT:'${SRCROOT}\n#cd ${SRCROOT}/watsonsdk\n\n# I have to move up a directory due to my layout.\n# echo 'Copying Headers into Framework..'\n#for H in `find ./ -name \"*.h\"`;  do\n#echo ${H}\n#ditto ${H} ${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers/${H}\n#done\n";
 		};
 		C11A648F1754D6DA00385896 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -904,7 +904,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -e\nset +u\necho nacho\n# Avoid recursively calling this script.\nif [[ $SF_MASTER_SCRIPT_RUNNING ]]\nthen\nexit 0\nfi\nset -u\nexport SF_MASTER_SCRIPT_RUNNING=1\n\n# Replicate what Xcode defines\nSF_EXECUTABLE_NAME=\"WatsonSDK\"\nSF_WRAPPER_NAME=\"WatsonSDK.framework\"\nSF_EXECUTABLE_PATH=\"${SF_WRAPPER_NAME}/${SF_EXECUTABLE_NAME}\"\n\n\n# The following conditionals come from\n# https://github.com/kstenerud/iOS-Universal-Framework\n\nif [[ \"$SDK_NAME\" =~ ([A-Za-z]+) ]]\nthen\nSF_SDK_PLATFORM=${BASH_REMATCH[1]}\nelse\necho \"Could not find platform name from SDK_NAME: $SDK_NAME\"\nexit 1\nfi\n\nif [[ \"$SDK_NAME\" =~ ([0-9]+.*$) ]]\nthen\nSF_SDK_VERSION=${BASH_REMATCH[1]}\nelse\necho \"Could not find sdk version from SDK_NAME: $SDK_NAME\"\nexit 1\nfi\n\nif [[ \"$SF_SDK_PLATFORM\" = \"iphoneos\" ]]\nthen\nSF_OTHER_PLATFORM=iphonesimulator\nelse\nSF_OTHER_PLATFORM=iphoneos\nfi\n\nif [[ \"$BUILT_PRODUCTS_DIR\" =~ (.*)$SF_SDK_PLATFORM$ ]]\nthen\nSF_OTHER_BUILT_PRODUCTS_DIR=\"${BASH_REMATCH[1]}${SF_OTHER_PLATFORM}\"\nelse\necho \"Could not find platform name from build products directory: $BUILT_PRODUCTS_DIR\"\nexit 1\nfi\n\n# Build the other platform.\nxcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk ${SF_OTHER_PLATFORM}${SF_SDK_VERSION} BUILD_DIR=\"${BUILD_DIR}\" OBJROOT=\"${OBJROOT}\" BUILD_ROOT=\"${BUILD_ROOT}\" SYMROOT=\"${SYMROOT}\" $ACTION\n\n# Create directory for universal builds\nUNIVERSAL_BUILD_PRODUCTS_DIR=$(dirname \"${BUILT_PRODUCTS_DIR}\")\"/${CONFIGURATION}-universal/\"\nmkdir -p \"${UNIVERSAL_BUILD_PRODUCTS_DIR}\"\n\n# Copy iphoneos platform into the universal directory (must be iphoneos so Info.plist is correct)\nIPHONEOS_BUILD_PRODUCTS_DIR=$(dirname \"${BUILT_PRODUCTS_DIR}\")\"/${CONFIGURATION}-iphoneos/\"\ncp -R \"${IPHONEOS_BUILD_PRODUCTS_DIR}/${SF_WRAPPER_NAME}\" \"${UNIVERSAL_BUILD_PRODUCTS_DIR}/${SF_WRAPPER_NAME}\"\n\n# Make the framework universal\nlipo -create \"${BUILT_PRODUCTS_DIR}/${SF_EXECUTABLE_PATH}\" \"${SF_OTHER_BUILT_PRODUCTS_DIR}/${SF_EXECUTABLE_PATH}\" -output \"${UNIVERSAL_BUILD_PRODUCTS_DIR}/${SF_EXECUTABLE_PATH}\"\n\necho done\n";
+			shellScript = "set -e\nset +u\necho nacho\n# Avoid recursively calling this script.\nif [[ $SF_MASTER_SCRIPT_RUNNING ]]\nthen\nexit 0\nfi\nset -u\nexport SF_MASTER_SCRIPT_RUNNING=1\n\n# Replicate what Xcode defines\nSF_EXECUTABLE_NAME=\"WatsonSDK\"\nSF_WRAPPER_NAME=\"WatsonSDK.framework\"\nSF_EXECUTABLE_PATH=\"${SF_WRAPPER_NAME}/${SF_EXECUTABLE_NAME}\"\n\n\n# The following conditionals come from\n# https://github.com/kstenerud/iOS-Universal-Framework\n\nif [[ \"$SDK_NAME\" =~ ([A-Za-z]+) ]]\nthen\nSF_SDK_PLATFORM=${BASH_REMATCH[1]}\nelse\necho \"Could not find platform name from SDK_NAME: $SDK_NAME\"\nexit 1\nfi\n\nif [[ \"$SDK_NAME\" =~ ([0-9]+.*$) ]]\nthen\nSF_SDK_VERSION=${BASH_REMATCH[1]}\nelse\necho \"Could not find sdk version from SDK_NAME: $SDK_NAME\"\nexit 1\nfi\n\nif [[ \"$SF_SDK_PLATFORM\" = \"iphoneos\" ]]\nthen\nSF_OTHER_PLATFORM=iphonesimulator\nelse\nSF_OTHER_PLATFORM=iphoneos\nfi\n\nif [[ \"$BUILT_PRODUCTS_DIR\" =~ (.*)$SF_SDK_PLATFORM$ ]]\nthen\nSF_OTHER_BUILT_PRODUCTS_DIR=\"${BASH_REMATCH[1]}${SF_OTHER_PLATFORM}\"\nelse\necho \"Could not find platform name from build products directory: $BUILT_PRODUCTS_DIR\"\nexit 1\nfi\n\n# Build the other platform.\nxcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk ${SF_OTHER_PLATFORM}${SF_SDK_VERSION} BUILD_DIR=\"${BUILD_DIR}\" OBJROOT=\"${OBJROOT}\" BUILD_ROOT=\"${BUILD_ROOT}\" SYMROOT=\"${SYMROOT}\" $ACTION\n\n# Create directory for universal builds\nUNIVERSAL_BUILD_PRODUCTS_DIR=$(dirname \"${BUILT_PRODUCTS_DIR}\")\"/${CONFIGURATION}-universal/\"\nmkdir -p \"${UNIVERSAL_BUILD_PRODUCTS_DIR}\"\n\n# Copy iphoneos platform into the universal directory (must be iphoneos so Info.plist is correct)\nIPHONEOS_BUILD_PRODUCTS_DIR=$(dirname \"${BUILT_PRODUCTS_DIR}\")\"/${CONFIGURATION}-iphoneos/\"\nrm -rf \"${UNIVERSAL_BUILD_PRODUCTS_DIR}/${SF_WRAPPER_NAME}\"\ncp -R \"${IPHONEOS_BUILD_PRODUCTS_DIR}/${SF_WRAPPER_NAME}\" \"${UNIVERSAL_BUILD_PRODUCTS_DIR}/${SF_WRAPPER_NAME}\"\n\n# Make the framework universal\nlipo -create \"${BUILT_PRODUCTS_DIR}/${SF_EXECUTABLE_PATH}\" \"${SF_OTHER_BUILT_PRODUCTS_DIR}/${SF_EXECUTABLE_PATH}\" -output \"${UNIVERSAL_BUILD_PRODUCTS_DIR}/${SF_EXECUTABLE_PATH}\"\n\n# create a zip of the framework and add it to the project root\ncd \"${UNIVERSAL_BUILD_PRODUCTS_DIR}\"\nzip -r \"${SRCROOT}/${SF_WRAPPER_NAME}.zip\" \"${SF_WRAPPER_NAME}\"\n\nopen \"${SRCROOT}\"\n#open \"${UNIVERSAL_BUILD_PRODUCTS_DIR}\"\n\necho done\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1467,6 +1467,7 @@
 				4FC4331A1D0EE7AA00ECEFD3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9BF43EDE1CEAC81900EC0185 /* Build configuration list for PBXNativeTarget "Swift Sample" */ = {
 			isa = XCConfigurationList;
