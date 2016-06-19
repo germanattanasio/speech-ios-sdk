@@ -15,6 +15,7 @@
  **/
 
 #import "WebSocketAudioStreamer.h"
+#import "SocketRocket.h"
 
 
 typedef void (^RecognizeCallbackBlockType)(NSDictionary*, NSError*);
