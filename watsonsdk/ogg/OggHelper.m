@@ -15,6 +15,16 @@
  **/
 
 #import "OggHelper.h"
+#import "ogg.h"
+
+@interface OggHelper () {
+    ogg_page oggPage;
+    ogg_int64_t packetCount;
+    ogg_int16_t granulePos;
+    ogg_stream_state streamState;
+}
+
+@end
 
 @implementation OggHelper
 

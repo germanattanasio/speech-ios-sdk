@@ -15,15 +15,9 @@
  **/
 
 #import <Foundation/Foundation.h>
-#import "ogg.h"
 
-@interface OggHelper : NSObject{
-    ogg_page oggPage;
-    ogg_int64_t packetCount;
-    ogg_int16_t granulePos;
-    ogg_stream_state streamState;
-}
 
+@interface OggHelper : NSObject
 - (OggHelper *) init;
 - (NSData *) getOggOpusHeader: (int) sampleRate;
 - (NSMutableData *) writePacket: (NSData*) data frameSize:(int) frameSize;

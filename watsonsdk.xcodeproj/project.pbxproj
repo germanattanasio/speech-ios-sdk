@@ -44,7 +44,7 @@
 		4FC4332E1D0EE9C500ECEFD3 /* SRRunLoopThread.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD8291CE6BF1200BE3B5F /* SRRunLoopThread.m */; };
 		4FC4332F1D0EE9E800ECEFD3 /* TTSCustomVoice.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3669541CF3546C00806BEE /* TTSCustomVoice.m */; };
 		4FC433311D0EEA3000ECEFD3 /* OggHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA475871B9D34AA00D66F1E /* OggHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4FC433321D0EEA3B00ECEFD3 /* ogg.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA4758C1B9D354E00D66F1E /* ogg.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4FC433321D0EEA3B00ECEFD3 /* ogg.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA4758C1B9D354E00D66F1E /* ogg.h */; };
 		4FC433331D0EEA4500ECEFD3 /* WebSocketAudioStreamer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B36693D1CF21A5400806BEE /* WebSocketAudioStreamer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4FC433341D0EEA5200ECEFD3 /* TTSCustomVoice.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3669531CF3546C00806BEE /* TTSCustomVoice.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4FC433351D0EEA5200ECEFD3 /* TTSCustomWord.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B1BCEE11CF69D440076FE2D /* TTSCustomWord.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -53,7 +53,7 @@
 		4FC433381D0EEAB100ECEFD3 /* TextToSpeech.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3669571CF3549400806BEE /* TextToSpeech.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4FC433391D0EEAC700ECEFD3 /* SpeechUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B47E7561CF21645003E0860 /* SpeechUtility.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4FC4333A1D0EEADD00ECEFD3 /* OpusHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = C1235353199B53FF009A8F8B /* OpusHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4FC4333B1D0EEAE300ECEFD3 /* SocketRocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD8311CE6BF1200BE3B5F /* SocketRocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4FC4333B1D0EEAE300ECEFD3 /* SocketRocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD8311CE6BF1200BE3B5F /* SocketRocket.h */; };
 		4FC4333C1D0EFA2500ECEFD3 /* TTSConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3669591CF3549400806BEE /* TTSConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4FC4333D1D0EFA5400ECEFD3 /* AuthConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EFE11E21B71D07D00EF10BF /* AuthConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4FC4333E1D0EFA8000ECEFD3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C11B3EA11AF41A200062BF7D /* AVFoundation.framework */; };
@@ -73,7 +73,7 @@
 		4FC4334C1D0EFB6300ECEFD3 /* config_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA4758B1B9D354E00D66F1E /* config_types.h */; };
 		4FC4334D1D0EFBE000ECEFD3 /* SRURLUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD82F1CE6BF1200BE3B5F /* SRURLUtilities.h */; };
 		4FC4334E1D0EFBEA00ECEFD3 /* SRHash.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD82D1CE6BF1200BE3B5F /* SRHash.h */; };
-		4FC4334F1D0EFC2A00ECEFD3 /* watsonsdk.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FC433161D0EE7AA00ECEFD3 /* watsonsdk.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4FC4334F1D0EFC2A00ECEFD3 /* WatsonSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FC433161D0EE7AA00ECEFD3 /* WatsonSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4FC433501D0EFC4400ECEFD3 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BA060401CE6D9320018CA5B /* libicucore.tbd */; };
 		7EFE11E41B71D07D00EF10BF /* AuthConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EFE11E21B71D07D00EF10BF /* AuthConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7EFE11E51B71D07D00EF10BF /* AuthConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFE11E31B71D07D00EF10BF /* AuthConfiguration.m */; };
@@ -103,7 +103,7 @@
 		9BA475891B9D34AA00D66F1E /* OggHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA475871B9D34AA00D66F1E /* OggHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9BA4758A1B9D34AA00D66F1E /* OggHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA475881B9D34AA00D66F1E /* OggHelper.m */; };
 		9BA4758E1B9D354E00D66F1E /* config_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA4758B1B9D354E00D66F1E /* config_types.h */; };
-		9BA4758F1B9D354E00D66F1E /* ogg.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA4758C1B9D354E00D66F1E /* ogg.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9BA4758F1B9D354E00D66F1E /* ogg.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA4758C1B9D354E00D66F1E /* ogg.h */; };
 		9BA475901B9D354E00D66F1E /* os_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA4758D1B9D354E00D66F1E /* os_types.h */; };
 		9BCAD8341CE6BF1200BE3B5F /* SRDelegateController.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD8201CE6BF1200BE3B5F /* SRDelegateController.h */; };
 		9BCAD8351CE6BF1200BE3B5F /* SRDelegateController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD8211CE6BF1200BE3B5F /* SRDelegateController.m */; };
@@ -119,7 +119,7 @@
 		9BCAD83F1CE6BF1200BE3B5F /* SRHash.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD82E1CE6BF1200BE3B5F /* SRHash.m */; };
 		9BCAD8401CE6BF1200BE3B5F /* SRURLUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD82F1CE6BF1200BE3B5F /* SRURLUtilities.h */; };
 		9BCAD8411CE6BF1200BE3B5F /* SRURLUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD8301CE6BF1200BE3B5F /* SRURLUtilities.m */; };
-		9BCAD8421CE6BF1200BE3B5F /* SocketRocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD8311CE6BF1200BE3B5F /* SocketRocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9BCAD8421CE6BF1200BE3B5F /* SocketRocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD8311CE6BF1200BE3B5F /* SocketRocket.h */; };
 		9BCAD8431CE6BF1200BE3B5F /* SRWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD8321CE6BF1200BE3B5F /* SRWebSocket.h */; };
 		9BCAD8441CE6BF1200BE3B5F /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD8331CE6BF1200BE3B5F /* SRWebSocket.m */; };
 		9BF00C9A1CF5A2BD00624702 /* TTSCustomizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF00C961CF5A10100624702 /* TTSCustomizationViewController.m */; };
@@ -197,7 +197,7 @@
 
 /* Begin PBXFileReference section */
 		4FC433141D0EE7AA00ECEFD3 /* WatsonSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WatsonSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4FC433161D0EE7AA00ECEFD3 /* watsonsdk.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = watsonsdk.h; sourceTree = "<group>"; };
+		4FC433161D0EE7AA00ECEFD3 /* WatsonSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WatsonSDK.h; sourceTree = "<group>"; };
 		4FC433181D0EE7AA00ECEFD3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7EFE11E21B71D07D00EF10BF /* AuthConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthConfiguration.h; sourceTree = "<group>"; };
 		7EFE11E31B71D07D00EF10BF /* AuthConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthConfiguration.m; sourceTree = "<group>"; };
@@ -363,7 +363,7 @@
 		4FC433151D0EE7AA00ECEFD3 /* WatsonSDK */ = {
 			isa = PBXGroup;
 			children = (
-				4FC433161D0EE7AA00ECEFD3 /* watsonsdk.h */,
+				4FC433161D0EE7AA00ECEFD3 /* WatsonSDK.h */,
 				4FC433181D0EE7AA00ECEFD3 /* Info.plist */,
 			);
 			name = WatsonSDK;
@@ -656,7 +656,7 @@
 				4FC433331D0EEA4500ECEFD3 /* WebSocketAudioStreamer.h in Headers */,
 				4FC433321D0EEA3B00ECEFD3 /* ogg.h in Headers */,
 				4FC433311D0EEA3000ECEFD3 /* OggHelper.h in Headers */,
-				4FC4334F1D0EFC2A00ECEFD3 /* watsonsdk.h in Headers */,
+				4FC4334F1D0EFC2A00ECEFD3 /* WatsonSDK.h in Headers */,
 				4FC4334E1D0EFBEA00ECEFD3 /* SRHash.h in Headers */,
 				4FC4334D1D0EFBE000ECEFD3 /* SRURLUtilities.h in Headers */,
 				4FC4334C1D0EFB6300ECEFD3 /* config_types.h in Headers */,

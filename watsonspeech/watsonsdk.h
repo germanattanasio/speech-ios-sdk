@@ -16,14 +16,17 @@ FOUNDATION_EXPORT const unsigned char WatsonSDKVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <WatsonSDK/WatsonSDK.h>
 
-#import "AuthConfiguration.h"
-#import "TTSConfiguration.h"
-#import "OpusHelper.h"
-#import "SpeechUtility.h"
-#import "STTConfiguration.h"
-#import "TextToSpeech.h"
+//#import "OpusHelper.h"
+//#import "OggHelper.h"
+//#import "AuthConfiguration.h"
+//#import "SpeechUtility.h"
+
 #import "SpeechToText.h"
+#import "STTConfiguration.h"
+
+#import "TextToSpeech.h"
 #import "TTSCustomWord.h"
 #import "TTSCustomVoice.h"
+#import "TTSConfiguration.h"
+
 #import "WebSocketAudioStreamer.h"
-#import "ogg.h"
