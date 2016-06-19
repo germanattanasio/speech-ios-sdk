@@ -166,7 +166,7 @@
     ogg_packet     op;
     ogg_stream_state os;
     ogg_int64_t audio_size=0;
-    long opus_serialno;
+    long opus_serialno=0;
     ogg_int64_t page_granule=0;
     ogg_int64_t link_out=0;
     OpusMSDecoder *st=NULL;
