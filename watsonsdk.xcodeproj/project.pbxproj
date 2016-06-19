@@ -1069,6 +1069,7 @@
 		4FC433191D0EE7AA00ECEFD3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BITCODE_GENERATION_MODE = bitcode;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -1111,6 +1112,7 @@
 		4FC4331A1D0EE7AA00ECEFD3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BITCODE_GENERATION_MODE = bitcode;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -1280,6 +1282,7 @@
 		C11A64811754D0E700385896 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BITCODE_GENERATION_MODE = bitcode;
 				DEAD_CODE_STRIPPING = NO;
 				DSTROOT = /tmp/watsonsdk.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1305,6 +1308,7 @@
 		C11A64821754D0E700385896 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BITCODE_GENERATION_MODE = bitcode;
 				DEAD_CODE_STRIPPING = NO;
 				DSTROOT = /tmp/watsonsdk.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1330,6 +1334,7 @@
 		C11A648B1754D6AB00385896 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BITCODE_GENERATION_MODE = bitcode;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/lib";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1341,6 +1346,7 @@
 		C11A648C1754D6AB00385896 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BITCODE_GENERATION_MODE = bitcode;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/lib";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1467,6 +1473,7 @@
 				4FC4331A1D0EE7AA00ECEFD3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9BF43EDE1CEAC81900EC0185 /* Build configuration list for PBXNativeTarget "Swift Sample" */ = {
 			isa = XCConfigurationList;
