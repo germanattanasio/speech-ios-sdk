@@ -257,6 +257,8 @@
                                 </variation>
                                 <connections>
                                     <action selector="pressStartRecord:" destination="vXZ-lx-hvc" eventType="touchDown" id="KL3-Cx-L4c"/>
+                                    <action selector="releaseStartRecord:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Puh-pp-7Uh"/>
+                                    <action selector="releaseStartRecord:" destination="vXZ-lx-hvc" eventType="touchUpOutside" id="bBY-Fi-mkT"/>
                                 </connections>
                             </button>
                         </subviews>
