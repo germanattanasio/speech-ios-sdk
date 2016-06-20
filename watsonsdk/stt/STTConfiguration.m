@@ -19,6 +19,8 @@
 @implementation STTConfiguration
 
 @synthesize apiURL = _apiURL;
+@synthesize audioSampleRate = _audioSampleRate;
+@synthesize audioFrameSize = _audioFrameSize;
 
 - (id)init {
     self = [super init];
@@ -27,8 +29,11 @@
     [self setApiEndpoint:[NSURL URLWithString:WATSONSDK_DEFAULT_STT_API_ENDPOINT]];
     [self setModelName:WATSONSDK_DEFAULT_STT_MODEL];
     [self setAudioCodec:WATSONSDK_AUDIO_CODEC_TYPE_PCM];
-    [self setInterimResults: [NSNumber numberWithBool:YES]];
-    [self setContinuous:[NSNumber numberWithBool:NO]];
+    [self setAudioSampleRate:WATSONSDK_AUDIO_SAMPLE_RATE];
+    [self setAudioFrameSize:WATSONSDK_AUDIO_FRAME_SIZE];
+
+    [self setInterimResults: NO];
+    [self setContinuous: NO];
     [self setInactivityTimeout:[NSNumber numberWithInt:30]];
 
     return self;
@@ -93,23 +98,42 @@
  *
  *  @return JSON string
  */
-- (NSString *)getStartMessage{
+- (NSString *)getStartMessage {
     NSString *jsonString = @"";
 
     NSMutableDictionary *inputParameters = [[NSMutableDictionary alloc] init];
     [inputParameters setValue:@"start" forKey:@"action"];
     [inputParameters setValue:self.audioCodec forKey:@"content-type"];
-    [inputParameters setValue:self.interimResults forKey:@"interim_results"];
-    [inputParameters setValue:self.continuous forKey:@"continuous"];
+    [inputParameters setValue:[NSNumber numberWithBool:self.interimResults] forKey:@"interim_results"];
+    [inputParameters setValue:[NSNumber numberWithBool:self.continuous] forKey:@"continuous"];
     [inputParameters setValue:self.inactivityTimeout forKey:@"inactivity_timeout"];
 
-    NSError *error = nil;
     if([NSJSONSerialization isValidJSONObject:inputParameters]){
+        NSError *error = nil;
         NSData *data = [NSJSONSerialization dataWithJSONObject:inputParameters options:NSJSONWritingPrettyPrinted error:&error];
         if(error == nil)
             jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     }
     return jsonString;
+}
+
+- (NSData *)getStopMessage {
+    NSData *data = nil;
+    data = [NSMutableData dataWithLength:0];
+    // JSON format somehow does not work in this case
+//    NSMutableDictionary *inputParameters = [[NSMutableDictionary alloc] init];
+//    [inputParameters setValue:@"stop" forKey:@"action"];
+//
+//    if([NSJSONSerialization isValidJSONObject:inputParameters]){
+//        NSError *error = nil;
+//        data = [NSJSONSerialization dataWithJSONObject:inputParameters options:NSJSONWritingPrettyPrinted error:&error];
+//    }
+
+//    if(data == nil) {
+//        data = [NSMutableData dataWithLength:0];
+//    }
+
+    return data;
 }
 
 @end

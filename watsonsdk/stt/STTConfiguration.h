@@ -25,7 +25,7 @@
 #define WEBSOCKETS_SCHEME @"wss://"
 
 // codecs
-#define WATSONSDK_AUDIO_CODEC_TYPE_PCM @"audio/l16; rate=16000"
+#define WATSONSDK_AUDIO_CODEC_TYPE_PCM @"audio/l16;rate=16000"
 //#define WATSONSDK_AUDIO_CODEC_TYPE_WAV @"audio/wav"
 //#define WATSONSDK_AUDIO_CODEC_TYPE_FLAC @"audio/flac"
 #define WATSONSDK_AUDIO_CODEC_TYPE_OPUS @"audio/ogg;codecs=opus"
@@ -40,12 +40,15 @@
 @property NSString *apiURL;
 @property NSString *modelName;
 @property NSString *audioCodec;
-@property NSNumber *interimResults;
-@property NSNumber *continuous;
+@property BOOL interimResults;
+@property BOOL continuous;
 @property NSNumber *inactivityTimeout;
 
 @property NSURL *apiEndpoint;
 @property BOOL isCertificateValidationDisabled;
+
+@property float audioSampleRate;
+@property int audioFrameSize;
 
 
 - (id)init;
@@ -53,5 +56,6 @@
 - (NSURL*)getModelServiceURL:(NSString*) modelName;
 - (NSURL*)getWebSocketRecognizeURL;
 - (NSString *)getStartMessage;
+- (NSData *)getStopMessage;
 
 @end
