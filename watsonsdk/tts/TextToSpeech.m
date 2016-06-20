@@ -144,15 +144,15 @@ typedef void (^PlayAudioCallbackBlockType)(NSError*);
  *
  *  @param audioHandler Audio handler
  *  @param audio        Audio data
+ *  @param rate         Sample rate
  */
-- (void) playAudio:(void (^)(NSError*)) audioHandler withData:(NSData *) audio {
-    
+- (void) playAudio:(void (^)(NSError*)) audioHandler withData:(NSData *) audio sampleRate:(long) rate {
     self.playAudioCallback = audioHandler;
     
+    self.sampleRate = rate;
+
     if([self.config.audioCodec isEqualToString:WATSONSDK_TTS_AUDIO_CODEC_TYPE_WAV]){
         NSError * err;
-        
-        self.sampleRate = WATSONSDK_TTS_AUDIO_CODEC_TYPE_WAV_SAMPLE_RATE;
 
         audio = [self stripAndAddWavHeader:audio];
         self.audioPlayer = [[AVAudioPlayer alloc] initWithData:audio error:&err];
@@ -161,11 +161,9 @@ typedef void (^PlayAudioCallbackBlockType)(NSError*);
             self.playAudioCallback(err);
         else
             [self.audioPlayer play];
-          
+        
     } else if ([self.config.audioCodec isEqualToString:WATSONSDK_TTS_AUDIO_CODEC_TYPE_OPUS]) {
         NSError * err;
-
-        self.sampleRate = WATSONSDK_TTS_AUDIO_CODEC_TYPE_OPUS_SAMPLE_RATE;
 
         // convert audio to PCM and add wav header
         audio = [self.opus opusToPCM:audio sampleRate:self.sampleRate];
@@ -178,7 +176,22 @@ typedef void (^PlayAudioCallbackBlockType)(NSError*);
         else
             [self.audioPlayer play];
     }
-    
+}
+
+/**
+ *  Play audio data
+ *
+ *  @param audioHandler Audio handler
+ *  @param audio        Audio data
+ */
+- (void) playAudio:(void (^)(NSError*)) audioHandler withData:(NSData *) audio {
+    if([self.config.audioCodec isEqualToString:WATSONSDK_TTS_AUDIO_CODEC_TYPE_WAV]){
+        self.sampleRate = WATSONSDK_TTS_AUDIO_CODEC_TYPE_WAV_SAMPLE_RATE;
+    }
+    else if ([self.config.audioCodec isEqualToString:WATSONSDK_TTS_AUDIO_CODEC_TYPE_OPUS]) {
+        self.sampleRate = WATSONSDK_TTS_AUDIO_CODEC_TYPE_OPUS_SAMPLE_RATE;
+    }
+    [self playAudio:audioHandler withData:audio sampleRate: self.sampleRate];
 }
 
 - (void)stopAudio {

@@ -35,6 +35,7 @@
 - (void)listVoices:(void (^)(NSDictionary*, NSError*))handler;
 - (void)saveAudio:(NSData*) audio toFile:(NSString*) path;
 - (void)playAudio:(void (^)(NSError*)) audioHandler  withData:(NSData *) audio;
+- (void) playAudio:(void (^)(NSError*)) audioHandler withData:(NSData *) audio sampleRate:(long) rate;
 - (void)stopAudio;
 
 - (void)createVoiceModelWithCustomVoice: (TTSCustomVoice*) customVoice handler: (void (^)(NSDictionary*, NSError*)) customizationHandler;
