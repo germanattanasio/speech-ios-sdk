@@ -46,6 +46,8 @@
     [confSTT setBasicAuthPassword:credentials[@"STTPassword"]];
     [confSTT setAudioCodec:WATSONSDK_AUDIO_CODEC_TYPE_OPUS];
     [confSTT setModelName:WATSONSDK_DEFAULT_STT_MODEL];
+    [confSTT setInterimResults:YES];
+    [confSTT setContinuous:NO];
 
 //    [conf setTokenGenerator:^(void (^tokenHandler)(NSString *token)){
 //        NSURL *url = [[NSURL alloc] initWithString:@"https://<token-factory-url>"];
@@ -86,6 +88,11 @@
     [self.pickerView setOpaque:YES];
 }
 
+-(IBAction) releaseStartRecord:(id)sender {
+//    [stt endRecognize];
+//    [stt endTransmission];
+}
+
 -(IBAction) pressStartRecord:(id) sender {
     // start recognize
     [stt recognize:^(NSDictionary* res, NSError* err){
@@ -95,23 +102,19 @@
             [stt endConnection];
             return;
         }
-
         if(err == nil) {
+            NSString *transcription = [stt getTranscript:res];
             if([self.stt isFinalTranscript:res]) {
-                
-                NSLog(@"this is the final transcript");
-                [stt endRecognize];
-                
-                NSLog(@"confidence score is %@",[stt getConfidenceScore:res]);
+                NSLog(@"Final transcription (confidence score: %@): \n\r%@\n\r", [stt getConfidenceScore:res], transcription);
+                [stt endTransmission];
             }
-            result.text = [stt getTranscript:res];
+            result.text = transcription;
         }
         else {
-            NSLog(@"received error from the SDK %@",[err description]);
-            [stt endRecognize];
+            NSLog(@"Received error from the SDK %@",[err description]);
+            [stt stopRecordingAudio];
+            [stt endConnection];
         }
-    } dataHandler:^(NSData* data) {
-        NSLog(@"sent out %lu bytes", (unsigned long)[data length]);
     } powerHandler:^(float power) {
         CGRect frm = self.soundbar.frame;
         frm.size.width = 3*(70 + power);
