@@ -77,6 +77,7 @@
 }
 
 - (IBAction)pressSpeak:(id)sender {
+    // play audio and log when playgin has finished
     [self.tts synthesize:^(NSData *data, NSError *reqErr) {
         if(reqErr){
             NSLog(@"Error requesting data: %@", [reqErr description]);
@@ -90,7 +91,7 @@
                 NSLog(@"Audio finished playing");
 
         } withData:data];
-        
+
     } theText:self.ttsField.text];
     
     [self.tts queryPronunciation:^(NSDictionary* dict, NSError* error) {
