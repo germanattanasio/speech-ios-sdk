@@ -20,7 +20,6 @@
 #import "STTConfiguration.h"
 #import "WebSocketAudioStreamer.h"
 #import "OpusHelper.h"
-#import "OggHelper.h"
 
 @interface SpeechToText : NSObject <NSURLSessionDelegate>
 
@@ -37,14 +36,14 @@
  *  @param dataHandler      (^) (NSData*)
  *  @param powerHandler     (^)(float)
  */
-- (void) recognize:(void (^)(NSDictionary*, NSError*)) recognizeHandler dataHandler: (void (^) (NSData*)) dataHandler powerHandler: (void (^)(float)) powerHandler;
+//- (void) recognize:(void (^)(NSDictionary*, NSError*)) recognizeHandler dataHandler: (void (^) (NSData*)) dataHandler powerHandler: (void (^)(float)) powerHandler;
 /**
  *  stream audio from the device microphone to the STT service
  *
  *  @param recognizeHandler (^)(NSDictionary*, NSError*)
  *  @param dataHandler      (^) (NSData*)
  */
-- (void) recognize:(void (^)(NSDictionary*, NSError*)) recognizeHandler dataHandler: (void (^) (NSData*)) dataHandler;
+//- (void) recognize:(void (^)(NSDictionary*, NSError*)) recognizeHandler dataHandler: (void (^) (NSData*)) dataHandler;
 /**
  *  stream audio from the device microphone to the STT service
  *
@@ -71,7 +70,7 @@
  *
  *  @return if the data has been sent directly, return NO if the data is bufferred because the connection is not established
  */
-- (BOOL) endTransmission;
+- (void) endTransmission;
 
 /**
  *  Disconnect

@@ -38,7 +38,6 @@ typedef struct
 
 @property NSString* pathPCM;
 @property NSTimer *PeakPowerTimer;
-@property OggHelper *ogg;
 @property OpusHelper* opus;
 @property RecordingState recordState;
 @property WebSocketAudioStreamer* audioStreamer;
@@ -55,17 +54,15 @@ typedef struct
 @synthesize recognizeCallback;
 @synthesize powerLevelCallback;
 @synthesize audioDataCallback;
-@synthesize ogg = _ogg;
 
 
 // static for use by c code
 static BOOL isNewRecordingAllowed;
 static BOOL isCompressedOpus;
-static int audioRecordedLength;
+static int audioFrameSize;
 
 id audioStreamerRef;
 id opusRef;
-id oggRef;
 
 #pragma mark public methods
 
@@ -92,11 +89,13 @@ id oggRef;
     self.config = config;
     // set audio encoding flags so they are accessible in c audio callbacks
     isCompressedOpus = [config.audioCodec isEqualToString:WATSONSDK_AUDIO_CODEC_TYPE_OPUS] ? YES : NO;
+    audioFrameSize = config.audioFrameSize;
+
     isNewRecordingAllowed = YES;
 
     // setup opus helper
     self.opus = [[OpusHelper alloc] init];
-    [self.opus createEncoder: WATSONSDK_AUDIO_SAMPLE_RATE];
+    [self.opus createEncoder: config.audioSampleRate frameSize:audioFrameSize];
     opusRef = self->_opus;
 
     return self;
@@ -159,8 +158,8 @@ id oggRef;
  *
  *  @return YES if the data has been sent directly; NO if the data is bufferred because the connection is not established
  */
--(BOOL) endTransmission {
-    return [[self audioStreamer] sendEndOfStreamMarker];
+-(void) endTransmission {
+    [[self audioStreamer] sendEndOfStreamMarker];
 }
 
 /**
@@ -202,7 +201,6 @@ id oggRef;
     [self performGet:handler forURL:[self.config getModelServiceURL:modelName]];
     
 }
-
 
 /**
  *  getTranscript - convenience method to get the transcript from the JSON results
@@ -347,7 +345,6 @@ id oggRef;
     [self setupAudioFormat:&_recordState.dataFormat];
     
     _recordState.currentPacket = 0;
-    audioRecordedLength = 0;
     
     OSStatus status = AudioQueueNewInput(&_recordState.dataFormat,
                                          AudioInputStreamingCallback,
@@ -361,8 +358,7 @@ id oggRef;
     if(status == 0) {
         
         for(int i = 0; i < NUM_BUFFERS; i++) {
-            
-            AudioQueueAllocateBuffer(_recordState.queue, WATSONSDK_AUDIO_SAMPLE_RATE, &_recordState.buffers[i]);
+            AudioQueueAllocateBuffer(_recordState.queue, _recordState.dataFormat.mSampleRate, &_recordState.buffers[i]);
             AudioQueueEnqueueBuffer(_recordState.queue, _recordState.buffers[i], 0, NULL);
         }
 
@@ -411,7 +407,6 @@ id oggRef;
     isNewRecordingAllowed = YES;
 }
 
-
 /**
  *  samplePeakPower - Get the decibel level from the AudioQueue
  */
@@ -426,8 +421,6 @@ id oggRef;
         }
     }
 }
-
-
 
 #pragma mark audio streaming
 
@@ -450,12 +443,7 @@ id oggRef;
 
     // Adding Ogg Header
     if(isCompressedOpus){
-        // Adding Ogg instance
-        // setup ogg helper
-        self.ogg = [[OggHelper alloc] init];
-        oggRef = self->_ogg;
-        // Indicate sample rate
-        [self.audioStreamer writeData:[[self ogg] getOggOpusHeader:WATSONSDK_AUDIO_SAMPLE_RATE]];
+        [self.audioStreamer writeData:[[self opus] getOggOpusHeader:_config.audioSampleRate]];
     }
     
     // set a pointer to the wsuploader class so it is accessible in the c callback
@@ -466,7 +454,7 @@ id oggRef;
 
 - (void)setupAudioFormat:(AudioStreamBasicDescription*)format
 {
-    format->mSampleRate = WATSONSDK_AUDIO_SAMPLE_RATE;
+    format->mSampleRate = _config.audioSampleRate;
     format->mFormatID = kAudioFormatLinearPCM;
     format->mFramesPerPacket = 1;
     format->mChannelsPerFrame = 1;
@@ -477,37 +465,26 @@ id oggRef;
     format->mFormatFlags = kLinearPCMFormatFlagIsSignedInteger | kLinearPCMFormatFlagIsPacked;
 }
 
-int getAudioRecordedLengthInMs()
-{
-    return audioRecordedLength/32;
-}
-
-void sendAudioOpusEncoded(NSData *data)
-{
-    if (data!=nil && [data length]!=0) {
-        
-        NSUInteger length = [data length];
-        NSUInteger chunkSize = WATSONSDK_AUDIO_FRAME_SIZE * 2;
+void sendAudioOpusEncoded(char *data, int size, int sampleRate, bool isFooter) {
+    if (size > 0) {
+        NSUInteger chunkSize = audioFrameSize * 2;
         NSUInteger offset = 0;
-        
+
         do {
-            NSUInteger thisChunkSize = length - offset > chunkSize ? chunkSize : length - offset;
-            NSData* chunk = [NSData dataWithBytesNoCopy:(char *)[data bytes] + offset
+            NSUInteger thisChunkSize = size - offset > chunkSize ? chunkSize : size - offset;
+            NSData* chunk = [NSData dataWithBytesNoCopy:data + offset
                                                  length:thisChunkSize
                                            freeWhenDone:NO];
-            
-            // opus encode block
-            NSData *compressed = [opusRef encode:chunk frameSize:WATSONSDK_AUDIO_FRAME_SIZE];
 
-            if(compressed != nil){
-                NSMutableData *newData = [oggRef writePacket:compressed frameSize:WATSONSDK_AUDIO_FRAME_SIZE];
-                if(newData != nil){
-                    [audioStreamerRef writeData:newData];
-                }
+            // opus encode block
+            NSData *compressed = [opusRef encode:chunk frameSize:audioFrameSize rate:sampleRate isFooter:isFooter];
+
+            if(compressed != nil && [compressed length] > 0){
+                [audioStreamerRef writeData:compressed];
             }
 
             offset += thisChunkSize;
-        } while (offset < length);
+        } while (offset < size);
     }
 }
 
@@ -523,14 +500,13 @@ void AudioInputStreamingCallback(
 {
     OSStatus status=0;
     RecordingState* recordState = (RecordingState*)inUserData;
-    
-    NSData *data = [NSData  dataWithBytes:inBuffer->mAudioData length:inBuffer->mAudioDataByteSize];
-    audioRecordedLength += [data length];
 
     if(isCompressedOpus)
-        sendAudioOpusEncoded(data);
-    else
+        sendAudioOpusEncoded(inBuffer->mAudioData, inBuffer->mAudioDataByteSize, recordState->dataFormat.mSampleRate, false);
+    else {
+        NSData *data = [NSData dataWithBytes:inBuffer->mAudioData length:inBuffer->mAudioDataByteSize];
         [audioStreamerRef writeData:data];
+    }
 
     if(status == 0) {
         recordState->currentPacket += inNumberPacketDescriptions;
