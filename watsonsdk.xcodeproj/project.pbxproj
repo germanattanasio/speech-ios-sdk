@@ -25,6 +25,23 @@
 /* Begin PBXBuildFile section */
 		7EFE11E41B71D07D00EF10BF /* AuthConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EFE11E21B71D07D00EF10BF /* AuthConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7EFE11E51B71D07D00EF10BF /* AuthConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFE11E31B71D07D00EF10BF /* AuthConfiguration.m */; };
+		9B07C4CF1D0A85FE005F41AE /* libspeexdsp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B07C4CE1D0A85FE005F41AE /* libspeexdsp.a */; };
+		9B07C4D11D0A8B76005F41AE /* libspeex.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B07C4D01D0A8B76005F41AE /* libspeex.a */; };
+		9B07C5071D0B0B25005F41AE /* config_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B07C4F21D0B0B25005F41AE /* config_types.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B07C5081D0B0B25005F41AE /* ogg.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B07C4F31D0B0B25005F41AE /* ogg.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B07C50B1D0B0B25005F41AE /* os_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B07C4F61D0B0B25005F41AE /* os_types.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B07C50C1D0B0B25005F41AE /* opus.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B07C4F81D0B0B25005F41AE /* opus.h */; };
+		9B07C50D1D0B0B25005F41AE /* opus_defines.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B07C4F91D0B0B25005F41AE /* opus_defines.h */; };
+		9B07C50E1D0B0B25005F41AE /* opus_header.c in Sources */ = {isa = PBXBuildFile; fileRef = 9B07C4FA1D0B0B25005F41AE /* opus_header.c */; };
+		9B07C50F1D0B0B25005F41AE /* opus_header.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B07C4FB1D0B0B25005F41AE /* opus_header.h */; };
+		9B07C5101D0B0B25005F41AE /* opus_multistream.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B07C4FC1D0B0B25005F41AE /* opus_multistream.h */; };
+		9B07C5111D0B0B25005F41AE /* opus_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B07C4FD1D0B0B25005F41AE /* opus_types.h */; };
+		9B07C5141D0B0B25005F41AE /* speex_config_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B07C5011D0B0B25005F41AE /* speex_config_types.h */; };
+		9B07C5151D0B0B25005F41AE /* speex_resampler.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B07C5021D0B0B25005F41AE /* speex_resampler.h */; };
+		9B07C5161D0B0B25005F41AE /* speex_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B07C5031D0B0B25005F41AE /* speex_types.h */; };
+		9B07C5171D0B0B25005F41AE /* speexdsp_config_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B07C5041D0B0B25005F41AE /* speexdsp_config_types.h */; };
+		9B07C5181D0B0B25005F41AE /* speexdsp_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B07C5051D0B0B25005F41AE /* speexdsp_types.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B07C5191D0B0B25005F41AE /* wav_io.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B07C5061D0B0B25005F41AE /* wav_io.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B1BCEE31CF69D440076FE2D /* TTSCustomWord.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B1BCEE11CF69D440076FE2D /* TTSCustomWord.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B1BCEE41CF69D440076FE2D /* TTSCustomWord.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B1BCEE21CF69D440076FE2D /* TTSCustomWord.m */; };
 		9B1BCEEB1CF6CAAD0076FE2D /* STTConfiguration.m in Headers */ = {isa = PBXBuildFile; fileRef = 9B3669631CF354B800806BEE /* STTConfiguration.m */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -48,11 +65,6 @@
 		9B47E7581CF21645003E0860 /* SpeechUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B47E7561CF21645003E0860 /* SpeechUtility.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B47E7591CF21645003E0860 /* SpeechUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B47E7571CF21645003E0860 /* SpeechUtility.m */; };
 		9BA060411CE6D9320018CA5B /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BA060401CE6D9320018CA5B /* libicucore.tbd */; };
-		9BA475891B9D34AA00D66F1E /* OggHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA475871B9D34AA00D66F1E /* OggHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9BA4758A1B9D34AA00D66F1E /* OggHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA475881B9D34AA00D66F1E /* OggHelper.m */; };
-		9BA4758E1B9D354E00D66F1E /* config_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA4758B1B9D354E00D66F1E /* config_types.h */; };
-		9BA4758F1B9D354E00D66F1E /* ogg.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA4758C1B9D354E00D66F1E /* ogg.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9BA475901B9D354E00D66F1E /* os_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA4758D1B9D354E00D66F1E /* os_types.h */; };
 		9BCAD8341CE6BF1200BE3B5F /* SRDelegateController.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD8201CE6BF1200BE3B5F /* SRDelegateController.h */; };
 		9BCAD8351CE6BF1200BE3B5F /* SRDelegateController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD8211CE6BF1200BE3B5F /* SRDelegateController.m */; };
 		9BCAD8361CE6BF1200BE3B5F /* SRIOConsumer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD8231CE6BF1200BE3B5F /* SRIOConsumer.h */; };
@@ -70,6 +82,13 @@
 		9BCAD8421CE6BF1200BE3B5F /* SocketRocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD8311CE6BF1200BE3B5F /* SocketRocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9BCAD8431CE6BF1200BE3B5F /* SRWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD8321CE6BF1200BE3B5F /* SRWebSocket.h */; };
 		9BCAD8441CE6BF1200BE3B5F /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD8331CE6BF1200BE3B5F /* SRWebSocket.m */; };
+		9BE583901D0FEDE20021DC88 /* lpc.c in Sources */ = {isa = PBXBuildFile; fileRef = 9BE5838E1D0FEDE20021DC88 /* lpc.c */; };
+		9BE583911D0FEDE20021DC88 /* lpc.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BE5838F1D0FEDE20021DC88 /* lpc.h */; };
+		9BE583931D0FEE2A0021DC88 /* stack_alloc.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BE583921D0FEE2A0021DC88 /* stack_alloc.h */; };
+		9BE583951D11220F0021DC88 /* CodecHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BE583941D11220F0021DC88 /* CodecHeader.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9BE583981D1130320021DC88 /* libwatsonsdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C11A645B1754D0E600385896 /* libwatsonsdk.a */; };
+		9BE5839C1D11C6AA0021DC88 /* OpusHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BE5839A1D11C6AA0021DC88 /* OpusHelper.h */; };
+		9BE5839D1D11C6AA0021DC88 /* OpusHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE5839B1D11C6AA0021DC88 /* OpusHelper.m */; };
 		9BF00C9A1CF5A2BD00624702 /* TTSCustomizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF00C961CF5A10100624702 /* TTSCustomizationViewController.m */; };
 		9BF00CA01CF5AB7F00624702 /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9BF00C9E1CF5A8DE00624702 /* Credentials.plist */; };
 		9BF00CA11CF5AB8100624702 /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9BF00C9E1CF5A8DE00624702 /* Credentials.plist */; };
@@ -80,16 +99,12 @@
 		9BF43ED91CEAC81900EC0185 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BF43ED81CEAC81900EC0185 /* Assets.xcassets */; };
 		9BF43EE11CEAC82E00EC0185 /* libwatsonsdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C11A645B1754D0E600385896 /* libwatsonsdk.a */; };
 		C11772091AFD191D00C8791A /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C11772081AFD191D00C8791A /* libogg.a */; };
-		C11772141B029BEE00C8791A /* opus_header.h in Headers */ = {isa = PBXBuildFile; fileRef = C11772131B029BEE00C8791A /* opus_header.h */; };
-		C117721E1B02A15000C8791A /* opus_header.c in Sources */ = {isa = PBXBuildFile; fileRef = C117721D1B02A15000C8791A /* opus_header.c */; };
 		C11A645F1754D0E600385896 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C11A645E1754D0E600385896 /* Foundation.framework */; };
 		C11A64961754D98700385896 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C11A64951754D98700385896 /* CoreFoundation.framework */; };
 		C11A649C1754D98700385896 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C11A649A1754D98700385896 /* InfoPlist.strings */; };
 		C11B3EA21AF41A200062BF7D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C11B3EA11AF41A200062BF7D /* AVFoundation.framework */; };
 		C11B3EA31AF41A320062BF7D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C11B3EA11AF41A200062BF7D /* AVFoundation.framework */; };
 		C11D9E7A1937C57200F2D614 /* beep.wav in Resources */ = {isa = PBXBuildFile; fileRef = C11D9E791937C57200F2D614 /* beep.wav */; };
-		C1235355199B53FF009A8F8B /* OpusHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = C1235353199B53FF009A8F8B /* OpusHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C1235356199B53FF009A8F8B /* OpusHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C1235354199B53FF009A8F8B /* OpusHelper.m */; };
 		C165429C191A0D8500905DCC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C11A645E1754D0E600385896 /* Foundation.framework */; };
 		C165429E191A0D8500905DCC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C165429D191A0D8500905DCC /* CoreGraphics.framework */; };
 		C16542A5191A0D8500905DCC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C16542A3191A0D8500905DCC /* InfoPlist.strings */; };
@@ -98,7 +113,6 @@
 		C16542AE191A0D8500905DCC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C16542AC191A0D8500905DCC /* Main.storyboard */; };
 		C16542B4191A0D8500905DCC /* STTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C16542B3191A0D8500905DCC /* STTViewController.m */; };
 		C16542B6191A0D8500905DCC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C16542B5191A0D8500905DCC /* Images.xcassets */; };
-		C16542D4191A0FA100905DCC /* libwatsonsdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C11A645B1754D0E600385896 /* libwatsonsdk.a */; };
 		C17779641B9DBFAA0066269A /* TTSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C17779631B9DBFAA0066269A /* TTSViewController.m */; };
 		C1B14B831AA0D3DD00864C53 /* libopus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C1B14B821AA0D3DC00864C53 /* libopus.a */; };
 		C1D4580119A78BBB00093095 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1D4580019A78BBB00093095 /* Security.framework */; };
@@ -146,6 +160,23 @@
 /* Begin PBXFileReference section */
 		7EFE11E21B71D07D00EF10BF /* AuthConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthConfiguration.h; sourceTree = "<group>"; };
 		7EFE11E31B71D07D00EF10BF /* AuthConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthConfiguration.m; sourceTree = "<group>"; };
+		9B07C4CE1D0A85FE005F41AE /* libspeexdsp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libspeexdsp.a; sourceTree = "<group>"; };
+		9B07C4D01D0A8B76005F41AE /* libspeex.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libspeex.a; sourceTree = "<group>"; };
+		9B07C4F21D0B0B25005F41AE /* config_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config_types.h; sourceTree = "<group>"; };
+		9B07C4F31D0B0B25005F41AE /* ogg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ogg.h; sourceTree = "<group>"; };
+		9B07C4F61D0B0B25005F41AE /* os_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = os_types.h; sourceTree = "<group>"; };
+		9B07C4F81D0B0B25005F41AE /* opus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opus.h; sourceTree = "<group>"; };
+		9B07C4F91D0B0B25005F41AE /* opus_defines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opus_defines.h; sourceTree = "<group>"; };
+		9B07C4FA1D0B0B25005F41AE /* opus_header.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = opus_header.c; sourceTree = "<group>"; };
+		9B07C4FB1D0B0B25005F41AE /* opus_header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opus_header.h; sourceTree = "<group>"; };
+		9B07C4FC1D0B0B25005F41AE /* opus_multistream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opus_multistream.h; sourceTree = "<group>"; };
+		9B07C4FD1D0B0B25005F41AE /* opus_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opus_types.h; sourceTree = "<group>"; };
+		9B07C5011D0B0B25005F41AE /* speex_config_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = speex_config_types.h; sourceTree = "<group>"; };
+		9B07C5021D0B0B25005F41AE /* speex_resampler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = speex_resampler.h; sourceTree = "<group>"; };
+		9B07C5031D0B0B25005F41AE /* speex_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = speex_types.h; sourceTree = "<group>"; };
+		9B07C5041D0B0B25005F41AE /* speexdsp_config_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = speexdsp_config_types.h; sourceTree = "<group>"; };
+		9B07C5051D0B0B25005F41AE /* speexdsp_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = speexdsp_types.h; sourceTree = "<group>"; };
+		9B07C5061D0B0B25005F41AE /* wav_io.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wav_io.h; sourceTree = "<group>"; };
 		9B1BCEE11CF69D440076FE2D /* TTSCustomWord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTSCustomWord.h; sourceTree = "<group>"; };
 		9B1BCEE21CF69D440076FE2D /* TTSCustomWord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTSCustomWord.m; sourceTree = "<group>"; };
 		9B1BCEF21CF704C10076FE2D /* TTSCustomizationDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTSCustomizationDetailTableViewCell.h; sourceTree = "<group>"; };
@@ -169,11 +200,6 @@
 		9B47E7561CF21645003E0860 /* SpeechUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeechUtility.h; sourceTree = "<group>"; };
 		9B47E7571CF21645003E0860 /* SpeechUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeechUtility.m; sourceTree = "<group>"; };
 		9BA060401CE6D9320018CA5B /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
-		9BA475871B9D34AA00D66F1E /* OggHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OggHelper.h; path = ogg/OggHelper.h; sourceTree = "<group>"; };
-		9BA475881B9D34AA00D66F1E /* OggHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OggHelper.m; path = ogg/OggHelper.m; sourceTree = "<group>"; };
-		9BA4758B1B9D354E00D66F1E /* config_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = config_types.h; path = ogg/config_types.h; sourceTree = "<group>"; };
-		9BA4758C1B9D354E00D66F1E /* ogg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ogg.h; path = ogg/ogg.h; sourceTree = "<group>"; };
-		9BA4758D1B9D354E00D66F1E /* os_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = os_types.h; path = ogg/os_types.h; sourceTree = "<group>"; };
 		9BCAD8201CE6BF1200BE3B5F /* SRDelegateController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRDelegateController.h; sourceTree = "<group>"; };
 		9BCAD8211CE6BF1200BE3B5F /* SRDelegateController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRDelegateController.m; sourceTree = "<group>"; };
 		9BCAD8231CE6BF1200BE3B5F /* SRIOConsumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRIOConsumer.h; sourceTree = "<group>"; };
@@ -191,6 +217,12 @@
 		9BCAD8311CE6BF1200BE3B5F /* SocketRocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketRocket.h; sourceTree = "<group>"; };
 		9BCAD8321CE6BF1200BE3B5F /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRWebSocket.h; sourceTree = "<group>"; };
 		9BCAD8331CE6BF1200BE3B5F /* SRWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRWebSocket.m; sourceTree = "<group>"; };
+		9BE5838E1D0FEDE20021DC88 /* lpc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lpc.c; sourceTree = "<group>"; };
+		9BE5838F1D0FEDE20021DC88 /* lpc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lpc.h; sourceTree = "<group>"; };
+		9BE583921D0FEE2A0021DC88 /* stack_alloc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stack_alloc.h; sourceTree = "<group>"; };
+		9BE583941D11220F0021DC88 /* CodecHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodecHeader.h; sourceTree = "<group>"; };
+		9BE5839A1D11C6AA0021DC88 /* OpusHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpusHelper.h; sourceTree = "<group>"; };
+		9BE5839B1D11C6AA0021DC88 /* OpusHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpusHelper.m; sourceTree = "<group>"; };
 		9BF00C951CF5A10100624702 /* TTSCustomizationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTSCustomizationViewController.h; sourceTree = "<group>"; };
 		9BF00C961CF5A10100624702 /* TTSCustomizationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTSCustomizationViewController.m; sourceTree = "<group>"; };
 		9BF00C9E1CF5A8DE00624702 /* Credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Credentials.plist; sourceTree = "<group>"; };
@@ -203,8 +235,6 @@
 		9BF43ED81CEAC81900EC0185 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9BF43EDD1CEAC81900EC0185 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C11772081AFD191D00C8791A /* libogg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libogg.a; sourceTree = "<group>"; };
-		C11772131B029BEE00C8791A /* opus_header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opus_header.h; sourceTree = "<group>"; };
-		C117721D1B02A15000C8791A /* opus_header.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = opus_header.c; sourceTree = "<group>"; };
 		C11A645B1754D0E600385896 /* libwatsonsdk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libwatsonsdk.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C11A645E1754D0E600385896 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C11A64621754D0E600385896 /* watsonsdk-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "watsonsdk-Prefix.pch"; sourceTree = "<group>"; };
@@ -219,12 +249,6 @@
 		C11A66E117560AD900385896 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		C11B3EA11AF41A200062BF7D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		C11D9E791937C57200F2D614 /* beep.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beep.wav; sourceTree = "<group>"; };
-		C12352A619910606009A8F8B /* opus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opus.h; sourceTree = "<group>"; };
-		C12352A719910606009A8F8B /* opus_defines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opus_defines.h; sourceTree = "<group>"; };
-		C12352A819910606009A8F8B /* opus_multistream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opus_multistream.h; sourceTree = "<group>"; };
-		C12352A919910606009A8F8B /* opus_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opus_types.h; sourceTree = "<group>"; };
-		C1235353199B53FF009A8F8B /* OpusHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpusHelper.h; sourceTree = "<group>"; };
-		C1235354199B53FF009A8F8B /* OpusHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpusHelper.m; sourceTree = "<group>"; };
 		C165429B191A0D8500905DCC /* OC Sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OC Sample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C165429D191A0D8500905DCC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		C16542A2191A0D8500905DCC /* watsonsdktest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "watsonsdktest-Info.plist"; sourceTree = "<group>"; };
@@ -262,6 +286,8 @@
 				C1D4580419A78BDF00093095 /* Security.framework in Frameworks */,
 				C11772091AFD191D00C8791A /* libogg.a in Frameworks */,
 				C1B14B831AA0D3DD00864C53 /* libopus.a in Frameworks */,
+				9B07C4D11D0A8B76005F41AE /* libspeex.a in Frameworks */,
+				9B07C4CF1D0A85FE005F41AE /* libspeexdsp.a in Frameworks */,
 				C11A645F1754D0E600385896 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -279,10 +305,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BA060411CE6D9320018CA5B /* libicucore.tbd in Frameworks */,
+				9BE583981D1130320021DC88 /* libwatsonsdk.a in Frameworks */,
 				C11B3EA21AF41A200062BF7D /* AVFoundation.framework in Frameworks */,
 				C1D4580219A78BC400093095 /* CFNetwork.framework in Frameworks */,
 				C1D4580119A78BBB00093095 /* Security.framework in Frameworks */,
-				C16542D4191A0FA100905DCC /* libwatsonsdk.a in Frameworks */,
 				C165429E191A0D8500905DCC /* CoreGraphics.framework in Frameworks */,
 				C165429C191A0D8500905DCC /* Foundation.framework in Frameworks */,
 			);
@@ -291,6 +317,56 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9B07C4F01D0B0B25005F41AE /* codec */ = {
+			isa = PBXGroup;
+			children = (
+				9B07C4F11D0B0B25005F41AE /* ogg */,
+				9B07C4F71D0B0B25005F41AE /* opus */,
+				9B07C5001D0B0B25005F41AE /* speex */,
+				9B07C5061D0B0B25005F41AE /* wav_io.h */,
+				9BE5838E1D0FEDE20021DC88 /* lpc.c */,
+				9BE5838F1D0FEDE20021DC88 /* lpc.h */,
+				9BE583921D0FEE2A0021DC88 /* stack_alloc.h */,
+				9BE583941D11220F0021DC88 /* CodecHeader.h */,
+			);
+			path = codec;
+			sourceTree = "<group>";
+		};
+		9B07C4F11D0B0B25005F41AE /* ogg */ = {
+			isa = PBXGroup;
+			children = (
+				9B07C4F21D0B0B25005F41AE /* config_types.h */,
+				9B07C4F31D0B0B25005F41AE /* ogg.h */,
+				9B07C4F61D0B0B25005F41AE /* os_types.h */,
+			);
+			path = ogg;
+			sourceTree = "<group>";
+		};
+		9B07C4F71D0B0B25005F41AE /* opus */ = {
+			isa = PBXGroup;
+			children = (
+				9B07C4F81D0B0B25005F41AE /* opus.h */,
+				9B07C4F91D0B0B25005F41AE /* opus_defines.h */,
+				9B07C4FA1D0B0B25005F41AE /* opus_header.c */,
+				9B07C4FB1D0B0B25005F41AE /* opus_header.h */,
+				9B07C4FC1D0B0B25005F41AE /* opus_multistream.h */,
+				9B07C4FD1D0B0B25005F41AE /* opus_types.h */,
+			);
+			path = opus;
+			sourceTree = "<group>";
+		};
+		9B07C5001D0B0B25005F41AE /* speex */ = {
+			isa = PBXGroup;
+			children = (
+				9B07C5011D0B0B25005F41AE /* speex_config_types.h */,
+				9B07C5021D0B0B25005F41AE /* speex_resampler.h */,
+				9B07C5031D0B0B25005F41AE /* speex_types.h */,
+				9B07C5041D0B0B25005F41AE /* speexdsp_config_types.h */,
+				9B07C5051D0B0B25005F41AE /* speexdsp_types.h */,
+			);
+			path = speex;
+			sourceTree = "<group>";
+		};
 		9B3669521CF3546C00806BEE /* tts */ = {
 			isa = PBXGroup;
 			children = (
@@ -398,18 +474,6 @@
 			path = "watsonsdktest-swift";
 			sourceTree = "<group>";
 		};
-		C11772101AFD193B00C8791A /* ogg */ = {
-			isa = PBXGroup;
-			children = (
-				9BA4758B1B9D354E00D66F1E /* config_types.h */,
-				9BA4758C1B9D354E00D66F1E /* ogg.h */,
-				9BA4758D1B9D354E00D66F1E /* os_types.h */,
-				9BA475871B9D34AA00D66F1E /* OggHelper.h */,
-				9BA475881B9D34AA00D66F1E /* OggHelper.m */,
-			);
-			name = ogg;
-			sourceTree = "<group>";
-		};
 		C11A64521754D0E600385896 = {
 			isa = PBXGroup;
 			children = (
@@ -453,16 +517,17 @@
 		C11A64601754D0E600385896 /* watsonsdk */ = {
 			isa = PBXGroup;
 			children = (
+				9B07C4F01D0B0B25005F41AE /* codec */,
 				9B36695F1CF354B800806BEE /* stt */,
 				9B3669521CF3546C00806BEE /* tts */,
-				C11772101AFD193B00C8791A /* ogg */,
-				C12352A519910606009A8F8B /* opus */,
 				C1416C33194B49520009C49A /* libs */,
 				9BCAD7C51CE5BC8B00BE3B5F /* websocket */,
 				7EFE11E21B71D07D00EF10BF /* AuthConfiguration.h */,
 				7EFE11E31B71D07D00EF10BF /* AuthConfiguration.m */,
 				9B47E7561CF21645003E0860 /* SpeechUtility.h */,
 				9B47E7571CF21645003E0860 /* SpeechUtility.m */,
+				9BE5839A1D11C6AA0021DC88 /* OpusHelper.h */,
+				9BE5839B1D11C6AA0021DC88 /* OpusHelper.m */,
 				C11A64611754D0E600385896 /* Supporting Files */,
 			);
 			path = watsonsdk;
@@ -496,24 +561,11 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		C12352A519910606009A8F8B /* opus */ = {
-			isa = PBXGroup;
-			children = (
-				C11772131B029BEE00C8791A /* opus_header.h */,
-				C117721D1B02A15000C8791A /* opus_header.c */,
-				C12352A619910606009A8F8B /* opus.h */,
-				C12352A719910606009A8F8B /* opus_defines.h */,
-				C12352A819910606009A8F8B /* opus_multistream.h */,
-				C12352A919910606009A8F8B /* opus_types.h */,
-				C1235353199B53FF009A8F8B /* OpusHelper.h */,
-				C1235354199B53FF009A8F8B /* OpusHelper.m */,
-			);
-			path = opus;
-			sourceTree = "<group>";
-		};
 		C1416C33194B49520009C49A /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				9B07C4D01D0A8B76005F41AE /* libspeex.a */,
+				9B07C4CE1D0A85FE005F41AE /* libspeexdsp.a */,
 				C11772081AFD191D00C8791A /* libogg.a */,
 				C1B14B821AA0D3DC00864C53 /* libopus.a */,
 			);
@@ -562,29 +614,41 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B07C5181D0B0B25005F41AE /* speexdsp_types.h in Headers */,
+				9B07C5071D0B0B25005F41AE /* config_types.h in Headers */,
+				9B07C50B1D0B0B25005F41AE /* os_types.h in Headers */,
+				9B07C5081D0B0B25005F41AE /* ogg.h in Headers */,
 				7EFE11E41B71D07D00EF10BF /* AuthConfiguration.h in Headers */,
 				9B36695D1CF3549400806BEE /* TTSConfiguration.h in Headers */,
 				9B1BCEEB1CF6CAAD0076FE2D /* STTConfiguration.m in Headers */,
 				9BCAD8361CE6BF1200BE3B5F /* SRIOConsumer.h in Headers */,
 				9BCAD8421CE6BF1200BE3B5F /* SocketRocket.h in Headers */,
-				C11772141B029BEE00C8791A /* opus_header.h in Headers */,
-				C1235355199B53FF009A8F8B /* OpusHelper.h in Headers */,
 				9B47E7581CF21645003E0860 /* SpeechUtility.h in Headers */,
 				9B36695B1CF3549400806BEE /* TextToSpeech.h in Headers */,
+				9BE583951D11220F0021DC88 /* CodecHeader.h in Headers */,
 				9B3669641CF354B800806BEE /* SpeechToText.h in Headers */,
 				9B3669661CF354B800806BEE /* STTConfiguration.h in Headers */,
 				9B1BCEE31CF69D440076FE2D /* TTSCustomWord.h in Headers */,
 				9B3669551CF3546C00806BEE /* TTSCustomVoice.h in Headers */,
+				9B07C5191D0B0B25005F41AE /* wav_io.h in Headers */,
+				9BE5839C1D11C6AA0021DC88 /* OpusHelper.h in Headers */,
+				9B07C50D1D0B0B25005F41AE /* opus_defines.h in Headers */,
+				9B07C5151D0B0B25005F41AE /* speex_resampler.h in Headers */,
+				9B07C50C1D0B0B25005F41AE /* opus.h in Headers */,
+				9B07C50F1D0B0B25005F41AE /* opus_header.h in Headers */,
+				9B07C5171D0B0B25005F41AE /* speexdsp_config_types.h in Headers */,
+				9BE583911D0FEDE20021DC88 /* lpc.h in Headers */,
+				9B07C5161D0B0B25005F41AE /* speex_types.h in Headers */,
+				9B07C5141D0B0B25005F41AE /* speex_config_types.h in Headers */,
+				9BE583931D0FEE2A0021DC88 /* stack_alloc.h in Headers */,
+				9B07C5111D0B0B25005F41AE /* opus_types.h in Headers */,
+				9B07C5101D0B0B25005F41AE /* opus_multistream.h in Headers */,
 				9B36693F1CF21A5400806BEE /* WebSocketAudioStreamer.h in Headers */,
 				9BCAD83C1CE6BF1200BE3B5F /* SRError.h in Headers */,
-				9BA4758F1B9D354E00D66F1E /* ogg.h in Headers */,
-				9BA475891B9D34AA00D66F1E /* OggHelper.h in Headers */,
-				9BA475901B9D354E00D66F1E /* os_types.h in Headers */,
 				9BCAD8381CE6BF1200BE3B5F /* SRIOConsumerPool.h in Headers */,
 				9BCAD8431CE6BF1200BE3B5F /* SRWebSocket.h in Headers */,
 				9BCAD8341CE6BF1200BE3B5F /* SRDelegateController.h in Headers */,
 				9BCAD83A1CE6BF1200BE3B5F /* SRRunLoopThread.h in Headers */,
-				9BA4758E1B9D354E00D66F1E /* config_types.h in Headers */,
 				9BCAD8401CE6BF1200BE3B5F /* SRURLUtilities.h in Headers */,
 				9BCAD83E1CE6BF1200BE3B5F /* SRHash.h in Headers */,
 			);
@@ -749,7 +813,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -e\n\nmkdir -p \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers\"\n\n# Link the \"Current\" version to \"A\"\n/bin/ln -sfh A \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/Current\"\n/bin/ln -sfh Versions/Current/Headers \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Headers\"\n/bin/ln -sfh \"Versions/Current/${PRODUCT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/${PRODUCT_NAME}\"\n\n# The -a ensures that the headers maintain the source modification date so that we don't constantly\n# cause propagating rebuilds of files that import these headers.\n/bin/cp -a \"${TARGET_BUILD_DIR}/${PUBLIC_HEADERS_FOLDER_PATH}/\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers\"\necho \"${TARGET_BUILD_DIR}/${PUBLIC_HEADERS_FOLDER_PATH}/\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/\" > ~/watsonsdklocation.txt\n\n# create a zip of the framework and add it to the project root\ncd ${BUILT_PRODUCTS_DIR}\nzip -r ${SRCROOT}/${PRODUCT_NAME}.framework.zip ${PRODUCT_NAME}.framework\n\n# [Rob] we need to copy the other headers keeping their folder structure\n#echo 'SRCROOT:'${SRCROOT}\n#cd ${SRCROOT}/watsonsdk\n\n# I have to move up a directory due to my layout.\n# echo 'Copying Headers into Framework..'\n#for H in `find ./ -name \"*.h\"`;  do\n#echo ${H}\n#ditto ${H} ${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers/${H}\n#done\n";
+			shellScript = "set -e\n\nmkdir -p \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers\"\n\n# Link the \"Current\" version to \"A\"\n/bin/ln -sfh A \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/Current\"\n/bin/ln -sfh Versions/Current/Headers \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Headers\"\n/bin/ln -sfh \"Versions/Current/${PRODUCT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/${PRODUCT_NAME}\"\n\n# The -a ensures that the headers maintain the source modification date so that we don't constantly\n# cause propagating rebuilds of files that import these headers.\n/bin/cp -a \"${TARGET_BUILD_DIR}/${PUBLIC_HEADERS_FOLDER_PATH}/\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers\"\necho \"${TARGET_BUILD_DIR}/${PUBLIC_HEADERS_FOLDER_PATH}/\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/\" > ~/watsonsdklocation.txt\n\n# create a zip of the framework and add it to the project root\ncd ${BUILT_PRODUCTS_DIR}\nzip -r ${SRCROOT}/${PRODUCT_NAME}.framework.zip ${PRODUCT_NAME}.framework\nunzip -o ${SRCROOT}/${PRODUCT_NAME}.framework.zip -d /Users/mihui/Documents/Work/Projects/Mobile/Dialog-Mobile/resources/plugins/WatsonSpeech/frameworks/\nunzip -o ${SRCROOT}/${PRODUCT_NAME}.framework.zip -d /Users/mihui/Documents/Work/Projects/Mobile/Dialog-Mobile/platforms/ios/GOMWW/Plugins/cordova-plugin-watson-speech/\n\n# [Rob] we need to copy the other headers keeping their folder structure\n#echo 'SRCROOT:'${SRCROOT}\n#cd ${SRCROOT}/watsonsdk\n\n# I have to move up a directory due to my layout.\n# echo 'Copying Headers into Framework..'\n#for H in `find ./ -name \"*.h\"`;  do\n#echo ${H}\n#ditto ${H} ${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers/${H}\n#done\n";
 		};
 		C11A648F1754D6DA00385896 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -783,21 +847,21 @@
 			files = (
 				7EFE11E51B71D07D00EF10BF /* AuthConfiguration.m in Sources */,
 				9BCAD8351CE6BF1200BE3B5F /* SRDelegateController.m in Sources */,
+				9BE5839D1D11C6AA0021DC88 /* OpusHelper.m in Sources */,
 				9B47E7591CF21645003E0860 /* SpeechUtility.m in Sources */,
-				C117721E1B02A15000C8791A /* opus_header.c in Sources */,
 				9BCAD8441CE6BF1200BE3B5F /* SRWebSocket.m in Sources */,
 				9B3669671CF354B800806BEE /* STTConfiguration.m in Sources */,
 				9B3669651CF354B800806BEE /* SpeechToText.m in Sources */,
 				9BCAD8391CE6BF1200BE3B5F /* SRIOConsumerPool.m in Sources */,
+				9B07C50E1D0B0B25005F41AE /* opus_header.c in Sources */,
 				9BCAD83D1CE6BF1200BE3B5F /* SRError.m in Sources */,
 				9B36695E1CF3549400806BEE /* TTSConfiguration.m in Sources */,
 				9BCAD8371CE6BF1200BE3B5F /* SRIOConsumer.m in Sources */,
 				9B1BCEE41CF69D440076FE2D /* TTSCustomWord.m in Sources */,
+				9BE583901D0FEDE20021DC88 /* lpc.c in Sources */,
 				9BCAD83B1CE6BF1200BE3B5F /* SRRunLoopThread.m in Sources */,
 				9B3669561CF3546C00806BEE /* TTSCustomVoice.m in Sources */,
-				9BA4758A1B9D34AA00D66F1E /* OggHelper.m in Sources */,
 				9B36695C1CF3549400806BEE /* TextToSpeech.m in Sources */,
-				C1235356199B53FF009A8F8B /* OpusHelper.m in Sources */,
 				9BCAD83F1CE6BF1200BE3B5F /* SRHash.m in Sources */,
 				9B3669401CF21A5400806BEE /* WebSocketAudioStreamer.m in Sources */,
 				9BCAD8411CE6BF1200BE3B5F /* SRURLUtilities.m in Sources */,
@@ -1025,20 +1089,27 @@
 		C11A64811754D0E700385896 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD)";
 				DEAD_CODE_STRIPPING = NO;
 				DSTROOT = /tmp/watsonsdk.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "watsonsdk/watsonsdk-Prefix.pch";
 				"HEADER_SEARCH_PATHS[arch=*]" = (
-					"$(SRCROOT)/inc/**",
-					"$(SRCROOT)/speex",
-					"$(SRCROOT)/speexenc",
-					"$(SRCROOT)/ogg",
+					"$(SRCROOT)",
+					"$(PROJECT_DIR)/watsonsdk/codec/**",
+					"$(PROJECT_DIR)/watsonsdk/codec/ogg/**",
+					"$(PROJECT_DIR)/watsonsdk/codec/opus/**",
+					"$(PROJECT_DIR)/watsonsdk/codec/speex/**",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"$(SRCROOT)",
 					"$(PROJECT_DIR)/watsonsdk/lib",
+					"$(PROJECT_DIR)/watsonsdk/codec/ogg/**",
+					"$(PROJECT_DIR)/watsonsdk/codec/**",
+					"$(PROJECT_DIR)/watsonsdk/codec/speex/**",
+					"$(PROJECT_DIR)/watsonsdk/codec/opus/**",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
@@ -1051,20 +1122,27 @@
 		C11A64821754D0E700385896 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD)";
 				DEAD_CODE_STRIPPING = NO;
 				DSTROOT = /tmp/watsonsdk.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "watsonsdk/watsonsdk-Prefix.pch";
 				"HEADER_SEARCH_PATHS[arch=*]" = (
-					"$(SRCROOT)/inc/**",
-					"$(SRCROOT)/speex",
-					"$(SRCROOT)/speexenc",
-					"$(SRCROOT)/ogg",
+					"$(SRCROOT)",
+					"$(PROJECT_DIR)/watsonsdk/codec/**",
+					"$(PROJECT_DIR)/watsonsdk/codec/ogg/**",
+					"$(PROJECT_DIR)/watsonsdk/codec/speex/**",
+					"$(PROJECT_DIR)/watsonsdk/codec/opus/**",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"$(SRCROOT)",
 					"$(PROJECT_DIR)/watsonsdk/lib",
+					"$(PROJECT_DIR)/watsonsdk/codec",
+					"$(PROJECT_DIR)/watsonsdk/codec/speex",
+					"$(PROJECT_DIR)/watsonsdk/codec/ogg",
+					"$(PROJECT_DIR)/watsonsdk/codec/opus",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
@@ -1165,7 +1243,7 @@
 				INFOPLIST_FILE = "watsonsdktest-objective-c/watsonsdktest-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.cio.watsonsdk.objetivec;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.cio.watsonsdk.objectivec;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -1199,7 +1277,7 @@
 				INFOPLIST_FILE = "watsonsdktest-objective-c/watsonsdktest-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.cio.watsonsdk.objetivec;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.cio.watsonsdk.objectivec;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;

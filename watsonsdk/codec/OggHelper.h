@@ -15,7 +15,24 @@
  **/
 
 #import <Foundation/Foundation.h>
+
 #import "ogg.h"
+
+#import "opus_defines.h"
+#import "opus_header.h"
+#import "opus_types.h"
+
+static void comment_init(char **comments, long* length, const char *vendor_string);
+static void comment_pad(char **comments, long* length, int amount);
+#define readint(buf, base) (((buf[base+3]<<24)&0xff000000)| \
+((buf[base+2]<<16)&0xff0000)| \
+((buf[base+1]<<8)&0xff00)| \
+(buf[base]&0xff))
+#define writeint(buf, base, val) do{ buf[base+3]=((val)>>24)&0xff; \
+buf[base+2]=((val)>>16)&0xff; \
+buf[base+1]=((val)>>8)&0xff; \
+buf[base]=(val)&0xff; \
+}while(0)
 
 @interface OggHelper : NSObject{
     ogg_page oggPage;
@@ -25,6 +42,6 @@
 }
 
 - (OggHelper *) init;
-- (NSData *) getOggOpusHeader: (int) sampleRate;
-- (NSMutableData *) writePacket: (NSData*) data frameSize:(int) frameSize;
+- (NSData *) getOggOpusHeader:(int) sampleRate opusHeader:(OpusHeader) header;
+- (NSMutableData *) writePacket: (NSData*) data frameSize:(int) frameSize rate: (int) sampleRate;
 @end
