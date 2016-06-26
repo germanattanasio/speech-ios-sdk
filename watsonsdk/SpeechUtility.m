@@ -233,10 +233,17 @@
             }
             else{
                 if(dataError == nil){
+                    NSLog(@"server error->%@", [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding]);
                     // response error handling
                     // https://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/text-to-speech/api/v1/#response-handling
-                    requestError = [SpeechUtility raiseErrorWithCode:[[responseObject valueForKey:@"code"] integerValue] message:[responseObject valueForKey:@"code_description"] reason:[responseObject valueForKey:@"error"] suggestion:@""];
-                    NSLog(@"server error");
+                    NSString *reason = [responseObject valueForKey:@"error"];
+                    NSString *description = [responseObject valueForKey:@"code_description"];
+                    if(reason == nil || description == nil) {
+                        NSLog(@"nil error");
+                        // https://developer.ibm.com/answers/questions/284164/500-forwarding-error-and-inconsistant-error-json-s/
+                        description = reason = [responseObject valueForKey:@"message"];
+                    }
+                    requestError = [SpeechUtility raiseErrorWithCode:[[responseObject valueForKey:@"code"] integerValue] message:description reason:reason suggestion:@""];
                     handler(nil, requestError);
                 }
                 else{
