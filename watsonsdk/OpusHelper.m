@@ -518,7 +518,7 @@ static inline unsigned int fast_rand(void) {
 
                     if (!lost){
                         /*Decode Opus packet*/
-                        ret = opus_multistream_decode_float(st, (unsigned char*)op.packet, op.bytes, output, MAX_FRAME_SIZE, 0);
+                        ret = opus_multistream_decode_float(st, (unsigned char*)op.packet, (opus_int32)op.bytes, output, MAX_FRAME_SIZE, 0);
                     } else {
                         /*Extract the original duration.
                          Normally you wouldn't have it for a lost packet, but normally the
