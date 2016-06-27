@@ -135,7 +135,7 @@ dispatch_once_t predicate_connect;
     if(self.isConnected && self.isReadyForAudio) {
         // if we had previously buffered audio because we were not connected, send it now
         if([self.audioBuffer length] > 0) {
-            NSLog(@"sending buffered audio %lu bytes", (unsigned long) [data length]);
+            NSLog(@"Sending buffered audio %lu bytes", (unsigned long) [self.audioBuffer length]);
             [self.webSocket sendData:self.audioBuffer];
             // reset buffer
             [self.audioBuffer setData:[NSData dataWithBytes:NULL length:0]];
