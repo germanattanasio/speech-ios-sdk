@@ -62,6 +62,9 @@
     return url;
 }
 - (NSURL*)getSynthesizeURL:(NSString*) text customizationId:(NSString*) customizationId {
+    if(customizationId == nil) {
+        return [self getSynthesizeURL:text];
+    }
     NSString *uriStr = [NSString stringWithFormat:@"%@://%@%@%@?voice=%@&accept=%@&text=%@&customization_id=%@",self.apiEndpoint.scheme,self.apiEndpoint.host,self.apiEndpoint.path,WATSONSDK_SERVICE_PATH_SYNTHESIZE,self.voiceName,self.audioCodec,[text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], customizationId];
     NSURL * url = [NSURL URLWithString:uriStr];
     return url;
