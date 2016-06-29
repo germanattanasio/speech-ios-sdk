@@ -88,27 +88,29 @@
     [self.pickerView setOpaque:YES];
 }
 
+/**
+ *  This is useful when you turn the continuous on, send stop mark to Watson Speech Service
+ *
+ *  @param sender id
+ */
 -(IBAction) releaseStartRecord:(id)sender {
-//    [stt endRecognize];
 //    [stt endTransmission];
 }
 
+/**
+ *  Start speech recognition
+ *
+ *  @param sender id
+ */
 -(IBAction) pressStartRecord:(id) sender {
     // start recognize
     [stt recognize:^(NSDictionary* res, NSError* err){
         // make sure the connection and recording process are finished
-        if(res == nil && err == nil){
-            [stt stopRecordingAudio];
-            [stt endConnection];
-            return;
-        }
         if(err == nil) {
-            NSString *transcription = [stt getTranscript:res];
-            if([self.stt isFinalTranscript:res]) {
-                NSLog(@"Final transcription (confidence score: %@): \n\r%@\n\r", [stt getConfidenceScore:res], transcription);
-                [stt endTransmission];
-            }
-            result.text = transcription;
+            SpeechToTextResult *sttResult = [stt getResult:res];
+
+            if(sttResult.transcript)
+                result.text = sttResult.transcript;
         }
         else {
             NSLog(@"Received error from the SDK %@",[err description]);
