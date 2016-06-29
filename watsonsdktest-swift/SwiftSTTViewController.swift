@@ -56,34 +56,32 @@ class SwiftSTTViewController: UIViewController, UITextFieldDelegate, UIPickerVie
 
     // start recording
     @IBAction func onStartRecording(sender: AnyObject) {
-        self.sttInstance?.recognize({ (result: [NSObject : AnyObject]!, error: NSError!) -> Void in
+        self.sttInstance?.recognize({ (result:[NSObject : AnyObject]!, error: NSError!) -> Void in
             if(error == nil){
-                let isFinal = self.sttInstance?.isFinalTranscript(result)
-                if isFinal == nil || isFinal == false{
-                    self.result.text = self.sttInstance?.getTranscript(result)
+                let sttResult = self.sttInstance?.getResult(result)
+                guard let transcript = sttResult?.transcript else {
+                    return;
                 }
-                else{
-                    self.sttInstance?.endRecognize()
-                }
+                self.result.text = transcript
+                
             }
             else{
                 print("Error from the SDK: %@", error.localizedDescription)
                 self.sttInstance?.endRecognize()
             }
-        })
-        
-        self.sttInstance?.getPowerLevel({ (power: Float) -> Void in
-            var frame = self.soundbar.frame
-            var w = CGFloat.init(3*(70 + power))
+            }) { (power: Float) -> Void in
 
-            if w > self.pickerViewContainer.frame.width{
-                w = self.pickerViewContainer.frame.width
-            }
-
-            frame.size.width = w
-            self.soundbar.frame = frame
-            self.soundbar.center = CGPointMake(self.view.frame.size.width / 2, self.soundbar.center.y);
-        })
+                var frame = self.soundbar.frame
+                var w = CGFloat.init(3*(70 + power))
+                
+                if w > self.pickerViewContainer.frame.width {
+                    w = self.pickerViewContainer.frame.width
+                }
+                
+                frame.size.width = w
+                self.soundbar.frame = frame
+                self.soundbar.center = CGPointMake(self.view.frame.size.width / 2, self.soundbar.center.y);
+        }
     }
     
     @IBAction func onSelectingModel(sender: AnyObject) {
