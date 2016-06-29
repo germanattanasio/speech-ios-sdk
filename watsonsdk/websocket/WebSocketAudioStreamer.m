@@ -18,6 +18,7 @@
 
 typedef void (^RecognizeCallbackBlockType)(NSDictionary*, NSError*);
 typedef void (^AudioDataCallbackBlockType)(NSData*);
+typedef void (^ClosureCallbackBlockType)(NSInteger, NSString*);
 
 @interface WebSocketAudioStreamer () <SRWebSocketDelegate>
 
@@ -26,6 +27,7 @@ typedef void (^AudioDataCallbackBlockType)(NSData*);
 @property (strong, atomic) NSNumber *reconnectAttempts;
 @property (nonatomic, copy) RecognizeCallbackBlockType recognizeCallback;
 @property (nonatomic, copy) AudioDataCallbackBlockType audioDataCallback;
+@property (nonatomic, copy) ClosureCallbackBlockType closureCallback;
 
 @property STTConfiguration *sConfig;
 @property SRWebSocket *webSocket;
@@ -43,7 +45,7 @@ typedef void (^AudioDataCallbackBlockType)(NSData*);
  *  @param speechServer   NSUrl containing the ws or wss format websocket service URI
  *  @param cookie pass a full cookie string that may have been returned in a separate authentication step
  */
-- (void) connect:(STTConfiguration*)config headers:(NSDictionary*)headers  {
+- (void) connect:(STTConfiguration*)config headers:(NSDictionary*)headers completionCallback:(void (^)(NSInteger, NSString*)) closureCallback {
     self.sConfig = config;
     self.headers = headers;
     
@@ -63,6 +65,7 @@ typedef void (^AudioDataCallbackBlockType)(NSData*);
 
     self.webSocket = [[SRWebSocket alloc] initWithURLRequest:req];
     self.webSocket.delegate = self;
+    self.closureCallback = closureCallback;
     [self.webSocket open];
     self.audioBuffer = [[NSMutableData alloc] initWithCapacity:0];
 }
@@ -84,7 +87,7 @@ typedef void (^AudioDataCallbackBlockType)(NSData*);
         self.reconnectAttempts = [NSNumber numberWithInt:0];
     }
     
-    [self connect:self.sConfig headers:self.headers];
+    [self connect:self.sConfig headers:self.headers completionCallback:nil];
 }
 
 /**
@@ -221,7 +224,7 @@ dispatch_once_t predicate_connect;
     if(error) {
         /* JSON was malformed, act appropriately here */
         NSLog(@"JSON from service malformed, received %@", json);
-        self.recognizeCallback(nil,error);
+        self.recognizeCallback(nil, error);
     }
 
     if([object isKindOfClass:[NSDictionary class]])
@@ -295,7 +298,7 @@ dispatch_once_t predicate_connect;
     if (code == 1006) { // authentication error
         [self.sConfig invalidateToken];
     }
-    self.recognizeCallback(nil, nil);
+    self.closureCallback(code, reason);
 }
 
 #pragma mark - delegate

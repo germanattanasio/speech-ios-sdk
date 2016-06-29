@@ -209,82 +209,38 @@ id opusRef;
  *
  *  @return NSString containing transcript
  */
--(NSString*) getTranscript:(NSDictionary*) results {
-    
+-(SpeechToTextResult*) getResult:(NSDictionary*) results {
+    SpeechToTextResult *sttResult = [[SpeechToTextResult alloc] init];
+
     if([results objectForKey:@"results"] != nil) {
-        
+
         NSArray *resultArray = [results objectForKey:@"results"];
-        if( [resultArray count] != 0 && [resultArray objectAtIndex:0] != nil) {
+
+        if([resultArray count] != 0 && [resultArray objectAtIndex:0] != nil) {
+
             NSDictionary *result =[resultArray objectAtIndex:0];
+
             NSArray *alternatives = [result objectForKey:@"alternatives"];
+
+            if([result objectForKey:@"complete"] != nil)
+                sttResult.isCompleted = [[result objectForKey:@"complete"] boolValue];
+
+            if([result objectForKey:@"final"] != nil)
+                sttResult.isFinal = [[result objectForKey:@"final"] boolValue];
+
             if([alternatives objectAtIndex:0] != nil) {
                 NSDictionary *alternative = [alternatives objectAtIndex:0];
+
                 if([alternative objectForKey:@"transcript"] != nil) {
-                    NSString *transcript = [alternative objectForKey:@"transcript"];
-                    return transcript;
+                    sttResult.transcript = [alternative objectForKey:@"transcript"];
                 }
-            }
-        }
-    }
-    return nil;
-}
-
-/**
- *  getConfidenceScore - convenience method to get the confidence score from the JSON results
- *
- *  @param results NSDictionary containing parsed JSON returned from the service
- *
- *  @return NSNumber containing score
- */
--(NSNumber*) getConfidenceScore:(NSDictionary*) results {
-    
-    if([results objectForKey:@"results"] != nil) {
-        
-        NSArray *resultArray = [results objectForKey:@"results"];
-        if( [resultArray count] != 0 && [resultArray objectAtIndex:0] != nil) {
-            
-            NSDictionary *result =[resultArray objectAtIndex:0];
-            
-            NSArray *alternatives = [result objectForKey:@"alternatives"];
-            
-            if([alternatives objectAtIndex:0] != nil) {
-                NSDictionary *alternative = [alternatives objectAtIndex:0];
-                
                 if([alternative objectForKey:@"confidence"] != nil) {
-                    NSNumber *confidence = [alternative objectForKey:@"confidence"];
-                    
-                    return confidence;
+                    sttResult.confidenceScore = [alternative objectForKey:@"confidence"];
                 }
             }
         }
     }
-    
-    return nil;
-}
-
-/**
- *  isFinalTranscript : check the 'final' value in the dictionary and return
- *
- *  @param results NSDictionary
- *
- *  @return BOOL
- */
--(BOOL) isFinalTranscript:(NSDictionary*) results {
-    
-    if([results objectForKey:@"results"] != nil) {
-        
-        NSArray *resultArray = [results objectForKey:@"results"];
-        if( [resultArray count] != 0 && [resultArray objectAtIndex:0] != nil) {
-            
-            NSDictionary *result =[resultArray objectAtIndex:0];
-            
-            BOOL isFinal = [[result objectForKey:@"final"] boolValue];
-        
-            return isFinal;
-        }
-    }
-    
-    return NO;
+    return sttResult;
 }
 
 /**
@@ -437,7 +393,32 @@ id opusRef;
     // connect if we are not connected
     if(![self.audioStreamer isWebSocketConnected]) {
         [self.config requestToken:^(AuthConfiguration *config) {
-            [self.audioStreamer connect:(STTConfiguration*)config headers:[config createRequestHeaders]];
+            [self.audioStreamer connect:(STTConfiguration*)config
+                                headers:[config createRequestHeaders]
+                     completionCallback:^(NSInteger code, NSString* reason)
+            {
+                [self stopRecordingAudio];
+                [self endConnection];
+
+                NSMutableDictionary *closureResult = [[NSMutableDictionary alloc] init];
+                NSMutableArray *results = [[NSMutableArray alloc] init];
+                NSMutableDictionary *result = [[NSMutableDictionary alloc] init];
+//                NSMutableArray *alternatives = [[NSMutableArray alloc] init];
+//                NSMutableDictionary *details = [[NSMutableDictionary alloc] init];
+
+//                [details setObject:@"" forKey:@"transcript"];
+//                [details setObject:[NSNumber numberWithDouble:0.000] forKey:@"confidence"];
+
+//                [alternatives setObject:details atIndexedSubscript:0];
+//                [result setObject:alternatives forKey:@"alternatives"];
+                [result setObject:[NSNumber numberWithBool:YES] forKey:@"complete"];
+                [result setObject:[NSNumber numberWithBool:YES] forKey:@"final"];
+
+                [results setObject:result atIndexedSubscript:0];
+                [closureResult setObject:results forKey:@"results"];
+                [closureResult setObject:[NSNumber numberWithInt:0] forKey:@"result_index"];
+                self.recognizeCallback(closureResult, nil);
+            }];
         }];
     }
 
@@ -516,3 +497,22 @@ void AudioInputStreamingCallback(
 
 @end
 
+@implementation SpeechToTextResult
+
+@synthesize transcript = _transcript;
+@synthesize isCompleted = _isCompleted;
+@synthesize isFinal = _isFinal;
+@synthesize confidenceScore = _confidenceScore;
+
+-(instancetype)init {
+    if(self = [super init]) {
+        self.isCompleted = NO;
+        self.isFinal = NO;
+        self.transcript = nil;
+        self.confidenceScore = 0;
+    }
+    return self;
+}
+
+
+@end

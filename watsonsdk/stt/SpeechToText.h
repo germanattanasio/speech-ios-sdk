@@ -21,8 +21,16 @@
 #import "WebSocketAudioStreamer.h"
 #import "OpusHelper.h"
 
-@interface SpeechToText : NSObject <NSURLSessionDelegate>
+@interface SpeechToTextResult : NSObject
 
+@property BOOL isFinal;
+@property BOOL isCompleted;
+@property NSString *transcript;
+@property NSNumber *confidenceScore;
+
+@end
+
+@interface SpeechToText : NSObject <NSURLSessionDelegate>
 
 @property (nonatomic,retain) STTConfiguration *config;
 
@@ -97,7 +105,6 @@
  */
 - (void) listModel:(void (^)(NSDictionary*, NSError*))handler withName:(NSString*) modelName;
 
-
 /**
  *  setIsVADenabled
  *  User voice activated detection to automatically detect when speech has finished and stop the recognize operation
@@ -114,27 +121,7 @@
  *
  *  @return NSString containing transcript
  */
--(NSString*) getTranscript:(NSDictionary*) results;
-
-
-/**
- *  getConfidenceScore - convenience method to get the confidence score from the JSON results
- *
- *  @param results NSDictionary containing parsed JSON returned from the service
- *
- *  @return NSNumber containing score
- */
--(NSNumber*) getConfidenceScore:(NSDictionary*) results;
-
-
-/**
- *  isFinalTranscript : convenience method to check the 'final' value in the dictionary and return
- *
- *  @param results NSDictionary
- *
- *  @return BOOL
- */
--(BOOL) isFinalTranscript:(NSDictionary*) results;
+-(SpeechToTextResult*) getResult:(NSDictionary*) results;
 
 /**
  *  getPowerLevel - listen for updates to the Db level of the speaker, can be used for a voice wave visualization
@@ -144,4 +131,3 @@
 - (void) getPowerLevel:(void (^)(float)) powerHandler;
 
 @end
-

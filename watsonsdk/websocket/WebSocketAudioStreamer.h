@@ -22,7 +22,7 @@
 @interface WebSocketAudioStreamer : NSObject
 
 - (BOOL) isWebSocketConnected;
-- (void) connect:(STTConfiguration*)config headers:(NSDictionary*)headers;
+- (void) connect:(STTConfiguration*)config headers:(NSDictionary*)headers completionCallback:(void (^)(NSInteger, NSString*)) closureCallback;
 - (void) reconnect;
 - (void) disconnect: (NSString*) reason;
 - (void) writeData:(NSData*) data;
