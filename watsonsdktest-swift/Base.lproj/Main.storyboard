@@ -119,7 +119,7 @@
                                     </mask>
                                 </variation>
                                 <connections>
-                                    <action selector="onStartRecording:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IuR-QX-DsA"/>
+                                    <action selector="onStartRecording:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gP1-PP-t2l"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8YD-Us-MHP">
