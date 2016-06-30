@@ -432,9 +432,9 @@ Generate and play audio
 **in Swift**
 ```swift
 
-	tts!.synthesize({ (data: NSData!, reqError: NSError!) -> Void in
+	tts?.synthesize({ (data: NSData!, reqError: NSError!) -> Void in
         if reqError == nil{
-			tts!.playAudio({ (error: NSError!) -> Void in
+			tts?.playAudio({ (error: NSError!) -> Void in
 				if error == nil{
 					... do something after the audio has played ...
 				}
@@ -479,9 +479,9 @@ Generate and play customized audio
 **in Swift**
 ```swift
 
-    tts!.synthesize({ (data: NSData!, reqError: NSError!) -> Void in
+    tts?.synthesize({ (data: NSData!, reqError: NSError!) -> Void in
         if reqError == nil{
-            tts!.playAudio({ (error: NSError!) -> Void in
+            tts?.playAudio({ (error: NSError!) -> Void in
                 if error == nil{
                     ... do something after the audio has played ...
                 }
