@@ -61,6 +61,8 @@ static BOOL isNewRecordingAllowed;
 static BOOL isCompressedOpus;
 static int audioFrameSize;
 
+BOOL isPermissionGranted = NO;
+
 id audioStreamerRef;
 id opusRef;
 
@@ -101,6 +103,15 @@ id opusRef;
     return self;
 }
 
+- (void)startRecognize {
+    if(isNewRecordingAllowed) {
+        // don't allow a new recording to be allowed until this transaction has completed
+        isNewRecordingAllowed = NO;
+        [self startRecordingAudio];
+        return;
+    }
+}
+
 /**
  *  stream audio from the device microphone to the STT service
  *
@@ -138,16 +149,30 @@ id opusRef;
  *  @param powerHandler (void (^)(float))
  */
 - (void) recognize:(void (^)(NSDictionary*, NSError*)) recognizeHandler dataHandler: (void (^) (NSData*)) dataHandler powerHandler: (void (^)(float)) powerHandler {
-    // store the block
+
     self.recognizeCallback = recognizeHandler;
     self.audioDataCallback = dataHandler;
     self.powerLevelCallback = powerHandler;
 
-    if(isNewRecordingAllowed) {
-        // don't allow a new recording to be allowed until this transaction has completed
-        isNewRecordingAllowed = NO;
-        [self startRecordingAudio];
+    if(isPermissionGranted) {
+        [self startRecognize];
         return;
+    }
+
+    if([[AVAudioSession sharedInstance] respondsToSelector:@selector(requestRecordPermission:)]) {
+        [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {
+            NSLog(@"Microphone access: %@", granted?@"Yes":@"No");
+            isPermissionGranted = granted;
+            if (granted) {
+                // Permission granted
+                [self startRecognize];
+            }
+            else {
+                // Permission denied
+                NSError *recordError = [SpeechUtility raiseErrorWithMessage:@"Permission denied"];
+                self.recognizeCallback(nil, recordError);
+            }
+        }];
     }
     // NSError *recordError = [SpeechUtility raiseErrorWithMessage:@"A voice query is already in progress"];
     // self.recognizeCallback(nil, recordError);
