@@ -103,12 +103,14 @@ id opusRef;
     return self;
 }
 
-- (void)startRecognize {
+/**
+ *  Start recognize
+ */
+- (void)startRecognizing {
     if(isNewRecordingAllowed) {
         // don't allow a new recording to be allowed until this transaction has completed
         isNewRecordingAllowed = NO;
         [self startRecordingAudio];
-        return;
     }
 }
 
@@ -155,7 +157,7 @@ id opusRef;
     self.powerLevelCallback = powerHandler;
 
     if(isPermissionGranted) {
-        [self startRecognize];
+        [self startRecognizing];
         return;
     }
 
@@ -165,7 +167,7 @@ id opusRef;
             isPermissionGranted = granted;
             if (granted) {
                 // Permission granted
-                [self startRecognize];
+                [self startRecognizing];
             }
             else {
                 // Permission denied
