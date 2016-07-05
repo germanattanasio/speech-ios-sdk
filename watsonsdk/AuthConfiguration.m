@@ -20,6 +20,7 @@
 
 @synthesize basicAuthUsername = _basicAuthUsername;
 @synthesize basicAuthPassword = _basicAuthPassword;
+@synthesize token = _token;
 
 - (id) init
 {
