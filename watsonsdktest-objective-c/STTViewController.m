@@ -46,6 +46,7 @@
     [confSTT setBasicAuthPassword:credentials[@"STTPassword"]];
     [confSTT setAudioCodec:WATSONSDK_AUDIO_CODEC_TYPE_OPUS];
     [confSTT setModelName:WATSONSDK_DEFAULT_STT_MODEL];
+    [confSTT setLearningOptOut:@(NO)]; // Change to `YES` to opt-out learning
 
 //    [conf setTokenGenerator:^(void (^tokenHandler)(NSString *token)){
 //        NSURL *url = [[NSURL alloc] initWithString:@"https://<token-factory-url>"];
