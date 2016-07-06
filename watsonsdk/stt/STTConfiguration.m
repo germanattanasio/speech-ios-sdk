@@ -43,16 +43,6 @@
     return self;
 }
 
-/**
- *  setApiUrl - override setter so we can update the NSURL endpoint
- *
- *  @param apiURL
- */
-- (void)setApiURL:(NSString *)apiURLStr {
-    
-    self.apiURL = apiURLStr;
-    [self setApiEndpoint:[NSURL URLWithString:apiURLStr]];
-}
 
 #pragma mark convenience methods for obtaining service URLs
 

@@ -65,4 +65,14 @@
 }
 
 
+/**
+ *  setApiUrl - override setter so we can update the NSURL endpoint
+ *
+ *  @param apiURL
+ */
+- (void)setApiURL:(NSString *)apiURLStr {
+    _apiURL = apiURLStr;
+    [self setApiEndpoint:[NSURL URLWithString:apiURLStr]];
+}
+
 @end

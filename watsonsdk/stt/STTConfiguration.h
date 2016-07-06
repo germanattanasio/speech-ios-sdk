@@ -51,7 +51,6 @@
 @property float audioSampleRate;
 @property int audioFrameSize;
 
-
 - (id)init;
 - (NSURL*)getModelsServiceURL;
 - (NSURL*)getModelServiceURL:(NSString*) modelName;
