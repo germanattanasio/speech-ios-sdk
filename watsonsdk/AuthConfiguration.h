@@ -25,7 +25,7 @@
 @property (copy, nonatomic) void (^tokenGenerator) (void (^tokenHandler)(NSString *token));
 
 - (void) invalidateToken;
-- (void) requestToken: (void(^)(AuthConfiguration *config)) completionHandler;
+- (void)requestToken:(void (^)(AuthConfiguration *config))completionHandler refreshCache:(BOOL) refreshCachedToken;
 - (NSDictionary*) createRequestHeaders;
 
 @end

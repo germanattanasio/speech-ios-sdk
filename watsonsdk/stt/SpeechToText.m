@@ -315,7 +315,7 @@ id opusRef;
         }];
         
         [dataTask resume];
-    }];
+    } refreshCache:NO];
 }
 
 
@@ -446,7 +446,7 @@ id opusRef;
                 [closureResult setObject:[NSNumber numberWithInt:0] forKey:@"result_index"];
                 self.recognizeCallback(closureResult, nil);
             }];
-        }];
+        } refreshCache:NO];
     }
 
     // Adding Ogg Header

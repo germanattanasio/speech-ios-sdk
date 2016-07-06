@@ -22,22 +22,19 @@
 @synthesize basicAuthPassword = _basicAuthPassword;
 @synthesize token = _token;
 
-- (id) init
-{
+- (id) init {
     self = [super init];
     _token = nil;
     return self;
 }
 
-- (void)invalidateToken
-{
+- (void)invalidateToken {
     _token = nil;
 }
 
-- (void)requestToken:(void (^)(AuthConfiguration *))completionHandler
-{
+- (void)requestToken:(void (^)(AuthConfiguration *))completionHandler refreshCache:(BOOL) refreshCachedToken {
     if (self.tokenGenerator) {
-        if (!_token) {
+        if (!_token || refreshCachedToken) {
             self.tokenGenerator(^(NSString *token) {
                 _token = token;
                 completionHandler(self);

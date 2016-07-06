@@ -329,7 +329,7 @@ typedef void (^PlayAudioCallbackBlockType)(NSError*);
         }];
 
         [dataTask resume];
-    }];
+    } refreshCache:NO];
 }
 
 
@@ -360,7 +360,7 @@ typedef void (^PlayAudioCallbackBlockType)(NSError*);
         }];
 
         [dataTask resume];
-    }];
+    } refreshCache:NO];
 }
 
 /**
@@ -388,7 +388,7 @@ typedef void (^PlayAudioCallbackBlockType)(NSError*);
         }];
 
         [dataTask resume];
-    }];
+    } refreshCache:NO];
 }
 
 @end
