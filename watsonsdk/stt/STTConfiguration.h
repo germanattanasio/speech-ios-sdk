@@ -37,15 +37,16 @@
 
 @interface STTConfiguration : AuthConfiguration
 
-@property NSString *apiURL;
 @property NSString *modelName;
 @property NSString *audioCodec;
 @property BOOL interimResults;
 @property BOOL continuous;
 @property NSNumber *inactivityTimeout;
-
-@property NSURL *apiEndpoint;
-@property BOOL isCertificateValidationDisabled;
+@property NSNumber *connectionTimeout;
+@property NSNumber *keywordsThreshold;
+@property NSNumber *maxAlternatives;
+@property NSNumber *wordAlternativesThreshold;
+@property NSArray *keywords;
 
 @property float audioSampleRate;
 @property int audioFrameSize;

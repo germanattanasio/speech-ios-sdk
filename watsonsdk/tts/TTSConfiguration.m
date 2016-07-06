@@ -18,8 +18,6 @@
 
 @implementation TTSConfiguration
 
-@synthesize apiURL = _apiURL;
-
 - (id)init {
     self = [super init];
     
@@ -38,12 +36,8 @@
  */
 - (void)setApiURL:(NSString *)apiURLStr {
     
-    _apiURL = apiURLStr;
+    self.apiURL = apiURLStr;
     [self setApiEndpoint:[NSURL URLWithString:apiURLStr]];
-}
-
-- (NSString*) apiURL {
-    return _apiURL;
 }
 
 

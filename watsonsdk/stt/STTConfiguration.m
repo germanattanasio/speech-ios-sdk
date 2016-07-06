@@ -18,7 +18,6 @@
 
 @implementation STTConfiguration
 
-@synthesize apiURL = _apiURL;
 @synthesize audioSampleRate = _audioSampleRate;
 @synthesize audioFrameSize = _audioFrameSize;
 
@@ -36,6 +35,11 @@
     [self setContinuous: NO];
     [self setInactivityTimeout:[NSNumber numberWithInt:30]];
 
+    [self setKeywordsThreshold:[NSNumber numberWithDouble:-1]];
+    [self setMaxAlternatives:[NSNumber numberWithInt:1]];
+    [self setWordAlternativesThreshold:[NSNumber numberWithDouble:-1]];
+    [self setKeywords:nil];
+
     return self;
 }
 
@@ -46,14 +50,9 @@
  */
 - (void)setApiURL:(NSString *)apiURLStr {
     
-    _apiURL = apiURLStr;
+    self.apiURL = apiURLStr;
     [self setApiEndpoint:[NSURL URLWithString:apiURLStr]];
 }
-
-- (NSString*) apiURL {
-    return _apiURL;
-}
-
 
 #pragma mark convenience methods for obtaining service URLs
 
@@ -107,6 +106,22 @@
     [inputParameters setValue:[NSNumber numberWithBool:self.interimResults] forKey:@"interim_results"];
     [inputParameters setValue:[NSNumber numberWithBool:self.continuous] forKey:@"continuous"];
     [inputParameters setValue:self.inactivityTimeout forKey:@"inactivity_timeout"];
+
+    if([self.maxAlternatives intValue] > 1) {
+        [inputParameters setValue:self.maxAlternatives forKey:@"max_alternatives"];
+    }
+    
+    if([self.keywordsThreshold doubleValue] >= 0 && [self.keywordsThreshold doubleValue] <= 1) {
+        [inputParameters setValue:self.keywordsThreshold forKey:@"keywords_threshold"];
+    }
+    
+    if([self.wordAlternativesThreshold doubleValue] >= 0 && [self.wordAlternativesThreshold doubleValue] <= 1) {
+        [inputParameters setValue:self.wordAlternativesThreshold forKey:@"word_alternatives_threshold"];
+    }
+    
+    if(self.keywords && [self.keywords count] > 0) {
+        [inputParameters setValue:self.keywords forKey:@"keywords"];
+    }
 
     if([NSJSONSerialization isValidJSONObject:inputParameters]){
         NSError *error = nil;

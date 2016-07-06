@@ -25,6 +25,7 @@
 - (id) init {
     self = [super init];
     _token = nil;
+    _xWatsonLearningOptOut = NO;
     return self;
 }
 

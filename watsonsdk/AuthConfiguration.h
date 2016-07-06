@@ -24,6 +24,11 @@
 @property (readonly) NSString *token;
 @property (copy, nonatomic) void (^tokenGenerator) (void (^tokenHandler)(NSString *token));
 
+@property NSString* apiURL;
+@property NSURL* apiEndpoint;
+@property BOOL isCertificateValidationDisabled;
+@property BOOL xWatsonLearningOptOut;
+
 - (void) invalidateToken;
 - (void)requestToken:(void (^)(AuthConfiguration *config))completionHandler refreshCache:(BOOL) refreshCachedToken;
 - (NSDictionary*) createRequestHeaders;

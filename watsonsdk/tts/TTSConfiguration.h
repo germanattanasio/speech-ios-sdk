@@ -35,11 +35,9 @@
 
 @interface TTSConfiguration : AuthConfiguration
 
-@property NSString* apiURL;
 @property NSString* voiceName;
 @property NSString* audioCodec;
-@property NSURL* apiEndpoint;
-@property BOOL isCertificateValidationDisabled;
+
 
 - (id)init;
 - (NSURL*)getVoicesServiceURL;

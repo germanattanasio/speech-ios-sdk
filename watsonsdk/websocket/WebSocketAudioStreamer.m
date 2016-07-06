@@ -55,12 +55,16 @@ typedef void (^ClosureCallbackBlockType)(NSInteger, NSString*);
     self.hasDataBeenSent = NO;
    
     NSLog(@"websocket connection using %@",[[self.sConfig getWebSocketRecognizeURL] absoluteString]);
-    
+
     NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:[self.sConfig getWebSocketRecognizeURL]];
     
     // set headers
     for(id headerName in headers) {
         [req setValue:[headers objectForKey:headerName] forHTTPHeaderField:headerName];
+    }
+
+    if(config.xWatsonLearningOptOut) {
+        [req setValue:@"true" forHTTPHeaderField:@"X-Watson-Learning-Opt-Out"];
     }
 
     self.webSocket = [[SRWebSocket alloc] initWithURLRequest:req];
