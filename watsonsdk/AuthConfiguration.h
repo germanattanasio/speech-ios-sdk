@@ -31,7 +31,7 @@
 
 - (void) invalidateToken;
 - (void)requestToken:(void (^)(AuthConfiguration *config))completionHandler refreshCache:(BOOL) refreshCachedToken;
-- (NSDictionary*) createRequestHeaders;
+- (NSMutableDictionary*) createRequestHeaders;
 
 - (void)setApiURL:(NSString *)apiURLStr;
 @end

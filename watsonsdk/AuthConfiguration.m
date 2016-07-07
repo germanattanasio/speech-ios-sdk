@@ -48,7 +48,7 @@
     }
 }
 
-- (NSDictionary*) createRequestHeaders {
+- (NSMutableDictionary*) createRequestHeaders {
     NSMutableDictionary *headers = [[NSMutableDictionary alloc] init];
     if (self.tokenGenerator) {
         if (self.token) {
