@@ -180,6 +180,13 @@
         }
         else{
             responseObject = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&dataError];
+
+            if(dataError) {
+                NSLog(@"data error");
+                handler(nil, dataError);
+                return;
+            }
+            
             // response error handling
             // https://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/text-to-speech/api/v1/#response-handling
             requestError = [SpeechUtility raiseErrorWithCode:[[responseObject valueForKey:@"code"] integerValue] message:[responseObject valueForKey:@"code_description"] reason:[responseObject valueForKey:@"error"] suggestion:@""];
