@@ -30,7 +30,7 @@
     [self setInterimResults: [NSNumber numberWithBool:YES]];
     [self setContinuous:[NSNumber numberWithBool:NO]];
     [self setInactivityTimeout:[NSNumber numberWithInt:30]];
-    [self setLearningOptOut:[NSNumber numberWithBool:NO]];
+
     return self;
 }
 
@@ -102,7 +102,6 @@
     [inputParameters setValue:self.interimResults forKey:@"interim_results"];
     [inputParameters setValue:self.continuous forKey:@"continuous"];
     [inputParameters setValue:self.inactivityTimeout forKey:@"inactivity_timeout"];
-    [inputParameters setValue:self.learningOptOut forKey:@"x-watson-learning-opt-out"];
 
     NSError *error = nil;
     if([NSJSONSerialization isValidJSONObject:inputParameters]){

@@ -43,7 +43,6 @@
 @property NSNumber *interimResults;
 @property NSNumber *continuous;
 @property NSNumber *inactivityTimeout;
-@property NSNumber *learningOptOut;
 
 @property NSURL *apiEndpoint;
 @property BOOL isCertificateValidationDisabled;

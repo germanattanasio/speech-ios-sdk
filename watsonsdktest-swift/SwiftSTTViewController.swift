@@ -42,7 +42,6 @@ class SwiftSTTViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         confSTT.basicAuthPassword = credentials!["STTPassword"] as! String
         confSTT.audioCodec = WATSONSDK_AUDIO_CODEC_TYPE_OPUS
         confSTT.modelName = WATSONSDK_DEFAULT_STT_MODEL
-        confSTT.learningOptOut = false // Change to `true` to opt-out learning
 
         self.sttInstance = SpeechToText(config: confSTT)
         self.sttInstance?.listModels({ (jsonDict, error) -> Void in
