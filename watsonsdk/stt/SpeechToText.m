@@ -445,7 +445,8 @@ id oggRef;
     // connect if we are not connected
     if(![self.audioStreamer isWebSocketConnected]) {
         [self.config requestToken:^(AuthConfiguration *config) {
-            [self.audioStreamer connect:(STTConfiguration*)config headers:[config createRequestHeaders]];
+            [self.audioStreamer connect:(STTConfiguration*)config
+                                headers:[config createRequestHeadersWithXWatsonLearningOptOut]];
         }];
     }
 

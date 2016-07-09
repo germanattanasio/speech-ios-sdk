@@ -41,6 +41,7 @@
     [confTTS setBasicAuthUsername:credentials[@"TTSUsername"]];
     [confTTS setBasicAuthPassword:credentials[@"TTSPassword"]];
     [confTTS setAudioCodec:WATSONSDK_TTS_AUDIO_CODEC_TYPE_OPUS];
+    [confTTS setXWatsonLearningOptOut:false]; // Change to true to opt-out learning
     
 //    [confTTS setTokenGenerator:^(void (^tokenHandler)(NSString *token)){
 //        NSURL *url = [[NSURL alloc] initWithString:@"https://my-token-factory/token"];

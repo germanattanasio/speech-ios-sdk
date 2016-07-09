@@ -20,6 +20,7 @@
 
 @property NSString* basicAuthUsername;
 @property NSString* basicAuthPassword;
+@property (nonatomic) BOOL xWatsonLearningOptOut;
 
 @property (readonly) NSString *token;
 @property (copy, nonatomic) void (^tokenGenerator) (void (^tokenHandler)(NSString *token));
@@ -27,5 +28,6 @@
 - (void) invalidateToken;
 - (void) requestToken: (void(^)(AuthConfiguration *config)) completionHandler;
 - (NSDictionary*) createRequestHeaders;
+- (NSDictionary*) createRequestHeadersWithXWatsonLearningOptOut;
 
 @end
