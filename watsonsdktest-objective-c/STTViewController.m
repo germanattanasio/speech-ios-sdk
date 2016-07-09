@@ -109,6 +109,7 @@
         else {
             NSLog(@"received error from the SDK %@",[err description]);
             [stt endRecognize];
+            [self presentAlertWithTitle:@"Error" message:err.localizedDescription];
         }
     } dataHandler:^(NSData* data) {
         NSLog(@"sent out %lu bytes", (unsigned long)[data length]);
@@ -180,6 +181,16 @@
     }
     
     return _pickerView;
+}
+
+#pragma mark -
+
+- (void)presentAlertWithTitle:(NSString *)title message:(NSString *)message {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [alert dismissViewControllerAnimated:YES completion:nil];
+    }]]
+    [self presentViewController:alert animated:true completion:nil];
 }
 
 #pragma mark - UIPickerViewDataSource Methods

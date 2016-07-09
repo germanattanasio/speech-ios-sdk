@@ -69,6 +69,7 @@ class SwiftSTTViewController: UIViewController, UITextFieldDelegate, UIPickerVie
             else{
                 print("Error from the SDK: %@", error.localizedDescription)
                 self.sttInstance?.endRecognize()
+                self.presentAlertWithTitle("Error", message:error.localizedDescription);
             }
         })
         
@@ -161,6 +162,14 @@ class SwiftSTTViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         }
     }
     
+    func presentAlertWithTitle(title: String, message:String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .Default) { (alertAction) in
+            alert.dismissViewControllerAnimated(true, completion: nil);
+        })
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+
     // UIPickerView delegate methods
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int{
         return 1

@@ -140,17 +140,27 @@ id oggRef;
  *  @param powerHandler (void (^)(float))
  */
 - (void) recognize:(void (^)(NSDictionary*, NSError*)) recognizeHandler dataHandler: (void (^) (NSData*)) dataHandler powerHandler: (void (^)(float)) powerHandler {
-    // store the block
     self.recognizeCallback = recognizeHandler;
     self.audioDataCallback = dataHandler;
     self.powerLevelCallback = powerHandler;
 
-    if(isNewRecordingAllowed) {
+    if (!isNewRecordingAllowed) {
         // don't allow a new recording to be allowed until this transaction has completed
-        isNewRecordingAllowed = NO;
-        [self startRecordingAudio];
         return;
     }
+    isNewRecordingAllowed = NO;
+
+    [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {
+        if (granted) {
+            // Permission granted
+            [self startRecordingAudio];
+        } else {
+            // Permission denied
+            isNewRecordingAllowed = YES;
+            NSError *recordError = [SpeechUtility raiseErrorWithMessage:@"Record permission denied"];
+            self.recognizeCallback(nil, recordError);
+        }
+    }];
     // NSError *recordError = [SpeechUtility raiseErrorWithMessage:@"A voice query is already in progress"];
     // self.recognizeCallback(nil, recordError);
 }
