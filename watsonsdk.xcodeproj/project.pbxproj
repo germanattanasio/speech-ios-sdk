@@ -1293,6 +1293,7 @@
 					"$(SRCROOT)/speexenc",
 					"$(SRCROOT)/ogg",
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/watsonsdk/lib",
@@ -1319,6 +1320,7 @@
 					"$(SRCROOT)/speexenc",
 					"$(SRCROOT)/ogg",
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/watsonsdk/lib",
