@@ -75,6 +75,7 @@
 		4FC4334E1D0EFBEA00ECEFD3 /* SRHash.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCAD82D1CE6BF1200BE3B5F /* SRHash.h */; };
 		4FC4334F1D0EFC2A00ECEFD3 /* WatsonSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FC433161D0EE7AA00ECEFD3 /* WatsonSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4FC433501D0EFC4400ECEFD3 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BA060401CE6D9320018CA5B /* libicucore.tbd */; };
+		4FF8BBCA1D337B810019E618 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C11A66DB1756098E00385896 /* AudioToolbox.framework */; };
 		7EFE11E41B71D07D00EF10BF /* AuthConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EFE11E21B71D07D00EF10BF /* AuthConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7EFE11E51B71D07D00EF10BF /* AuthConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFE11E31B71D07D00EF10BF /* AuthConfiguration.m */; };
 		9B1BCEE31CF69D440076FE2D /* TTSCustomWord.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B1BCEE11CF69D440076FE2D /* TTSCustomWord.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -309,6 +310,7 @@
 				4FC433401D0EFA8B00ECEFD3 /* Security.framework in Frameworks */,
 				4FC433431D0EFAB000ECEFD3 /* libogg.a in Frameworks */,
 				4FC433421D0EFAAC00ECEFD3 /* libopus.a in Frameworks */,
+				4FF8BBCA1D337B810019E618 /* AudioToolbox.framework in Frameworks */,
 				4FC4333F1D0EFA8000ECEFD3 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
