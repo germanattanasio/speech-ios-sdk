@@ -58,7 +58,16 @@
     } else if(self.basicAuthPassword && self.basicAuthUsername) {
         NSString *authStr = [NSString stringWithFormat:@"%@:%@", self.basicAuthUsername,self.basicAuthPassword];
         NSData *authData = [authStr dataUsingEncoding:NSUTF8StringEncoding];
-        NSString *authValue = [NSString stringWithFormat:@"Basic %@", [authData base64EncodedStringWithOptions:0]];
+        NSString *base64;
+        if ([authData respondsToSelector:@selector(base64EncodedStringWithOptions:)]) {
+            base64 = [authData base64EncodedStringWithOptions:0];
+        } else {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+            base64 = [authData base64Encoding];
+#pragma clang diagnostic pop
+        }
+        NSString *authValue = [NSString stringWithFormat:@"Basic %@", base64];
         [headers setObject:authValue forKey:@"Authorization"];
     }
     
