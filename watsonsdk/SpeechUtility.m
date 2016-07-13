@@ -123,6 +123,19 @@
  *  @return customized error
  */
 + (NSError *)raiseErrorWithCode:(NSInteger)code message:(NSString *)errorMessage reason:(NSString *)reasonMessage suggestion:(NSString *)suggestionMessage{
+    // Ideally errorMessage and reasonMessage and suggestionMessage should never be nil. It sometimes happens :(
+    if (!errorMessage) {
+        NSLog(@"%s no errorMessage provided. Falling back to default.", __PRETTY_FUNCTION__);
+        errorMessage = @"Unexpected error";
+    }
+    if (!reasonMessage) {
+        NSLog(@"%s no reasonMessage provided. Falling back to default.", __PRETTY_FUNCTION__);
+        reasonMessage = @"Unknown reason";
+    }
+    if (!suggestionMessage) {
+        NSLog(@"%s no suggestionMessage provided. Falling back to default.", __PRETTY_FUNCTION__);
+        reasonMessage = @"";
+    }
     NSDictionary *userInfo = @{
                                NSLocalizedDescriptionKey: errorMessage,
                                NSLocalizedFailureReasonErrorKey: reasonMessage,
