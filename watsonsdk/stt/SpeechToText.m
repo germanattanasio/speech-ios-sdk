@@ -15,6 +15,7 @@
  **/
 
 #import <SpeechToText.h>
+#import "AuthConfigurationInternal.h"
 
 // type defs for block callbacks
 #define NUM_BUFFERS 3

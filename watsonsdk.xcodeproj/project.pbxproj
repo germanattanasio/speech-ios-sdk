@@ -23,6 +23,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		4FAA404E1D372962001DD221 /* AuthConfigurationInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FAA404D1D37292C001DD221 /* AuthConfigurationInternal.h */; };
+		4FAA404F1D372963001DD221 /* AuthConfigurationInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FAA404D1D37292C001DD221 /* AuthConfigurationInternal.h */; };
 		4FC4331C1D0EE82F00ECEFD3 /* AuthConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFE11E31B71D07D00EF10BF /* AuthConfiguration.m */; };
 		4FC4331D1D0EE83F00ECEFD3 /* SRDelegateController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD8211CE6BF1200BE3B5F /* SRDelegateController.m */; };
 		4FC4331E1D0EE84800ECEFD3 /* SpeechUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B47E7571CF21645003E0860 /* SpeechUtility.m */; };
@@ -196,6 +198,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4FAA404D1D37292C001DD221 /* AuthConfigurationInternal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuthConfigurationInternal.h; sourceTree = "<group>"; };
 		4FC433141D0EE7AA00ECEFD3 /* WatsonSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WatsonSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FC433161D0EE7AA00ECEFD3 /* WatsonSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WatsonSDK.h; sourceTree = "<group>"; };
 		4FC433181D0EE7AA00ECEFD3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -541,6 +544,7 @@
 				C1416C33194B49520009C49A /* libs */,
 				9BCAD7C51CE5BC8B00BE3B5F /* websocket */,
 				7EFE11E21B71D07D00EF10BF /* AuthConfiguration.h */,
+				4FAA404D1D37292C001DD221 /* AuthConfigurationInternal.h */,
 				7EFE11E31B71D07D00EF10BF /* AuthConfiguration.m */,
 				9B47E7561CF21645003E0860 /* SpeechUtility.h */,
 				9B47E7571CF21645003E0860 /* SpeechUtility.m */,
@@ -659,6 +663,7 @@
 				4FC4334F1D0EFC2A00ECEFD3 /* WatsonSDK.h in Headers */,
 				4FC4334E1D0EFBEA00ECEFD3 /* SRHash.h in Headers */,
 				4FC4334D1D0EFBE000ECEFD3 /* SRURLUtilities.h in Headers */,
+				4FAA404E1D372962001DD221 /* AuthConfigurationInternal.h in Headers */,
 				4FC4334C1D0EFB6300ECEFD3 /* config_types.h in Headers */,
 				4FC4334B1D0EFB5B00ECEFD3 /* SRRunLoopThread.h in Headers */,
 				4FC4334A1D0EFB5200ECEFD3 /* SRDelegateController.h in Headers */,
@@ -691,6 +696,7 @@
 				9B36693F1CF21A5400806BEE /* WebSocketAudioStreamer.h in Headers */,
 				9BCAD83C1CE6BF1200BE3B5F /* SRError.h in Headers */,
 				9BA4758F1B9D354E00D66F1E /* ogg.h in Headers */,
+				4FAA404F1D372963001DD221 /* AuthConfigurationInternal.h in Headers */,
 				9BA475891B9D34AA00D66F1E /* OggHelper.h in Headers */,
 				9BA475901B9D354E00D66F1E /* os_types.h in Headers */,
 				9BCAD8381CE6BF1200BE3B5F /* SRIOConsumerPool.h in Headers */,

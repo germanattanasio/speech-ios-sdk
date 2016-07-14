@@ -15,6 +15,7 @@
  **/
 
 #import "TextToSpeech.h"
+#import "AuthConfigurationInternal.h"
 
 typedef void (^PlayAudioCallbackBlockType)(NSError*);
 
