@@ -49,7 +49,7 @@
     }
 }
 
-- (NSDictionary*) createRequestHeaders {
+- (NSMutableDictionary*) _createRequestHeaders {
     NSMutableDictionary *headers = [[NSMutableDictionary alloc] init];
     if (self.tokenGenerator) {
         if (self.token) {
@@ -74,5 +74,16 @@
     return headers;
 }
 
+- (NSDictionary*) createRequestHeaders {
+    return [self _createRequestHeaders];
+}
+
+- (NSDictionary*) createRequestHeadersWithXWatsonLearningOptOut {
+    NSMutableDictionary *headers = [self _createRequestHeaders];
+    if (self.xWatsonLearningOptOut) {
+        [headers setObject:@"true" forKey:@"X-Watson-Learning-Opt-Out"];
+    }
+    return headers;
+}
 
 @end

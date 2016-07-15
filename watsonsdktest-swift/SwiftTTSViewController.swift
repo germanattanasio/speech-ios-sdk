@@ -43,6 +43,7 @@ class SwiftTTSViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         confTTS.basicAuthPassword = credentials?["TTSPassword"] as! String
         confTTS.audioCodec = WATSONSDK_TTS_AUDIO_CODEC_TYPE_OPUS
         confTTS.voiceName = WATSONSDK_DEFAULT_TTS_VOICE
+        confTTS.xWatsonLearningOptOut = false // Change to true to opt-out
 
         self.ttsInstance = TextToSpeech(config: confTTS)
         self.ttsInstance?.listVoices({ (jsonDict, error) -> Void in

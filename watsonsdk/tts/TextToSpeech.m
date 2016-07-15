@@ -15,6 +15,7 @@
  **/
 
 #import "TextToSpeech.h"
+#import "AuthConfigurationInternal.h"
 
 typedef void (^PlayAudioCallbackBlockType)(NSError*);
 
@@ -340,7 +341,7 @@ typedef void (^PlayAudioCallbackBlockType)(NSError*);
         [defaultConfigObject setURLCache:nil];
     
     [self.config requestToken:^(AuthConfiguration *config) {
-        NSDictionary* headers = [config createRequestHeaders];
+        NSDictionary* headers = [config createRequestHeadersWithXWatsonLearningOptOut];
         [defaultConfigObject setHTTPAdditionalHeaders:headers];
         NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: defaultConfigObject delegate: self delegateQueue: [NSOperationQueue mainQueue]];
         NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {

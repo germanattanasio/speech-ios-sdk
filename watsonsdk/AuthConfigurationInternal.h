@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2015
+ * Copyright IBM Corporation 2016
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,18 +14,9 @@
  * limitations under the License.
  **/
 
-#import <Foundation/Foundation.h>
+#import "AuthConfiguration.h"
 
-@interface AuthConfiguration : NSObject
-
-@property NSString* basicAuthUsername;
-@property NSString* basicAuthPassword;
-@property (nonatomic) BOOL xWatsonLearningOptOut;
-
-@property (readonly) NSString *token;
-@property (copy, nonatomic) void (^tokenGenerator) (void (^tokenHandler)(NSString *token));
-
-- (void) invalidateToken;
-- (void) requestToken: (void(^)(AuthConfiguration *config)) completionHandler;
-
+@interface AuthConfiguration (Internal)
+- (NSDictionary*) createRequestHeaders;
+- (NSDictionary*) createRequestHeadersWithXWatsonLearningOptOut;
 @end
