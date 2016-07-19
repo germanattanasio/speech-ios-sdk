@@ -156,15 +156,18 @@ id oggRef;
     if ([[AVAudioSession sharedInstance] respondsToSelector:@selector(requestRecordPermission:)]) {
         // iOS 7.x and above. Needs to ask permission
         [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {
-            if (granted) {
-                // Permission granted
-                [self startRecordingAudio];
-            } else {
-                // Permission denied
-                isNewRecordingAllowed = YES;
-                NSError *recordError = [SpeechUtility raiseErrorWithMessage:@"Record permission denied"];
-                self.recognizeCallback(nil, recordError);
-            }
+            // Make sure to startRecordingAudio on a thread that has a run loop otherwise audio will not work
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                if (granted) {
+                    // Permission granted
+                    [self startRecordingAudio];
+                } else {
+                    // Permission denied
+                    isNewRecordingAllowed = YES;
+                    NSError *recordError = [SpeechUtility raiseErrorWithMessage:@"Record permission denied"];
+                    self.recognizeCallback(nil, recordError);
+                }
+            }];
         }];
     } else {
         // iOS 6.x: Permission is always granted.
