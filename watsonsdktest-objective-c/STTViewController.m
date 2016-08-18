@@ -47,6 +47,7 @@
     [confSTT setAudioCodec:WATSONSDK_AUDIO_CODEC_TYPE_OPUS];
     [confSTT setModelName:WATSONSDK_DEFAULT_STT_MODEL];
     [confSTT setXWatsonLearningOptOut:NO]; // Change to YES to opt-out learning
+    [confSTT setAdditionalParameters:@{@"smart_formatting": @(YES)}];
 
 //    [conf setTokenGenerator:^(void (^tokenHandler)(NSString *token)){
 //        NSURL *url = [[NSURL alloc] initWithString:@"https://<token-factory-url>"];

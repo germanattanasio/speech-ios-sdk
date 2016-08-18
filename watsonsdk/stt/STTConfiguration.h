@@ -43,6 +43,7 @@
 @property NSNumber *interimResults;
 @property NSNumber *continuous;
 @property NSNumber *inactivityTimeout;
+@property NSDictionary<NSString*, NSObject*> *additionalParameters; // i.e.: @{ @"smart_formatting": @(YES), @"max_alternatives", @(3) };
 
 @property NSURL *apiEndpoint;
 @property BOOL isCertificateValidationDisabled;

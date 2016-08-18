@@ -102,6 +102,9 @@
     [inputParameters setValue:self.interimResults forKey:@"interim_results"];
     [inputParameters setValue:self.continuous forKey:@"continuous"];
     [inputParameters setValue:self.inactivityTimeout forKey:@"inactivity_timeout"];
+    for (NSString *key in self.additionalParameters.allKeys) {
+        [inputParameters setValue:self.additionalParameters[key] forKey:key];
+    }
 
     NSError *error = nil;
     if([NSJSONSerialization isValidJSONObject:inputParameters]){
