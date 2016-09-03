@@ -32,6 +32,9 @@
 #define WATSONSDK_AUDIO_FRAME_SIZE 160
 #define WATSONSDK_AUDIO_SAMPLE_RATE 16000.0
 
+// timeout
+#define WATSONSDK_INACTIVITY_TIMEOUT 30
+
 // models
 #define WATSONSDK_DEFAULT_STT_MODEL @"en-US_BroadbandModel"
 
@@ -43,16 +46,25 @@
 @property NSNumber *interimResults;
 @property NSNumber *continuous;
 @property NSNumber *inactivityTimeout;
-@property NSDictionary<NSString*, NSObject*> *additionalParameters; // i.e.: @{ @"smart_formatting": @(YES), @"max_alternatives", @(3) };
+@property NSNumber *keywordsThreshold;
+@property NSNumber *maxAlternatives;
+@property NSNumber *wordAlternativesThreshold;
+@property BOOL wordConfidence;
+@property BOOL timestamps;
+@property NSArray *keywords;
+
+@property BOOL profanityFilter;
+@property BOOL smartFormatting;
 
 @property NSURL *apiEndpoint;
 @property BOOL isCertificateValidationDisabled;
 
-
 - (id)init;
+
 - (NSURL*)getModelsServiceURL;
 - (NSURL*)getModelServiceURL:(NSString*) modelName;
 - (NSURL*)getWebSocketRecognizeURL;
+
 - (NSString *)getStartMessage;
 
 @end

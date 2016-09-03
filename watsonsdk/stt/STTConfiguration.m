@@ -27,9 +27,19 @@
     [self setApiEndpoint:[NSURL URLWithString:WATSONSDK_DEFAULT_STT_API_ENDPOINT]];
     [self setModelName:WATSONSDK_DEFAULT_STT_MODEL];
     [self setAudioCodec:WATSONSDK_AUDIO_CODEC_TYPE_PCM];
+
     [self setInterimResults: [NSNumber numberWithBool:YES]];
     [self setContinuous:[NSNumber numberWithBool:NO]];
-    [self setInactivityTimeout:[NSNumber numberWithInt:30]];
+    [self setInactivityTimeout:[NSNumber numberWithInt:WATSONSDK_INACTIVITY_TIMEOUT]];
+
+    [self setKeywordsThreshold:[NSNumber numberWithDouble:-1]];
+    [self setMaxAlternatives:[NSNumber numberWithInt:1]];
+    [self setWordAlternativesThreshold:[NSNumber numberWithDouble:-1]];
+    [self setKeywords:nil];
+    [self setProfanityFilter:YES];
+    [self setSmartFormatting:NO];
+    [self setTimestamps:NO];
+    [self setWordConfidence:NO];
 
     return self;
 }
@@ -99,13 +109,39 @@
     NSMutableDictionary *inputParameters = [[NSMutableDictionary alloc] init];
     [inputParameters setValue:@"start" forKey:@"action"];
     [inputParameters setValue:self.audioCodec forKey:@"content-type"];
-    [inputParameters setValue:self.interimResults forKey:@"interim_results"];
-    [inputParameters setValue:self.continuous forKey:@"continuous"];
-    [inputParameters setValue:self.inactivityTimeout forKey:@"inactivity_timeout"];
-    for (NSString *key in self.additionalParameters.allKeys) {
-        [inputParameters setValue:self.additionalParameters[key] forKey:key];
+    if (self.interimResults) {
+        [inputParameters setValue:[NSNumber numberWithBool:YES] forKey:@"interim_results"];
     }
-
+    if ([self.inactivityTimeout intValue] != WATSONSDK_INACTIVITY_TIMEOUT) {
+        [inputParameters setValue:self.inactivityTimeout forKey:@"inactivity_timeout"];
+    }
+    if (self.continuous) {
+        [inputParameters setValue:[NSNumber numberWithBool:YES] forKey:@"continuous"];
+    }
+    if ([self.maxAlternatives intValue] > 1) {
+        [inputParameters setValue:self.maxAlternatives forKey:@"max_alternatives"];
+    }
+    if ([self.keywordsThreshold doubleValue] >= 0 && [self.keywordsThreshold doubleValue] <= 1) {
+        [inputParameters setValue:self.keywordsThreshold forKey:@"keywords_threshold"];
+    }
+    if ([self.wordAlternativesThreshold doubleValue] >= 0 && [self.wordAlternativesThreshold doubleValue] <= 1) {
+        [inputParameters setValue:self.wordAlternativesThreshold forKey:@"word_alternatives_threshold"];
+    }
+    if (self.keywords && [self.keywords count] > 0) {
+        [inputParameters setValue:self.keywords forKey:@"keywords"];
+    }
+    if (self.smartFormatting) {
+        [inputParameters setValue:[NSNumber numberWithBool:YES] forKey:@"smart_formatting"];
+    }
+    if (self.timestamps) {
+        [inputParameters setValue:[NSNumber numberWithBool:YES] forKey:@"timestamps"];
+    }
+    if (self.profanityFilter == NO) {
+        [inputParameters setValue:[NSNumber numberWithBool:NO] forKey:@"profanity_filter"];
+    }
+    if (self.wordConfidence) {
+        [inputParameters setValue:[NSNumber numberWithBool:YES] forKey:@"word_confidence"];
+    }
     NSError *error = nil;
     if([NSJSONSerialization isValidJSONObject:inputParameters]){
         NSData *data = [NSJSONSerialization dataWithJSONObject:inputParameters options:NSJSONWritingPrettyPrinted error:&error];
